@@ -105,8 +105,8 @@ export function CurriculumDayPreviewScreen({ navigation, route }: Props) {
         {drillTitles.length ? (
           <Box style={{ marginTop: 12, gap: 6 }}>
             <Text preset="body" style={{ fontWeight: '900' }}>{t('curriculumPreview.drillsTitle')}</Text>
-            {drillTitles.map((x) => (
-              <Text key={x} preset="muted">{`• ${x}`}</Text>
+            {drillTitles.map((x, idx) => (
+              <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
             ))}
           </Box>
         ) : null}

@@ -207,8 +207,8 @@ export function SessionScreen({ navigation, route }: Props) {
           {lessonKeyPoints?.length ? (
             <Box style={{ marginTop: 10, gap: 4 }}>
               <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.keyPointsTitle')}</Text>
-              {lessonKeyPoints.slice(0, 6).map((x) => (
-                <Text key={x} preset="muted">{`• ${x}`}</Text>
+              {lessonKeyPoints.slice(0, 6).map((x, idx) => (
+                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
               ))}
             </Box>
           ) : null}
@@ -216,8 +216,8 @@ export function SessionScreen({ navigation, route }: Props) {
           {lessonDo?.length ? (
             <Box style={{ marginTop: 10, gap: 4 }}>
               <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.doThisTitle')}</Text>
-              {lessonDo.slice(0, 6).map((x) => (
-                <Text key={x} preset="muted">{`• ${x}`}</Text>
+              {lessonDo.slice(0, 6).map((x, idx) => (
+                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
               ))}
             </Box>
           ) : null}
@@ -225,8 +225,8 @@ export function SessionScreen({ navigation, route }: Props) {
           {lessonAvoid?.length ? (
             <Box style={{ marginTop: 10, gap: 4 }}>
               <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.avoidThisTitle')}</Text>
-              {lessonAvoid.slice(0, 6).map((x) => (
-                <Text key={x} preset="muted">{`• ${x}`}</Text>
+              {lessonAvoid.slice(0, 6).map((x, idx) => (
+                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
               ))}
             </Box>
           ) : null}
@@ -331,9 +331,9 @@ export function SessionScreen({ navigation, route }: Props) {
       <Card>
         <Text preset="h2">{t('session.quickPickTitle')}</Text>
         <Text preset="muted">{t('session.quickPickSubtitle')}</Text>
-        {pack.drills.map((d) => (
+        {pack.drills.map((d, idx) => (
           <Button
-            key={d.id}
+            key={`${d.id}-${idx}`}
             text={d.title}
             variant="ghost"
             disabled={!sessionId}

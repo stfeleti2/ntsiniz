@@ -58,9 +58,9 @@ export function Heatmap({ days, columns = 7 }: { days: HeatmapCell[]; columns?: 
       <Box style={styles.legendRow}>
         <Text preset="muted">{t('heatmap.less')}</Text>
         <Box style={{ flexDirection: "row", gap: 6, alignItems: "center" }}>
-          {[0.15, 0.35, 0.6, 0.9].map((a) => (
+          {[0.15, 0.35, 0.6, 0.9].map((a, idx) => (
             <Box
-              key={a}
+              key={`${a}-${idx}`}
               style={{
                 width: 12,
                 height: 12,

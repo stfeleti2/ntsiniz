@@ -362,8 +362,8 @@ export function DrillResultScreen({ navigation, route }: Props) {
             </Box>
             {breakdown.notes.length > 0 ? (
               <Box style={{ marginTop: 6, gap: 4 }}>
-                {breakdown.notes.slice(0, 3).map((n) => (
-                  <Text key={n} preset="muted">{t('common.bullet', { text: n })}</Text>
+                {breakdown.notes.slice(0, 3).map((n, idx) => (
+                  <Text key={`${n}-${idx}`} preset="muted">{t('common.bullet', { text: n })}</Text>
                 ))}
               </Box>
             ) : null}

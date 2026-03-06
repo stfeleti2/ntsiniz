@@ -40,6 +40,9 @@ export const en = {
     notNow: 'Not now',
     close: 'Close',
     cancel: 'Cancel',
+    ok: 'OK',
+    open: 'Open',
+    tryAgain: 'Try again',
     save: 'Save',
     error: 'Something went wrong.',
     bullet: '• {text}',
@@ -137,6 +140,7 @@ export const en = {
     openMarketplace: 'Marketplace',
 
     openModTools: 'Open Mod Tools',
+    openDiagnostics: 'Open diagnostics',
 
     accountTitle: 'Account & Sync',
     accountSubtitle: 'Optional cloud sync to keep your progress across devices.',
@@ -339,6 +343,8 @@ export const en = {
     signatureTitle: 'Content signing',
     signatureStatus: 'Signature status',
     signatureRequired: 'Signature required',
+    devTools: 'Dev tools',
+    openAudioTortureLab: 'Open Audio Torture Lab →',
     tip: 'Tip: Use this screen when reporting bugs so we can reproduce issues faster.',
   },
 
@@ -479,6 +485,15 @@ export const en = {
     startDailySession: 'Start Daily Session',
     openTuner: 'Open Tuner',
     nextMissionTitle: 'Next mission',
+    recovery: {
+      title: 'Recovered recording',
+      body: 'We recovered {count} unfinished recording(s) after an unexpected exit.',
+    },
+    orphanTakes: {
+      title: 'Recovered takes found',
+      body: 'You have {count} recording(s) saved, but not attached to a session.',
+      cta: 'Review takes',
+    },
     unlockJourney: 'Do your first session to unlock the journey.',
     startMission: 'Start mission',
     seeFullMap: 'See full map',
@@ -519,6 +534,65 @@ export const en = {
     systemDefault: 'System default',
     input: 'Input',
     bluetoothTag: '(Bluetooth)',
+  },
+
+  micTest: {
+    title: 'Test microphone',
+    subtitle: 'Do a quick 5-second check for level and clipping before drills.',
+    live: 'Live level',
+    level: 'Level: {v}',
+    peak: 'Peak: {v}',
+    clipped: 'Clipping: YES',
+    notClipped: 'Clipping: no',
+    hintTitle: 'Tip',
+    hintClipping: 'Clipping detected. Move the phone slightly farther away or sing softer.',
+    hintQuiet: 'Input is very quiet. Try a quieter room or move closer to the mic.',
+    hintOk: 'Mic input looks good.',
+  },
+  recording: {
+    micLevelLabel: 'Microphone level',
+    clippingWarning: 'Clipping detected. Move slightly farther from the mic.',
+    clippingOk: 'No clipping detected.',
+  },
+  audioQuality: {
+    title: 'Audio quality',
+    clipping: 'Clipping detected. Try moving the phone slightly farther away or reducing volume.',
+    noClipping: 'No clipping detected.',
+    tooQuiet: 'Input is quite quiet. Try a quieter room, or get closer to the mic.',
+  },
+  recovered: {
+    screenTitle: 'Recovered Takes',
+    none: 'No recovered takes found.',
+    title: 'Recovered takes',
+    status: 'Status',
+  },
+  monet: {
+    rewarded: {
+      title: 'Boost tomorrow',
+      body: 'Watch 1 ad to add an extra drill to tomorrow’s plan.',
+      cta: 'Watch & Boost',
+    },
+  },
+  rootError: {
+    title: 'Something went wrong',
+    body: 'The app hit an unexpected error.',
+    hint: 'You can restart safely. If you enabled crash reporting, we captured details to help fix it.',
+    restart: 'Restart',
+  },
+  audioTorture: {
+    title: 'Audio Torture Lab',
+    subtitle: 'Run these on real devices. Capture the Support Bundle after failures.',
+    recordOverlayTitle: '1) Record + Overlay (60s)',
+    recordOverlayBody: 'Start a sustain drill. While recording, toggle Bluetooth on/off once.',
+    interruptionTitle: '2) Interruption test',
+    interruptionBody: 'Start a match-note drill, then trigger a notification / call. Ensure we recover.',
+    seekSpamTitle: '3) Playback seek spam',
+    seekSpamBody: 'After recording, go to Playback and scrub rapidly for 10 seconds.',
+    seekSpamPass: 'Pass criteria: no stuck audio session, no silent playback, no crash.',
+    captureTitle: '4) Capture 10s perf evidence',
+    captureBody: 'Captures UI frame metrics + audio supervisor counters and exports a markdown snippet you can paste into docs/PERF_EVIDENCE.md.',
+    sharePerfEvidence: 'Share perf evidence',
+    shareFailed: 'Share failed on this device. You can still long-press the path below to copy it and retrieve the file from app documents.',
   },
 
   curriculum: {
@@ -677,6 +751,17 @@ dayComplete: {
   },
 
   challenge: {
+    pitchLockTitle: '7-Day Pitch Lock',
+    today: 'Today: Day {day}',
+    body: 'Do one short drill per day. Share your progress.',
+    share: 'Share progress',
+    reset: 'Reset challenge',
+    day: 'Day {day}',
+    completed: 'Completed • Best {score}',
+    doToday: 'Do your session today to complete this day.',
+    locked: 'Complete previous days to unlock.',
+    cardTitle: 'Pitch Lock Challenge',
+    daysCompleted: 'days completed',
     title: 'Daily challenge',
     subtitle: 'Small pressure. Big consistency.',
     targetLine: 'Target score: {target}',
@@ -922,6 +1007,13 @@ dayComplete: {
 
   coach: {
     whyTitle: 'Why you missed',
+    scoreV2Title: 'Score (effort + accuracy)',
+    effort: 'Effort',
+    accuracy: 'Accuracy',
+    total: 'Total',
+    sessionSummaryTitle: 'Session summary',
+    sessionSummaryLine1: 'You’re building real consistency.',
+    sessionSummaryStats: 'Stats',
     nextActionTitle: 'What now?',
     nextActionSubtitle: 'One micro-fix. 30 seconds. Then try again.',
     tryFixNow: 'Do the 30s fix',
@@ -1090,6 +1182,13 @@ dayComplete: {
     unavailable: 'Playback unavailable',
     restart: 'Restart',
     seekHint: 'Tip: tap the waveform to seek.',
+    routeChanged: {
+      title: 'Audio route changed',
+      bluetooth: 'Your Bluetooth audio route changed. Playback was paused.',
+      generic: 'Your audio route changed. Playback was paused.',
+      resume: 'Resume',
+      chooseOutput: 'Choose output',
+    },
   },
   drillResult: {
     loadingTitle: 'Drill complete',
@@ -1212,6 +1311,12 @@ dayComplete: {
     },
     dailyTrend: 'Daily trend',
     footer: 'Trained on Ntsiniz • Proof beats vibes',
+  },
+  weekly: {
+    title: 'Weekly report',
+    summary: '{sessions} sessions • {days} days • Avg {avg} • Best {best}',
+    share: 'Share progress',
+    cardTitle: 'My progress this week',
   },
   drillResultCard: {
     score: 'Score',

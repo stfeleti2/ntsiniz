@@ -92,8 +92,8 @@ export function CelebrationOverlay({
 
       {/* Confetti burst */}
       <Box style={styles.confettiWrap} pointerEvents="none">
-        {ANGLES.map((a) => (
-          <ConfettiDot key={a} angleDeg={a} burst={burst} color={t.colors.accent} />
+        {ANGLES.map((a, idx) => (
+          <ConfettiDot key={`${a}-${idx}`} angleDeg={a} burst={burst} color={t.colors.accent} />
         ))}
       </Box>
 

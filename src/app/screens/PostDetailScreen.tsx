@@ -123,9 +123,9 @@ export function PostDetailScreen({ navigation, route }: Props) {
         <Box style={{ marginTop: 14, gap: 10 }}>
           <Text preset="muted">{t('post.react')}</Text>
           <Box style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
-            {REACTIONS.map((r) => (
+            {REACTIONS.map((r, idx) => (
               <Button
-                key={r}
+                key={`${r}-${idx}`}
                 text={`${r} ${reactionCounts[r] ?? 0}`}
                 variant="soft"
                 onPress={async () => {

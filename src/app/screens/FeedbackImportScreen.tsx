@@ -117,7 +117,7 @@ export function FeedbackImportScreen({ navigation }: Props) {
       </Box>
 
       <Card tone="glow">
-        <Text preset="h2">{t('marketplace.importHowTitle')}</Text>
+        <Text preset="h2">{t('marketplace.importHowTitle')} vvv</Text>
         <Text preset="muted">{t('marketplace.importHowBody')}</Text>
         <Box style={{ marginTop: 12, gap: 10 }}>
           <Button text={busy ? t('common.loading') : t('marketplace.pickPack')} onPress={pick} disabled={busy} />

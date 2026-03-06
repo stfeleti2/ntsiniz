@@ -306,9 +306,9 @@ export function SettingsScreen({ navigation }: Props) {
           <Text weight="semibold">{t('settings.qualityTitle')}</Text>
           <Text preset="muted">{t('settings.qualitySubtitle')}</Text>
           <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
-            {(['AUTO', 'HIGH', 'BALANCED', 'LITE'] as const).map((m) => (
+            {(['AUTO', 'HIGH', 'BALANCED', 'LITE'] as const).map((m, idx) => (
               <Button
-                key={m}
+                key={`${m}-${idx}`}
                 text={m}
                 variant={(s.qualityMode ?? 'AUTO') === m ? 'primary' : 'soft'}
                 onPress={async () => {
@@ -413,8 +413,8 @@ export function SettingsScreen({ navigation }: Props) {
         <Text preset="h2">{t('settings.languageTitle')}</Text>
         <Text preset="muted">{t('settings.languageCurrent', { value: s.language })}</Text>
         <Box style={{ flexDirection: "row", gap: 10, flexWrap: "wrap" }}>
-          {LANGS.map((l) => (
-            <Button key={l} text={l.toUpperCase()} variant={l === s.language ? "primary" : "ghost"} onPress={() => update({ ...s, language: l })} />
+          {LANGS.map((l, idx) => (
+            <Button key={`${l}-${idx}`} text={l.toUpperCase()} variant={l === s.language ? "primary" : "ghost"} onPress={() => update({ ...s, language: l })} />
           ))}
         </Box>
       </Card>

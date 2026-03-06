@@ -136,8 +136,8 @@ export function CurriculumOverviewScreen({ navigation }: Props) {
       {Object.keys(byWeek)
         .map((k) => Number(k))
         .sort((a, b) => a - b)
-        .map((week) => (
-          <Card key={week} tone="elevated">
+        .map((week, idx) => (
+          <Card key={`${week}-${idx}`} tone="elevated">
             <Text preset="h2">{t('curriculumOverview.weekTitle', { week })}</Text>
             <Text preset="muted">{t('curriculumOverview.weekHint')}</Text>
 
