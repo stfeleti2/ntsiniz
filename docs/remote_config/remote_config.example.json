@@ -1,0 +1,21 @@
+{
+  "flags": {
+    "cloud": false,
+    "duets": true,
+    "competitions": true
+  },
+  "killSwitch": {
+    "disabledPackIds": [],
+    "disabledDrillIds": [],
+    "disabledLessonIds": [],
+    "disabledCompetitionIds": []
+  },
+  "compat": {
+    "minAppVersion": "0.0.0",
+    "maxAppVersion": "99.99.99",
+    "minManifestSchema": 1
+  },
+  "security": {
+    "requireManifestSignature": false
+  }
+}

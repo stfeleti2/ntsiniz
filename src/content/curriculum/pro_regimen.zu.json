@@ -1,0 +1,739 @@
+{
+  "packId": "curriculum_pro_regimen_v1",
+  "language": "zu",
+  "curriculum": {
+    "curriculumId": "pro_regimen_v1",
+    "language": "zu",
+    "title": "Pro Training Regiment (8 weeks)",
+    "days": [
+      {
+        "id": "PRO_W01D01",
+        "title": "First Win: Pitch Lock + Best Take",
+        "week": 1,
+        "day": 1,
+        "focus": "Learn the loop. Calm pitch lock. Confidence-building wins.",
+        "lessonId": "PRO_W01D01",
+        "drillIds": [
+          "warmup_hum_c4",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D02",
+        "title": "Repeatability: Stable Holds (Day 2)",
+        "week": 1,
+        "day": 2,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D02",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D03",
+        "title": "Repeatability: Stable Holds (Day 3)",
+        "week": 1,
+        "day": 3,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D03",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D04",
+        "title": "Repeatability: Stable Holds (Day 4)",
+        "week": 1,
+        "day": 4,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D04",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D05",
+        "title": "Repeatability: Stable Holds (Day 5)",
+        "week": 1,
+        "day": 5,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D05",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D06",
+        "title": "Repeatability: Stable Holds (Day 6)",
+        "week": 1,
+        "day": 6,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D06",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W01D07",
+        "title": "Repeatability: Stable Holds (Day 7)",
+        "week": 1,
+        "day": 7,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "lessonId": "PRO_W01D07",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ]
+      },
+      {
+        "id": "PRO_W02D01",
+        "title": "Stability Ladder W2D1",
+        "week": 2,
+        "day": 1,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D01",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D02",
+        "title": "Stability Ladder W2D2",
+        "week": 2,
+        "day": 2,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D02",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D03",
+        "title": "Stability Ladder W2D3",
+        "week": 2,
+        "day": 3,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D03",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D04",
+        "title": "Stability Ladder W2D4",
+        "week": 2,
+        "day": 4,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D04",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D05",
+        "title": "Stability Ladder W2D5",
+        "week": 2,
+        "day": 5,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D05",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D06",
+        "title": "Stability Ladder W2D6",
+        "week": 2,
+        "day": 6,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D06",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W02D07",
+        "title": "Stability Ladder W2D7",
+        "week": 2,
+        "day": 7,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "lessonId": "PRO_W02D07",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W03D01",
+        "title": "2-Note Steps W3D1",
+        "week": 3,
+        "day": 1,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D01",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D02",
+        "title": "2-Note Steps W3D2",
+        "week": 3,
+        "day": 2,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D02",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D03",
+        "title": "2-Note Steps W3D3",
+        "week": 3,
+        "day": 3,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D03",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D04",
+        "title": "2-Note Steps W3D4",
+        "week": 3,
+        "day": 4,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D04",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D05",
+        "title": "2-Note Steps W3D5",
+        "week": 3,
+        "day": 5,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D05",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D06",
+        "title": "2-Note Steps W3D6",
+        "week": 3,
+        "day": 6,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D06",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W03D07",
+        "title": "2-Note Steps W3D7",
+        "week": 3,
+        "day": 7,
+        "focus": "Clean transitions between two notes (up/down).",
+        "lessonId": "PRO_W03D07",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PRO_W04D01",
+        "title": "Onset + Offset Control W4D1",
+        "week": 4,
+        "day": 1,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D01",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D02",
+        "title": "Onset + Offset Control W4D2",
+        "week": 4,
+        "day": 2,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D02",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D03",
+        "title": "Onset + Offset Control W4D3",
+        "week": 4,
+        "day": 3,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D03",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D04",
+        "title": "Onset + Offset Control W4D4",
+        "week": 4,
+        "day": 4,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D04",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D05",
+        "title": "Onset + Offset Control W4D5",
+        "week": 4,
+        "day": 5,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D05",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D06",
+        "title": "Onset + Offset Control W4D6",
+        "week": 4,
+        "day": 6,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D06",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W04D07",
+        "title": "Onset + Offset Control W4D7",
+        "week": 4,
+        "day": 7,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "lessonId": "PRO_W04D07",
+        "drillIds": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PRO_W05D01",
+        "title": "Agility Runs + Echo Phrases W5D1",
+        "week": 5,
+        "day": 1,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D01",
+        "drillIds": [
+          "agility_penta_run_1",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D02",
+        "title": "Agility Runs + Echo Phrases W5D2",
+        "week": 5,
+        "day": 2,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D02",
+        "drillIds": [
+          "agility_penta_run_1",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D03",
+        "title": "Agility Runs + Echo Phrases W5D3",
+        "week": 5,
+        "day": 3,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D03",
+        "drillIds": [
+          "agility_penta_run_2",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D04",
+        "title": "Agility Runs + Echo Phrases W5D4",
+        "week": 5,
+        "day": 4,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D04",
+        "drillIds": [
+          "agility_penta_run_2",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D05",
+        "title": "Agility Runs + Echo Phrases W5D5",
+        "week": 5,
+        "day": 5,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D05",
+        "drillIds": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D06",
+        "title": "Agility Runs + Echo Phrases W5D6",
+        "week": 5,
+        "day": 6,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D06",
+        "drillIds": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W05D07",
+        "title": "Agility Runs + Echo Phrases W5D7",
+        "week": 5,
+        "day": 7,
+        "focus": "Agility and short melodic accuracy under control.",
+        "lessonId": "PRO_W05D07",
+        "drillIds": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ]
+      },
+      {
+        "id": "PRO_W06D01",
+        "title": "Variation & Robustness W6D1",
+        "week": 6,
+        "day": 1,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D01",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D02",
+        "title": "Variation & Robustness W6D2",
+        "week": 6,
+        "day": 2,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D02",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D03",
+        "title": "Variation & Robustness W6D3",
+        "week": 6,
+        "day": 3,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D03",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D04",
+        "title": "Variation & Robustness W6D4",
+        "week": 6,
+        "day": 4,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D04",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D05",
+        "title": "Variation & Robustness W6D5",
+        "week": 6,
+        "day": 5,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D05",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D06",
+        "title": "Variation & Robustness W6D6",
+        "week": 6,
+        "day": 6,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D06",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W06D07",
+        "title": "Variation & Robustness W6D7",
+        "week": 6,
+        "day": 7,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "lessonId": "PRO_W06D07",
+        "drillIds": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D01",
+        "title": "Transfer & Independence W7D1",
+        "week": 7,
+        "day": 1,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D01",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D02",
+        "title": "Transfer & Independence W7D2",
+        "week": 7,
+        "day": 2,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D02",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D03",
+        "title": "Transfer & Independence W7D3",
+        "week": 7,
+        "day": 3,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D03",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D04",
+        "title": "Transfer & Independence W7D4",
+        "week": 7,
+        "day": 4,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D04",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D05",
+        "title": "Transfer & Independence W7D5",
+        "week": 7,
+        "day": 5,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D05",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D06",
+        "title": "Transfer & Independence W7D6",
+        "week": 7,
+        "day": 6,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D06",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W07D07",
+        "title": "Transfer & Independence W7D7",
+        "week": 7,
+        "day": 7,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "lessonId": "PRO_W07D07",
+        "drillIds": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D01",
+        "title": "Graduation Set W8D1",
+        "week": 8,
+        "day": 1,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D01",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D02",
+        "title": "Graduation Set W8D2",
+        "week": 8,
+        "day": 2,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D02",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D03",
+        "title": "Graduation Set W8D3",
+        "week": 8,
+        "day": 3,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D03",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D04",
+        "title": "Graduation Set W8D4",
+        "week": 8,
+        "day": 4,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D04",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D05",
+        "title": "Graduation Set W8D5",
+        "week": 8,
+        "day": 5,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D05",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D06",
+        "title": "Graduation Set W8D6",
+        "week": 8,
+        "day": 6,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D06",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PRO_W08D07",
+        "title": "Graduation Set W8D7",
+        "week": 8,
+        "day": 7,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "lessonId": "PRO_W08D07",
+        "drillIds": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ]
+      }
+    ]
+  }
+}

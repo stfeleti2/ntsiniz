@@ -1,0 +1,47 @@
+appId: com.ntsiniz.app
+---
+- launchApp
+
+# Unlock dev QA shortcut + skip calibration (dev builds)
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "btn-qa-skip-calibration"
+
+# One drill end-to-end
+- tapOn:
+    id: "tab-Session"
+- assertVisible:
+    id: "btn-session-start"
+- tapOn:
+    id: "btn-session-start"
+
+- assertVisible:
+    id: "btn-drill-start"
+- tapOn:
+    id: "btn-drill-start"
+
+# Result screen must render + provide share
+- assertVisible:
+    id: "btn-drillresult-share"
+- tapOn:
+    id: "btn-drillresult-share"
+- assertVisible: "Shared ✅"
+
+# Navigate home and ensure session is not broken
+- tapOn:
+    id: "btn-drillresult-next"
+- assertVisible:
+    id: "btn-drill-start"

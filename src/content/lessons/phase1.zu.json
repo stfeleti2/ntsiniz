@@ -1,0 +1,110 @@
+{
+  "packId": "phase1_lessons",
+  "language": "zu",
+  "lessons": [
+    {
+      "id": "lesson_pitch_center",
+      "title": "Micro-lesson: Pitch Center",
+      "body": "Think ‘land → relax’. Start gently and aim for the middle of the note, not above or below it.",
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_fast_lock",
+      "title": "Micro-lesson: Fast Lock",
+      "body": "Your score jumps when you hit the right pitch early. Imagine the note first, then sing.",
+      "demo": [{ "note": "E4", "durationMs": 450, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_hold_steady",
+      "title": "Micro-lesson: Hold Steady",
+      "body": "Steady tone = steady airflow. Keep jaw loose and let the vowel stay the same.",
+      "demo": [{ "note": "A3", "durationMs": 800, "gapMs": 160 }]
+    },
+    {
+      "id": "lesson_clean_slide",
+      "title": "Micro-lesson: Clean Slide",
+      "body": "Slide smoothly like a single line. Don’t ‘step’ between notes.",
+      "demo": [
+        { "note": "C4", "durationMs": 350, "gapMs": 120 },
+        { "note": "G4", "durationMs": 350, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_intervals",
+      "title": "Micro-lesson: Intervals",
+      "body": "Hear the destination note in your head. Then jump cleanly — avoid sliding.",
+      "demo": [
+        { "note": "C4", "durationMs": 300, "gapMs": 120 },
+        { "note": "E4", "durationMs": 300, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_melody_shape",
+      "title": "Micro-lesson: Melody Shape",
+      "body": "First match the shape (up/down). Then tighten the pitch.",
+      "demo": [
+        { "note": "C4", "durationMs": 260, "gapMs": 80 },
+        { "note": "D4", "durationMs": 260, "gapMs": 80 },
+        { "note": "C4", "durationMs": 260, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_week1_check",
+      "title": "Micro-lesson: Week 1 Check",
+      "body": "One clean rep. Don’t chase score — chase control.",
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_breath_phrase",
+      "title": "Micro-lesson: Breath Phrasing",
+      "body": "Airflow is the engine. Keep it even — no ‘dumping’ air at the start.",
+      "demo": [{ "note": "A3", "durationMs": 900, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_stability_motion",
+      "title": "Micro-lesson: Stability After Motion",
+      "body": "After a slide, re-center the pitch quickly. Think ‘snap back to calm’.",
+      "demo": [
+        { "note": "E4", "durationMs": 320, "gapMs": 120 },
+        { "note": "C4", "durationMs": 320, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_agility",
+      "title": "Micro-lesson: Agility",
+      "body": "Short notes still need clean landings. Keep vowel consistent.",
+      "demo": [
+        { "note": "C4", "durationMs": 240, "gapMs": 60 },
+        { "note": "E4", "durationMs": 240, "gapMs": 60 },
+        { "note": "G4", "durationMs": 240, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_resonance",
+      "title": "Micro-lesson: Resonance",
+      "body": "Aim for an easy, forward tone. If it feels squeezed, back off volume a little.",
+      "demo": [{ "note": "E4", "durationMs": 550, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_vibrato",
+      "title": "Micro-lesson: Vibrato Control",
+      "body": "You control vibrato — it doesn’t control you. Try straight tone first, then add gentle vibrato.",
+      "demo": [{ "note": "A3", "durationMs": 700, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_intervals_melody",
+      "title": "Micro-lesson: Hear First",
+      "body": "Before you sing, hear it. The clearer the mental note, the cleaner the output.",
+      "demo": [
+        { "note": "C4", "durationMs": 260, "gapMs": 80 },
+        { "note": "G4", "durationMs": 260, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_week2_check",
+      "title": "Micro-lesson: Week 2 Check",
+      "body": "Stability + musical phrase. Keep it simple and clean.",
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    }
+  ]
+}

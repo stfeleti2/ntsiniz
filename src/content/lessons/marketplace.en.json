@@ -1,0 +1,13 @@
+{
+  "packId": "marketplace_lessons_v1",
+  "language": "en",
+  "lessons": [
+    {
+      "id": "mkt_intro",
+      "title": "How marketplace coaching works",
+      "body": "Pick a program. Do the day. Share a clip. Your coach responds with specific notes.",
+      "keyPoints": ["Short clips win", "Headphones help", "Do it daily"],
+      "demo": [{ "note": "A3", "durationMs": 800 }]
+    }
+  ]
+}

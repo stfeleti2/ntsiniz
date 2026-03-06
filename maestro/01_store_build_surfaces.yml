@@ -1,0 +1,23 @@
+appId: com.ntsiniz.app
+---
+# Store-build surface guard.
+#
+# Run this against a STORE_BUILD=true build.
+# Goal: ensure Phase 1 ships without unfinished tabs.
+
+- launchApp
+- waitForAnimationToEnd
+
+# We should land on Welcome.
+- assertVisible: "Ntsiniz"
+
+# Proceed into the app (if your Welcome has a primary CTA).
+# NOTE: If your Welcome CTA text changes, update this selector.
+- tapOn:
+    text: "Get started"
+    optional: true
+
+- waitForAnimationToEnd
+
+# Community tab must not exist in store builds.
+- assertNotVisible: "Community"

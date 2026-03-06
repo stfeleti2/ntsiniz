@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core:
+    name: Typecheck + Core tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "Using npm ci (lockfile present)"
+            npm ci
+          else
+            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
+            echo "To fix: run 'npm install' locally and commit package-lock.json."
+            npm install --no-fund --no-audit
+          fi
+
+      - name: CI
+        run: npm run ci

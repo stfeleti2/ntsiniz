@@ -1,0 +1,392 @@
+{
+  "schema": 3,
+  "algo": "sha256",
+  "entries": [
+    {
+      "id": "drills/agility.en",
+      "file": "drills/agility.en.json",
+      "sha256": "e17e3acf39aa72b8123b64a18045684217b9520601a65ce68d6fc532ab6d1ca4",
+      "sizeBytes": 870,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/agility.xh",
+      "file": "drills/agility.xh.json",
+      "sha256": "0fe70ee2f6cd95c3f6467e9606ea976152531305c93de714df531f3f810c422b",
+      "sizeBytes": 911,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/agility.zu",
+      "file": "drills/agility.zu.json",
+      "sha256": "b2bedb1220bd2f8ea0f432c4ce4b3b075e500bbcffba5d850487879bf92e04e9",
+      "sizeBytes": 900,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase1.en",
+      "file": "drills/phase1.en.json",
+      "sha256": "73dca30113de5fc0bcaf26c83c1144bd5ef7a2dba73b71807172cfad3e30cb92",
+      "sizeBytes": 8950,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase1.xh",
+      "file": "drills/phase1.xh.json",
+      "sha256": "c932cba5911d3064f023de0e6a347f12ce5dfd04e362352d8812b1b16449e0d7",
+      "sizeBytes": 8950,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase1.zu",
+      "file": "drills/phase1.zu.json",
+      "sha256": "3844b2243a776580475dc5f434c47935bf86c697f4661cf8f4c18a79a4b30fc4",
+      "sizeBytes": 8950,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase2.en",
+      "file": "drills/phase2.en.json",
+      "sha256": "21530e6bc83f63058592f1ee205f0221c6ec3024c0ae83e5733001bb7b2f6787",
+      "sizeBytes": 815,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase2.xh",
+      "file": "drills/phase2.xh.json",
+      "sha256": "c566266eb0ec935b198050cbde347a064e6f6d524642ddc48cf7f25b1bf00540",
+      "sizeBytes": 819,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/phase2.zu",
+      "file": "drills/phase2.zu.json",
+      "sha256": "6610c6ca77a71b4fd40b8b720c4d767658daa5624240c994dc1d91b09408c16c",
+      "sizeBytes": 821,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/warmups.en",
+      "file": "drills/warmups.en.json",
+      "sha256": "7efaa5929d582d94972b1f76e76ee5cff9cc31931c882ac4cf5bd34a46cc9fc7",
+      "sizeBytes": 934,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/warmups.xh",
+      "file": "drills/warmups.xh.json",
+      "sha256": "3a97717d782119ba10bb57ed44e760f447788b7aeb73460256bbd10ed01ab3b9",
+      "sizeBytes": 959,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "drills/warmups.zu",
+      "file": "drills/warmups.zu.json",
+      "sha256": "1c2d376c4806b2f70e321ffb184a1a8c542d8240824af31823e8cb4d6171a704",
+      "sizeBytes": 957,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/phase1.en",
+      "file": "curriculum/phase1.en.json",
+      "sha256": "e42d2f9f4c24fa8db92912d40ffab491eb71742fab1c41755897bae9e543d896",
+      "sizeBytes": 4810,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/phase1.xh",
+      "file": "curriculum/phase1.xh.json",
+      "sha256": "10550b63341e4400220597dd6230f47630e57e364e78dd97ca8eecda165fe729",
+      "sizeBytes": 4810,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/phase1.zu",
+      "file": "curriculum/phase1.zu.json",
+      "sha256": "dff5dd812dad38b4c40a957c19a0e518267a7723713e93f1258930afabc7e694",
+      "sizeBytes": 4810,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen.en",
+      "file": "curriculum/pro_regimen.en.json",
+      "sha256": "6a3864c5b987fe442f8cdd561aa5d97da7851ea2419d7fe3e08554891d37f30f",
+      "sizeBytes": 20731,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen.xh",
+      "file": "curriculum/pro_regimen.xh.json",
+      "sha256": "f542a75289cdfe6d4e45dcd93d51e42eac8b7cf7d54d57eafea3cdcdba300c07",
+      "sizeBytes": 20731,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen.zu",
+      "file": "curriculum/pro_regimen.zu.json",
+      "sha256": "21f9f83c3dafbaefa9d969719d6a62b14b5bff1b9d175579e2ce829bf68fb8d8",
+      "sizeBytes": 20731,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_advanced.en",
+      "file": "curriculum/pro_regimen12_advanced.en.json",
+      "sha256": "30d1989a6f4fc3e1b16bbf5e5c8a575d09e30276d6253efea2abea62e7f435fc",
+      "sizeBytes": 37345,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_advanced.xh",
+      "file": "curriculum/pro_regimen12_advanced.xh.json",
+      "sha256": "617deee6c0fb214fa06df641e5500911968daf27eb4a332a6d56d03d662520d9",
+      "sizeBytes": 37345,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_advanced.zu",
+      "file": "curriculum/pro_regimen12_advanced.zu.json",
+      "sha256": "6c92f7003457eb73f13d496334601d3fd8b4c20da98033a96ca974421b062914",
+      "sizeBytes": 37345,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_beginner.en",
+      "file": "curriculum/pro_regimen12_beginner.en.json",
+      "sha256": "f58c18bcbf6375ef3ee8d79e97672e8752e3a341e8e109661b666eab8b8d121a",
+      "sizeBytes": 37069,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_beginner.xh",
+      "file": "curriculum/pro_regimen12_beginner.xh.json",
+      "sha256": "8b0efb752e608155aab1d1b413a24be3c4f2ffdbf5e3db9b4277f3500650d63e",
+      "sizeBytes": 37069,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_beginner.zu",
+      "file": "curriculum/pro_regimen12_beginner.zu.json",
+      "sha256": "a8da22e184e5dc9d7373877e644d8633a335e4dd80f05a60fe6571d0ec4128f4",
+      "sizeBytes": 37069,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_intermediate.en",
+      "file": "curriculum/pro_regimen12_intermediate.en.json",
+      "sha256": "1f6833d451bd0d28ba9f740f920999ce43f62f948315c8c1fa5914767ae655cb",
+      "sizeBytes": 37297,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_intermediate.xh",
+      "file": "curriculum/pro_regimen12_intermediate.xh.json",
+      "sha256": "b24eff7b145a34822c9b75eaee4fb1c9cbd3e1cddce8fb5a225cb08e4cdb9dbd",
+      "sizeBytes": 37297,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "curriculum/pro_regimen12_intermediate.zu",
+      "file": "curriculum/pro_regimen12_intermediate.zu.json",
+      "sha256": "aa47a8134269ee44dba1cf4ec3ec2ced85d60713476386f2620589ce004b871c",
+      "sizeBytes": 37297,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/marketplace.en",
+      "file": "lessons/marketplace.en.json",
+      "sha256": "c407ed2a31cfca4614a563fb1885ea94547aa6551cc628a89fbbdf7a415884c8",
+      "sizeBytes": 393,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/marketplace.xh",
+      "file": "lessons/marketplace.xh.json",
+      "sha256": "4cdb94f2e72c170151bfccce530839c9585ae138e2eb8439919cc61c48dd229e",
+      "sizeBytes": 439,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/marketplace.zu",
+      "file": "lessons/marketplace.zu.json",
+      "sha256": "43c595620d5cb34670ab5a37acf65316f928efad48e9d35a00baafa4026b06f6",
+      "sizeBytes": 432,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/phase1.en",
+      "file": "lessons/phase1.en.json",
+      "sha256": "b18f972574e7fa5dce82874576d729bc807733d1f1ef838ee46fd5cc2e45f1f7",
+      "sizeBytes": 12508,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/phase1.xh",
+      "file": "lessons/phase1.xh.json",
+      "sha256": "b9de4cd9f286a7d5067cc802b2bf4d325f7c483e36108853bf6390337a0fa7b8",
+      "sizeBytes": 4118,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/phase1.zu",
+      "file": "lessons/phase1.zu.json",
+      "sha256": "ca8679e7ea3e5dcddb9344519b83fd173390298b4e86a5b1c43ceff93ea86f1a",
+      "sizeBytes": 4118,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen.en",
+      "file": "lessons/pro_regimen.en.json",
+      "sha256": "4a47d18946c480188a12cf975105d89381e127fe609847473c706ae9de4356f2",
+      "sizeBytes": 94844,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen.xh",
+      "file": "lessons/pro_regimen.xh.json",
+      "sha256": "9797a8b0d3c057a3d2c10984f33a6cf2135446dc63a48b9a938a1a52a3577ab0",
+      "sizeBytes": 94844,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen.zu",
+      "file": "lessons/pro_regimen.zu.json",
+      "sha256": "efa314302cf4defac884aaaeb6bf7431fd103c4d931eef47fff34281e84fe47c",
+      "sizeBytes": 94844,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_advanced.en",
+      "file": "lessons/pro_regimen12_advanced.en.json",
+      "sha256": "428e3f7be46da988388f276d471469ac35abaa58bc640a5cd627ee22e8b97f2f",
+      "sizeBytes": 243117,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_advanced.xh",
+      "file": "lessons/pro_regimen12_advanced.xh.json",
+      "sha256": "6000b064370d3dc44addc665f0b3b34dc3670499c168d339ea1da7f18a27d4d5",
+      "sizeBytes": 243117,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_advanced.zu",
+      "file": "lessons/pro_regimen12_advanced.zu.json",
+      "sha256": "6a2e78a548508bcec4a1174cf2961d3dba7a2b3274dd1aea69a21f3f32936a9e",
+      "sizeBytes": 243117,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_beginner.en",
+      "file": "lessons/pro_regimen12_beginner.en.json",
+      "sha256": "c6127f556c85ce40fc7c2fee019e94bab065f43c330e12bba0d4f17bd9cae37f",
+      "sizeBytes": 237042,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_beginner.xh",
+      "file": "lessons/pro_regimen12_beginner.xh.json",
+      "sha256": "0615a9970ba7c9c9bf3970694d66dc4618161a0461d3c3fc5b29bf1323b2e853",
+      "sizeBytes": 237042,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_beginner.zu",
+      "file": "lessons/pro_regimen12_beginner.zu.json",
+      "sha256": "2fdf53ce7155c2a8cae099fa87f3f598f86d7aae6aca534baaea2b08a68fa370",
+      "sizeBytes": 237042,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_intermediate.en",
+      "file": "lessons/pro_regimen12_intermediate.en.json",
+      "sha256": "63b86a4f38e8879b6f07e470e79b19d1ef2e7b43a359cd39628fe71f21abea85",
+      "sizeBytes": 238157,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_intermediate.xh",
+      "file": "lessons/pro_regimen12_intermediate.xh.json",
+      "sha256": "99f7119f2d928633abe8bfcee125a2c2a24f6f4e07b073e3584bfcd9aac3d44e",
+      "sizeBytes": 238157,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "lessons/pro_regimen12_intermediate.zu",
+      "file": "lessons/pro_regimen12_intermediate.zu.json",
+      "sha256": "286b11a7a1ccf44b977e3a2bbc4d75022041c296c8877a6c6d9077095010a364",
+      "sizeBytes": 238157,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "competitions/competitions.en",
+      "file": "competitions/competitions.en.json",
+      "sha256": "9e31c95361f322623c517ec748dcd8037c85b36c925f89633e85d231e9d9d20e",
+      "sizeBytes": 1154,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "competitions/competitions.xh",
+      "file": "competitions/competitions.xh.json",
+      "sha256": "a6ccdb8de002c328c6d941d26ff2de30f3687dc2a05dea9855e057f33db6cdff",
+      "sizeBytes": 681,
+      "canonical": "stable-json-v1",
+      "version": 3
+    },
+    {
+      "id": "competitions/competitions.zu",
+      "file": "competitions/competitions.zu.json",
+      "sha256": "7678f2146702397cb94bba046a19dc4f12d5370c13a42c02eb76892bbe896eab",
+      "sizeBytes": 816,
+      "canonical": "stable-json-v1",
+      "version": 3
+    }
+  ],
+  "generatedAt": "2026-03-05T15:04:21.288Z",
+  "manifestId": "4423d0f2946ea6cad92560a742839b57c79c4b8e279737936f1a3a037204b06c"
+}

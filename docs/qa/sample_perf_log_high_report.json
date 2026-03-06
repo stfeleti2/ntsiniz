@@ -1,0 +1,32 @@
+{
+  "device": {
+    "tier": "HIGH",
+    "model": "Sample High"
+  },
+  "mode": "HIGH",
+  "tier": "HIGH",
+  "windowSec": 120,
+  "summary": {
+    "p95max": 95,
+    "worstmax": 320,
+    "drops": 0
+  },
+  "checks": [
+    {
+      "name": "p95 stalls",
+      "ok": true,
+      "detail": "max p95=95ms (budget 160ms)"
+    },
+    {
+      "name": "worst stalls",
+      "ok": true,
+      "detail": "max worst=320ms (budget 800ms)"
+    },
+    {
+      "name": "FrameBus drops",
+      "ok": true,
+      "detail": "max drops=0 (budget 0)"
+    }
+  ],
+  "result": "PASS"
+}

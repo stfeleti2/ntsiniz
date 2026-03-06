@@ -1,0 +1,23 @@
+{
+  "packId": "marketplace_coaches_v1",
+  "language": "en",
+  "coaches": [
+    {
+      "id": "coach_1",
+      "featured": true,
+      "name": "Coach Nandi",
+      "headline": "Breath + pitch stability",
+      "bio": "Beginner-friendly. We focus on repeatable control before style.",
+      "tags": ["Pitch", "Stability", "Breath"],
+      "rating": 4.8
+    },
+    {
+      "id": "coach_2",
+      "name": "Coach Alex",
+      "headline": "Runs, phrasing, performance",
+      "bio": "For singers ready to move from technique to expression.",
+      "tags": ["Musicality", "Style"],
+      "rating": 4.7
+    }
+  ]
+}

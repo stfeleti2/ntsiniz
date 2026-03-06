@@ -1,0 +1,377 @@
+{
+  "packId": "phase1_lessons",
+  "language": "en",
+  "lessons": [
+    {
+      "id": "lesson_pitch_center",
+      "title": "Day 1: Pitch Center",
+      "body": "Pitch is a target, not a vibe. Your job is to land the note quickly and then *stay in the middle* without pushing volume.",
+      "keyPoints": [
+        "Land first → relax second.",
+        "Aim for the center of the pitch, not above it.",
+        "A softer start is usually more accurate than a loud start."
+      ],
+      "doThis": [
+        "Take a quiet breath (no shoulder lift).",
+        "Start the note at 70% volume.",
+        "If you’re sharp, think ‘lower + lighter’—not ‘force it down’."
+      ],
+      "avoidThis": [
+        "Hitting the note by shouting.",
+        "Changing the vowel mid-note (it pulls pitch).",
+        "Tensing the jaw or tongue."
+      ],
+      "coachScript": [
+        "Alright. Think: land, then relax.",
+        "Imagine the note for half a second, then sing it softly.",
+        "If you miss, don’t panic—adjust gently."
+      ],
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_fast_lock",
+      "title": "Day 2: Fast Lock",
+      "body": "Most ‘bad pitch’ is just *late pitch*. The first 300–500ms matters. Train your brain to hear the note before you sing.",
+      "keyPoints": [
+        "Early accuracy beats late accuracy.",
+        "Hear it → sing it. Not the other way around.",
+        "Small correction is fine. Big swoops cost points."
+      ],
+      "doThis": [
+        "Before you start, whisper the note in your head.",
+        "Start with a clean onset (no breathy slide).",
+        "If you’re off, correct once—then hold."
+      ],
+      "avoidThis": [
+        "Sliding up to the target every time.",
+        "Over-correcting (bouncing sharp/flat)."
+      ],
+      "coachScript": [
+        "Fast lock is a mindset.",
+        "Hear the note. Then sing it immediately—soft and clean.",
+        "One small correction, then hold."
+      ],
+      "demo": [{ "note": "E4", "durationMs": 450, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_hold_steady",
+      "title": "Day 3: Hold Steady",
+      "body": "Stability is calm airflow + a stable vowel. If the vowel changes, the pitch moves.",
+      "keyPoints": [
+        "Steady pitch comes from steady breath.",
+        "Keep the vowel consistent (same mouth shape).",
+        "Relaxed face = less wobble."
+      ],
+      "doThis": [
+        "Pick one vowel (like ‘oo’ or ‘ee’) and keep it.",
+        "Imagine the note is a laser line—straight.",
+        "Let the breath be even from start to finish."
+      ],
+      "avoidThis": [
+        "Pulsing air (wobble).",
+        "Clenching the jaw to ‘hold’ the note."
+      ],
+      "coachScript": [
+        "Okay—smooth airflow.",
+        "Same vowel, same shape.",
+        "Hold the middle of the note. Calm."
+      ],
+      "demo": [{ "note": "A3", "durationMs": 900, "gapMs": 160 }]
+    },
+    {
+      "id": "lesson_clean_slide",
+      "title": "Day 4: Clean Slides",
+      "body": "A slide should feel like one continuous line—not steps. Smoothness beats speed.",
+      "keyPoints": [
+        "One line, not a staircase.",
+        "Keep volume steady through the slide.",
+        "Your goal is *control*, not drama."
+      ],
+      "doThis": [
+        "Start the slide gently.",
+        "Keep your throat relaxed—let pitch change, not tension.",
+        "Arrive at the target and *stop moving*."
+      ],
+      "avoidThis": [
+        "Overshooting the target.",
+        "Adding vibrato during the slide (hard to control)."
+      ],
+      "coachScript": [
+        "Slide like a single smooth line.",
+        "Arrive, then stop.",
+        "No extra wobble."
+      ],
+      "demo": [
+        { "note": "C4", "durationMs": 350, "gapMs": 120 },
+        { "note": "G4", "durationMs": 350, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_intervals",
+      "title": "Day 5: Intervals",
+      "body": "Intervals are jumps. The cleanest jump happens when you ‘hear the landing’ first.",
+      "keyPoints": [
+        "Hear the destination note.",
+        "Jump cleanly—avoid sliding.",
+        "If you miss, reset your ear and try again."
+      ],
+      "doThis": [
+        "Sing the first note quietly.",
+        "Think the second note.",
+        "Jump with the same vowel."
+      ],
+      "avoidThis": [
+        "Turning every jump into a slide.",
+        "Changing vowel on the jump."
+      ],
+      "coachScript": [
+        "Hear the landing.",
+        "Now jump—same vowel, clean.",
+        "Reset your ear between tries."
+      ],
+      "demo": [
+        { "note": "C4", "durationMs": 300, "gapMs": 120 },
+        { "note": "E4", "durationMs": 300, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_melody_shape",
+      "title": "Day 6: Melody Shape",
+      "body": "Shape first, cents second. If you get the contour right, accuracy becomes easy.",
+      "keyPoints": [
+        "Up/down is more important than perfect cents at first.",
+        "Short notes still need clear targets.",
+        "Stay relaxed—tension ruins contour."
+      ],
+      "doThis": [
+        "Hum the phrase once (easy tone).",
+        "Then sing it with one consistent vowel.",
+        "Tighten accuracy on your second attempt."
+      ],
+      "avoidThis": [
+        "Rushing the phrase.",
+        "Changing volume dramatically between notes."
+      ],
+      "coachScript": [
+        "Contour first.",
+        "Up, down—clean targets.",
+        "Second attempt: tighten the cents."
+      ],
+      "demo": [
+        { "note": "C4", "durationMs": 260, "gapMs": 80 },
+        { "note": "D4", "durationMs": 260, "gapMs": 80 },
+        { "note": "C4", "durationMs": 260, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_week1_check",
+      "title": "Day 7: Week 1 Check",
+      "body": "This is not a score chase. It’s a control check. One clean rep is a win.",
+      "keyPoints": [
+        "Clean beats high.",
+        "Stay relaxed.",
+        "If you miss, reduce volume and try again."
+      ],
+      "doThis": [
+        "Pick the easiest vowel for you.",
+        "Focus on early lock.",
+        "Stop after one clean rep."
+      ],
+      "avoidThis": [
+        "Doing ten messy reps.",
+        "Pushing volume to ‘force’ pitch."
+      ],
+      "coachScript": [
+        "One clean rep.",
+        "Control first.",
+        "If it’s messy, go softer and retry."
+      ],
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_breath_phrase",
+      "title": "Day 8: Breath Phrasing",
+      "body": "Long notes don’t need more air—just steadier air. Think ‘slow leak’, not ‘dump’.",
+      "keyPoints": [
+        "Even airflow = even pitch.",
+        "Start gently; don’t blast air at the onset.",
+        "Ribs stay open for support."
+      ],
+      "doThis": [
+        "Start at 60–70% volume.",
+        "Keep ribs open while you sustain.",
+        "If the pitch wobbles, reduce volume slightly."
+      ],
+      "avoidThis": [
+        "Big breathy start.",
+        "Squeezing the throat to ‘save air’."
+      ],
+      "coachScript": [
+        "Slow leak of air.",
+        "Soft start.",
+        "Keep the ribs open while you hold."
+      ],
+      "demo": [{ "note": "A3", "durationMs": 1000, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_stability_motion",
+      "title": "Day 9: Stability Under Motion",
+      "body": "After movement (a slide), your job is to re-center instantly. Think ‘snap to calm’.",
+      "keyPoints": [
+        "Move → arrive → stop.",
+        "Re-center within 300–500ms.",
+        "Stable vowel = stable pitch."
+      ],
+      "doThis": [
+        "Slide smoothly.",
+        "The moment you arrive, lock.",
+        "Hold the target with calm airflow."
+      ],
+      "avoidThis": [
+        "Keeping the slide moving after you arrive.",
+        "Over-correcting sharp/flat after the slide."
+      ],
+      "coachScript": [
+        "Arrive.",
+        "Snap to calm.",
+        "Hold the center of the pitch."
+      ],
+      "demo": [
+        { "note": "E4", "durationMs": 320, "gapMs": 120 },
+        { "note": "C4", "durationMs": 320, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_agility",
+      "title": "Day 10: Agility",
+      "body": "Agility is accuracy at speed. The secret is *clean landings* on every note.",
+      "keyPoints": [
+        "Short notes still need a target.",
+        "Same vowel helps consistency.",
+        "Speed comes after control."
+      ],
+      "doThis": [
+        "Start slower than you want.",
+        "Hit each note cleanly.",
+        "Only speed up when accuracy stays."
+      ],
+      "avoidThis": [
+        "Rushing and smearing notes.",
+        "Over-singing volume on fast runs."
+      ],
+      "coachScript": [
+        "Clean landings.",
+        "Same vowel.",
+        "Speed later—control now."
+      ],
+      "demo": [
+        { "note": "C4", "durationMs": 240, "gapMs": 60 },
+        { "note": "E4", "durationMs": 240, "gapMs": 60 },
+        { "note": "G4", "durationMs": 240, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_resonance",
+      "title": "Day 11: Resonance Awareness",
+      "body": "Resonance is ‘easy loud’. If it feels squeezed, you’re using force instead of space.",
+      "keyPoints": [
+        "Forward, easy tone.",
+        "Less squeeze = steadier pitch.",
+        "Volume is optional. Clarity is not."
+      ],
+      "doThis": [
+        "Try a gentle ‘ng’ feeling (like ‘sing’).",
+        "Keep cheeks and jaw relaxed.",
+        "If it tightens, lower the volume and retry."
+      ],
+      "avoidThis": [
+        "Shouting for brightness.",
+        "Over-darkening the vowel (pitch drops)."
+      ],
+      "coachScript": [
+        "Easy, forward tone.",
+        "No squeeze.",
+        "If it tightens, go softer."
+      ],
+      "demo": [{ "note": "E4", "durationMs": 600, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_vibrato",
+      "title": "Day 12: Vibrato Control",
+      "body": "Vibrato is a choice. Train straight tone first, then add gentle vibrato intentionally.",
+      "keyPoints": [
+        "Straight tone is the foundation.",
+        "Gentle vibrato is small (not wide).",
+        "If pitch wobbles, reduce volume + stabilize breath."
+      ],
+      "doThis": [
+        "Hold straight tone for 2–3 seconds.",
+        "Then add tiny oscillation.",
+        "Return to straight tone on command."
+      ],
+      "avoidThis": [
+        "Forcing vibrato by shaking the jaw.",
+        "Wide, uncontrolled wobble."
+      ],
+      "coachScript": [
+        "Straight tone first.",
+        "Now add gentle vibrato.",
+        "Back to straight tone. Your choice."
+      ],
+      "demo": [{ "note": "A3", "durationMs": 800, "gapMs": 120 }]
+    },
+    {
+      "id": "lesson_intervals_melody",
+      "title": "Day 13: Hear First",
+      "body": "If you can hear it clearly, you can sing it cleanly. This day connects jumps and melody.",
+      "keyPoints": [
+        "Hear the next note before you move.",
+        "Clean jump, then clean phrase.",
+        "Stay relaxed as pitch changes."
+      ],
+      "doThis": [
+        "Pause between notes for a split second.",
+        "Lock each landing.",
+        "Keep your vowel consistent across the phrase."
+      ],
+      "avoidThis": [
+        "Sliding when the task is a jump.",
+        "Rushing the phrase."
+      ],
+      "coachScript": [
+        "Hear it.",
+        "Now sing it.",
+        "Lock each landing before the next note."
+      ],
+      "demo": [
+        { "note": "C4", "durationMs": 260, "gapMs": 80 },
+        { "note": "G4", "durationMs": 260, "gapMs": 0 }
+      ]
+    },
+    {
+      "id": "lesson_week2_check",
+      "title": "Day 14: Week 2 Check",
+      "body": "This is your ‘clean + musical’ check. Stability plus a phrase that feels like music.",
+      "keyPoints": [
+        "Clean phrase.",
+        "Stable holds.",
+        "Don’t push—stay easy."
+      ],
+      "doThis": [
+        "Take one clean breath.",
+        "Stay calm and steady.",
+        "Stop after one clean run."
+      ],
+      "avoidThis": [
+        "Chasing score with tension.",
+        "Doing too many reps when you’re tired."
+      ],
+      "coachScript": [
+        "Clean and musical.",
+        "Steady holds.",
+        "One clean run and you’re done."
+      ],
+      "demo": [{ "note": "C4", "durationMs": 500, "gapMs": 120 }]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+export class PitchSmoother {
+  private window: number[] = []
+  private windowSize: number
+  private lastStable: number | null = null
+  private hysteresisHz: number
+
+  constructor(opts?: { windowSize?: number; hysteresisHz?: number }) {
+    this.windowSize = opts?.windowSize ?? 5
+    this.hysteresisHz = opts?.hysteresisHz ?? 6
+  }
+
+  push(freqHz: number) {
+    this.window.push(freqHz)
+    if (this.window.length > this.windowSize) this.window.shift()
+
+    const med = median(this.window)
+
+    if (this.lastStable == null) {
+      this.lastStable = med
+      return med
+    }
+
+    // hysteresis: ignore tiny jumps
+    if (Math.abs(med - this.lastStable) < this.hysteresisHz) {
+      return this.lastStable
+    }
+
+    // accept
+    this.lastStable = med
+    return med
+  }
+
+  reset() {
+    this.window = []
+    this.lastStable = null
+  }
+}
+
+function median(xs: number[]) {
+  const a = [...xs].sort((x, y) => x - y)
+  const m = Math.floor(a.length / 2)
+  return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2
+}

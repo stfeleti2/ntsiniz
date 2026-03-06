@@ -1,0 +1,27 @@
+{
+  "name": "ntsiniz-wav-file-writer",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "private": true,
+  "keywords": [
+    "expo",
+    "expo-module",
+    "audio",
+    "wav"
+  ],
+  "peerDependencies": {
+    "expo": "*",
+    "expo-modules-core": "*",
+    "react-native": "*"
+  },
+  "types": "build/index.d.ts",
+  "files": [
+    "build",
+    "android",
+    "ios",
+    "expo-module.config.json"
+  ],
+  "scripts": {
+    "build": "echo \"(prebuilt)\""
+  }
+}

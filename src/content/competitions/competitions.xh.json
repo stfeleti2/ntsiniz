@@ -1,0 +1,25 @@
+{
+  "packId": "competitions_v1",
+  "language": "xh",
+  "seasons": [
+    {
+      "id": "s2026_q1",
+      "title": "Ixesha Q1 2026",
+      "subtitle": "Imijikelo yeveki · Offline-first",
+      "startsAt": 1709164800000,
+      "endsAt": 1716940800000,
+      "competitions": [
+        {
+          "id": "comp_pitch_control",
+          "featured": true,
+          "title": "Pitch Control Cup",
+          "subtitle": "Bamba uzinzile",
+          "rules": ["I-clip enye ngomjikelo", "Sebenzisa best take", "Yiba nobubele"],
+          "rounds": [
+            { "id": "r1", "title": "Round 1", "opensAt": 1709164800000, "closesAt": 1709773200000 }
+          ]
+        }
+      ]
+    }
+  ]
+}

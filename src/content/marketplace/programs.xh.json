@@ -1,0 +1,17 @@
+{
+  "packId": "marketplace_programs_v1",
+  "language": "xh",
+  "programs": [
+    {
+      "id": "prog_stability_7",
+      "featured": true,
+      "coachId": "coach_1",
+      "title": "7-Day Stability Reset",
+      "subtitle": "Bamba amanqaku acocekileyo.",
+      "days": [
+        { "day": 1, "title": "Baseline", "lessonId": "lesson_pitch_center" },
+        { "day": 2, "title": "Hold steady", "lessonId": "lesson_hold_steady" }
+      ]
+    }
+  ]
+}

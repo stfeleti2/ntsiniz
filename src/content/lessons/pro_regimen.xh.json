@@ -1,0 +1,2187 @@
+{
+  "packId": "lessons_pro_regimen_v1",
+  "language": "xh",
+  "lessons": [
+    {
+      "id": "PRO_W01D01",
+      "title": "First Win: Pitch Lock + Best Take",
+      "body": "**Focus:** Learn the loop. Calm pitch lock. Confidence-building wins.\n\n### Objectives\n- Complete the full loop end-to-end\n- Hold a note inside the lane for 2s\n- Save one best take you’re proud of\n\n### Warm-up (3–5 min)\n- Gentle hum (60–90s) — soft and steady\n- NG resonance (60s) — relaxed throat\n- Tiny glide (30–60s) — no strain\n\n### Core drills\n- **Warmup hum** — 30–45s. Focus on steady airflow.\n- **Match & lock** — 5 reps. Lock quickly, then stay still for ~2s.\n- **Sustain steady** — 4 reps. Keep it smooth; micro-correct only.\n\n### Transfer (reduced feedback)\n- 2 reps with overlay faded after 1s (listen and rely on feel).\n\n### Close\n- Replay the best rep (waveform) and save as Best Take.\n- Next: Repeatability day.",
+      "keyPoints": [
+        "Calm beats loud.",
+        "Micro-corrections, not big jumps.",
+        "Save a best take based on cleanliness, not just score."
+      ],
+      "doThis": [
+        "Start soft, then stabilize.",
+        "Breathe low and easy.",
+        "If you miss, reset and go again."
+      ],
+      "avoidThis": [
+        "Pushing volume to ‘hit’ pitch.",
+        "Chasing the line aggressively.",
+        "Holding tension in jaw/neck."
+      ],
+      "coachScript": [
+        "Today is about a *win*. Start gentle. Lock the note, then keep it still.",
+        "If you drift, do a tiny adjustment and return to calm.",
+        "After each rep, listen once. Save the cleanest take."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 1,
+        "focus": "Learn the loop. Calm pitch lock. Confidence-building wins.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_hum_c4",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W01D02",
+      "title": "Repeatability: Stable Holds (Day 2)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 2,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W01D03",
+      "title": "Repeatability: Stable Holds (Day 3)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 3,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W01D04",
+      "title": "Repeatability: Stable Holds (Day 4)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 4,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W01D05",
+      "title": "Repeatability: Stable Holds (Day 5)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 5,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W01D06",
+      "title": "Repeatability: Stable Holds (Day 6)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 6,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W01D07",
+      "title": "Repeatability: Stable Holds (Day 7)",
+      "body": "**Focus:** Build consistency: repeat the same success with less effort.\n\n### Objectives\n- Get 3+ stable reps\n- Reduce ‘wobble’ and overshooting\n- Save a best take that feels easier than Day 1\n\n### Warm-up (3–5 min)\n- Hum + NG (2 min)\n- Small slide (1 min)\n\n### Core drills\n- **Warmup match** — 3 reps. Match pitch gently.\n- **Match & lock** — 5 reps. Aim for quicker lock than yesterday.\n- **Sustain steady** — 4 reps. Focus on steadiness (not louder).\n\n### Transfer (reduced feedback)\n- Do 1 rep with bandwidth-only mindset: only correct when clearly outside the lane.\n\n### Close\n- Save today’s best take.\n- Note: ‘Did this feel easier?’ (yes/no).",
+      "keyPoints": [
+        "Consistency beats intensity.",
+        "Make the correction smaller than you think."
+      ],
+      "doThis": [
+        "Repeat the same setup each rep (posture, breath).",
+        "Listen once, then do the next rep."
+      ],
+      "avoidThis": [
+        "Changing strategy every rep.",
+        "Over-correcting."
+      ],
+      "coachScript": [
+        "We’re building repeatability. Same setup every time.",
+        "Aim for ‘easy wins’ rather than ‘big wins’."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 1,
+        "day": 7,
+        "focus": "Build consistency: repeat the same success with less effort.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 45,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "warmup_sustain_a3"
+        ],
+        "transferMode": "BANDWIDTH_ONLY"
+      }
+    },
+    {
+      "id": "PRO_W02D01",
+      "title": "Stability Ladder W2D1",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 1,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D02",
+      "title": "Stability Ladder W2D2",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 2,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D03",
+      "title": "Stability Ladder W2D3",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 3,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D04",
+      "title": "Stability Ladder W2D4",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 4,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D05",
+      "title": "Stability Ladder W2D5",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 5,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D06",
+      "title": "Stability Ladder W2D6",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 6,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W02D07",
+      "title": "Stability Ladder W2D7",
+      "body": "**Focus:** Longer holds and cleaner endings. Make stability automatic.\n\n### Objectives\n- Increase hold time without tension\n- End cleanly\n- Save best take with smoother tail\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n- Easy sustain (1 min)\n\n### Core drills\n- **Sustain steady** — 5 reps. 2–3s holds.\n- **Breath phrase** — 3 reps. Smooth airflow for 4s.\n- **Vibrato control** — 3 reps. Keep wobble small and controlled.\n\n### Transfer (reduced feedback)\n- 1 rep with overlay faded after 1.2s. Focus on feel + breath.\n\n### Close\n- Save best take. Tomorrow: stability under small variation.",
+      "keyPoints": [
+        "Longer holds require less push, not more.",
+        "Clean endings are part of ‘pro’ singing."
+      ],
+      "doThis": [
+        "Release the end cleanly—don’t ‘search’ for pitch on the way out."
+      ],
+      "avoidThis": [
+        "Tensing to hold longer."
+      ],
+      "coachScript": [
+        "Longer holds feel calmer. If you tense, shorten and rebuild.",
+        "We care about the end as much as the middle."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 2,
+        "day": 7,
+        "focus": "Longer holds and cleaner endings. Make stability automatic.",
+        "difficulty": "beginner",
+        "durationMin": 18,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D01",
+      "title": "2-Note Steps W3D1",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 1,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D02",
+      "title": "2-Note Steps W3D2",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 2,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D03",
+      "title": "2-Note Steps W3D3",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 3,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D04",
+      "title": "2-Note Steps W3D4",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 4,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D05",
+      "title": "2-Note Steps W3D5",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 5,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D06",
+      "title": "2-Note Steps W3D6",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 6,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_p5_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W03D07",
+      "title": "2-Note Steps W3D7",
+      "body": "**Focus:** Clean transitions between two notes (up/down).\n\n### Objectives\n- Move between notes without sliding too far\n- Stabilize quickly after the change\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Slide small (1 min)\n\n### Core drills\n- **Slide warmup** — 3 reps. Small controlled glide.\n- **Interval step** — 5 reps. Hit the second note cleanly.\n- **Stabilize** — 3 reps. Hold steady after movement.\n\n### Transfer (reduced feedback)\n- Do 2 reps with faded overlay; judge success by listening to playback.\n\n### Close\n- Save the cleanest transition take.\n- Next: add stability after transition.",
+      "keyPoints": [
+        "Transition is quick; stability is the goal.",
+        "Don’t ‘aim high’—aim centered."
+      ],
+      "doThis": [
+        "Move quickly, then settle.",
+        "Use small corrections after landing."
+      ],
+      "avoidThis": [
+        "Sliding slowly through the target.",
+        "Over-shooting the landing note."
+      ],
+      "coachScript": [
+        "Hit the change, then go still. Playback will tell you the truth."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 3,
+        "day": 7,
+        "focus": "Clean transitions between two notes (up/down).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 40,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "sustain_a3_steady"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W04D01",
+      "title": "Onset + Offset Control W4D1",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 1,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D02",
+      "title": "Onset + Offset Control W4D2",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 2,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D03",
+      "title": "Onset + Offset Control W4D3",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 3,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D04",
+      "title": "Onset + Offset Control W4D4",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 4,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D05",
+      "title": "Onset + Offset Control W4D5",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 5,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D06",
+      "title": "Onset + Offset Control W4D6",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 6,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W04D07",
+      "title": "Onset + Offset Control W4D7",
+      "body": "**Focus:** Clean starts and endings; reduce scoops and pitch tails.\n\n### Objectives\n- Start on pitch quickly\n- End without drift\n- Improve median consistency over reps\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- NG (1 min)\n\n### Core drills\n- **Resonance forward** — 4 reps. Forward placement.\n- **Slide down control** — 4 reps. Control descent.\n- **Melody echo** — 3 reps. Short phrase accuracy.\n\n### Transfer (reduced feedback)\n- 1 no-overlay rep (post summary only).\n\n### Close\n- Save best take and compare to last week’s best take.",
+      "keyPoints": [
+        "A clean onset is gentle and precise.",
+        "A clean offset releases, not collapses."
+      ],
+      "doThis": [
+        "Start with intention (soft but precise).",
+        "Release the end as if ‘placing’ silence."
+      ],
+      "avoidThis": [
+        "Scooping up to the note.",
+        "Letting pitch fall at the end."
+      ],
+      "coachScript": [
+        "Treat starts and ends like punctuation. Clean edges sound pro."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 4,
+        "day": 7,
+        "focus": "Clean starts and endings; reduce scoops and pitch tails.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "resonance_forward_e4",
+          "slide_e4_to_c4",
+          "melody_echo_3note"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W05D01",
+      "title": "Agility Runs + Echo Phrases W5D1",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 1,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_1",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D02",
+      "title": "Agility Runs + Echo Phrases W5D2",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 2,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_1",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D03",
+      "title": "Agility Runs + Echo Phrases W5D3",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 3,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_2",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D04",
+      "title": "Agility Runs + Echo Phrases W5D4",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 4,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_2",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D05",
+      "title": "Agility Runs + Echo Phrases W5D5",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 5,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D06",
+      "title": "Agility Runs + Echo Phrases W5D6",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 6,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W05D07",
+      "title": "Agility Runs + Echo Phrases W5D7",
+      "body": "**Focus:** Agility and short melodic accuracy under control.\n\n### Objectives\n- Move smoothly without losing pitch center\n- Keep rhythm and pitch stable\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Small pentatonic run (1 min)\n\n### Core drills\n- **Agility run** — 4 reps. Smooth and even.\n- **Melody echo** — 5 reps. Copy the phrase precisely.\n- **Stability hold** — 2 reps. Reset steadiness.\n\n### Transfer (reduced feedback)\n- 2 reps with faded overlay; focus on listening for accuracy.\n\n### Close\n- Save best take. Next: vary vowel or range (controlled variation).",
+      "keyPoints": [
+        "Smooth movement, calm landing.",
+        "Accuracy first; speed later."
+      ],
+      "doThis": [
+        "Go slower to be cleaner.",
+        "Keep airflow consistent through movement."
+      ],
+      "avoidThis": [
+        "Rushing and losing pitch.",
+        "Tensing jaw/tongue."
+      ],
+      "coachScript": [
+        "Clean agility is relaxed. Slow is professional."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 5,
+        "day": 7,
+        "focus": "Agility and short melodic accuracy under control.",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "REALTIME_FULL",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "agility_penta_run_3",
+          "melody_echo_3note",
+          "vibrato_control_hold"
+        ],
+        "transferMode": "FADED"
+      }
+    },
+    {
+      "id": "PRO_W06D01",
+      "title": "Variation & Robustness W6D1",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 1,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D02",
+      "title": "Variation & Robustness W6D2",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 2,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D03",
+      "title": "Variation & Robustness W6D3",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 3,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D04",
+      "title": "Variation & Robustness W6D4",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 4,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D05",
+      "title": "Variation & Robustness W6D5",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 5,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D06",
+      "title": "Variation & Robustness W6D6",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 6,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W06D07",
+      "title": "Variation & Robustness W6D7",
+      "body": "**Focus:** Same skills under controlled variation (range/vowel/noise).\n\n### Objectives\n- Hold performance under variation\n- Stay calm when confidence dips\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Breath phrase** — 3 reps. Stable airflow.\n- **Slide up** — 4 reps. Controlled ascent.\n- **Song phrase** — 2 reps. Simple musical transfer.\n\n### Transfer (reduced feedback)\n- 1 rep with bandwidth-only overlay; 1 rep with overlay off.\n\n### Close\n- Save a best take that is ‘clean under variation’.",
+      "keyPoints": [
+        "Variation is training, not a test.",
+        "When confidence dips, simplify."
+      ],
+      "doThis": [
+        "If tracking is noisy, focus on breath + steady vowel.",
+        "Use playback as judge."
+      ],
+      "avoidThis": [
+        "Chasing a noisy line.",
+        "Turning variation into strain."
+      ],
+      "coachScript": [
+        "If it gets messy, return to calm breath and a steady tone. That’s the pro move."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 6,
+        "day": 7,
+        "focus": "Same skills under controlled variation (range/vowel/noise).",
+        "difficulty": "intermediate",
+        "durationMin": 20,
+        "feedbackPlan": {
+          "mode": "BANDWIDTH_ONLY",
+          "bandwidthCents": 35,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "breath_phrase_4s",
+          "slide_c4_to_g4",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "MIXED"
+      }
+    },
+    {
+      "id": "PRO_W07D01",
+      "title": "Transfer & Independence W7D1",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 1,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D02",
+      "title": "Transfer & Independence W7D2",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 2,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D03",
+      "title": "Transfer & Independence W7D3",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 3,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D04",
+      "title": "Transfer & Independence W7D4",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 4,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D05",
+      "title": "Transfer & Independence W7D5",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 5,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D06",
+      "title": "Transfer & Independence W7D6",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 6,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W07D07",
+      "title": "Transfer & Independence W7D7",
+      "body": "**Focus:** Reduce reliance on visual overlay; build performance resilience.\n\n### Objectives\n- Perform with minimal live feedback\n- Use post summary to correct one thing\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Resonance (1 min)\n\n### Core drills\n- **Match & lock** — 4 reps. Minimal corrections.\n- **Melody echo** — 4 reps. Rely on ear.\n- **Song phrase** — 2 reps. Performance feel.\n\n### Transfer (reduced feedback)\n- All reps are faded or off. After each, pick ONE correction and redo.\n\n### Close\n- Save best take. Write one sentence: ‘My one correction today was…’",
+      "keyPoints": [
+        "Less feedback = more skill.",
+        "One correction per take."
+      ],
+      "doThis": [
+        "Listen, then apply one change.",
+        "Keep rep count low and quality high."
+      ],
+      "avoidThis": [
+        "Trying to fix everything at once."
+      ],
+      "coachScript": [
+        "Today you train independence. Trust your ear; use the summary as your coach."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 7,
+        "day": 7,
+        "focus": "Reduce reliance on visual overlay; build performance resilience.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "FADED",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 1.0
+        },
+        "drills": [
+          "match_e4_lock",
+          "melody_echo_3note",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D01",
+      "title": "Graduation Set W8D1",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 1,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D02",
+      "title": "Graduation Set W8D2",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 2,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D03",
+      "title": "Graduation Set W8D3",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 3,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D04",
+      "title": "Graduation Set W8D4",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 4,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D05",
+      "title": "Graduation Set W8D5",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 5,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D06",
+      "title": "Graduation Set W8D6",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 6,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    },
+    {
+      "id": "PRO_W08D07",
+      "title": "Graduation Set W8D7",
+      "body": "**Focus:** Pro-feel loop: choose best take, consistency under pressure, next program.\n\n### Objectives\n- Demonstrate stable pitch + transitions\n- Save best take under limited attempts\n- Plan next focus\n\n### Warm-up (3–5 min)\n- Hum (1 min)\n- Breath phrase (1 min)\n\n### Core drills\n- **Interval step** — 3 reps. Clean transitions.\n- **Vibrato control** — 2 reps. Stable hold.\n- **Song phrase** — 2 reps. Musical transfer.\n\n### Transfer (reduced feedback)\n- Limit to 3 total attempts. Choose best take and commit.\n\n### Close\n- Save best take. Review week-to-week progress (best take history).\n- Next: pick a specialization path (stability / agility / songs).",
+      "keyPoints": [
+        "Limited attempts = focus.",
+        "Choose and commit to the best take."
+      ],
+      "doThis": [
+        "Treat each rep like performance.",
+        "Use playback once, then decide."
+      ],
+      "avoidThis": [
+        "Endless retries.",
+        "Over-analyzing mid-performance."
+      ],
+      "coachScript": [
+        "This is your graduation set. You’re training confidence and decision-making."
+      ],
+      "demo": null,
+      "meta": {
+        "week": 8,
+        "day": 7,
+        "focus": "Pro-feel loop: choose best take, consistency under pressure, next program.",
+        "difficulty": "advanced",
+        "durationMin": 22,
+        "feedbackPlan": {
+          "mode": "OFF_POST",
+          "bandwidthCents": 30,
+          "fadeAfterSec": 0
+        },
+        "drills": [
+          "interval_m3_up",
+          "vibrato_control_hold",
+          "song_phrase_twinkle_a"
+        ],
+        "transferMode": "OFF_POST"
+      }
+    }
+  ]
+}

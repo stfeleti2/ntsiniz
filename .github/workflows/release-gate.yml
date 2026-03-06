@@ -1,0 +1,35 @@
+name: Release Gate (Deterministic)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+concurrency:
+  group: release-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: Release gate (lockfile + full CI)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Require lockfile
+        run: bash scripts/check-lockfile-hard.sh
+
+      - name: Install deps (deterministic)
+        run: npm ci
+
+      - name: CI
+        run: npm run ci

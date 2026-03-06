@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "outDir": "dist-tests",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "src/ui/testing/**/*.ts",
+    "src/ui/testing/**/*.tsx",
+    "src/ui/**/*.ts",
+    "src/ui/**/*.tsx",
+    "src/types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist-tests", "dist-core"]
+}

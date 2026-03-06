@@ -1,0 +1,11 @@
+{
+  "packId": "phase2",
+  "language": "zu",
+  "drills": [
+    {"id":"phase2_sustain_d4","title":"Ukuqina: Bamba D4","type":"sustain","level":2,"tuneWindowCents":32,"holdMs":1700,"countdownMs":900,"target":{"note":"D4"}},
+    {"id":"phase2_match_f3","title":"Pitch lock: Qondanisa F3","type":"match_note","level":2,"tuneWindowCents":26,"holdMs":900,"countdownMs":650,"target":{"note":"F3"}},
+    {"id":"phase2_interval_5th","title":"Pitch lock: Ukugxuma kwe-5th","type":"interval","level":3,"tuneWindowCents":40,"holdMs":900,"countdownMs":650,"target":{"note":"D4"},"intervalSemitones":7},
+    {"id":"phase2_melody_3","title":"Pitch lock: Echo yomculo (A3)","type":"melody_echo","level":3,"tuneWindowCents":44,"holdMs":800,"countdownMs":650,
+      "melody":[{"note":"A3"},{"note":"C4"},{"note":"B3"},{"note":"A3"}]}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "packId": "marketplace_programs_v1",
+  "language": "zu",
+  "programs": [
+    {
+      "id": "prog_stability_7",
+      "featured": true,
+      "coachId": "coach_1",
+      "title": "Uhlelo lwezinsuku ezi-7: Uzinzo",
+      "subtitle": "Bamba amanothi ahlanzekile.",
+      "days": [
+        { "day": 1, "title": "I-baseline", "lessonId": "lesson_pitch_center" },
+        { "day": 2, "title": "Bamba uzinzile", "lessonId": "lesson_hold_steady" }
+      ]
+    }
+  ]
+}

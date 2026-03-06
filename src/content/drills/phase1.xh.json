@@ -1,0 +1,391 @@
+{
+  "packId": "phase1-xh",
+  "language": "xh",
+  "drills": [
+    {
+      "id": "warmup_hum_c4",
+      "title": "Warmup: Hum C4",
+      "type": "match_note",
+      "level": 1,
+      "tuneWindowCents": 30,
+      "holdMs": 650,
+      "countdownMs": 650,
+      "target": { "note": "C4" }
+    },
+    {
+      "id": "warmup_hum_e4",
+      "title": "Warmup: Hum E4",
+      "type": "match_note",
+      "level": 1,
+      "tuneWindowCents": 30,
+      "holdMs": 650,
+      "countdownMs": 650,
+      "target": { "note": "E4" }
+    },
+    {
+      "id": "warmup_match_g3",
+      "title": "Warmup: Match G3",
+      "type": "match_note",
+      "level": 1,
+      "tuneWindowCents": 28,
+      "holdMs": 700,
+      "countdownMs": 650,
+      "target": { "note": "G3" }
+    },
+    {
+      "id": "warmup_sustain_a3",
+      "title": "Warmup: Sustain A3",
+      "type": "sustain",
+      "level": 2,
+      "tuneWindowCents": 28,
+      "holdMs": 1100,
+      "countdownMs": 700,
+      "target": { "note": "A3" }
+    },
+    {
+      "id": "warmup_slide_c4_e4",
+      "title": "Warmup: Slide C4 → E4",
+      "type": "slide",
+      "level": 2,
+      "tuneWindowCents": 32,
+      "holdMs": 850,
+      "countdownMs": 700,
+      "from": { "note": "C4" },
+      "to": { "note": "E4" }
+    },
+    {
+      "id": "match_c4_lock",
+      "title": "Pitch Lock: C4",
+      "type": "match_note",
+      "level": 2,
+      "tuneWindowCents": 22,
+      "holdMs": 950,
+      "countdownMs": 750,
+      "target": { "note": "C4" }
+    },
+    {
+      "id": "match_e4_lock",
+      "title": "Pitch Lock: E4",
+      "type": "match_note",
+      "level": 2,
+      "tuneWindowCents": 22,
+      "holdMs": 950,
+      "countdownMs": 750,
+      "target": { "note": "E4" }
+    },
+    {
+      "id": "sustain_a3_steady",
+      "title": "Stability: Sustain A3",
+      "type": "sustain",
+      "level": 3,
+      "tuneWindowCents": 22,
+      "holdMs": 2300,
+      "countdownMs": 750,
+      "target": { "note": "A3" }
+    },
+    {
+      "id": "breath_phrase_4s",
+      "title": "Breath Phrase: 4s Hold",
+      "type": "sustain",
+      "level": 4,
+      "tuneWindowCents": 24,
+      "holdMs": 4000,
+      "countdownMs": 800,
+      "target": { "note": "A3" }
+    },
+    {
+      "id": "vibrato_control_hold",
+      "title": "Vibrato Control: Straight Tone",
+      "type": "sustain",
+      "level": 4,
+      "tuneWindowCents": 20,
+      "holdMs": 2600,
+      "countdownMs": 800,
+      "target": { "note": "A3" }
+    },
+    {
+      "id": "resonance_forward_e4",
+      "title": "Resonance: Forward E4",
+      "type": "match_note",
+      "level": 3,
+      "tuneWindowCents": 24,
+      "holdMs": 900,
+      "countdownMs": 750,
+      "target": { "note": "E4" }
+    },
+    {
+      "id": "slide_c4_to_g4",
+      "title": "Slide C4 → G4",
+      "type": "slide",
+      "level": 4,
+      "tuneWindowCents": 30,
+      "holdMs": 900,
+      "countdownMs": 800,
+      "from": { "note": "C4" },
+      "to": { "note": "G4" }
+    },
+    {
+      "id": "slide_e4_to_c4",
+      "title": "Slide E4 → C4",
+      "type": "slide",
+      "level": 4,
+      "tuneWindowCents": 30,
+      "holdMs": 900,
+      "countdownMs": 800,
+      "from": { "note": "E4" },
+      "to": { "note": "C4" }
+    },
+    {
+      "id": "interval_m3_up",
+      "title": "Interval: m3 Up",
+      "type": "interval",
+      "level": 4,
+      "tuneWindowCents": 28,
+      "holdMs": 800,
+      "countdownMs": 800,
+      "target": { "note": "C4" },
+      "intervalSemitones": 3
+    },
+    {
+      "id": "interval_p5_up",
+      "title": "Interval: P5 Up",
+      "type": "interval",
+      "level": 5,
+      "tuneWindowCents": 28,
+      "holdMs": 800,
+      "countdownMs": 800,
+      "target": { "note": "C4" },
+      "intervalSemitones": 7
+    },
+    {
+      "id": "melody_echo_3note",
+      "title": "Melody Echo: 3 Notes",
+      "type": "melody_echo",
+      "level": 4,
+      "tuneWindowCents": 30,
+      "holdMs": 650,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "C4" },
+        { "note": "D4" },
+        { "note": "C4" }
+      ]
+    },
+    {
+      "id": "agility_penta_run_1",
+      "title": "Agility: Pentatonic Run 1",
+      "type": "melody_echo",
+      "level": 6,
+      "tuneWindowCents": 32,
+      "holdMs": 520,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "C4" },
+        { "note": "D4" },
+        { "note": "E4" },
+        { "note": "G4" },
+        { "note": "A4" }
+      ]
+    },
+    {
+      "id": "agility_penta_run_2",
+      "title": "Agility: Pentatonic Run 2",
+      "type": "melody_echo",
+      "level": 6,
+      "tuneWindowCents": 32,
+      "holdMs": 520,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "A3" },
+        { "note": "C4" },
+        { "note": "D4" },
+        { "note": "E4" },
+        { "note": "G4" }
+      ]
+    },
+    {
+      "id": "agility_penta_run_3",
+      "title": "Agility: Arpeggio Bounce",
+      "type": "melody_echo",
+      "level": 7,
+      "tuneWindowCents": 32,
+      "holdMs": 500,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "C4" },
+        { "note": "E4" },
+        { "note": "G4" },
+        { "note": "E4" },
+        { "note": "C4" }
+      ]
+    },
+    {
+      "id": "song_phrase_twinkle_a",
+      "title": "Song Phrase: Twinkle A",
+      "type": "melody_echo",
+      "level": 6,
+      "tuneWindowCents": 34,
+      "holdMs": 560,
+      "countdownMs": 850,
+      "melody": [
+        { "note": "C4" },
+        { "note": "C4" },
+        { "note": "G4" },
+        { "note": "G4" },
+        { "note": "A4" }
+      ]
+    },
+    {
+      "id": "song_phrase_twinkle_b",
+      "title": "Song Phrase: Twinkle B",
+      "type": "melody_echo",
+      "level": 6,
+      "tuneWindowCents": 34,
+      "holdMs": 560,
+      "countdownMs": 850,
+      "melody": [
+        { "note": "G4" },
+        { "note": "F4" },
+        { "note": "E4" },
+        { "note": "D4" },
+        { "note": "C4" }
+      ]
+    },
+    {
+      "id": "song_phrase_scale_up",
+      "title": "Song Phrase: Scale Up",
+      "type": "melody_echo",
+      "level": 5,
+      "tuneWindowCents": 34,
+      "holdMs": 540,
+      "countdownMs": 850,
+      "melody": [
+        { "note": "C4" },
+        { "note": "D4" },
+        { "note": "E4" },
+        { "note": "F4" },
+        { "note": "G4" }
+      ]
+    },
+    {
+      "id": "song_phrase_scale_down",
+      "title": "Song Phrase: Scale Down",
+      "type": "melody_echo",
+      "level": 5,
+      "tuneWindowCents": 34,
+      "holdMs": 540,
+      "countdownMs": 850,
+      "melody": [
+        { "note": "G4" },
+        { "note": "F4" },
+        { "note": "E4" },
+        { "note": "D4" },
+        { "note": "C4" }
+      ]
+    },
+    {
+      "id": "match_a3",
+      "title": "Match A3",
+      "type": "match_note",
+      "level": 1,
+      "tuneWindowCents": 25,
+      "holdMs": 900,
+      "countdownMs": 800,
+      "target": { "note": "A3" }
+    },
+    {
+      "id": "match_c4",
+      "title": "Match C4",
+      "type": "match_note",
+      "level": 1,
+      "tuneWindowCents": 25,
+      "holdMs": 900,
+      "countdownMs": 800,
+      "target": { "note": "C4" }
+    },
+    {
+      "id": "sustain_g3",
+      "title": "Sustain G3",
+      "type": "sustain",
+      "level": 2,
+      "tuneWindowCents": 25,
+      "holdMs": 1500,
+      "countdownMs": 800,
+      "target": { "note": "G3" }
+    },
+    {
+      "id": "sustain_a4",
+      "title": "Sustain A4",
+      "type": "sustain",
+      "level": 3,
+      "tuneWindowCents": 22,
+      "holdMs": 1700,
+      "countdownMs": 800,
+      "target": { "note": "A4" }
+    },
+    {
+      "id": "slide_c4_to_e4",
+      "title": "Slide C4 → E4",
+      "type": "slide",
+      "level": 3,
+      "tuneWindowCents": 28,
+      "holdMs": 900,
+      "countdownMs": 800,
+      "from": { "note": "C4" },
+      "to": { "note": "E4" }
+    },
+    {
+      "id": "interval_up_5",
+      "title": "Interval +5 (up)",
+      "type": "interval",
+      "level": 4,
+      "tuneWindowCents": 28,
+      "holdMs": 800,
+      "countdownMs": 800,
+      "target": { "note": "C4" },
+      "intervalSemitones": 5
+    },
+    {
+      "id": "interval_down_4",
+      "title": "Interval -4 (down)",
+      "type": "interval",
+      "level": 4,
+      "tuneWindowCents": 28,
+      "holdMs": 800,
+      "countdownMs": 800,
+      "target": { "note": "E4" },
+      "intervalSemitones": -4
+    },
+    {
+      "id": "melody_1",
+      "title": "Melody Echo 1",
+      "type": "melody_echo",
+      "level": 5,
+      "tuneWindowCents": 30,
+      "holdMs": 700,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "C4" },
+        { "note": "D4" },
+        { "note": "E4" },
+        { "note": "D4" }
+      ]
+    },
+    {
+      "id": "melody_2",
+      "title": "Melody Echo 2",
+      "type": "melody_echo",
+      "level": 6,
+      "tuneWindowCents": 28,
+      "holdMs": 650,
+      "countdownMs": 800,
+      "melody": [
+        { "note": "G3" },
+        { "note": "A3" },
+        { "note": "B3" },
+        { "note": "A3" },
+        { "note": "G3" }
+      ]
+    }
+  ]
+}

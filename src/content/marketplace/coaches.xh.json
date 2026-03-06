@@ -1,0 +1,15 @@
+{
+  "packId": "marketplace_coaches_v1",
+  "language": "xh",
+  "coaches": [
+    {
+      "id": "coach_1",
+      "featured": true,
+      "name": "Coach Nandi",
+      "headline": "Ukuphefumla + uzinzo lwepitch",
+      "bio": "Kulungele abaqalayo. Siqala ngolawulo oluphindekayo.",
+      "tags": ["Pitch", "Uzinzo"],
+      "rating": 4.8
+    }
+  ]
+}

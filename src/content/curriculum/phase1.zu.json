@@ -1,0 +1,193 @@
+{
+  "packId": "curriculum_phase1_v1",
+  "language": "zu",
+  "curriculum": {
+    "curriculumId": "phase1_curriculum",
+    "language": "zu",
+    "title": "14-Day Pitch & Stability",
+    "days": [
+      {
+        "id": "d01",
+        "week": 1,
+        "day": 1,
+        "title": "Pitch Center",
+        "focus": "Land the note first. Relax second.",
+        "lessonId": "lesson_pitch_center",
+        "drillIds": [
+          "warmup_hum_c4",
+          "match_c4_lock",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "d02",
+        "week": 1,
+        "day": 2,
+        "title": "Fast Lock",
+        "focus": "Get to the right pitch in the first 300ms.",
+        "lessonId": "lesson_fast_lock",
+        "drillIds": [
+          "warmup_hum_e4",
+          "match_e4_lock",
+          "agility_penta_run_1"
+        ]
+      },
+      {
+        "id": "d03",
+        "week": 1,
+        "day": 3,
+        "title": "Hold Steady",
+        "focus": "Keep the pitch calm — no shake.",
+        "lessonId": "lesson_hold_steady",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "sustain_a3_steady",
+          "song_phrase_scale_down"
+        ]
+      },
+      {
+        "id": "d04",
+        "week": 1,
+        "day": 4,
+        "title": "Clean Slides",
+        "focus": "Glide without wobble.",
+        "lessonId": "lesson_clean_slide",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "slide_c4_to_g4",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "d05",
+        "week": 1,
+        "day": 5,
+        "title": "Intervals",
+        "focus": "Jump cleanly — don’t slide.",
+        "lessonId": "lesson_intervals",
+        "drillIds": [
+          "warmup_match_g3",
+          "interval_m3_up",
+          "interval_p5_up"
+        ]
+      },
+      {
+        "id": "d06",
+        "week": 1,
+        "day": 6,
+        "title": "Melody Shape",
+        "focus": "First get up/down right. Then refine cents.",
+        "lessonId": "lesson_melody_shape",
+        "drillIds": [
+          "warmup_hum_c4",
+          "melody_echo_3note",
+          "song_phrase_twinkle_b"
+        ]
+      },
+      {
+        "id": "d07",
+        "week": 1,
+        "day": 7,
+        "title": "Week 1 Check",
+        "focus": "One clean rep of each skill.",
+        "lessonId": "lesson_week1_check",
+        "drillIds": [
+          "match_c4_lock",
+          "sustain_a3_steady",
+          "interval_m3_up"
+        ]
+      },
+      {
+        "id": "d08",
+        "week": 2,
+        "day": 1,
+        "title": "Breath Phrasing",
+        "focus": "Smooth airflow for longer holds.",
+        "lessonId": "lesson_breath_phrase",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "breath_phrase_4s",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "d09",
+        "week": 2,
+        "day": 2,
+        "title": "Stability Under Motion",
+        "focus": "Stay steady even after a slide.",
+        "lessonId": "lesson_stability_motion",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "slide_e4_to_c4",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "d10",
+        "week": 2,
+        "day": 3,
+        "title": "Agility",
+        "focus": "Quick notes, clean landings.",
+        "lessonId": "lesson_agility",
+        "drillIds": [
+          "agility_penta_run_1",
+          "agility_penta_run_3",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "d11",
+        "week": 2,
+        "day": 4,
+        "title": "Resonance Awareness",
+        "focus": "Forward, easy tone — no squeeze.",
+        "lessonId": "lesson_resonance",
+        "drillIds": [
+          "resonance_forward_e4",
+          "match_e4_lock",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "d12",
+        "week": 2,
+        "day": 5,
+        "title": "Vibrato Control",
+        "focus": "Choose: straight tone or gentle vibrato.",
+        "lessonId": "lesson_vibrato",
+        "drillIds": [
+          "vibrato_control_hold",
+          "sustain_a3_steady",
+          "song_phrase_scale_down"
+        ]
+      },
+      {
+        "id": "d13",
+        "week": 2,
+        "day": 6,
+        "title": "Intervals + Melody",
+        "focus": "Hear the target note before you sing.",
+        "lessonId": "lesson_intervals_melody",
+        "drillIds": [
+          "interval_p5_up",
+          "melody_echo_3note",
+          "song_phrase_twinkle_b"
+        ]
+      },
+      {
+        "id": "d14",
+        "week": 2,
+        "day": 7,
+        "title": "Week 2 Check",
+        "focus": "Stability + musical phrase.",
+        "lessonId": "lesson_week2_check",
+        "drillIds": [
+          "breath_phrase_4s",
+          "sustain_a3_steady",
+          "song_phrase_scale_up"
+        ]
+      }
+    ]
+  }
+}

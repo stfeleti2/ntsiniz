@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+group = 'com.ntsiniz.wavfilewriter'
+
+def expoModulesCorePlugin = new File(['node', '--print', "require.resolve('expo-modules-core/package.json')"].execute(null, rootDir).text.trim()).getParentFile()
+
+android {
+  namespace "com.ntsiniz.wavfilewriter"
+  compileSdkVersion 34
+
+  defaultConfig {
+    minSdkVersion 24
+    targetSdkVersion 34
+  }
+
+  sourceSets {
+    main {
+      manifest.srcFile 'src/main/AndroidManifest.xml'
+      java.srcDirs = ['src/main/java']
+    }
+  }
+}
+
+dependencies {
+  implementation project(':expo-modules-core')
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+}

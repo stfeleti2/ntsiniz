@@ -1,0 +1,17 @@
+{
+  "name": "NtsinizAudioRoute",
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "ios": {
+    "modules": [
+      "NtsinizAudioRouteModule"
+    ]
+  },
+  "android": {
+    "modules": [
+      "com.ntsiniz.audioroute.NtsinizAudioRouteModule"
+    ]
+  }
+}

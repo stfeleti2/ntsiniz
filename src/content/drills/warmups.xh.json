@@ -1,0 +1,11 @@
+{
+  "packId": "warmups",
+  "language": "xh",
+  "drills": [
+    {"id":"warmup_hum_g3","title":"Ukufudumeza: Hum G3","type":"match_note","level":1,"tuneWindowCents":32,"holdMs":700,"countdownMs":650,"target":{"note":"G3"}},
+    {"id":"warmup_liptrill_c4","title":"Ukufudumeza: Lip Trill C4","type":"match_note","level":1,"tuneWindowCents":34,"holdMs":750,"countdownMs":650,"target":{"note":"C4"}},
+    {"id":"warmup_sustain_a3","title":"Ukufudumeza: Bamba A3","type":"sustain","level":1,"tuneWindowCents":38,"holdMs":1400,"countdownMs":800,"target":{"note":"A3"}},
+    {"id":"warmup_slide_c4_e4","title":"Ukufudumeza: Swayida C4→E4","type":"slide","level":2,"tuneWindowCents":40,"holdMs":1200,"countdownMs":800,"from":{"note":"C4"},"to":{"note":"E4"}},
+    {"id":"warmup_interval_c4_g4","title":"Ukufudumeza: Isithuba C4→G4","type":"interval","level":2,"tuneWindowCents":45,"holdMs":900,"countdownMs":800,"target":{"note":"C4"},"intervalSemitones":7}
+  ]
+}

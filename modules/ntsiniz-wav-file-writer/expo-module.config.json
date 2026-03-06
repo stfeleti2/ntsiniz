@@ -1,0 +1,10 @@
+{
+  "name": "WavFileWriter",
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["WavFileWriterModule"]
+  },
+  "android": {
+    "modules": ["com.ntsiniz.wavfilewriter.WavFileWriterModule"]
+  }
+}

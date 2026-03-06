@@ -1,0 +1,24 @@
+{
+  "packId": "marketplace_programs_v1",
+  "language": "en",
+  "programs": [
+    {
+      "id": "prog_stability_7",
+      "featured": true,
+      "coachId": "coach_1",
+      "access": "pro",
+      "priceLabel": "Pro",
+      "title": "7-Day Stability Reset",
+      "subtitle": "Fix wobble. Hold notes clean.",
+      "days": [
+        { "day": 1, "title": "Baseline + gate", "lessonId": "lesson_pitch_center" },
+        { "day": 2, "title": "Hold steady", "lessonId": "lesson_hold_steady" },
+        { "day": 3, "title": "Clean slides", "lessonId": "lesson_clean_slide" },
+        { "day": 4, "title": "Intervals", "lessonId": "lesson_intervals" },
+        { "day": 5, "title": "Stability under motion", "lessonId": "lesson_stability_motion" },
+        { "day": 6, "title": "Breath + phrasing", "lessonId": "lesson_breath_phrase" },
+        { "day": 7, "title": "Week check", "lessonId": "lesson_week1_check" }
+      ]
+    }
+  ]
+}

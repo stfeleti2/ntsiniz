@@ -1,0 +1,26 @@
+{
+  "packId": "competitions_v1",
+  "language": "zu",
+  "seasons": [
+    {
+      "id": "s2026_q1",
+      "title": "Isizini Q1 2026",
+      "subtitle": "Imijikelezo yamasonto · Okungaxhunyiwe ku-inthanethi",
+      "startsAt": 1709164800000,
+      "endsAt": 1716940800000,
+      "competitions": [
+        {
+          "id": "comp_pitch_control",
+          "featured": true,
+          "title": "I-Pitch Control Cup",
+          "subtitle": "Bamba uzinzile",
+          "rules": ["I-clip eyodwa ngomjikelezo", "Sebenzisa okungcono", "Ube nomusa"],
+          "rounds": [
+            { "id": "r1", "title": "Umjikelezo 1", "opensAt": 1709164800000, "closesAt": 1709773200000 },
+            { "id": "r2", "title": "Umjikelezo 2", "opensAt": 1709773200000, "closesAt": 1710381600000 }
+          ]
+        }
+      ]
+    }
+  ]
+}

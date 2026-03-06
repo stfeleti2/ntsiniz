@@ -1,0 +1,1103 @@
+{
+  "packId": "curriculum_pro_regimen12_intermediate_v1",
+  "language": "xh",
+  "curriculum": {
+    "curriculumId": "pro_regimen12_intermediate_v1",
+    "language": "xh",
+    "title": "Pro Training Regiment (12 weeks) — Intermediate Track",
+    "days": [
+      {
+        "id": "PR12_INT_W01D01",
+        "title": "First Win: Pro Loop Setup",
+        "week": 1,
+        "day": 1,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D01",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "match_c4_lock",
+          "match_e4_lock"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D02",
+        "title": "W01D2: Calibration & wins",
+        "week": 1,
+        "day": 2,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D02",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "match_e4_lock",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D03",
+        "title": "W01D3: Calibration & wins",
+        "week": 1,
+        "day": 3,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D03",
+        "drillIds": [
+          "resonance_forward_e4",
+          "sustain_a3_steady",
+          "sustain_g3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D04",
+        "title": "W01D4: Calibration & wins",
+        "week": 1,
+        "day": 4,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D04",
+        "drillIds": [
+          "breath_phrase_4s",
+          "sustain_g3",
+          "sustain_a4"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D05",
+        "title": "W01D5: Calibration & wins",
+        "week": 1,
+        "day": 5,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D05",
+        "drillIds": [
+          "warmup_hum_c4",
+          "sustain_a4",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D06",
+        "title": "W01D6: Calibration & wins",
+        "week": 1,
+        "day": 6,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W01D06",
+        "drillIds": [
+          "warmup_match_g3",
+          "match_c4_lock",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W01D07",
+        "title": "Recovery + Transfer: Light practice (Calibration & wins)",
+        "week": 1,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W01D07",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D01",
+        "title": "W02D1: Calibration & wins",
+        "week": 2,
+        "day": 1,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D01",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "match_c4_lock",
+          "match_e4_lock"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D02",
+        "title": "W02D2: Calibration & wins",
+        "week": 2,
+        "day": 2,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D02",
+        "drillIds": [
+          "resonance_forward_e4",
+          "match_e4_lock",
+          "sustain_a3_steady"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D03",
+        "title": "W02D3: Calibration & wins",
+        "week": 2,
+        "day": 3,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D03",
+        "drillIds": [
+          "breath_phrase_4s",
+          "sustain_a3_steady",
+          "sustain_g3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D04",
+        "title": "W02D4: Calibration & wins",
+        "week": 2,
+        "day": 4,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D04",
+        "drillIds": [
+          "warmup_hum_c4",
+          "sustain_g3",
+          "sustain_a4"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D05",
+        "title": "W02D5: Calibration & wins",
+        "week": 2,
+        "day": 5,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D05",
+        "drillIds": [
+          "warmup_match_g3",
+          "sustain_a4",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D06",
+        "title": "W02D6: Calibration & wins",
+        "week": 2,
+        "day": 6,
+        "focus": "Calibration & wins — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W02D06",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "match_c4_lock",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W02D07",
+        "title": "Recovery + Transfer: Light practice (Calibration & wins)",
+        "week": 2,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W02D07",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D01",
+        "title": "W03D1: Stability & clean starts/ends",
+        "week": 3,
+        "day": 1,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D01",
+        "drillIds": [
+          "resonance_forward_e4",
+          "interval_m3_up",
+          "interval_up_5"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D02",
+        "title": "W03D2: Stability & clean starts/ends",
+        "week": 3,
+        "day": 2,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D02",
+        "drillIds": [
+          "breath_phrase_4s",
+          "interval_up_5",
+          "interval_down_4"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D03",
+        "title": "W03D3: Stability & clean starts/ends",
+        "week": 3,
+        "day": 3,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D03",
+        "drillIds": [
+          "warmup_hum_c4",
+          "interval_down_4",
+          "interval_p5_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D04",
+        "title": "W03D4: Stability & clean starts/ends",
+        "week": 3,
+        "day": 4,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D04",
+        "drillIds": [
+          "warmup_match_g3",
+          "interval_p5_up",
+          "interval_m3_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D05",
+        "title": "W03D5: Stability & clean starts/ends",
+        "week": 3,
+        "day": 5,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D05",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "interval_m3_up",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D06",
+        "title": "W03D6: Stability & clean starts/ends",
+        "week": 3,
+        "day": 6,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W03D06",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_up_5",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W03D07",
+        "title": "Recovery + Transfer: Light practice (Stability & clean starts/ends)",
+        "week": 3,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W03D07",
+        "drillIds": [
+          "resonance_forward_e4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D01",
+        "title": "W04D1: Stability & clean starts/ends",
+        "week": 4,
+        "day": 1,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D01",
+        "drillIds": [
+          "breath_phrase_4s",
+          "interval_m3_up",
+          "interval_up_5"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D02",
+        "title": "W04D2: Stability & clean starts/ends",
+        "week": 4,
+        "day": 2,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D02",
+        "drillIds": [
+          "warmup_hum_c4",
+          "interval_up_5",
+          "interval_down_4"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D03",
+        "title": "W04D3: Stability & clean starts/ends",
+        "week": 4,
+        "day": 3,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D03",
+        "drillIds": [
+          "warmup_match_g3",
+          "interval_down_4",
+          "interval_p5_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D04",
+        "title": "W04D4: Stability & clean starts/ends",
+        "week": 4,
+        "day": 4,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D04",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "interval_p5_up",
+          "interval_m3_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D05",
+        "title": "W04D5: Stability & clean starts/ends",
+        "week": 4,
+        "day": 5,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D05",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "interval_m3_up",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D06",
+        "title": "W04D6: Stability & clean starts/ends",
+        "week": 4,
+        "day": 6,
+        "focus": "Stability & clean starts/ends — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W04D06",
+        "drillIds": [
+          "resonance_forward_e4",
+          "interval_up_5",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W04D07",
+        "title": "Recovery + Transfer: Light practice (Stability & clean starts/ends)",
+        "week": 4,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W04D07",
+        "drillIds": [
+          "breath_phrase_4s",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D01",
+        "title": "W05D1: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 1,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D01",
+        "drillIds": [
+          "warmup_hum_c4",
+          "melody_echo_3note",
+          "melody_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D02",
+        "title": "W05D2: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 2,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D02",
+        "drillIds": [
+          "warmup_match_g3",
+          "melody_1",
+          "melody_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D03",
+        "title": "W05D3: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 3,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D03",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "melody_2",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D04",
+        "title": "W05D4: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 4,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D04",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "melody_echo_3note",
+          "melody_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D05",
+        "title": "W05D5: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 5,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D05",
+        "drillIds": [
+          "resonance_forward_e4",
+          "melody_1",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D06",
+        "title": "W05D6: Transitions & accuracy under variation",
+        "week": 5,
+        "day": 6,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W05D06",
+        "drillIds": [
+          "breath_phrase_4s",
+          "melody_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W05D07",
+        "title": "Recovery + Transfer: Light practice (Transitions & accuracy under variation)",
+        "week": 5,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W05D07",
+        "drillIds": [
+          "warmup_hum_c4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D01",
+        "title": "W06D1: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 1,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D01",
+        "drillIds": [
+          "warmup_match_g3",
+          "melody_echo_3note",
+          "melody_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D02",
+        "title": "W06D2: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 2,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D02",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "melody_1",
+          "melody_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D03",
+        "title": "W06D3: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 3,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D03",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "melody_2",
+          "melody_echo_3note"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D04",
+        "title": "W06D4: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 4,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D04",
+        "drillIds": [
+          "resonance_forward_e4",
+          "melody_echo_3note",
+          "melody_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D05",
+        "title": "W06D5: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 5,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D05",
+        "drillIds": [
+          "breath_phrase_4s",
+          "melody_1",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D06",
+        "title": "W06D6: Transitions & accuracy under variation",
+        "week": 6,
+        "day": 6,
+        "focus": "Transitions & accuracy under variation — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W06D06",
+        "drillIds": [
+          "warmup_hum_c4",
+          "melody_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W06D07",
+        "title": "Recovery + Transfer: Light practice (Transitions & accuracy under variation)",
+        "week": 6,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W06D07",
+        "drillIds": [
+          "warmup_match_g3",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D01",
+        "title": "W07D1: Melody control & smooth movement",
+        "week": 7,
+        "day": 1,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D01",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D02",
+        "title": "W07D2: Melody control & smooth movement",
+        "week": 7,
+        "day": 2,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D02",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "agility_penta_run_2",
+          "agility_penta_run_3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D03",
+        "title": "W07D3: Melody control & smooth movement",
+        "week": 7,
+        "day": 3,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D03",
+        "drillIds": [
+          "resonance_forward_e4",
+          "agility_penta_run_3",
+          "agility_penta_run_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D04",
+        "title": "W07D4: Melody control & smooth movement",
+        "week": 7,
+        "day": 4,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D04",
+        "drillIds": [
+          "breath_phrase_4s",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D05",
+        "title": "W07D5: Melody control & smooth movement",
+        "week": 7,
+        "day": 5,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D05",
+        "drillIds": [
+          "warmup_hum_c4",
+          "agility_penta_run_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D06",
+        "title": "W07D6: Melody control & smooth movement",
+        "week": 7,
+        "day": 6,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W07D06",
+        "drillIds": [
+          "warmup_match_g3",
+          "agility_penta_run_3",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W07D07",
+        "title": "Recovery + Transfer: Light practice (Melody control & smooth movement)",
+        "week": 7,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W07D07",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D01",
+        "title": "W08D1: Melody control & smooth movement",
+        "week": 8,
+        "day": 1,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D01",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D02",
+        "title": "W08D2: Melody control & smooth movement",
+        "week": 8,
+        "day": 2,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D02",
+        "drillIds": [
+          "resonance_forward_e4",
+          "agility_penta_run_2",
+          "agility_penta_run_3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D03",
+        "title": "W08D3: Melody control & smooth movement",
+        "week": 8,
+        "day": 3,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D03",
+        "drillIds": [
+          "breath_phrase_4s",
+          "agility_penta_run_3",
+          "agility_penta_run_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D04",
+        "title": "W08D4: Melody control & smooth movement",
+        "week": 8,
+        "day": 4,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D04",
+        "drillIds": [
+          "warmup_hum_c4",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D05",
+        "title": "W08D5: Melody control & smooth movement",
+        "week": 8,
+        "day": 5,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D05",
+        "drillIds": [
+          "warmup_match_g3",
+          "agility_penta_run_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D06",
+        "title": "W08D6: Melody control & smooth movement",
+        "week": 8,
+        "day": 6,
+        "focus": "Melody control & smooth movement — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W08D06",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "agility_penta_run_3",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W08D07",
+        "title": "Recovery + Transfer: Light practice (Melody control & smooth movement)",
+        "week": 8,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W08D07",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D01",
+        "title": "W09D1: Agility + endurance",
+        "week": 9,
+        "day": 1,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D01",
+        "drillIds": [
+          "resonance_forward_e4",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D02",
+        "title": "W09D2: Agility + endurance",
+        "week": 9,
+        "day": 2,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D02",
+        "drillIds": [
+          "breath_phrase_4s",
+          "agility_penta_run_2",
+          "agility_penta_run_3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D03",
+        "title": "W09D3: Agility + endurance",
+        "week": 9,
+        "day": 3,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D03",
+        "drillIds": [
+          "warmup_hum_c4",
+          "agility_penta_run_3",
+          "agility_penta_run_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D04",
+        "title": "W09D4: Agility + endurance",
+        "week": 9,
+        "day": 4,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D04",
+        "drillIds": [
+          "warmup_match_g3",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D05",
+        "title": "W09D5: Agility + endurance",
+        "week": 9,
+        "day": 5,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D05",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "agility_penta_run_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D06",
+        "title": "W09D6: Agility + endurance",
+        "week": 9,
+        "day": 6,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W09D06",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "agility_penta_run_3",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W09D07",
+        "title": "Recovery + Transfer: Light practice (Agility + endurance)",
+        "week": 9,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W09D07",
+        "drillIds": [
+          "resonance_forward_e4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D01",
+        "title": "W10D1: Agility + endurance",
+        "week": 10,
+        "day": 1,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D01",
+        "drillIds": [
+          "breath_phrase_4s",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D02",
+        "title": "W10D2: Agility + endurance",
+        "week": 10,
+        "day": 2,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D02",
+        "drillIds": [
+          "warmup_hum_c4",
+          "agility_penta_run_2",
+          "agility_penta_run_3"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D03",
+        "title": "W10D3: Agility + endurance",
+        "week": 10,
+        "day": 3,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D03",
+        "drillIds": [
+          "warmup_match_g3",
+          "agility_penta_run_3",
+          "agility_penta_run_1"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D04",
+        "title": "W10D4: Agility + endurance",
+        "week": 10,
+        "day": 4,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D04",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "agility_penta_run_1",
+          "agility_penta_run_2"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D05",
+        "title": "W10D5: Agility + endurance",
+        "week": 10,
+        "day": 5,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D05",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "agility_penta_run_2",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D06",
+        "title": "W10D6: Agility + endurance",
+        "week": 10,
+        "day": 6,
+        "focus": "Agility + endurance — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W10D06",
+        "drillIds": [
+          "resonance_forward_e4",
+          "agility_penta_run_3",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W10D07",
+        "title": "Recovery + Transfer: Light practice (Agility + endurance)",
+        "week": 10,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W10D07",
+        "drillIds": [
+          "breath_phrase_4s",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D01",
+        "title": "W11D1: Transfer & performance resilience",
+        "week": 11,
+        "day": 1,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D01",
+        "drillIds": [
+          "warmup_hum_c4",
+          "song_phrase_twinkle_a",
+          "song_phrase_twinkle_b"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D02",
+        "title": "W11D2: Transfer & performance resilience",
+        "week": 11,
+        "day": 2,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D02",
+        "drillIds": [
+          "warmup_match_g3",
+          "song_phrase_twinkle_b",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D03",
+        "title": "W11D3: Transfer & performance resilience",
+        "week": 11,
+        "day": 3,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D03",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "song_phrase_scale_up",
+          "song_phrase_scale_down"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D04",
+        "title": "W11D4: Transfer & performance resilience",
+        "week": 11,
+        "day": 4,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D04",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "song_phrase_scale_down",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D05",
+        "title": "W11D5: Transfer & performance resilience",
+        "week": 11,
+        "day": 5,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D05",
+        "drillIds": [
+          "resonance_forward_e4",
+          "song_phrase_twinkle_a",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D06",
+        "title": "W11D6: Transfer & performance resilience",
+        "week": 11,
+        "day": 6,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W11D06",
+        "drillIds": [
+          "breath_phrase_4s",
+          "song_phrase_twinkle_b",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W11D07",
+        "title": "Recovery + Transfer: Light practice (Transfer & performance resilience)",
+        "week": 11,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W11D07",
+        "drillIds": [
+          "warmup_hum_c4",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D01",
+        "title": "W12D1: Transfer & performance resilience",
+        "week": 12,
+        "day": 1,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D01",
+        "drillIds": [
+          "warmup_match_g3",
+          "song_phrase_twinkle_a",
+          "song_phrase_twinkle_b"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D02",
+        "title": "W12D2: Transfer & performance resilience",
+        "week": 12,
+        "day": 2,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D02",
+        "drillIds": [
+          "warmup_sustain_a3",
+          "song_phrase_twinkle_b",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D03",
+        "title": "W12D3: Transfer & performance resilience",
+        "week": 12,
+        "day": 3,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D03",
+        "drillIds": [
+          "warmup_slide_c4_e4",
+          "song_phrase_scale_up",
+          "song_phrase_scale_down"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D04",
+        "title": "W12D4: Transfer & performance resilience",
+        "week": 12,
+        "day": 4,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D04",
+        "drillIds": [
+          "resonance_forward_e4",
+          "song_phrase_scale_down",
+          "song_phrase_twinkle_a"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D05",
+        "title": "W12D5: Transfer & performance resilience",
+        "week": 12,
+        "day": 5,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D05",
+        "drillIds": [
+          "breath_phrase_4s",
+          "song_phrase_twinkle_a",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D06",
+        "title": "W12D6: Transfer & performance resilience",
+        "week": 12,
+        "day": 6,
+        "focus": "Transfer & performance resilience — build one clear skill, then do a short transfer rep without leaning on the overlay.",
+        "lessonId": "PR12_INT_W12D06",
+        "drillIds": [
+          "warmup_hum_c4",
+          "song_phrase_twinkle_b",
+          "song_phrase_scale_up"
+        ]
+      },
+      {
+        "id": "PR12_INT_W12D07",
+        "title": "Recovery + Transfer: Light practice (Transfer & performance resilience)",
+        "week": 12,
+        "day": 7,
+        "focus": "Recovery day: low effort, high quality. Keep the habit; protect the voice.",
+        "lessonId": "PR12_INT_W12D07",
+        "drillIds": [
+          "warmup_match_g3",
+          "sustain_a3_steady",
+          "breath_phrase_4s"
+        ]
+      }
+    ]
+  }
+}

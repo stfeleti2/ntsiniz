@@ -1,0 +1,54 @@
+name: Weekly iOS E2E (Detox)
+
+on:
+  schedule:
+    # Weekly on Sunday at 04:00 UTC
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+
+concurrency:
+  group: weekly-ios-detox
+  cancel-in-progress: false
+
+jobs:
+  ios-detox:
+    runs-on: macos-latest
+    timeout-minutes: 75
+    env:
+      CI: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
+            npm install --no-fund --no-audit
+          fi
+
+      - name: Install applesimutils (Detox iOS dependency)
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Prebuild iOS native project
+        run: npx expo prebuild -p ios --non-interactive --no-install --clean
+
+      - name: Install pods
+        run: cd ios && pod install
+
+      - name: Detox build (iOS simulator)
+        run: npm run e2e:detox:build:ios
+
+      - name: Detox test (iOS simulator)
+        run: npm run e2e:detox:test:ios

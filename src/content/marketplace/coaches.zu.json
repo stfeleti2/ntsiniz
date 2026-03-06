@@ -1,0 +1,15 @@
+{
+  "packId": "marketplace_coaches_v1",
+  "language": "zu",
+  "coaches": [
+    {
+      "id": "coach_1",
+      "featured": true,
+      "name": "Coach Nandi",
+      "headline": "Ukuphefumula + ukuzinza kwepitch",
+      "bio": "Kusiza abaqalayo. Sigxila ekulawuleni okuphindekayo kuqala.",
+      "tags": ["Pitch", "Uzinzo"],
+      "rating": 4.8
+    }
+  ]
+}

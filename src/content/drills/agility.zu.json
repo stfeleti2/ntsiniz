@@ -1,0 +1,12 @@
+{
+  "packId": "agility",
+  "language": "zu",
+  "drills": [
+    {"id":"agility_melody_1","title":"Ukushesha: Echo yamanothi 3 (C4)","type":"melody_echo","level":2,"tuneWindowCents":45,"holdMs":800,"countdownMs":650,
+      "melody":[{"note":"C4"},{"note":"D4"},{"note":"E4"}]},
+    {"id":"agility_melody_2","title":"Ukushesha: Echo yamanothi 4 (G3)","type":"melody_echo","level":3,"tuneWindowCents":48,"holdMs":800,"countdownMs":650,
+      "melody":[{"note":"G3"},{"note":"A3"},{"note":"B3"},{"note":"C4"}]},
+    {"id":"agility_interval_3rd","title":"Ukushesha: Ama-3rds asheshayo","type":"interval","level":3,"tuneWindowCents":48,"holdMs":700,"countdownMs":650,"target":{"note":"C4"},"intervalSemitones":4},
+    {"id":"agility_slide_oct","title":"Ukushesha: Swayida i-octave","type":"slide","level":4,"tuneWindowCents":55,"holdMs":1200,"countdownMs":800,"from":{"note":"C4"},"to":{"note":"C5"}}
+  ]
+}

@@ -1,0 +1,54 @@
+appId: com.ntsiniz.app
+---
+- launchApp
+
+# Unlock QA shortcut + skip calibration (dev builds)
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "btn-qa-skip-calibration"
+
+# Core loop: open → drill → record/live feedback → result → playback → save best take
+- tapOn:
+    id: "tab-Session"
+- assertVisible:
+    id: "btn-session-start"
+- tapOn:
+    id: "btn-session-start"
+
+- assertVisible:
+    id: "btn-drill-start"
+- tapOn:
+    id: "btn-drill-start"
+
+# Wait for drill to finish and result screen to appear
+- extendedWaitUntil:
+    visible:
+      id: "btn-drillresult-next"
+    timeout: 120000
+
+# Playback the take (waveform screen)
+- tapOn:
+    id: "btn-next-playback"
+- extendedWaitUntil:
+    visible:
+      id: "waveform-player"
+    timeout: 30000
+
+# Go back and continue loop
+- tapOn:
+    id: "btn-next-try-next"
+- assertVisible:
+    id: "btn-drill-start"

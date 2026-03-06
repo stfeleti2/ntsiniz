@@ -1,0 +1,13 @@
+{
+  "packId": "marketplace_lessons_v1",
+  "language": "zu",
+  "lessons": [
+    {
+      "id": "mkt_intro",
+      "title": "Indlela yokusebenza kwe-marketplace",
+      "body": "Khetha uhlelo. Qedela usuku. Yabelana nge-clip. Umqeqeshi uphendula ngamanothi acacile.",
+      "keyPoints": ["Ama-clip amafushane ayasebenza", "Ama-headphones ayasiza", "Kwenza nsuku zonke"],
+      "demo": [{ "note": "A3", "durationMs": 800 }]
+    }
+  ]
+}

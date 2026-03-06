@@ -1,0 +1,12 @@
+{
+  "device": {"tier": "HIGH", "model": "Sample High"},
+  "mode": "HIGH",
+  "windowSec": 120,
+  "samples": [
+    {"t": 0, "p95StallMs": 40, "worstStallMs": 120, "frameBusDropped": 0},
+    {"t": 30, "p95StallMs": 55, "worstStallMs": 180, "frameBusDropped": 0},
+    {"t": 60, "p95StallMs": 70, "worstStallMs": 220, "frameBusDropped": 0},
+    {"t": 90, "p95StallMs": 80, "worstStallMs": 260, "frameBusDropped": 0},
+    {"t": 120, "p95StallMs": 95, "worstStallMs": 320, "frameBusDropped": 0}
+  ]
+}

@@ -1,0 +1,76 @@
+appId: com.ntsiniz.app
+---
+- launchApp
+
+# Unlock dev QA shortcut + skip calibration (dev builds)
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "tap-welcome-title"
+- tapOn:
+    id: "btn-qa-skip-calibration"
+
+# Start the daily session
+- tapOn:
+    id: "tab-Session"
+- assertVisible:
+    id: "btn-session-start"
+- tapOn:
+    id: "btn-session-start"
+
+# Drill 1
+- assertVisible:
+    id: "btn-drill-start"
+- tapOn:
+    id: "btn-drill-start"
+- assertVisible:
+    id: "btn-drillresult-share"
+- tapOn:
+    id: "btn-drillresult-next"
+
+# Drill 2
+- assertVisible:
+    id: "btn-drill-start"
+- tapOn:
+    id: "btn-drill-start"
+- assertVisible:
+    id: "btn-drillresult-share"
+- tapOn:
+    id: "btn-drillresult-next"
+
+# Drill 3
+- assertVisible:
+    id: "btn-drill-start"
+- tapOn:
+    id: "btn-drill-start"
+- assertVisible:
+    id: "btn-drillresult-share"
+- tapOn:
+    id: "btn-drillresult-next"
+
+# Results
+- assertVisible:
+    id: "btn-results-share"
+- tapOn:
+    id: "btn-results-share"
+- assertVisible: "Shared ✅"
+
+# Persistence sanity: go Journey, then relaunch, Journey still shows Weekly Report
+- tapOn:
+    id: "tab-Journey"
+- assertVisible: "Weekly report"
+- stopApp
+- launchApp
+- tapOn:
+    id: "tab-Journey"
+- assertVisible: "Weekly report"

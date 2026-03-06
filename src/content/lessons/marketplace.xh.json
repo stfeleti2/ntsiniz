@@ -1,0 +1,13 @@
+{
+  "packId": "marketplace_lessons_v1",
+  "language": "xh",
+  "lessons": [
+    {
+      "id": "mkt_intro",
+      "title": "Indlela esebenza ngayo i-marketplace",
+      "body": "Khetha inkqubo. Yenza usuku. Yabelana nge-clip. Umqeqeshi uphendula ngamacebiso acacileyo.",
+      "keyPoints": ["Iiklip ezi mfutshane ziyasebenza", "Ii-headphones ziyanceda", "Yenza yonke imihla"],
+      "demo": [{ "note": "A3", "durationMs": 800 }]
+    }
+  ]
+}
