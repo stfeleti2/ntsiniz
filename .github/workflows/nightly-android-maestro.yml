@@ -41,14 +41,11 @@ jobs:
       - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Install deps
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
-            npm install --no-fund --no-audit
-          fi
+      - name: Require lockfile
+        run: bash scripts/check-lockfile-hard.sh
+
+      - name: Install deps (deterministic)
+        run: npm ci
 
       - name: Prebuild Android native project
         run: npx expo prebuild -p android --non-interactive --no-install --clean
