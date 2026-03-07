@@ -90,7 +90,7 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          profile: Pixel_6
+          profile: pixel_6
           avd-name: Pixel_6_API_34
           force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -102,7 +102,7 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          profile: Pixel_6
+          profile: pixel_6
           avd-name: Pixel_6_API_34
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
