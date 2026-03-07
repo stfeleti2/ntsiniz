@@ -1,106 +1,122 @@
-name: PR Android E2E (Maestro)
+# name: PR Android E2E (Maestro)
 
-on:
-  pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
+# on:
+#   pull_request:
+#     branches: [ main, master ]
+#   workflow_dispatch:
 
-concurrency:
-  group: pr-android-maestro-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: pr-android-maestro-${{ github.ref }}
+#   cancel-in-progress: true
 
-jobs:
-  android-maestro:
-    # Allow maintainers to disable E2E by setting repository variable DISABLE_PR_E2E=true
-    if: ${{ vars.DISABLE_PR_E2E != 'true' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    env:
-      CI: true
-      MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
+# permissions:
+#   contents: read
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   android-maestro:
+#     # Allow maintainers to disable E2E by setting repository variable DISABLE_PR_E2E=true
+#     if: ${{ vars.DISABLE_PR_E2E != 'true' }}
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 60
+#     env:
+#       CI: true
+#       MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: npm
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+#       - name: Setup Java
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: temurin
+#           java-version: '17'
 
-      - name: Setup Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+#       - name: Setup Android SDK
+#         uses: android-actions/setup-android@v3
 
-      - name: Install deps
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
-            npm install --no-fund --no-audit
-          fi
+#       - name: Setup Gradle cache
+#         uses: gradle/actions/setup-gradle@v3
 
-      - name: Prebuild Android native project
-        run: npx expo prebuild -p android --non-interactive --no-install --clean
+#       - name: Require lockfile
+#         run: bash scripts/check-lockfile-hard.sh
 
-      - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug --no-daemon
+#       - name: Install deps (deterministic)
+#         run: npm ci
 
-      - name: Install Maestro CLI
-        uses: dniHze/maestro-test-action@v1
+#       - name: Prebuild Android native project
+#         run: npx expo prebuild -p android --non-interactive --no-install --clean
 
-      - name: AVD cache
-        uses: actions/cache@v4
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-pixel6-api34
+#       - name: Build debug APK
+#         run: |
+#           cd android
+#           ./gradlew assembleDebug --no-daemon --stacktrace || ./gradlew assembleDebug --no-daemon --stacktrace --refresh-dependencies
 
-      - name: Create AVD snapshot (cache miss)
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          arch: x86_64
-          profile: Pixel_6
-          avd-name: Pixel_6_API_34
-          force-avd-creation: true
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "AVD snapshot generated"
+#       - name: Install Maestro CLI
+#         run: |
+#           set -euo pipefail
+#           for attempt in 1 2 3; do
+#             echo "Installing Maestro CLI (attempt ${attempt}/3)..."
+#             if curl -fsSL https://get.maestro.mobile.dev | bash; then
+#               break
+#             fi
+#             if [ "$attempt" -eq 3 ]; then
+#               echo "Failed to install Maestro CLI after 3 attempts."
+#               exit 1
+#             fi
+#             sleep $((attempt * 15))
+#           done
+#           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+#           "$HOME/.maestro/bin/maestro" --version
 
-      - name: Run Maestro flows (Android emulator)
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          arch: x86_64
-          profile: Pixel_6
-          avd-name: Pixel_6_API_34
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: |
-            set -e
-            adb install -r android/app/build/outputs/apk/debug/app-debug.apk
-            rm -rf maestro-artifacts
-            mkdir -p maestro-artifacts
-            maestro test --format junit --output maestro-artifacts/report.xml --test-output-dir maestro-artifacts maestro
+#       - name: AVD cache
+#         uses: actions/cache@v4
+#         id: avd-cache
+#         with:
+#           path: |
+#             ~/.android/avd/*
+#             ~/.android/adb*
+#           key: avd-${{ runner.os }}-pixel6-api34-v1
 
-      - name: Upload Maestro artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: maestro-artifacts
-          path: maestro-artifacts
+#       - name: Create AVD snapshot (cache miss)
+#         if: steps.avd-cache.outputs.cache-hit != 'true'
+#         uses: reactivecircus/android-emulator-runner@v2
+#         with:
+#           api-level: 34
+#           arch: x86_64
+#           profile: pixel_6
+#           avd-name: Pixel_6_API_34
+#           force-avd-creation: true
+#           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+#           disable-animations: false
+#           script: echo "AVD snapshot generated"
+
+#       - name: Run Maestro flows (Android emulator)
+#         uses: reactivecircus/android-emulator-runner@v2
+#         with:
+#           api-level: 34
+#           arch: x86_64
+#           profile: pixel_6
+#           avd-name: Pixel_6_API_34
+#           force-avd-creation: false
+#           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+#           disable-animations: true
+#           script: |
+#             set -e
+#             adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+#             rm -rf maestro-artifacts
+#             mkdir -p maestro-artifacts
+#             maestro test --format junit --output maestro-artifacts/report.xml --test-output-dir maestro-artifacts maestro
+
+#       - name: Upload Maestro artifacts
+#         if: always()
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: maestro-artifacts
+#           path: maestro-artifacts

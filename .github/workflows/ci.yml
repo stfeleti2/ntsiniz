@@ -10,6 +10,9 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   core:
     name: Typecheck + Core tests
@@ -25,16 +28,11 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install deps
-        run: |
-          if [ -f package-lock.json ]; then
-            echo "Using npm ci (lockfile present)"
-            npm ci
-          else
-            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
-            echo "To fix: run 'npm install' locally and commit package-lock.json."
-            npm install --no-fund --no-audit
-          fi
+      - name: Require lockfile
+        run: bash scripts/check-lockfile-hard.sh
+
+      - name: Install deps (deterministic)
+        run: npm ci
 
       - name: CI
         run: npm run ci

@@ -10,6 +10,9 @@ concurrency:
   group: nightly-android-maestro
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
   android-maestro:
     runs-on: ubuntu-latest
@@ -41,24 +44,36 @@ jobs:
       - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Install deps
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            echo "WARNING: package-lock.json missing; falling back to npm install (non-deterministic)."
-            npm install --no-fund --no-audit
-          fi
+      - name: Require lockfile
+        run: bash scripts/check-lockfile-hard.sh
+
+      - name: Install deps (deterministic)
+        run: npm ci
 
       - name: Prebuild Android native project
         run: npx expo prebuild -p android --non-interactive --no-install --clean
 
       - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug --no-daemon
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon --stacktrace || ./gradlew assembleDebug --no-daemon --stacktrace --refresh-dependencies
 
-      # Install Maestro CLI (cached) — then we run it inside the emulator step.
       - name: Install Maestro CLI
-        uses: dniHze/maestro-test-action@v1
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            echo "Installing Maestro CLI (attempt ${attempt}/3)..."
+            if curl -fsSL https://get.maestro.mobile.dev | bash; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Failed to install Maestro CLI after 3 attempts."
+              exit 1
+            fi
+            sleep $((attempt * 15))
+          done
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+          "$HOME/.maestro/bin/maestro" --version
 
       # Cache AVD snapshot to speed up subsequent nightly runs.
       - name: AVD cache
@@ -68,7 +83,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-pixel6-api34
+          key: avd-${{ runner.os }}-pixel6-api34-v1
 
       - name: Create AVD snapshot (cache miss)
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -76,7 +91,7 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          profile: Pixel_6
+          profile: pixel_6
           avd-name: Pixel_6_API_34
           force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -88,7 +103,7 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          profile: Pixel_6
+          profile: pixel_6
           avd-name: Pixel_6_API_34
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
