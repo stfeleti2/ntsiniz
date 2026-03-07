@@ -10,6 +10,9 @@ concurrency:
   group: nightly-android-maestro
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
   android-maestro:
     runs-on: ubuntu-latest
@@ -51,7 +54,9 @@ jobs:
         run: npx expo prebuild -p android --non-interactive --no-install --clean
 
       - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug --no-daemon
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon --stacktrace || ./gradlew assembleDebug --no-daemon --stacktrace --refresh-dependencies
 
       # Install Maestro CLI (cached) — then we run it inside the emulator step.
       - name: Install Maestro CLI
@@ -65,7 +70,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-pixel6-api34
+          key: avd-${{ runner.os }}-pixel6-api34-v1
 
       - name: Create AVD snapshot (cache miss)
         if: steps.avd-cache.outputs.cache-hit != 'true'

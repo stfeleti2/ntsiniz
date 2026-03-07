@@ -9,6 +9,9 @@ concurrency:
   group: pr-android-maestro-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   android-maestro:
     # Allow maintainers to disable E2E by setting repository variable DISABLE_PR_E2E=true
@@ -51,7 +54,9 @@ jobs:
         run: npx expo prebuild -p android --non-interactive --no-install --clean
 
       - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug --no-daemon
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon --stacktrace || ./gradlew assembleDebug --no-daemon --stacktrace --refresh-dependencies
 
       - name: Install Maestro CLI
         uses: dniHze/maestro-test-action@v1
@@ -63,7 +68,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-pixel6-api34
+          key: avd-${{ runner.os }}-pixel6-api34-v1
 
       - name: Create AVD snapshot (cache miss)
         if: steps.avd-cache.outputs.cache-hit != 'true'
