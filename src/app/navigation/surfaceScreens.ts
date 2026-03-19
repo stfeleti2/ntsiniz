@@ -13,6 +13,11 @@ import { PlaybackScreen } from '../screens/PlaybackScreen'
 import { RecoveredTakesScreen } from '../screens/RecoveredTakesScreen'
 import { CurriculumOverviewScreen } from '../screens/CurriculumOverviewScreen'
 import { CurriculumDayPreviewScreen } from '../screens/CurriculumDayPreviewScreen'
+import { LessonIntroScreen } from '../screens/LessonIntroScreen'
+import { ConceptExplainerScreen } from '../screens/ConceptExplainerScreen'
+import { TechniqueHelpScreen } from '../screens/TechniqueHelpScreen'
+import { WhyThisMattersScreen } from '../screens/WhyThisMattersScreen'
+import { DrillPrepScreen } from '../screens/DrillPrepScreen'
 import { DayCompleteScreen } from '../screens/DayCompleteScreen'
 import { MainTabs } from './MainTabs'
 import { BillingScreen } from '../screens/BillingScreen'
@@ -28,6 +33,9 @@ import { AudioTortureLabScreen } from '../screens/AudioTortureLabScreen'
 import { SessionSummaryScreen } from '../screens/SessionSummaryScreen'
 import { WeeklyReportScreen } from '../screens/WeeklyReportScreen'
 import { PitchLockChallengeScreen } from '../screens/PitchLockChallengeScreen'
+import { KaraokeModeScreen } from '../screens/KaraokeModeScreen'
+import { PerformanceModeScreen } from '../screens/PerformanceModeScreen'
+import { PerformancePreviewScreen } from '../screens/PerformancePreviewScreen'
 import { VoiceProfileScreen } from '../screens/VoiceProfileScreen'
 import { RangeSnapshotScreen } from '../screens/RangeSnapshotScreen'
 import { VocalFamilyScreen } from '../screens/VocalFamilyScreen'
@@ -35,6 +43,7 @@ import { PersonalPlanScreen } from '../screens/PersonalPlanScreen'
 import { InsightsScreen } from '../screens/InsightsScreen'
 import { MilestonesScreen } from '../screens/MilestonesScreen'
 import { CompareProgressScreen } from '../screens/CompareProgressScreen'
+import { enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
 
 import type { RootStackParamList } from './types'
 
@@ -54,6 +63,8 @@ export type SurfaceFlags = {
   competitionsOn: boolean
   marketplaceOn: boolean
   diagnosticsOn: boolean
+  karaokeOn: boolean
+  performanceOn: boolean
   dev: boolean
 }
 
@@ -88,6 +99,11 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     { name: 'RecoveredTakes', component: RecoveredTakesScreen, options: { animation: 'slide_from_right' } },
     { name: 'CurriculumOverview', component: CurriculumOverviewScreen, options: { animation: 'slide_from_right' } },
     { name: 'CurriculumDayPreview', component: CurriculumDayPreviewScreen, options: { animation: 'slide_from_right' } },
+    { name: 'LessonIntro', component: LessonIntroScreen, options: { animation: 'slide_from_right' } },
+    { name: 'ConceptExplainer', component: ConceptExplainerScreen, options: { animation: 'slide_from_right' } },
+    { name: 'TechniqueHelp', component: TechniqueHelpScreen, options: { animation: 'slide_from_right' } },
+    { name: 'WhyThisMatters', component: WhyThisMattersScreen, options: { animation: 'slide_from_right' } },
+    { name: 'DrillPrep', component: DrillPrepScreen, options: { animation: 'slide_from_right' } },
     { name: 'DayComplete', component: DayCompleteScreen, options: { animation: 'fade_from_bottom' } },
     { name: 'Paywall', component: PaywallScreen, options: { animation: 'fade_from_bottom' } },
     { name: 'SessionSummary', component: SessionSummaryScreen, options: { animation: 'fade_from_bottom' } },
@@ -101,6 +117,17 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     { name: 'Milestones', component: MilestonesScreen, options: { animation: 'slide_from_right' } },
     { name: 'CompareProgress', component: CompareProgressScreen, options: { animation: 'slide_from_right' } },
   ]
+
+  if (flags.karaokeOn && enableKaraokeV1()) {
+    base.push({ name: 'KaraokeMode', component: KaraokeModeScreen, options: { animation: 'slide_from_right' } })
+  }
+
+  if (flags.performanceOn && enablePerformanceModeV1()) {
+    base.push(
+      { name: 'PerformanceMode', component: PerformanceModeScreen, options: { animation: 'slide_from_right' } },
+      { name: 'PerformancePreview', component: PerformancePreviewScreen, options: { animation: 'slide_from_right' } },
+    )
+  }
 
   if (flags.dev) {
     base.push(

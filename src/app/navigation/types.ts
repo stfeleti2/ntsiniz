@@ -45,6 +45,11 @@ export type RootStackParamList = {
   Playback: { attemptId: string }
   CurriculumOverview: undefined
   CurriculumDayPreview: { dayId: string }
+  LessonIntro: { lessonId: string }
+  ConceptExplainer: { lessonId: string }
+  TechniqueHelp: { lessonId: string }
+  WhyThisMatters: { lessonId: string }
+  DrillPrep: { lessonId: string; stageId?: string }
   DayComplete: { sessionId: string; completedDayId: string }
   VoiceProfile: undefined
   RangeSnapshot: undefined
@@ -53,6 +58,7 @@ export type RootStackParamList = {
   Insights: undefined
   Milestones: undefined
   CompareProgress: undefined
+  KaraokeMode: { drillId?: string } | undefined
 
   ChallengesHub: undefined
   Leaderboard: { period: 'daily' | 'weekly'; challengeId: string }

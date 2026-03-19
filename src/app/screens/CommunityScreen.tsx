@@ -19,6 +19,7 @@ import { ensureSelfPerson } from '@/core/social/peopleRepo'
 import { listFollowingIds } from '@/core/social/followsRepo'
 import { isPersonBlocked } from '@/core/social/peopleRepo'
 import { reportUiError } from '@/app/telemetry/report'
+import { enablePerformanceModeV1 } from '@/core/config/flags'
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Community'>,
@@ -62,6 +63,7 @@ export function CommunityScreen({ navigation }: Props) {
   )
 
   const openStack = (name: string, params?: any) => (navigation as any).getParent?.()?.navigate?.(name, params)
+  const performanceOn = enablePerformanceModeV1()
 
   return (
     <Screen scroll background="gradient">
@@ -74,7 +76,7 @@ export function CommunityScreen({ navigation }: Props) {
         <Text preset="h2">{t('community.actionsTitle')}</Text>
         <Text preset="muted">{t('community.actionsSubtitle')}</Text>
         <Box style={{ marginTop: 12, gap: 10 }}>
-          <Button text={t('community.recordClip')} onPress={() => openStack('PerformanceMode')} />
+          {performanceOn ? <Button text={t('community.recordClip')} onPress={() => openStack('PerformanceMode')} /> : null}
           <Button text={t('community.createPost')} onPress={() => openStack('CreatePost')} />
           <Button text={t('community.importCode')} variant="soft" onPress={() => openStack('ImportCode')} />
           <Button text={t('community.openDuets')} variant="soft" onPress={() => openStack('DuetsHub')} />

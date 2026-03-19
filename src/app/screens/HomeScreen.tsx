@@ -8,7 +8,7 @@ import { Card } from '@/ui/components/Card'
 import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
 import type { MainTabParamList, RootStackParamList } from '../navigation/types'
-import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { enableGuidedJourneyV3, enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
 import { listSessionAggregates } from '@/core/storage/sessionsRepo'
 import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { getAdaptiveJourneyState } from '@/core/guidedJourney/adaptiveStateRepo'
@@ -59,6 +59,12 @@ const copy = {
   compareBody: 'See baseline versus latest and keep the next step grounded.',
   voiceProfileTitle: 'Voice profile',
   voiceProfileBody: 'Comfort zone, strengths, and current focus in one place.',
+  karaokeTitle: 'Song mode',
+  karaokeBody: 'Use real song-phrase drills when you want a more melodic rep.',
+  karaokeCta: 'Open song mode',
+  performanceTitle: 'Performance mode',
+  performanceBody: 'Record a short clip when your route reaches pressure-ready work.',
+  performanceCta: 'Open performance mode',
   latestScore: 'Latest score',
   streakDays: 'Day streak',
   sessions: 'Sessions',
@@ -231,6 +237,9 @@ export function HomeScreen({ navigation }: Props) {
         cta="Open voice profile"
         onPress={() => (navigation as any).navigate('VoiceProfile')}
       />
+
+      {enableKaraokeV1() ? <NextStepCard title={copy.karaokeTitle} body={copy.karaokeBody} cta={copy.karaokeCta} onPress={() => (navigation as any).navigate('KaraokeMode')} /> : null}
+      {enablePerformanceModeV1() && vm.stageId === 'S5' ? <NextStepCard title={copy.performanceTitle} body={copy.performanceBody} cta={copy.performanceCta} onPress={() => (navigation as any).navigate('PerformanceMode')} /> : null}
     </Screen>
   )
 }

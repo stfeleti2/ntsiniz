@@ -17,6 +17,8 @@ test('store build does not expose Phase 3 / social / cloud surfaces', () => {
     competitionsOn: false,
     marketplaceOn: false,
     diagnosticsOn: false,
+    karaokeOn: false,
+    performanceOn: true,
     dev: false,
   })
 
@@ -50,7 +52,7 @@ test('store build does not expose Phase 3 / social / cloud surfaces', () => {
   }
 
   // Core surfaces must remain.
-  for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult']) {
+  for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult', 'LessonIntro', 'ConceptExplainer', 'TechniqueHelp', 'WhyThisMatters', 'DrillPrep', 'PerformanceMode', 'PerformancePreview']) {
     assert.equal(set.has(required), true, `required screen missing: ${required}`)
   }
 })
@@ -65,10 +67,12 @@ test('non-store build with social+cloud+invites enables expected surfaces', () =
     competitionsOn: false,
     marketplaceOn: false,
     diagnosticsOn: false,
+    karaokeOn: true,
+    performanceOn: true,
     dev: false,
   })
 
-  for (const expected of ['ImportCode', 'Invite', 'CreatorProfile', 'Account', 'SignIn', 'SyncStatus']) {
+  for (const expected of ['ImportCode', 'Invite', 'CreatorProfile', 'Account', 'SignIn', 'SyncStatus', 'KaraokeMode', 'PerformanceMode', 'PerformancePreview']) {
     assert.equal(set.has(expected), true, `expected screen missing: ${expected}`)
   }
 })

@@ -12,6 +12,8 @@ import {
   enableCompetitions,
   enableMarketplace,
   enableDiagnostics,
+  enableKaraokeV1,
+  enablePerformanceModeV1,
 } from "@/core/config/flags"
 import { buildLinkingConfig, getEnabledStackScreens, type SurfaceFlags } from "./surfaceScreens"
 
@@ -27,6 +29,8 @@ export function getSurfaceFlags(): SurfaceFlags {
     competitionsOn: enableCompetitions(),
     marketplaceOn: enableMarketplace(),
     diagnosticsOn: enableDiagnostics(),
+    karaokeOn: enableKaraokeV1(),
+    performanceOn: enablePerformanceModeV1(),
     dev: !!__DEV__,
   }
 }

@@ -10,7 +10,7 @@ import { enableGuidedJourneyV3 } from '@/core/config/flags'
 import { ensureJourneyV3Progress } from '@/core/guidedJourney/progress'
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
 import { mapPackLessonToHostDrills } from '@/core/guidedJourney/hostDrillMapper'
-import { BrandWorldBackdrop, ChapterHeroCard, CoachInset, DemoLoopCard, StatusPill, TechniqueVisualCard, VoiceGuideCard } from '@/ui/guidedJourney'
+import { BrandWorldBackdrop, ChapterHeroCard, NextStepCard, StatusPill, VoiceGuideCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CurriculumDayPreview'>
 
@@ -31,16 +31,27 @@ const copy = {
   fallbackTitle: 'Lesson preview',
   fallbackBody: 'The guided lesson preview is only available while the V3 journey flag is on.',
   title: 'Lesson preview',
-  subtitle: 'A short concept explainer, a drill preview, and one clean way into the mission.',
+  subtitle: 'A short teach flow, a drill preview, and one clean way into the mission.',
   planTitle: 'Live drill plan',
   startLesson: 'Start lesson',
   loading: 'Loading this lesson…',
   live: 'Live',
   queued: 'Queued',
-  whyTitle: 'Why it matters',
+  lessonIntroTitle: 'Lesson intro',
+  lessonIntroBody: 'Start with the promise, the payoff, and the clean lesson handoff.',
+  lessonIntroCta: 'Open lesson intro',
   conceptTitle: 'Concept explainer',
-  successTitle: 'What success looks like',
+  conceptBody: 'See the core idea and body cue before the live rep.',
+  conceptCta: 'Open concept',
   techniqueTitle: 'Technique help',
+  techniqueBody: 'Review the main cue, common miss, and reset.',
+  techniqueCta: 'Open technique help',
+  whyTitle: 'Why this matters',
+  whyBody: 'Tie the drill to a musical payoff that feels worth doing.',
+  whyCta: 'Open why this matters',
+  prepTitle: 'Drill prep',
+  prepBody: 'Check what success looks like right before the mission starts.',
+  prepCta: 'Open drill prep',
   back: 'Back',
 }
 
@@ -106,9 +117,11 @@ export function CurriculumDayPreviewScreen({ navigation, route }: Props) {
       <ChapterHeroCard title={vm.lessonTitle} subtitle={`${vm.stageTitle} · ${vm.estimatedTime}`} stageLabel={vm.stageTitle} cta={copy.startLesson} onPress={() => navigation.navigate('MainTabs' as any, { screen: 'Session', params: { lessonId: vm.lessonId, stageId: vm.stageId } } as any)} />
 
       <VoiceGuideCard title={copy.whyTitle} body={vm.whyThisMatters} pill={vm.stageTitle} />
-      <DemoLoopCard title={copy.conceptTitle} body={vm.purpose} />
-      <TechniqueVisualCard title={copy.successTitle} body={vm.successLine} />
-      <CoachInset title={copy.techniqueTitle} body={vm.techniqueLine} />
+      <NextStepCard title={copy.lessonIntroTitle} body={copy.lessonIntroBody} cta={copy.lessonIntroCta} onPress={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.conceptTitle} body={copy.conceptBody} cta={copy.conceptCta} onPress={() => navigation.navigate('ConceptExplainer', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.techniqueTitle} body={copy.techniqueBody} cta={copy.techniqueCta} onPress={() => navigation.navigate('TechniqueHelp', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.whyTitle} body={copy.whyBody} cta={copy.whyCta} onPress={() => navigation.navigate('WhyThisMatters', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.prepTitle} body={copy.prepBody} cta={copy.prepCta} onPress={() => navigation.navigate('DrillPrep', { lessonId: vm.lessonId, stageId: vm.stageId })} />
 
       <Card tone="elevated">
         <Text preset="h2">{copy.planTitle}</Text>

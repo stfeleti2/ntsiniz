@@ -8,7 +8,7 @@ import { Card } from '@/ui/components/Card'
 import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
 import type { MainTabParamList, RootStackParamList } from '../navigation/types'
-import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { enableGuidedJourneyV3, enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
 import { ensureJourneyV3Progress, getCurrentJourneyV3, getStageProgress } from '@/core/guidedJourney/progress'
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
 import { BrandWorldBackdrop, ChapterHeroCard, JourneyPath, MilestoneCard, NextStepCard } from '@/ui/guidedJourney'
@@ -43,6 +43,12 @@ const copy = {
   openCompare: 'Compare progress',
   openChapter: 'Open chapter overview',
   openCurrentLesson: 'Start current lesson',
+  karaokeTitle: 'Song mode',
+  karaokeBody: 'Drop into phrase-first practice when you want a more musical session.',
+  karaokeCta: 'Open song mode',
+  performanceTitle: 'Performance mode',
+  performanceBody: 'Use performance capture when you are inside the final chapter.',
+  performanceCta: 'Open performance mode',
   loading: 'Loading your stage map…',
 }
 
@@ -146,6 +152,8 @@ export function JourneyScreen({ navigation }: Props) {
 
       <NextStepCard title={copy.milestonesTitle} body={copy.milestonesBody} cta={copy.openMilestones} onPress={() => (navigation as any).navigate('Milestones')} />
       <NextStepCard title={copy.compareTitle} body={copy.compareBody} cta={copy.openCompare} onPress={() => (navigation as any).navigate('CompareProgress')} />
+      {enableKaraokeV1() ? <NextStepCard title={copy.karaokeTitle} body={copy.karaokeBody} cta={copy.karaokeCta} onPress={() => (navigation as any).navigate('KaraokeMode')} /> : null}
+      {enablePerformanceModeV1() && vm.currentStageId === 'S5' ? <NextStepCard title={copy.performanceTitle} body={copy.performanceBody} cta={copy.performanceCta} onPress={() => (navigation as any).navigate('PerformanceMode')} /> : null}
     </Screen>
   )
 }

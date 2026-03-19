@@ -9,6 +9,8 @@ export type SurfaceFlags = {
   competitionsOn: boolean
   marketplaceOn: boolean
   diagnosticsOn: boolean
+  karaokeOn: boolean
+  performanceOn: boolean
   dev: boolean
 }
 
@@ -30,6 +32,11 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'RecoveredTakes',
   'CurriculumOverview',
   'CurriculumDayPreview',
+  'LessonIntro',
+  'ConceptExplainer',
+  'TechniqueHelp',
+  'WhyThisMatters',
+  'DrillPrep',
   'DayComplete',
   'Billing',
   'Privacy',
@@ -48,6 +55,14 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
 
 export function getEnabledStackScreenNames(flags: SurfaceFlags): string[] {
   const names = [...CORE_STACK_SCREENS] as string[]
+
+  if (flags.karaokeOn) {
+    names.push('KaraokeMode')
+  }
+
+  if (flags.performanceOn) {
+    names.push('PerformanceMode', 'PerformancePreview')
+  }
 
   if (flags.dev) {
     names.push('Billing', 'Privacy')

@@ -23,6 +23,9 @@ const uiCopy = {
   progressCompareTitle: 'Progress compare',
   progressCompareBody: 'Compare your baseline against your latest session when you are ready.',
   progressCompareCta: 'Open compare progress',
+  weeklyFlexTitle: 'Weekly flex / share card',
+  weeklyFlexBody: 'Use the weekly share card on a safe closure surface after the session ends.',
+  weeklyFlexCta: 'Open weekly flex',
 }
 
 export function SessionSummaryScreen({ navigation, route }: Props) {
@@ -116,6 +119,7 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
       </Card>
 
       <NextStepCard title={uiCopy.progressCompareTitle} body={uiCopy.progressCompareBody} cta={uiCopy.progressCompareCta} onPress={() => navigation.navigate('CompareProgress')} />
+      <NextStepCard title={uiCopy.weeklyFlexTitle} body={uiCopy.weeklyFlexBody} cta={uiCopy.weeklyFlexCta} onPress={() => navigation.navigate('WeeklyReport')} />
     </Screen>
   )
 }

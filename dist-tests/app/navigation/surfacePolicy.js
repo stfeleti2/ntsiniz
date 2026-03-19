@@ -19,6 +19,11 @@ const CORE_STACK_SCREENS = [
     'RecoveredTakes',
     'CurriculumOverview',
     'CurriculumDayPreview',
+    'LessonIntro',
+    'ConceptExplainer',
+    'TechniqueHelp',
+    'WhyThisMatters',
+    'DrillPrep',
     'DayComplete',
     'Billing',
     'Privacy',
@@ -36,6 +41,12 @@ const CORE_STACK_SCREENS = [
 ];
 function getEnabledStackScreenNames(flags) {
     const names = [...CORE_STACK_SCREENS];
+    if (flags.karaokeOn) {
+        names.push('KaraokeMode');
+    }
+    if (flags.performanceOn) {
+        names.push('PerformanceMode', 'PerformancePreview');
+    }
     if (flags.dev) {
         names.push('Billing', 'Privacy');
     }

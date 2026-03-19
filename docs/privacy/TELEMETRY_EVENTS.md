@@ -34,6 +34,18 @@ This file is the **canonical list** of telemetry events that can be buffered loc
   - When: the guided first-win flow completes and a soft route is assigned.
   - Payload: `{ routeId }`
 
+- `guided_lesson_opened`
+  - When: a guided lesson teach screen opens.
+  - Payload: `{ lessonId, screen }`
+
+- `karaoke_started`
+  - When: user starts a song-phrase karaoke mission.
+  - Payload: `{ drillId }`
+
+- `performance_mode_opened`
+  - When: the performance recording mode opens.
+  - Payload: `{ templateId }`
+
 - `share_session_result`
   - When: user shares a session result.
   - Payload: `{ sessionId }`

@@ -8,7 +8,7 @@ import { Card } from '@/ui/components/Card'
 import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
 import type { MainTabParamList, RootStackParamList } from '../navigation/types'
-import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { enableGuidedJourneyV3, enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
 import { createSession } from '@/core/storage/sessionsRepo'
 import { createSessionPlan, createSessionPlanFromIds, getPlan } from '@/core/profile/sessionPlan'
 import { setSessionMeta } from '@/core/profile/sessionMeta'
@@ -20,7 +20,7 @@ import { ensureJourneyV3Progress, getCurrentJourneyV3 } from '@/core/guidedJourn
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
 import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { mapPackLessonToHostDrills, type HostMappedPackDrill } from '@/core/guidedJourney/hostDrillMapper'
-import { BrandWorldBackdrop, ChapterHeroCard, CoachInset, DemoLoopCard, PrimaryActionBar, StatusPill, TechniqueVisualCard, VoiceGuideCard } from '@/ui/guidedJourney'
+import { BrandWorldBackdrop, ChapterHeroCard, CoachInset, DemoLoopCard, NextStepCard, PrimaryActionBar, StatusPill, TechniqueVisualCard, VoiceGuideCard } from '@/ui/guidedJourney'
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Session'>,
@@ -62,7 +62,13 @@ const copy = {
   techniqueTitle: 'Technique help',
   startLesson: 'Start lesson',
   preparingLesson: 'Preparing lesson',
-  openChapter: 'Open chapter',
+  reviewLessonFlow: 'Review lesson flow',
+  karaokeTitle: 'Song mode',
+  karaokeBody: 'Launch a melody-first phrase rep when you want a more musical moment.',
+  karaokeCta: 'Open song mode',
+  performanceTitle: 'Performance mode',
+  performanceBody: 'Capture a short performance clip when you want pressure-ready reps.',
+  performanceCta: 'Open performance mode',
   back: 'Back',
 }
 
@@ -220,10 +226,13 @@ export function SessionScreen({ navigation, route }: Props) {
       <PrimaryActionBar
         primaryLabel={vm.recommended || fallbackDrillId ? copy.startLesson : copy.preparingLesson}
         onPrimary={startGuided}
-        secondaryLabel={copy.openChapter}
-        onSecondary={() => (navigation as any).navigate('CurriculumOverview')}
+        secondaryLabel={copy.reviewLessonFlow}
+        onSecondary={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })}
         helperText={vm.recommended ? `First live step: ${vm.recommended.title}` : copy.noPlan}
       />
+
+      {enableKaraokeV1() ? <NextStepCard title={copy.karaokeTitle} body={copy.karaokeBody} cta={copy.karaokeCta} onPress={() => navigation.navigate('KaraokeMode')} /> : null}
+      {enablePerformanceModeV1() && vm.stageId === 'S5' ? <NextStepCard title={copy.performanceTitle} body={copy.performanceBody} cta={copy.performanceCta} onPress={() => navigation.navigate('PerformanceMode')} /> : null}
 
       <Button text={copy.back} variant="ghost" onPress={() => navigation.goBack()} />
     </Screen>

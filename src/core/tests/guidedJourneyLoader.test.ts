@@ -1,7 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 
-const rawProgram = require('../../src/content/guided_journey/production.en.json')
+const rawProgram = JSON.parse(
+  readFileSync('src/content/guided_journey/production.en.json', 'utf8'),
+)
 
 test('guided journey production pack has the expected chapter structure', () => {
   assert.equal(rawProgram.routes.length, 5)
@@ -13,6 +16,7 @@ test('guided journey production pack has the expected chapter structure', () => 
 
 test('guided journey lessons carry route-specific drill slices', () => {
   const lesson = rawProgram.lessons.find((item: any) => item.id === 'S1_L01')
+  assert.ok(lesson)
   const drills = rawProgram.drills.filter((drill: any) => lesson.drill_ids.includes(drill.id))
   const routeIds = Array.from(new Set(drills.map((drill: any) => drill.route_id))).sort()
 
