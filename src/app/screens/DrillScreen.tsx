@@ -15,6 +15,7 @@ import { NextActionBar } from '@/ui/components/NextActionBar'
 import { AudioRoutePill } from '@/ui/components/AudioRoutePill'
 import { AudioInputPicker } from '@/ui/components/AudioInputPicker'
 import { useTheme } from "@/theme/useTheme"
+import { AdaptiveInstructionBlock, BrandWorldBackdrop, CurrentZoneChip, HexagonStateRenderer, StatusPill } from '@/ui/guidedJourney'
 
 import type { RootStackParamList } from "../navigation/types"
 import { loadAllBundledPacks } from "@/core/drills/loader"
@@ -49,6 +50,10 @@ import { loadCurriculum } from '@/core/curriculum/loader'
 import { markDayCompleted } from '@/core/curriculum/progress'
 import { finalizeChallengeSubmissionsForSession } from '@/core/challenges/finalize'
 import { logger } from '@/core/observability/logger'
+import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { completeJourneyLesson } from '@/core/guidedJourney/progress'
+import { recordAdaptiveAttempt } from '@/core/guidedJourney/adaptiveStateRepo'
+import { scoreGuidedAttempt } from '@/core/guidedJourney/scoringAdapter'
 
 // NOTE: DrillScreen is the “gameplay” screen. Keep it fast.
 
@@ -57,12 +62,14 @@ type Props = NativeStackScreenProps<RootStackParamList, "Drill">
 export function DrillScreen({ navigation, route }: Props) {
   const theme = useTheme()
   const snackbar = useSnackbar()
-  const { sessionId, drillId } = route.params
+  const { sessionId, drillId, packDrillId, lessonId, stageId } = route.params
   const pack = useMemo(() => loadAllBundledPacks(), [])
   const drill = useMemo(() => pack.drills.find((d) => d.id === drillId)!, [pack.drills, drillId])
+  const guidedProgram = useMemo(() => loadGuidedJourneyProgram(), [])
+  const packDrill = useMemo(() => (packDrillId ? guidedProgram.drillsById[packDrillId] ?? null : null), [guidedProgram, packDrillId])
   const demo = useSoundPlayback(drill?.demoUri)
 
-  const description = (drill as any).description ?? describeDrill(drill)
+  const description = packDrill?.instructions || (drill as any).description || describeDrill(drill)
 
   const [status, setStatus] = useState<"idle" | "referencing" | "running">("idle")
   const [customRefUri, setCustomRefUri] = useState<string | null>(null)
@@ -154,6 +161,17 @@ export function DrillScreen({ navigation, route }: Props) {
 
   const plan = getPlan(sessionId)
   const progressPct = plan ? Math.round(((plan.index + 1) / plan.drillIds.length) * 100) : 0
+  const guidedMeta = getSessionMeta(sessionId)?.guidedJourney ?? null
+  const guidedCopy = useMemo(
+    () => ({
+      liveCoachTitle: 'Live coach',
+      readyBody: packDrill?.coachCues[0] || packDrill?.instructions || 'Listen first, sing second, and keep the pitch move calm.',
+      trackingBody: packDrill?.correctionCues[0] || 'Small corrections usually lock faster than big jumps.',
+      summaryLabel: packDrill?.drillType ? packDrill.drillType.replace(/_/g, ' ') : 'host drill',
+      currentZone: packDrill?.targetSkill ? packDrill.targetSkill.replace(/_/g, ' ') : 'Live pitch',
+    }),
+    [packDrill],
+  )
 
   const bar = useSharedValue(progressPct)
   useEffect(() => {
@@ -298,18 +316,46 @@ export function DrillScreen({ navigation, route }: Props) {
         },
       }
 
+      const guidedScore = packDrillId
+        ? scoreGuidedAttempt({
+            drillId: packDrillId,
+            metrics: mergedMetrics as any,
+            hostScore: res.score,
+            abortFlag: false,
+            packFamily: packDrill?.drillType,
+            masteryThreshold: packDrill?.masteryThreshold,
+          })
+        : null
+      const effectiveScore = guidedScore?.finalScore ?? res.score
+      const metricsToPersist = guidedScore
+        ? {
+            ...mergedMetrics,
+            guidedJourney: {
+              ...guidedScore,
+              packDrillId,
+              lessonId: lessonId ?? guidedMeta?.lessonId ?? null,
+              stageId: stageId ?? guidedMeta?.stageId ?? null,
+              routeId: guidedMeta?.routeId ?? null,
+              helpMode: activeFeedbackPlan?.mode !== 'OFF_POST',
+              completionRatio: (mergedMetrics as any)?.voicedRatio ?? null,
+              entryTimeMs: (mergedMetrics as any)?.timeToEnterMs ?? null,
+              pitchFamily: packDrill?.drillType ?? null,
+            },
+          }
+        : mergedMetrics
+
       const { attempt } = await addAttemptAndUpdateBestTake({
         sessionId,
         drillId,
-        score: res.score,
-        metrics: mergedMetrics,
+        score: effectiveScore,
+        metrics: metricsToPersist,
       }).catch((e) => {
         // Attempt persistence is critical. If this fails, surface it.
         captureException(e, { kind: 'persist_attempt', sessionId, drillId })
         throw e
       })
 
-      track('drill_complete', { sessionId, drillId, score: res.score })
+      track('drill_complete', { sessionId, drillId, score: effectiveScore })
 
       // Data safety: if this attempt produced an audio take, mark it indexed so
       // recovery UI can distinguish "saved but not attached" takes.
@@ -341,25 +387,52 @@ export function DrillScreen({ navigation, route }: Props) {
     }
 
     // Adaptive fail streaks (helps mission routing later)
-    if (res.score < 60) markFail(sessionId, drillId)
+    if (effectiveScore < 60) markFail(sessionId, drillId)
     else resetFail(sessionId, drillId)
 
     // Session plan progression
     const p2 = advancePlan(sessionId)
     let nextDrillId = p2 && p2.index < p2.drillIds.length ? p2.drillIds[p2.index] : undefined
+    const nextPackDrillId = guidedMeta && p2 && p2.index < guidedMeta.plan.length ? guidedMeta.plan[p2.index]?.packDrillId : undefined
 
     // Smart "repair" routing: if the plan ended but the user struggled, suggest a corrective drill
     // instead of dumping them into Results.
-    if (!nextDrillId && res.score < 70) {
+    if (!nextDrillId && effectiveScore < 70) {
       try {
         const { loadAllBundledPacks } = await import('@/core/drills/loader')
         const { pickNextDrill } = await import('@/core/profile/nextDrill')
         const pack = loadAllBundledPacks()
-        nextDrillId = pickNextDrill(pack, profile, { lastDrillId: drillId, lastScore: res.score })
+        nextDrillId = pickNextDrill(pack, profile, { lastDrillId: drillId, lastScore: effectiveScore })
       } catch {}
     }
 
     const endToResults = !nextDrillId
+
+    if (guidedScore && (packDrillId || guidedMeta?.routeId)) {
+      await recordAdaptiveAttempt(
+        {
+          score: effectiveScore,
+          drillId: packDrillId ?? drillId,
+          family: guidedScore.family,
+          meanAbsCents: (mergedMetrics as any)?.avgAbsCents ?? undefined,
+          biasCents: (mergedMetrics as any)?.meanCents ?? undefined,
+          driftSlopeCentsPerSec: (mergedMetrics as any)?.driftCentsPerSec ?? undefined,
+          overshootRate: (mergedMetrics as any)?.overshootRate ?? undefined,
+          stabilityStdDevCents: (mergedMetrics as any)?.wobbleCents ?? undefined,
+          voicedRatio: (mergedMetrics as any)?.voicedRatio ?? undefined,
+          correctDirectionRatio:
+            typeof (mergedMetrics as any)?.intervalDirectionCorrect === 'boolean'
+              ? (mergedMetrics as any).intervalDirectionCorrect
+                ? 1
+                : 0
+              : undefined,
+          completionRatio: (mergedMetrics as any)?.voicedRatio ?? undefined,
+          abortFlag: false,
+          timestamp: Date.now(),
+        },
+        (guidedMeta?.routeId as any) ?? undefined,
+      ).catch(() => {})
+    }
 
     if (endToResults) {
       // Retention hooks: curriculum progression + daily challenge recording.
@@ -382,9 +455,16 @@ export function DrillScreen({ navigation, route }: Props) {
         const { getChallengeState, getTodayChallengeDay, completeChallengeDay } = await import('@/core/challenges/pitchLockChallenge')
         const st = await getChallengeState()
         const day = getTodayChallengeDay(st)
-        await completeChallengeDay(day, res.score)
+        await completeChallengeDay(day, effectiveScore)
       } catch {}
-      await finishSession(sessionId, res.tip, res.summary)
+      if (guidedMeta?.lessonId) {
+        await completeJourneyLesson(guidedMeta.lessonId).catch(() => {})
+      }
+      await finishSession(
+        sessionId,
+        guidedScore?.coachTip ?? res.tip,
+        guidedScore ? buildGuidedSummary(packDrill?.title ?? drill.title, guidedScore.band, effectiveScore) : res.summary,
+      )
     }
 
       navigation.replace("DrillResult", {
@@ -392,6 +472,10 @@ export function DrillScreen({ navigation, route }: Props) {
         drillId,
         attemptId: attempt.id,
         nextDrillId,
+        nextPackDrillId,
+        packDrillId,
+        lessonId,
+        stageId,
         endToResults,
       })
     } catch (e: any) {
@@ -434,10 +518,32 @@ export function DrillScreen({ navigation, route }: Props) {
   }
 
   return (
-    <Screen scroll background="gradient">
+    <Screen scroll background={packDrill ? 'hero' : 'gradient'}>
+      {packDrill ? <BrandWorldBackdrop /> : null}
       <Box style={{ gap: 6 }}>
-        <Text preset="h1">{drill.title}</Text>
+        <Text preset="h1">{packDrill?.title ?? drill.title}</Text>
         <Text preset="muted">{description}</Text>
+
+        {packDrill ? (
+          <>
+            <StatusPill state={status === 'running' ? 'listening' : 'ready'} label={guidedCopy.summaryLabel} />
+            <HexagonStateRenderer
+              state={status === 'running' ? 'tracking' : 'ready'}
+              title={packDrill.title}
+              subtitle={packDrill.targetSkill.replace(/_/g, ' ')}
+              progress={Math.max(0.18, progressPct / 100)}
+            />
+            <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
+              <CurrentZoneChip label={guidedCopy.currentZone} />
+              {packDrill.passCriteria ? <CurrentZoneChip label={packDrill.passCriteria} /> : null}
+            </Box>
+            <AdaptiveInstructionBlock
+              title={guidedCopy.liveCoachTitle}
+              body={status === 'running' ? guidedCopy.trackingBody : guidedCopy.readyBody}
+              state={status === 'running' ? 'tracking' : 'ready'}
+            />
+          </>
+        ) : null}
 
         <AudioRoutePill route={audioRoute} onPress={() => setShowInputPicker(true)} />
 
@@ -579,4 +685,8 @@ export function DrillScreen({ navigation, route }: Props) {
       ) : null}
     </Screen>
   )
+}
+
+function buildGuidedSummary(title: string, band: string, score: number) {
+  return `${title} finished at ${score}. Band: ${band.replace(/_/g, ' ')}.`
 }

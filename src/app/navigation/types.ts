@@ -7,6 +7,8 @@ export type MainTabParamList = {
         focusType?: Drill["type"]
         missionId?: string
         curriculumDayId?: string
+        lessonId?: string
+        stageId?: string
         dailyChallenge?: boolean
         weeklyChallengeId?: string
       }
@@ -20,15 +22,37 @@ export type RootStackParamList = {
   Welcome: undefined
   Calibration: undefined
   Onboarding: undefined
+  WakeYourVoice: undefined
+  FirstWinResult: { lessonId?: string; snapshotId?: string } | undefined
+  Recovery: {
+    reason:
+      | 'micDenied'
+      | 'micBlocked'
+      | 'noisyRoom'
+      | 'noVoice'
+      | 'tooQuiet'
+      | 'tooLoud'
+      | 'routeChanged'
+      | 'audioSetup'
+      | 'retune'
+    next?: { name: string; params?: any }
+  }
   MainTabs: undefined
   Tuner: undefined
-  Drill: { sessionId: string; drillId: string }
-  DrillResult: { sessionId: string; drillId: string; attemptId: string; nextDrillId?: string; endToResults?: boolean }
+  Drill: { sessionId: string; drillId: string; packDrillId?: string; lessonId?: string; stageId?: string }
+  DrillResult: { sessionId: string; drillId: string; attemptId: string; nextDrillId?: string; nextPackDrillId?: string; packDrillId?: string; lessonId?: string; stageId?: string; endToResults?: boolean }
   Results: { sessionId: string }
   Playback: { attemptId: string }
   CurriculumOverview: undefined
   CurriculumDayPreview: { dayId: string }
   DayComplete: { sessionId: string; completedDayId: string }
+  VoiceProfile: undefined
+  RangeSnapshot: undefined
+  VocalFamily: undefined
+  PersonalPlan: undefined
+  Insights: undefined
+  Milestones: undefined
+  CompareProgress: undefined
 
   ChallengesHub: undefined
   Leaderboard: { period: 'daily' | 'weekly'; challengeId: string }

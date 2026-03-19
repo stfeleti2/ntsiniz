@@ -14,6 +14,19 @@ export type Settings = {
   onboardingComplete?: boolean
   /** Selected onboarding goal (used to tailor the first win + home suggestions). */
   onboardingGoal?: 'practice' | 'social' | 'compete' | 'coach'
+  onboardingIntent?:
+    | 'justStarting'
+    | 'singInTune'
+    | 'moreControl'
+    | 'songsBetter'
+    | 'choirWorship'
+    | 'justExplore'
+  coachingMode?: 'starter' | 'casual' | 'practised' | 'performerCoach'
+  routeHint?: 'R1' | 'R2' | 'R3' | 'R4' | 'R5' | null
+  firstWinComplete?: boolean
+  firstWinVersion?: number
+  sacredMomentsHoldout?: boolean
+  legacyCurriculumFallback?: boolean
 
   /** Permission primers (anti-anxiety, store-friendly). */
   seenMicPrimer?: boolean
@@ -90,6 +103,13 @@ export const DEFAULT_SETTINGS: Settings = {
   seenMicPrimer: false,
   seenCameraPrimer: false,
   ghostAdvanced: false,
+  onboardingIntent: 'justExplore',
+  coachingMode: 'starter',
+  routeHint: null,
+  firstWinComplete: false,
+  firstWinVersion: 0,
+  sacredMomentsHoldout: true,
+  legacyCurriculumFallback: true,
 
   devPerfOverlayEnabled: false,
   telemetryCrashReportingEnabled: true,

@@ -21,8 +21,12 @@ import { NextActionBar } from '@/ui/components/NextActionBar'
 import { captureException } from '@/app/telemetry/sentry'
 import { onInterruption } from '@/core/audio/interruptions'
 import { routeBroker } from '@/core/audio/routeBroker'
+import { PlaybackInsightCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Playback'>
+const copy = {
+  bestMomentTitle: 'Best moment highlight',
+}
 
 export function PlaybackScreen({ navigation, route }: Props) {
   const { attemptId } = route.params
@@ -89,6 +93,7 @@ export function PlaybackScreen({ navigation, route }: Props) {
 
   const dateLabel = formatDate(attempt.createdAt, { dateStyle: 'medium', timeStyle: 'short' })
   const canSeek = !!audioUri && pb.isReady
+  const guidedNote = (attempt as any)?.metrics?.guidedJourney?.coachTip as string | undefined
 
   return (
     <Screen scroll background="gradient">
@@ -158,6 +163,8 @@ export function PlaybackScreen({ navigation, route }: Props) {
         <Box style={{ height: 8 }} />
         <Text preset="muted">{t('playback.seekHint')}</Text>
       </Card>
+
+      {guidedNote ? <PlaybackInsightCard title={copy.bestMomentTitle} body={guidedNote} /> : null}
 
       <NextActionBar
         title={t('coach.nextActionTitle')}

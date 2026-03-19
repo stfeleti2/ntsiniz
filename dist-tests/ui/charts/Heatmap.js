@@ -44,14 +44,14 @@ function Heatmap({ days, columns = 7 }) {
     const rows = Math.ceil(padded.length / columns);
     const weekday = (ts) => new Date(ts).getDay(); // 0 Sun
     const isStartOfWeek = (ts) => weekday(ts) === 1; // Monday
-    return ((0, jsx_runtime_1.jsxs)(ui_1.Box, { style: styles.wrap, children: [(0, jsx_runtime_1.jsxs)(ui_1.Box, { style: styles.legendRow, children: [(0, jsx_runtime_1.jsx)(Typography_1.Text, { preset: "muted", children: (0, i18n_1.t)('heatmap.less') }), (0, jsx_runtime_1.jsx)(ui_1.Box, { style: { flexDirection: "row", gap: 6, alignItems: "center" }, children: [0.15, 0.35, 0.6, 0.9].map((a) => ((0, jsx_runtime_1.jsx)(ui_1.Box, { style: {
+    return ((0, jsx_runtime_1.jsxs)(ui_1.Box, { style: styles.wrap, children: [(0, jsx_runtime_1.jsxs)(ui_1.Box, { style: styles.legendRow, children: [(0, jsx_runtime_1.jsx)(Typography_1.Text, { preset: "muted", children: (0, i18n_1.t)('heatmap.less') }), (0, jsx_runtime_1.jsx)(ui_1.Box, { style: { flexDirection: "row", gap: 6, alignItems: "center" }, children: [0.15, 0.35, 0.6, 0.9].map((a, idx) => ((0, jsx_runtime_1.jsx)(ui_1.Box, { style: {
                                 width: 12,
                                 height: 12,
                                 borderRadius: 4,
                                 backgroundColor: withAlpha(theme.colors.accent, a),
                                 borderWidth: 1,
                                 borderColor: theme.colors.line,
-                            } }, a))) }), (0, jsx_runtime_1.jsx)(Typography_1.Text, { preset: "muted", children: (0, i18n_1.t)('heatmap.more') })] }), (0, jsx_runtime_1.jsx)(ui_1.Box, { style: [styles.grid, { borderColor: theme.colors.line, backgroundColor: theme.colors.bg }], children: Array.from({ length: rows }).map((_, r) => ((0, jsx_runtime_1.jsx)(ui_1.Box, { style: styles.row, children: Array.from({ length: columns }).map((__, c) => {
+                            } }, `${a}-${idx}`))) }), (0, jsx_runtime_1.jsx)(Typography_1.Text, { preset: "muted", children: (0, i18n_1.t)('heatmap.more') })] }), (0, jsx_runtime_1.jsx)(ui_1.Box, { style: [styles.grid, { borderColor: theme.colors.line, backgroundColor: theme.colors.bg }], children: Array.from({ length: rows }).map((_, r) => ((0, jsx_runtime_1.jsx)(ui_1.Box, { style: styles.row, children: Array.from({ length: columns }).map((__, c) => {
                         const idx = r * columns + c;
                         const cell = padded[idx];
                         const alpha = cell.signal <= 0 ? 0.08 : 0.1 + 0.9 * (cell.signal / maxSignal);

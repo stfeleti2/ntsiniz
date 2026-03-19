@@ -1,6 +1,9 @@
 import { WelcomeScreen } from '../screens/WelcomeScreen'
 import { CalibrationScreen } from '../screens/CalibrationScreen'
 import { OnboardingScreen } from '../screens/OnboardingScreen'
+import { WakeYourVoiceScreen } from '../screens/WakeYourVoiceScreen'
+import { FirstWinResultScreen } from '../screens/FirstWinResultScreen'
+import { RecoveryScreen } from '../screens/RecoveryScreen'
 import { TunerScreen } from '../screens/TunerScreen'
 import { MicTestScreen } from '../screens/MicTestScreen'
 import { DrillScreen } from '../screens/DrillScreen'
@@ -25,6 +28,13 @@ import { AudioTortureLabScreen } from '../screens/AudioTortureLabScreen'
 import { SessionSummaryScreen } from '../screens/SessionSummaryScreen'
 import { WeeklyReportScreen } from '../screens/WeeklyReportScreen'
 import { PitchLockChallengeScreen } from '../screens/PitchLockChallengeScreen'
+import { VoiceProfileScreen } from '../screens/VoiceProfileScreen'
+import { RangeSnapshotScreen } from '../screens/RangeSnapshotScreen'
+import { VocalFamilyScreen } from '../screens/VocalFamilyScreen'
+import { PersonalPlanScreen } from '../screens/PersonalPlanScreen'
+import { InsightsScreen } from '../screens/InsightsScreen'
+import { MilestonesScreen } from '../screens/MilestonesScreen'
+import { CompareProgressScreen } from '../screens/CompareProgressScreen'
 
 import type { RootStackParamList } from './types'
 
@@ -64,6 +74,10 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     { name: 'Welcome', component: WelcomeScreen },
     { name: 'Calibration', component: CalibrationScreen, options: { animation: 'slide_from_right' } },
     { name: 'Onboarding', component: OnboardingScreen, options: { animation: 'slide_from_right' } },
+    { name: 'PermissionsPrimer', component: PermissionsPrimerScreen, options: { animation: 'fade_from_bottom' } },
+    { name: 'WakeYourVoice', component: WakeYourVoiceScreen, options: { animation: 'slide_from_right' } },
+    { name: 'FirstWinResult', component: FirstWinResultScreen, options: { animation: 'fade_from_bottom' } },
+    { name: 'Recovery', component: RecoveryScreen, options: { animation: 'fade_from_bottom' } },
     { name: 'MainTabs', component: MainTabs },
     { name: 'Tuner', component: TunerScreen, options: { animation: 'slide_from_right' } },
     { name: 'MicTest', component: MicTestScreen, options: { animation: 'slide_from_right' } },
@@ -79,12 +93,18 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     { name: 'SessionSummary', component: SessionSummaryScreen, options: { animation: 'fade_from_bottom' } },
     { name: 'WeeklyReport', component: WeeklyReportScreen, options: { animation: 'slide_from_right' } },
     { name: 'PitchLockChallenge', component: PitchLockChallengeScreen, options: { animation: 'slide_from_right' } },
+    { name: 'VoiceProfile', component: VoiceProfileScreen, options: { animation: 'slide_from_right' } },
+    { name: 'RangeSnapshot', component: RangeSnapshotScreen, options: { animation: 'slide_from_right' } },
+    { name: 'VocalFamily', component: VocalFamilyScreen, options: { animation: 'slide_from_right' } },
+    { name: 'PersonalPlan', component: PersonalPlanScreen, options: { animation: 'slide_from_right' } },
+    { name: 'Insights', component: InsightsScreen, options: { animation: 'slide_from_right' } },
+    { name: 'Milestones', component: MilestonesScreen, options: { animation: 'slide_from_right' } },
+    { name: 'CompareProgress', component: CompareProgressScreen, options: { animation: 'slide_from_right' } },
   ]
 
   if (flags.dev) {
     base.push(
       { name: 'Billing', component: BillingScreen, options: { animation: 'slide_from_right' } },
-      { name: 'PermissionsPrimer', component: PermissionsPrimerScreen, options: { animation: 'fade_from_bottom' } },
       { name: 'Privacy', component: PrivacyScreen, options: { animation: 'slide_from_right' } },
     )
   }

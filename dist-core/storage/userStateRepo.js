@@ -8,6 +8,18 @@ exports.DEFAULT_USER_STATE = {
     curriculum: { dayIndex: 0, completedDayKeys: [] },
     streakShield: { usedDayKeys: [] },
     dailyChallenge: { bestByDate: {} },
+    journeyV3: {
+        routeId: null,
+        stageId: null,
+        lessonId: null,
+        unlockedLessonIds: [],
+        completedLessonIds: [],
+        completedStageIds: [],
+        assessmentByStageId: {},
+        compareBaseline: null,
+        firstWinSnapshotId: null,
+        firstWinCompletedAt: null,
+    },
 };
 async function getUserState() {
     const d = await (0, db_1.getDb)();

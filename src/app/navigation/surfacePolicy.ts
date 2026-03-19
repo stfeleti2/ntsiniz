@@ -16,6 +16,10 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'Welcome',
   'Calibration',
   'Onboarding',
+  'PermissionsPrimer',
+  'WakeYourVoice',
+  'FirstWinResult',
+  'Recovery',
   'MainTabs',
   'Tuner',
   'MicTest',
@@ -33,13 +37,20 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'SessionSummary',
   'WeeklyReport',
   'PitchLockChallenge',
+  'VoiceProfile',
+  'RangeSnapshot',
+  'VocalFamily',
+  'PersonalPlan',
+  'Insights',
+  'Milestones',
+  'CompareProgress',
 ]
 
 export function getEnabledStackScreenNames(flags: SurfaceFlags): string[] {
   const names = [...CORE_STACK_SCREENS] as string[]
 
   if (flags.dev) {
-    names.push('Billing', 'PermissionsPrimer', 'Privacy')
+    names.push('Billing', 'Privacy')
   }
 
   if (!flags.storeBuild) {

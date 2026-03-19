@@ -1,73 +1,57 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Pressable } from "@/ui/primitives"
 import type { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { Screen } from "@/ui/components/Screen"
 import { Text, Stack } from "@/ui/primitives"
-import { Button, Card } from "@/ui/components/kit"
+import { Button } from "@/ui/components/Button"
+import { Card } from "@/ui/components/Card"
 import type { RootStackParamList } from "../navigation/types"
-import { getSettings, upsertSettings } from "@/core/storage/settingsRepo"
+import { getSettings } from "@/core/storage/settingsRepo"
 import { t } from '@/app/i18n'
+import { BrandWorldBackdrop, ChapterHeroCard, HexagonHero, TrustBulletRow } from '@/ui/guidedJourney'
+import { enableGuidedJourneyV3 } from '@/core/config/flags'
 
 type Props = NativeStackScreenProps<RootStackParamList, "Welcome">
 
 export function WelcomeScreen({ navigation }: Props) {
   const [ready, setReady] = useState(false)
-  const [hasCal, setHasCal] = useState(false)
-  const [needsOnboarding, setNeedsOnboarding] = useState(false)
+  const [firstWinComplete, setFirstWinComplete] = useState(false)
+  const [showHow, setShowHow] = useState(false)
   const [devTap, setDevTap] = useState(0)
   const showDev = __DEV__ && devTap >= 7
+  const copy = {
+    subtitle: 'A guided singing journey that gives you a tiny win before it asks anything big.',
+    heroTitle: 'Tiny game. Real signal.',
+    heroBody: 'We start with one guided voice moment, then turn it into your first chapter.',
+    cardTitle: 'Your first win starts here',
+    cardBody: 'No cold scan. No early paywall. Just a short guided check that leaves you with momentum.',
+    cardStage: 'Entry',
+    enter: 'Enter your journey',
+    start: 'Start first win',
+    showHow: 'How it works',
+    hideHow: 'Hide how it works',
+    devRetune: 'Go to retune utility',
+    privacy: 'Privacy: your voice is yours. We only listen inside the moments you start.',
+  }
 
   useEffect(() => {
     getSettings()
       .then((s) => {
-        setHasCal(!!s.hasCalibrated)
-        setNeedsOnboarding(!!s.hasCalibrated && !s.onboardingComplete)
+        setFirstWinComplete(!!s.firstWinComplete)
       })
       .catch(() => {})
       .finally(() => setReady(true))
   }, [])
 
-  // Auto-forward returning users.
   useEffect(() => {
     if (!ready) return
-    if (!hasCal) return
-    if (needsOnboarding) {
-      navigation.replace('Onboarding')
-      return
-    }
-    navigation.replace('MainTabs')
-  }, [ready, hasCal, needsOnboarding])
-
-  const primaryLabel = useMemo(() => {
-    if (!ready) return t('common.loading')
-    return hasCal ? t('welcome.enter') : t('welcome.calibrate')
-  }, [ready, hasCal])
-
-  const primaryAction = () => {
-    if (!hasCal) {
-      navigation.navigate('PermissionsPrimer', { kind: 'mic', next: { name: 'Calibration' } })
-      return
-    }
-    else if (needsOnboarding) navigation.replace('Onboarding')
-    else navigation.replace("MainTabs")
-  }
-
-  const skipCalibration = async () => {
-    const s = await getSettings()
-    await upsertSettings({
-      ...s,
-      noiseGateRms: s.noiseGateRms ?? 0.02,
-      hasCalibrated: true,
-      qaSimulatedMic: true,
-      qaMockShare: true,
-      qaBypassMicPermission: true,
-    })
-    navigation.replace("Onboarding")
-  }
+    if (enableGuidedJourneyV3() && firstWinComplete) navigation.replace('MainTabs')
+  }, [ready, firstWinComplete, navigation])
 
   return (
     <Screen scroll background="hero">
-      <Stack gap={6}>
+      <BrandWorldBackdrop />
+      <Stack gap={12}>
         <Pressable
           testID="tap-welcome-title"
           accessibilityRole="button"
@@ -78,37 +62,36 @@ export function WelcomeScreen({ navigation }: Props) {
             {t('brand.name')}
           </Text>
         </Pressable>
-        <Text tone="muted">{t('welcome.subtitle')}</Text>
+        <Text tone="muted">{copy.subtitle}</Text>
       </Stack>
 
-      <Card>
-        <Text size="lg" weight="bold">
-          {t('welcome.weeklyFlexTitle')}
-        </Text>
-        <Text tone="muted">{t('welcome.weeklyFlexSubtitle')}</Text>
-        <Button label={primaryLabel} disabled={!ready} onPress={primaryAction} testID="btn-welcome-primary" />
-        {hasCal ? (
-          <Button label={t('welcome.recalibrate')} variant="ghost" onPress={() => navigation.navigate("Calibration")} testID="btn-welcome-recalibrate" />
-        ) : null}
+      <HexagonHero state="ready" title={copy.heroTitle} subtitle={copy.heroBody} />
 
-        {showDev ? (
-          <Button label={t('welcome.qaSkipCalibration')} variant="ghost" onPress={skipCalibration} testID="btn-qa-skip-calibration" />
-        ) : null}
-      </Card>
+      <ChapterHeroCard
+        title={copy.cardTitle}
+        subtitle={copy.cardBody}
+        stageLabel={copy.cardStage}
+        cta={ready ? (firstWinComplete ? copy.enter : copy.start) : t('common.loading')}
+        onPress={() => (firstWinComplete ? navigation.replace('MainTabs') : navigation.navigate('Onboarding'))}
+      />
 
-      <Card>
-        <Text size="lg" weight="bold">
-          {t('welcome.whatYouDoTitle')}
-        </Text>
-        <Stack gap={10}>
-          <Text tone="muted">{t('welcome.bullet.listenSing')}</Text>
-          <Text tone="muted">{t('welcome.bullet.adapt')}</Text>
-          <Text tone="muted">{t('welcome.bullet.journey')}</Text>
-          <Text tone="muted">{t('welcome.bullet.shareable')}</Text>
-        </Stack>
-      </Card>
+      <Button text={showHow ? copy.hideHow : copy.showHow} variant="ghost" onPress={() => setShowHow((value) => !value)} />
 
-      <Text tone="muted">{t('welcome.privacy')}</Text>
+      {showHow ? (
+        <Card>
+          <TrustBulletRow
+            bullets={[
+              'We ask about your goal and coaching style first, then mic access only when you are ready.',
+              'Your first voice check is short, supportive, and built to give you a usable win.',
+              'Pitch is analyzed on-device by default and your recordings stay on your device unless you choose to share.',
+            ]}
+          />
+        </Card>
+      ) : null}
+
+      {showDev ? <Button text={copy.devRetune} variant="ghost" onPress={() => navigation.navigate('Calibration')} /> : null}
+
+      <Text tone="muted">{copy.privacy}</Text>
     </Screen>
   )
 }

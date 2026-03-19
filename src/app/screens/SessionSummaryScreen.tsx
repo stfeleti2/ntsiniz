@@ -13,8 +13,17 @@ import { loadAllBundledPacks } from '@/core/drills/loader'
 import { pickNextDrill } from '@/core/profile/nextDrill'
 import { getProfile } from '@/core/storage/profileRepo'
 import { RewardedBoostCard } from '@/ui/monetization/RewardedBoostCard'
+import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
+import { getAdaptiveJourneyState } from '@/core/guidedJourney/adaptiveStateRepo'
+import { NextStepCard, PlaybackInsightCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SessionSummary'>
+const uiCopy = {
+  coachNoteTitle: 'Coach note',
+  progressCompareTitle: 'Progress compare',
+  progressCompareBody: 'Compare your baseline against your latest session when you are ready.',
+  progressCompareCta: 'Open compare progress',
+}
 
 export function SessionSummaryScreen({ navigation, route }: Props) {
   const { sessionId } = route.params
@@ -36,18 +45,21 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
   }, [attempts])
 
   const [nextDrillId, setNextDrillId] = useState<string | null>(null)
+  const [voiceTip, setVoiceTip] = useState<string | null>(null)
 
   useEffect(() => {
     ;(async () => {
       try {
         const pack = loadAllBundledPacks()
         const profile = await getProfile().catch(() => null)
+        const [voice, adaptive] = await Promise.all([getVoiceIdentity().catch(() => null), getAdaptiveJourneyState().catch(() => null)])
         const last = stats.last
         const id = pickNextDrill(pack, profile ?? ({} as any), {
           lastDrillId: last?.drillId,
           lastScore: last?.score,
         })
         setNextDrillId(id)
+        setVoiceTip(last?.metrics?.guidedJourney?.coachTip ?? adaptive?.lastRecommendedFamily?.replace(/_/g, ' ') ?? voice?.currentFocus?.[0] ?? null)
       } catch {
         setNextDrillId(null)
       }
@@ -71,6 +83,8 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
         <Text preset="body">{`Best: ${stats.best}`}</Text>
         <Text preset="body">{`Average: ${stats.avg}`}</Text>
       </Card>
+
+      {voiceTip ? <PlaybackInsightCard title={uiCopy.coachNoteTitle} body={voiceTip} /> : null}
 
       <Box h={14} />
       <RewardedBoostCard />
@@ -100,6 +114,8 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
           testID="btn-session-summary-results"
         />
       </Card>
+
+      <NextStepCard title={uiCopy.progressCompareTitle} body={uiCopy.progressCompareBody} cta={uiCopy.progressCompareCta} onPress={() => navigation.navigate('CompareProgress')} />
     </Screen>
   )
 }

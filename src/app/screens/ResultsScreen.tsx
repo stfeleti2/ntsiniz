@@ -24,8 +24,16 @@ import { AttemptWaveformList, ResultsScoreModule, ResultsShareModule, useModuleE
 import { track } from '@/app/telemetry'
 import { clearSessionMeta } from '@/core/profile/sessionMeta'
 import { captureException } from '@/app/telemetry/sentry'
+import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
+import { getAdaptiveJourneyState } from '@/core/guidedJourney/adaptiveStateRepo'
+import { NextStepCard, PlaybackInsightCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, "Results">
+const uiCopy = {
+  coachNoteTitle: 'Coach note',
+  nextDrillTitle: 'Next recommended drill',
+  continueTraining: 'Continue training',
+}
 
 export function ResultsScreen({ navigation, route }: Props) {
   const { sessionId } = route.params
@@ -43,6 +51,8 @@ export function ResultsScreen({ navigation, route }: Props) {
   )
   const didCelebrate = useRef(false)
   const [shareToast, setShareToast] = useState<string | null>(null)
+  const [voiceTip, setVoiceTip] = useState<string | null>(null)
+  const [nextHint, setNextHint] = useState<string | null>(null)
 
   useEffect(() => {
     // Session meta is an in-memory map; clear it once we've reached a safe endpoint.
@@ -56,6 +66,16 @@ export function ResultsScreen({ navigation, route }: Props) {
       setSummary(s?.summary ?? "")
       const atts = await listAttemptsBySession(sessionId)
       setAttempts(atts)
+      const bestGuided = [...atts]
+        .filter((attempt) => attempt.metrics?.guidedJourney)
+        .sort((left, right) => right.score - left.score)[0]
+      const [voice, adaptive] = await Promise.all([getVoiceIdentity().catch(() => null), getAdaptiveJourneyState().catch(() => null)])
+      setVoiceTip(bestGuided?.metrics?.guidedJourney?.coachTip ?? voice?.currentFocus?.[0] ?? null)
+      setNextHint(
+        adaptive?.lastRecommendedFamily
+          ? `Next family emphasis: ${String(adaptive.lastRecommendedFamily).replace(/_/g, ' ')}.`
+          : voice?.currentFocus?.[0] ?? null,
+      )
 
       // Best-takes for the session (drillId -> attemptId)
       const best = await listBestTakeAttemptIdsForSession(sessionId).catch(() => ({}))
@@ -131,6 +151,9 @@ export function ResultsScreen({ navigation, route }: Props) {
     <Screen scroll background="gradient">
       <Text preset="h1">{t('results.title')}</Text>
       <Text preset="muted">{summary || ""}</Text>
+
+      {voiceTip ? <PlaybackInsightCard title={uiCopy.coachNoteTitle} body={voiceTip} /> : null}
+      {nextHint ? <NextStepCard title={uiCopy.nextDrillTitle} body={nextHint} cta={uiCopy.continueTraining} onPress={() => (navigation as any).navigate('MainTabs', { screen: 'Session' })} /> : null}
 
       {showScoreModule ? (
         <ResultsScoreModule

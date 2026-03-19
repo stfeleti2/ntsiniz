@@ -37,6 +37,7 @@ export const CONTENT_INDEX: Record<string, any> = {
   "drills/warmups.en.json": require("./drills/warmups.en.json"),
   "drills/warmups.xh.json": require("./drills/warmups.xh.json"),
   "drills/warmups.zu.json": require("./drills/warmups.zu.json"),
+  "guided_journey/production.en.json": require("./guided_journey/production.en.json"),
   "lessons/marketplace.en.json": require("./lessons/marketplace.en.json"),
   "lessons/marketplace.xh.json": require("./lessons/marketplace.xh.json"),
   "lessons/marketplace.zu.json": require("./lessons/marketplace.zu.json"),

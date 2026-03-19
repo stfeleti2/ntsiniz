@@ -217,3 +217,33 @@ export function enableMarketplace(): boolean {
 export function enableDiagnostics(): boolean {
   return getBoolean('ENABLE_DIAGNOSTICS', { default: __DEV__ })
 }
+
+export function enableGuidedJourneyV3(): boolean {
+  const o = remoteFlag('guidedJourneyV3')
+  if (o != null) return o
+  return getBoolean('ENABLE_GUIDED_JOURNEY_V3', { default: true })
+}
+
+export function enableLegacyCurriculumFallback(): boolean {
+  const o = remoteFlag('legacyCurriculumFallback')
+  if (o != null) return o
+  return getBoolean('ENABLE_LEGACY_CURRICULUM_FALLBACK', { default: true })
+}
+
+export function enableExtendedPackFamilies(): boolean {
+  const o = remoteFlag('extendedPackFamilies')
+  if (o != null) return o
+  return getBoolean('ENABLE_EXTENDED_PACK_FAMILIES', { default: false })
+}
+
+export function enableKaraokeV1(): boolean {
+  const o = remoteFlag('karaokeV1')
+  if (o != null) return o
+  return getBoolean('ENABLE_KARAOKE_V1', { default: false })
+}
+
+export function enablePerformanceModeV1(): boolean {
+  const o = remoteFlag('performanceModeV1')
+  if (o != null) return o
+  return getBoolean('ENABLE_PERFORMANCE_MODE_V1', { default: true })
+}

@@ -33,6 +33,7 @@ import { View } from 'react-native'
 import { usePro } from '@/core/billing/usePro'
 import { scoreAttemptV2 } from '@/core/scoring/drillScoring'
 import { getPublicLinks } from '@/core/config/links'
+import { NextStepCard, ResultAnnotationCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, "DrillResult"> 
 
@@ -61,6 +62,21 @@ export function DrillResultScreen({ navigation, route }: Props) {
   const pack = useMemo(() => loadAllBundledPacks(), [])
   const drill = useMemo(() => pack.drills.find((d) => d.id === drillId)!, [pack.drills, drillId])
   const links = useMemo(() => getPublicLinks(), []);
+  const uiCopy = {
+    successTitle: 'Key success',
+    fixTitle: 'Key fix',
+    nextTitle: 'Next recommended action',
+    finishLesson: 'Finish lesson',
+  }
+  const guidedResult = attempt?.metrics?.guidedJourney as
+    | {
+        coachTip?: string
+        band?: string
+        family?: string
+        passed?: boolean
+        diagnosisTags?: string[]
+      }
+    | undefined
 
   useEffect(() => {
     ;(async () => {
@@ -213,7 +229,13 @@ export function DrillResultScreen({ navigation, route }: Props) {
       return
     }
     if (nextDrillId) {
-      navigation.replace("Drill", { sessionId, drillId: nextDrillId })
+      navigation.replace("Drill", {
+        sessionId,
+        drillId: nextDrillId,
+        packDrillId: route.params.nextPackDrillId,
+        lessonId: route.params.lessonId,
+        stageId: route.params.stageId,
+      })
       return
     }
     ;(navigation as any).replace("MainTabs", { screen: "Session" })
@@ -236,6 +258,29 @@ export function DrillResultScreen({ navigation, route }: Props) {
     <Screen scroll background="gradient">
       <Text preset="h1">{t('drillResult.niceTitle')}</Text>
       <Text preset="muted">{t('drillResult.niceSubtitle')}</Text>
+
+      {guidedResult ? (
+        <>
+          <ResultAnnotationCard
+            title={uiCopy.successTitle}
+            body={
+              guidedResult.passed
+                ? `You landed a real pass on ${guidedResult.family?.replace(/_/g, ' ') ?? 'this drill'}.`
+                : `You still gave us a usable rep on ${guidedResult.family?.replace(/_/g, ' ') ?? 'this drill'}.`
+            }
+          />
+          <ResultAnnotationCard
+            title={uiCopy.fixTitle}
+            body={guidedResult.coachTip ?? 'Keep the next correction smaller and calmer.'}
+          />
+          <NextStepCard
+            title={uiCopy.nextTitle}
+            body={endToResults ? 'Close the lesson, review the summary, and keep the next chapter moving.' : 'Take the next live drill while the same coaching cue is still fresh.'}
+            cta={endToResults ? uiCopy.finishLesson : t('common.next')}
+            onPress={continueNext}
+          />
+        </>
+      ) : null}
 
       {isBestTake ? (
         <Box style={{ alignSelf: 'flex-start', marginTop: 6 }}>

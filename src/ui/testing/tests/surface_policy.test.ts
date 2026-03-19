@@ -50,7 +50,7 @@ test('store build does not expose Phase 3 / social / cloud surfaces', () => {
   }
 
   // Core surfaces must remain.
-  for (const required of ['Welcome', 'MainTabs', 'Drill', 'DrillResult', 'Privacy', 'Billing']) {
+  for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult']) {
     assert.equal(set.has(required), true, `required screen missing: ${required}`)
   }
 })

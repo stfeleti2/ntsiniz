@@ -18,6 +18,20 @@ export type SessionMeta = {
   dailyChallenge?: boolean
   weeklyChallengeId?: string
   weeklyPeriodKey?: string
+
+  guidedJourney?: {
+    routeId: string
+    stageId: string
+    lessonId: string
+    plan: Array<{
+      packDrillId: string
+      hostDrillId: string
+      family: string
+      title: string
+      supported: boolean
+      instructions?: string
+    }>
+  }
 }
 
 const meta = new Map<string, SessionMeta>()

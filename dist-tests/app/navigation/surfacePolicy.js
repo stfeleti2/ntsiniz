@@ -5,6 +5,10 @@ const CORE_STACK_SCREENS = [
     'Welcome',
     'Calibration',
     'Onboarding',
+    'PermissionsPrimer',
+    'WakeYourVoice',
+    'FirstWinResult',
+    'Recovery',
     'MainTabs',
     'Tuner',
     'MicTest',
@@ -22,11 +26,18 @@ const CORE_STACK_SCREENS = [
     'SessionSummary',
     'WeeklyReport',
     'PitchLockChallenge',
+    'VoiceProfile',
+    'RangeSnapshot',
+    'VocalFamily',
+    'PersonalPlan',
+    'Insights',
+    'Milestones',
+    'CompareProgress',
 ];
 function getEnabledStackScreenNames(flags) {
     const names = [...CORE_STACK_SCREENS];
     if (flags.dev) {
-        names.push('Billing', 'PermissionsPrimer', 'Privacy');
+        names.push('Billing', 'Privacy');
     }
     if (!flags.storeBuild) {
         names.push('Missions', 'AdminContent');

@@ -55,7 +55,17 @@ function loadAllBundledPacks() {
         loadPackById('agility'),
         loadPackById('phase2'),
     ];
-    const drills = packs.flatMap((p) => p.drills);
+    // Packs can overlap (e.g. phase1 + warmups). Deduplicate by id so
+    // list rendering keys remain stable and unique across the merged pack.
+    const seen = new Set();
+    const drills = packs
+        .flatMap((p) => p.drills)
+        .filter((d) => {
+        if (seen.has(d.id))
+            return false;
+        seen.add(d.id);
+        return true;
+    });
     return {
         packId: 'bundled_all',
         title: 'All Drills',

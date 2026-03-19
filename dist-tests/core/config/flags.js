@@ -26,6 +26,11 @@ exports.enableDuets = enableDuets;
 exports.enableCompetitions = enableCompetitions;
 exports.enableMarketplace = enableMarketplace;
 exports.enableDiagnostics = enableDiagnostics;
+exports.enableGuidedJourneyV3 = enableGuidedJourneyV3;
+exports.enableLegacyCurriculumFallback = enableLegacyCurriculumFallback;
+exports.enableExtendedPackFamilies = enableExtendedPackFamilies;
+exports.enableKaraokeV1 = enableKaraokeV1;
+exports.enablePerformanceModeV1 = enablePerformanceModeV1;
 const expo_constants_1 = __importDefault(require("expo-constants"));
 const remoteConfig_1 = require("./remoteConfig");
 let remoteFlagsCache = null;
@@ -228,4 +233,34 @@ function enableMarketplace() {
  */
 function enableDiagnostics() {
     return getBoolean('ENABLE_DIAGNOSTICS', { default: __DEV__ });
+}
+function enableGuidedJourneyV3() {
+    const o = remoteFlag('guidedJourneyV3');
+    if (o != null)
+        return o;
+    return getBoolean('ENABLE_GUIDED_JOURNEY_V3', { default: true });
+}
+function enableLegacyCurriculumFallback() {
+    const o = remoteFlag('legacyCurriculumFallback');
+    if (o != null)
+        return o;
+    return getBoolean('ENABLE_LEGACY_CURRICULUM_FALLBACK', { default: true });
+}
+function enableExtendedPackFamilies() {
+    const o = remoteFlag('extendedPackFamilies');
+    if (o != null)
+        return o;
+    return getBoolean('ENABLE_EXTENDED_PACK_FAMILIES', { default: false });
+}
+function enableKaraokeV1() {
+    const o = remoteFlag('karaokeV1');
+    if (o != null)
+        return o;
+    return getBoolean('ENABLE_KARAOKE_V1', { default: false });
+}
+function enablePerformanceModeV1() {
+    const o = remoteFlag('performanceModeV1');
+    if (o != null)
+        return o;
+    return getBoolean('ENABLE_PERFORMANCE_MODE_V1', { default: true });
 }

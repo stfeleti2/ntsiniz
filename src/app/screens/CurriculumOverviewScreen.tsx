@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
@@ -6,192 +6,130 @@ import { Text } from '@/ui/components/Typography'
 import { Card } from '@/ui/components/Card'
 import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
-import { t } from '@/app/i18n'
-import { loadCurriculum } from '@/core/curriculum/loader'
-import { getCurriculumState } from '@/core/curriculum/progress'
-import { msUntilTomorrow, formatCountdown } from '@/core/time/countdown'
-import { loadAllBundledPacks } from '@/core/drills/loader'
-import { getSettings } from '@/core/storage/settingsRepo'
+import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { ensureJourneyV3Progress, getCurrentJourneyV3, getLessonsForStage, getStageProgress } from '@/core/guidedJourney/progress'
+import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { BrandWorldBackdrop, ChapterHeroCard, MilestoneCard, StatusPill } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CurriculumOverview'>
 
-type DayStatus = 'done' | 'today' | 'upcoming' | 'done_today' | 'tomorrow_locked' | 'locked'
+type OverviewVm = {
+  stageId: string
+  stageTitle: string
+  stageProfile: string
+  goals: string[]
+  progressLine: string
+  currentLessonId: string
+  currentLessonTitle: string
+  lessons: Array<{ id: string; title: string; purpose: string; locked: boolean; current: boolean }>
+}
+
+const copy = {
+  fallbackTitle: 'Chapter overview',
+  fallbackBody: 'The legacy curriculum overview is hidden while the guided journey is active.',
+  title: 'Chapter overview',
+  subtitle: 'What this chapter trains, why it matters, and which lesson is next.',
+  goalsTitle: 'Why this chapter matters',
+  lessonsTitle: 'Lesson list',
+  startCurrent: 'Start current mission',
+  openLesson: 'Open lesson',
+  loading: 'Loading your chapter…',
+  locked: 'Locked',
+  current: 'Current',
+  open: 'Open',
+}
 
 export function CurriculumOverviewScreen({ navigation }: Props) {
-  const [activeCurriculum, setActiveCurriculum] = useState<'phase1' | 'pro_regimen' | 'pro_regimen12'>('phase1')
-  const [activeTrack, setActiveTrack] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
+  const [vm, setVm] = useState<OverviewVm | null>(null)
 
   useEffect(() => {
-    getSettings()
-      .then((s) => {
-        setActiveCurriculum((s.activeCurriculum ?? 'phase1') as any)
-        setActiveTrack((s.activeTrack ?? 'beginner') as any)
+    if (!enableGuidedJourneyV3()) {
+      setVm(null)
+      return
+    }
+
+    ;(async () => {
+      const program = loadGuidedJourneyProgram()
+      const progress = await ensureJourneyV3Progress()
+      const current = getCurrentJourneyV3(program, progress)
+      const lessons = getLessonsForStage(program, current.stage.id)
+      const stageProgress = getStageProgress(program, progress, current.stage.id)
+      setVm({
+        stageId: current.stage.id,
+        stageTitle: current.stage.title,
+        stageProfile: current.stage.learnerProfile,
+        goals: current.stage.goals,
+        progressLine: `${stageProgress.completed}/${stageProgress.total} lessons complete`,
+        currentLessonId: current.lesson.id,
+        currentLessonTitle: current.lesson.title,
+        lessons: lessons.map((lesson, index) => ({
+          id: lesson.id,
+          title: lesson.title,
+          purpose: lesson.purpose,
+          locked: !(progress.unlockedLessonIds ?? []).includes(lesson.id) && lesson.id !== current.lesson.id && index > stageProgress.completed,
+          current: lesson.id === current.lesson.id,
+        })),
       })
-      .catch(() => {})
+    })().catch(() => setVm(null))
   }, [])
 
-  const curr = useMemo(() => loadCurriculum(activeCurriculum as any, activeTrack as any), [activeCurriculum, activeTrack])
-  const pack = useMemo(() => loadAllBundledPacks(), [])
-  const [currState, setCurrState] = useState<{
-    dayIndex: number
-    displayIndex: number
-    doneToday: boolean
-    doneCount: number
-    total: number
-    pct: number
-    todayDay: any
-    nextDay: any
-  } | null>(null)
-  const [unlockIn, setUnlockIn] = useState<string | null>(null)
-
-  useEffect(() => {
-    getCurriculumState(curr)
-      .then((st) => {
-        setCurrState(st as any)
-        setUnlockIn(st.doneToday && st.nextDay ? formatCountdown(msUntilTomorrow()) : null)
-      })
-      .catch(() => setCurrState(null))
-  }, [curr])
-
-  useEffect(() => {
-    if (!currState?.doneToday || !currState?.nextDay) return
-    const id = setInterval(() => setUnlockIn(formatCountdown(msUntilTomorrow())), 1000)
-    return () => clearInterval(id)
-  }, [currState?.doneToday, currState?.nextDay])
-
-  const total = currState?.total ?? curr.days.length
-  const done = currState?.doneCount ?? 0
-  const pct = currState?.pct ?? 0
-
-  const dayIndex = currState?.dayIndex ?? 0
-  const displayIndex = currState?.displayIndex ?? 0
-  const doneToday = !!currState?.doneToday
-  const today = currState?.todayDay ?? curr.days[0]
-  const tomorrowDay = doneToday ? currState?.nextDay ?? null : null
-
-  const byWeek = useMemo(() => {
-    const out: Record<number, typeof curr.days> = {}
-    for (const d of curr.days) {
-      out[d.week] = out[d.week] ? [...out[d.week], d] : [d]
-    }
-    return out
-  }, [curr.days])
-
-  const statusForIndex = (idx: number): DayStatus => {
-    if (!doneToday) {
-      if (idx < dayIndex) return 'done'
-      if (idx === dayIndex) return 'today'
-      return 'upcoming'
-    }
-
-    // When you already completed today, keep the completed day visible as “done today”,
-    // and lock the next day until tomorrow.
-    if (idx < displayIndex) return 'done'
-    if (idx === displayIndex) return 'done_today'
-    if (idx === dayIndex) return 'tomorrow_locked'
-    return 'locked'
+  if (!enableGuidedJourneyV3()) {
+    return (
+      <Screen background="gradient">
+        <Text preset="h1">{copy.fallbackTitle}</Text>
+        <Text preset="muted">{copy.fallbackBody}</Text>
+      </Screen>
+    )
   }
 
-  const startDay = (dayId: string) => {
-    ;(navigation as any).replace('MainTabs', {
-      screen: 'Session',
-      params: { curriculumDayId: dayId },
-    })
+  if (!vm) {
+    return (
+      <Screen background="hero">
+        <BrandWorldBackdrop />
+        <Text preset="h1">{copy.title}</Text>
+        <Text preset="muted">{copy.loading}</Text>
+      </Screen>
+    )
   }
 
   return (
-    <Screen scroll background="gradient">
+    <Screen scroll background="hero">
+      <BrandWorldBackdrop />
       <Box style={{ gap: 6 }}>
-        <Text preset="h1">{t('curriculumOverview.title')}</Text>
-        <Text preset="muted">{t('curriculumOverview.subtitle')}</Text>
+        <Text preset="h1">{copy.title}</Text>
+        <Text preset="muted">{copy.subtitle}</Text>
       </Box>
 
-            <Card tone="glow">
-        <Text preset="h2">{t('curriculumOverview.progressTitle')}</Text>
-        <Text preset="muted">{t('curriculumOverview.progressLine', { done, total, pct })}</Text>
+      <ChapterHeroCard title={vm.currentLessonTitle} subtitle={`${vm.stageProfile} · ${vm.progressLine}`} stageLabel={vm.stageTitle} cta={copy.startCurrent} onPress={() => navigation.navigate('MainTabs' as any, { screen: 'Session', params: { lessonId: vm.currentLessonId, stageId: vm.stageId } } as any)} />
 
-        {doneToday && tomorrowDay ? (
-          <Box style={{ marginTop: 10, gap: 10 }}>
-            <Text preset="body" style={{ fontWeight: '900' }}>{t('curriculumOverview.doneForToday')}</Text>
-            <Text preset="muted">{t('curriculumOverview.tomorrowLine', { title: tomorrowDay.title })}</Text>
-            {unlockIn ? <Text preset="muted">{t('curriculumOverview.unlocksIn', { value: unlockIn })}</Text> : null}
-            <Button
-              text={t('curriculumOverview.previewTomorrow')}
-              variant="soft"
-              onPress={() => (navigation as any).navigate('CurriculumDayPreview', { dayId: tomorrowDay.id })}
-            />
-            <Button text={t('common.back')} variant="ghost" onPress={() => navigation.goBack()} />
-          </Box>
-        ) : (
-          <Box style={{ marginTop: 10, gap: 10 }}>
-            <Button
-              text={t('curriculumOverview.startToday')}
-              onPress={() => startDay(today?.id ?? curr.days[0].id)}
-            />
-            <Button text={t('common.back')} variant="ghost" onPress={() => navigation.goBack()} />
-          </Box>
-        )}
+      <Card tone="glow">
+        <Text preset="h2">{copy.goalsTitle}</Text>
+        <Box style={{ height: 10 }} />
+        <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
+          {vm.goals.map((goal, index) => (
+            <MilestoneCard key={`${goal}-${index}`} title={vm.stageTitle} body={goal} stat={String(index + 1)} />
+          ))}
+        </Box>
       </Card>
 
-      {Object.keys(byWeek)
-        .map((k) => Number(k))
-        .sort((a, b) => a - b)
-        .map((week, idx) => (
-          <Card key={`${week}-${idx}`} tone="elevated">
-            <Text preset="h2">{t('curriculumOverview.weekTitle', { week })}</Text>
-            <Text preset="muted">{t('curriculumOverview.weekHint')}</Text>
-
-            <Box style={{ marginTop: 10, gap: 10 }}>
-              {byWeek[week].map((d) => {
-                const idx = curr.days.findIndex((x) => x.id === d.id)
-                const st = statusForIndex(idx)
-                const tag =
-                  st === 'done'
-                    ? t('curriculumOverview.tagDone')
-                    : st === 'today'
-                      ? t('curriculumOverview.tagToday')
-                      : st === 'done_today'
-                        ? t('curriculumOverview.tagDoneToday')
-                        : st === 'tomorrow_locked'
-                          ? t('curriculumOverview.tagTomorrowLocked')
-                          : t('curriculumOverview.tagLocked')
-                const btn =
-                  st === 'today'
-                    ? t('curriculumOverview.ctaStart')
-                    : st === 'done' || st === 'done_today'
-                      ? t('curriculumOverview.ctaRedo')
-                      : t('curriculumOverview.ctaPreview')
-                const drillTitles = (d.drillIds ?? [])
-                  .map((id) => pack.drills.find((x) => x.id === id)?.title ?? id)
-                  .slice(0, 3)
-                  .join(' • ')
-
-                return (
-                  <Box key={d.id} style={{ gap: 6, paddingVertical: 8, borderBottomWidth: 1, borderColor: 'rgba(255,255,255,0.08)' }}>
-                    <Text preset="body" style={{ fontWeight: '900' }}>
-                      {t('curriculum.dayLabel', { week: d.week, day: d.day })} — {d.title}  ·  {tag}
-                    </Text>
-                    <Text preset="muted">{d.focus}</Text>
-                    {drillTitles ? <Text preset="muted">{t('curriculumOverview.drillsLine', { value: drillTitles })}</Text> : null}
-                    <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
-                      <Button
-                        text={btn}
-                        variant={st === 'today' ? 'primary' : 'soft'}
-                        onPress={() => {
-                          if (st === 'upcoming' || st === 'tomorrow_locked' || st === 'locked') {
-                            ;(navigation as any).navigate('CurriculumDayPreview', { dayId: d.id })
-                            return
-                          }
-                          startDay(d.id)
-                        }}
-                      />
-                    </Box>
-                  </Box>
-                )
-              })}
-            </Box>
-          </Card>
-        ))}
+      <Card tone="elevated">
+        <Text preset="h2">{copy.lessonsTitle}</Text>
+        <Box style={{ height: 10 }} />
+        <Box style={{ gap: 10 }}>
+          {vm.lessons.map((lesson) => (
+            <Card key={lesson.id} tone={lesson.current ? 'glow' : 'default'}>
+              <Box style={{ gap: 8 }}>
+                <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
+                  <Text preset="body" style={{ fontWeight: '900', flex: 1 }}>{lesson.title}</Text>
+                  <StatusPill state={lesson.locked ? 'blocked' : lesson.current ? 'ready' : 'success'} label={lesson.locked ? copy.locked : lesson.current ? copy.current : copy.open} />
+                </Box>
+                <Text preset="muted">{lesson.purpose}</Text>
+                <Button text={copy.openLesson} variant={lesson.current ? 'primary' : 'soft'} onPress={() => navigation.navigate('CurriculumDayPreview', { dayId: lesson.id })} />
+              </Box>
+            </Card>
+          ))}
+        </Box>
+      </Card>
     </Screen>
   )
 }

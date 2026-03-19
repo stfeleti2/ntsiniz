@@ -26,6 +26,14 @@ This file is the **canonical list** of telemetry events that can be buffered loc
   - When: user cancels a drill.
   - Payload: `{ sessionId, drillId }`
 
+- `first_win_started`
+  - When: the guided first-win voice flow starts.
+  - Payload: `{ source }`
+
+- `first_win_completed`
+  - When: the guided first-win flow completes and a soft route is assigned.
+  - Payload: `{ routeId }`
+
 - `share_session_result`
   - When: user shares a session result.
   - Payload: `{ sessionId }`
