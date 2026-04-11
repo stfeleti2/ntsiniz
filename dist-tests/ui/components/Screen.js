@@ -45,20 +45,28 @@ const primitives_1 = require("@/ui/primitives");
 const i18n_1 = require("@/core/i18n");
 function Screen({ children, scroll = false, style, background = "plain", title, subtitle, onBack }) {
     const t = (0, theme_1.useTheme)();
+    const { width } = (0, react_native_1.useWindowDimensions)();
+    const layout = (0, react_1.useMemo)(() => {
+        if (width >= t.breakpoints.tabletLg)
+            return { paddingHorizontal: 34, paddingVertical: 22, gap: 18 };
+        if (width >= t.breakpoints.tablet)
+            return { paddingHorizontal: 26, paddingVertical: 20, gap: 16 };
+        return { paddingHorizontal: 16, paddingVertical: 16, gap: 14 };
+    }, [width, t.breakpoints.tablet, t.breakpoints.tabletLg]);
     const Shell = ({ children: inner }) => {
         if (background === "plain") {
             return (0, jsx_runtime_1.jsx)(react_native_safe_area_context_1.SafeAreaView, { style: [styles.safe, { backgroundColor: t.colors.bg }], children: inner });
         }
         const colors = background === "hero"
-            ? [t.colors.bg, "#2A1255", t.colors.bg]
-            : [t.colors.bg, "#10162D", t.colors.bg];
+            ? [t.colors.bg, '#13112A', '#201A41', '#131125', t.colors.bg]
+            : [t.colors.bg, '#10182F', '#121A32', t.colors.bg];
         return ((0, jsx_runtime_1.jsxs)(react_native_safe_area_context_1.SafeAreaView, { style: [styles.safe, { backgroundColor: t.colors.bg }], children: [(0, jsx_runtime_1.jsx)(expo_linear_gradient_1.LinearGradient, { colors: colors, style: react_native_1.StyleSheet.absoluteFill, start: { x: 0, y: 0 }, end: { x: 1, y: 1 } }), (0, jsx_runtime_1.jsx)(Backdrop, { variant: background }), inner] }));
     };
     const header = title ? ((0, jsx_runtime_1.jsxs)(primitives_1.Box, { style: { gap: 6 }, children: [(0, jsx_runtime_1.jsxs)(primitives_1.Box, { style: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)(primitives_1.Text, { size: "xl", weight: "bold", children: title }), onBack ? ((0, jsx_runtime_1.jsx)(primitives_1.Pressable, { onPress: onBack, accessibilityRole: "button", style: { paddingVertical: 4, paddingHorizontal: 8 }, children: (0, jsx_runtime_1.jsx)(primitives_1.Text, { size: "sm", tone: "muted", children: (0, i18n_1.t)('common.back', 'Back') }) })) : null] }), subtitle ? (0, jsx_runtime_1.jsx)(primitives_1.Text, { size: "sm", tone: "muted", children: subtitle }) : null] })) : null;
     if (scroll) {
-        return ((0, jsx_runtime_1.jsx)(Shell, { children: (0, jsx_runtime_1.jsxs)(react_native_1.ScrollView, { contentContainerStyle: [styles.container, style], showsVerticalScrollIndicator: false, children: [header, children] }) }));
+        return ((0, jsx_runtime_1.jsx)(Shell, { children: (0, jsx_runtime_1.jsxs)(react_native_1.ScrollView, { contentContainerStyle: [styles.container, layout, style], showsVerticalScrollIndicator: false, children: [header, children] }) }));
     }
-    return ((0, jsx_runtime_1.jsx)(Shell, { children: (0, jsx_runtime_1.jsxs)(react_native_reanimated_1.default.View, { style: [styles.container, style], children: [header, children] }) }));
+    return ((0, jsx_runtime_1.jsx)(Shell, { children: (0, jsx_runtime_1.jsxs)(react_native_reanimated_1.default.View, { style: [styles.container, layout, style], children: [header, children] }) }));
 }
 function Backdrop({ variant }) {
     const p1 = (0, react_native_reanimated_1.useSharedValue)(0);
@@ -79,9 +87,9 @@ function Backdrop({ variant }) {
     const a3 = (0, react_native_reanimated_1.useAnimatedStyle)(() => ({
         transform: [{ translateX: (p3.value - 0.5) * 16 }, { translateY: (p3.value - 0.5) * -16 }, { rotate: "20deg" }],
     }));
-    const accent = "rgba(124, 92, 255, 0.28)";
-    const pink = "rgba(255, 61, 206, 0.18)";
-    const cyan = "rgba(0, 229, 255, 0.14)";
+    const accent = "rgba(122, 107, 255, 0.30)";
+    const pink = "rgba(236, 166, 255, 0.16)";
+    const cyan = "rgba(137, 233, 255, 0.18)";
     return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(react_native_reanimated_1.default.View, { pointerEvents: "none", style: [
                     styles.blob,
                     {
@@ -90,7 +98,7 @@ function Backdrop({ variant }) {
                         top: -140,
                         left: -120,
                         backgroundColor: accent,
-                        opacity: variant === "hero" ? 0.9 : 0.65,
+                        opacity: variant === "hero" ? 0.92 : 0.7,
                     },
                     a1,
                 ] }), (0, jsx_runtime_1.jsx)(react_native_reanimated_1.default.View, { pointerEvents: "none", style: [
@@ -109,19 +117,23 @@ function Backdrop({ variant }) {
                     {
                         width: 220,
                         height: 220,
-                        top: 140,
-                        right: -90,
+                        top: 124,
+                        right: -84,
                         backgroundColor: cyan,
-                        opacity: 0.55,
+                        opacity: 0.62,
                     },
                     a3,
                 ] })) : null] }));
 }
 const styles = react_native_1.StyleSheet.create({
     safe: { flex: 1 },
-    container: { flexGrow: 1, padding: 16, gap: 14 },
+    container: { flexGrow: 1 },
     blob: {
         position: "absolute",
         borderRadius: 999,
+        shadowColor: '#8E89FF',
+        shadowOpacity: 0.34,
+        shadowRadius: 42,
+        shadowOffset: { width: 0, height: 18 },
     },
 });

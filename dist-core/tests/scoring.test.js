@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const drillScoring_js_1 = require("../scoring/drillScoring.js");
+const drillScoring_1 = require("../scoring/drillScoring");
 (0, node_test_1.default)("scoreAttempt: good attempt scores high", () => {
-    const score = (0, drillScoring_js_1.scoreAttempt)({
+    const score = (0, drillScoring_1.scoreAttempt)({
         drillType: "match_note",
         tuneWindowCents: 25,
         holdMs: 900,
@@ -23,7 +23,7 @@ const drillScoring_js_1 = require("../scoring/drillScoring.js");
     strict_1.default.ok(score >= 80);
 });
 (0, node_test_1.default)("scoreAttempt: poor attempt scores low", () => {
-    const score = (0, drillScoring_js_1.scoreAttempt)({
+    const score = (0, drillScoring_1.scoreAttempt)({
         drillType: "match_note",
         tuneWindowCents: 25,
         holdMs: 900,

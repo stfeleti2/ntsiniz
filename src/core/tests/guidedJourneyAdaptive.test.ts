@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { adaptiveReducer, DEFAULT_ADAPTIVE_STATE } from '../guidedJourney/adaptiveCore.js'
+import { adaptiveReducer, DEFAULT_ADAPTIVE_STATE } from '../guidedJourney/adaptiveCore'
 
 test('adaptive reducer turns on help mode after repeated low scores', () => {
   let state = DEFAULT_ADAPTIVE_STATE
@@ -22,6 +22,7 @@ test('adaptive reducer turns on help mode after repeated low scores', () => {
 
   assert.equal(state.helpMode, true)
   assert.ok(state.voiceProfile.tags.includes('always_flat'))
+  assert.equal(state.lastRecommendedBundleId, 'RB2')
 })
 
 test('adaptive reducer recommends route-biased family when tags are quiet', () => {
@@ -42,4 +43,24 @@ test('adaptive reducer recommends route-biased family when tags are quiet', () =
   )
 
   assert.equal(state.lastRecommendedFamily, 'confidence_rep')
+})
+
+test('adaptive reducer turns on recovery mode after repeated high-load score collapse', () => {
+  let state = DEFAULT_ADAPTIVE_STATE
+  for (let index = 0; index < 3; index += 1) {
+    state = adaptiveReducer(state, {
+      type: 'ATTEMPT_RECORDED',
+      payload: {
+        score: 82 - index * 18,
+        drillId: `LT${index}`,
+        family: 'performance_run',
+        voicedRatio: 0.78,
+        loadTier: 'LT3',
+        timestamp: Date.now() + index,
+      },
+    })
+  }
+
+  assert.equal(state.recoveryMode, true)
+  assert.ok(state.voiceProfile.tags.includes('fatigue_risk'))
 })

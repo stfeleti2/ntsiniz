@@ -11,13 +11,17 @@ const distRoot = node_path_1.default.join(root, 'dist-tests');
 const stubs = {
     'react-native': node_path_1.default.join(distRoot, 'ui/testing/stubs/react-native.js'),
     'react-native-reanimated': node_path_1.default.join(distRoot, 'ui/testing/stubs/react-native-reanimated.js'),
+    'react-native-gesture-handler': node_path_1.default.join(distRoot, 'ui/testing/stubs/react-native-gesture-handler.js'),
+    '@shopify/react-native-skia': node_path_1.default.join(distRoot, 'ui/testing/stubs/react-native-skia.js'),
     'expo-linear-gradient': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-linear-gradient.js'),
+    'expo-blur': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-blur.js'),
     'expo-haptics': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-haptics.js'),
     'expo-constants': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-constants.js'),
     'expo-av': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-av.js'),
     'expo-file-system': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-file-system.js'),
     'expo-file-system/legacy': node_path_1.default.join(distRoot, 'ui/testing/stubs/expo-file-system.js'),
     'ntsiniz-audio-route': node_path_1.default.join(distRoot, 'ui/testing/stubs/ntsiniz-audio-route.js'),
+    '@gorhom/bottom-sheet': node_path_1.default.join(distRoot, 'ui/testing/stubs/gorhom-bottom-sheet.js'),
 };
 function resolveAliasPath(request) {
     const rel = request.slice(2); // strip "@/..."

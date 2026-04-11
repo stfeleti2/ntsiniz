@@ -1,100 +1,200 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Pressable, StyleSheet, View } from 'react-native'
+import { BlurView } from 'expo-blur'
+import { LinearGradient } from 'expo-linear-gradient'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
 import { Box } from '@/ui'
+import { Button } from '@/ui/components/Button'
+import { Card } from '@/ui/components/Card'
+import { BrandWorldBackdrop } from '@/ui/guidedJourney'
+
 import { getSettings, upsertSettings } from '@/core/storage/settingsRepo'
-import { BrandWorldBackdrop, ChoiceCardGroup, HexagonStateRenderer, PrimaryActionBar } from '@/ui/guidedJourney'
-import type { CoachingMode, OnboardingIntent } from '@/core/guidedJourney'
+import { profileForSingingLevel, type SingingLevel } from '@/core/guidedJourney/singingLevel'
+import { getVoiceIdentity, upsertVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
+import { t } from '@/app/i18n'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>
 
+type LevelOption = {
+  id: SingingLevel
+  icon: string
+  title: string
+  description: string
+}
+
+const LEVEL_OPTIONS: LevelOption[] = [
+  {
+    id: 'justStarting',
+    icon: '◌',
+    title: 'Just starting',
+    description: 'My voice and I are still getting to know each other.',
+  },
+  {
+    id: 'casual',
+    icon: '◔',
+    title: 'Casual',
+    description: 'I sing for fun, and sometimes I surprise myself.',
+  },
+  {
+    id: 'serious',
+    icon: '◉',
+    title: 'Serious',
+    description: 'I want real progress, not just vibes.',
+  },
+  {
+    id: 'professionalCoach',
+    icon: '⬢',
+    title: 'Professional / Coach',
+    description: 'I know what I am working on. Let us go.',
+  },
+]
+
 export function OnboardingScreen({ navigation }: Props) {
-  const [intent, setIntent] = useState<OnboardingIntent | null>(null)
-  const [mode, setMode] = useState<CoachingMode | null>(null)
+  const [level, setLevel] = useState<SingingLevel>('justStarting')
+  const [busy, setBusy] = useState(false)
   const copy = {
-    title: 'Shape the guide around you',
-    subtitle: 'Choose why you are here and how much coaching you want in the moment.',
-    heroTitle: 'Goal + guidance',
-    heroBody: 'One clear choice now makes every later hint feel more personal.',
-    intentTitle: 'Why are you singing today?',
-    modeTitle: 'How should the coach feel?',
+    title: 'Select your singing level',
+    subtitle: 'This tunes helper density and explanation depth for your real first drill.',
+    saving: 'Saving…',
+    continue: 'Continue',
   }
 
   useEffect(() => {
-    ;(async () => {
-      const s = await getSettings()
-      setIntent((s.onboardingIntent as OnboardingIntent | undefined) ?? 'justExplore')
-      setMode((s.coachingMode as CoachingMode | undefined) ?? 'starter')
-    })().catch(() => {})
+    getSettings()
+      .then((settings) => {
+        setLevel(settings.singingLevel ?? 'justStarting')
+      })
+      .catch(() => {})
   }, [])
 
-  const next = async () => {
-    if (!intent || !mode) return
-    const s = await getSettings()
-    const routeHint =
-      intent === 'justStarting'
-        ? 'R1'
-        : intent === 'singInTune'
-          ? 'R2'
-          : intent === 'justExplore'
-            ? 'R3'
-            : mode === 'performerCoach'
-              ? 'R5'
-              : 'R4'
-    await upsertSettings({
-      ...s,
-      onboardingIntent: intent,
-      coachingMode: mode,
-      routeHint,
-    })
-    navigation.navigate('PermissionsPrimer', { kind: 'mic', next: { name: 'WakeYourVoice' } })
+  const helperLine = useMemo(() => {
+    const profile = profileForSingingLevel(level)
+    if (profile.helperDensity === 'high') return 'You will get stronger step-by-step guidance.'
+    if (profile.helperDensity === 'light') return 'You will get compact cues and faster flow.'
+    return 'You will get balanced coaching with room to sing.'
+  }, [level])
+
+  const onContinue = async () => {
+    setBusy(true)
+    try {
+      const current = await getSettings()
+      const profile = profileForSingingLevel(level)
+      await upsertSettings({
+        ...current,
+        singingLevel: level,
+        helperDensity: profile.helperDensity,
+        guideTone: profile.guideTone,
+        coachingMode: profile.coachingMode,
+        onboardingIntent: profile.onboardingIntent,
+        routeHint: profile.routeHint,
+      })
+      const voiceIdentity = await getVoiceIdentity().catch(() => null)
+      if (voiceIdentity) {
+        await upsertVoiceIdentity({
+          ...voiceIdentity,
+          updatedAt: Date.now(),
+          coachingMode: profile.coachingMode,
+          onboardingIntent: profile.onboardingIntent,
+        }).catch(() => {})
+      }
+      navigation.replace('PermissionsPrimer', { kind: 'mic', next: { name: 'WakeYourVoice' } })
+    } finally {
+      setBusy(false)
+    }
   }
 
   return (
     <Screen scroll background="hero">
       <BrandWorldBackdrop />
-      <Box style={{ gap: 16 }}>
-        <Text preset="h1">{copy.title}</Text>
-        <Text preset="muted">{copy.subtitle}</Text>
+      <Card tone="glow" style={{ overflow: 'hidden' }}>
+        <LinearGradient colors={['rgba(98,56,227,0.48)', 'rgba(29,16,73,0.84)']} style={StyleSheet.absoluteFill} />
+        <Box style={{ gap: 8 }}>
+          <Text preset="h1">{copy.title}</Text>
+          <Text preset="muted">{copy.subtitle}</Text>
+        </Box>
+      </Card>
 
-        <HexagonStateRenderer state="ready" title={copy.heroTitle} subtitle={copy.heroBody} />
-
-        <ChoiceCardGroup
-          title={copy.intentTitle}
-          value={intent}
-          onChange={setIntent}
-          options={[
-            { id: 'justStarting', title: 'I’m just starting', subtitle: 'Gentle first wins and low-pressure reps.' },
-            { id: 'singInTune', title: 'I want to sing in tune', subtitle: 'More pitch-entry and control cues.' },
-            { id: 'moreControl', title: 'I want more control', subtitle: 'Steadier holds, cleaner slides, better landings.' },
-            { id: 'songsBetter', title: 'I want to sing songs better', subtitle: 'Phrase shape, melody, and musical carry-over.' },
-            { id: 'choirWorship', title: 'Choir / worship', subtitle: 'Blend, reliability, and confident entrances.' },
-            { id: 'justExplore', title: 'Just explore', subtitle: 'A flexible route that stays supportive.' },
-          ]}
-        />
-
-        <ChoiceCardGroup
-          title={copy.modeTitle}
-          value={mode}
-          onChange={setMode}
-          options={[
-            { id: 'starter', title: 'Starter', subtitle: 'Clear, gentle, beginner-friendly coaching.' },
-            { id: 'casual', title: 'Casual', subtitle: 'Light guidance without too much interruption.' },
-            { id: 'practised', title: 'Practised', subtitle: 'Sharper cues and quicker pacing.' },
-            { id: 'performerCoach', title: 'Performer / coach', subtitle: 'Dense feedback and tighter expectations.' },
-          ]}
-        />
-
-        <PrimaryActionBar
-          primaryLabel="Continue to voice check"
-          onPrimary={() => void next()}
-          secondaryLabel="Back"
-          onSecondary={() => navigation.goBack()}
-          helperText="You can change both later. Right now we only need a useful starting direction."
-        />
+      <Box style={{ gap: 10 }}>
+        {LEVEL_OPTIONS.map((option) => {
+          const selected = option.id === level
+          return (
+            <Pressable key={option.id} onPress={() => setLevel(option.id)} accessibilityRole="button">
+              <BlurView intensity={selected ? 44 : 30} tint="dark" style={[styles.optionCard, selected ? styles.optionCardSelected : null]}>
+                <View style={[styles.iconPill, selected ? styles.iconPillSelected : null]}>
+                  <Text preset="body">{option.icon}</Text>
+                </View>
+                <Box style={{ flex: 1, gap: 4 }}>
+                  <Text preset="h3">{option.title}</Text>
+                  <Text preset="muted">{option.description}</Text>
+                </Box>
+                <View style={[styles.selectDot, selected ? styles.selectDotSelected : null]} />
+              </BlurView>
+            </Pressable>
+          )
+        })}
       </Box>
+
+      <Card tone="elevated">
+        <Box style={{ gap: 6 }}>
+          <Text preset="muted">{helperLine}</Text>
+          <Text preset="muted">{t('guidedFlow.onboardingNowWhyNext')}</Text>
+        </Box>
+      </Card>
+
+      <Button text={busy ? copy.saving : copy.continue} onPress={() => void onContinue()} disabled={busy} />
     </Screen>
   )
 }
+
+const styles = StyleSheet.create({
+  optionCard: {
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: 'rgba(194,186,244,0.34)',
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: 'rgba(29,24,54,0.58)',
+    shadowColor: '#060410',
+    shadowOpacity: 0.36,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 4,
+  },
+  optionCardSelected: {
+    borderColor: 'rgba(224,218,255,0.74)',
+    backgroundColor: 'rgba(138,116,238,0.3)',
+  },
+  iconPill: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.24)',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconPillSelected: {
+    borderColor: 'rgba(228,220,255,0.9)',
+    backgroundColor: 'rgba(164,139,255,0.46)',
+  },
+  selectDot: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.46)',
+    backgroundColor: 'transparent',
+  },
+  selectDotSelected: {
+    borderColor: 'rgba(176,255,233,0.9)',
+    backgroundColor: 'rgba(122,248,226,0.78)',
+  },
+})

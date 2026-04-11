@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { resolveFeedbackPlan, applyFeedbackPlanToDrill, isTransferLikeDrillId } from '../coaching/feedbackPolicy.js'
+import { resolveFeedbackPlan, applyFeedbackPlanToDrill, isTransferLikeDrillId } from '../coaching/feedbackPolicy'
 
 test('resolveFeedbackPlan: beginner stays forgiving but tightens over weeks', () => {
   const w1 = resolveFeedbackPlan({ track: 'beginner', week: 1, base: null })

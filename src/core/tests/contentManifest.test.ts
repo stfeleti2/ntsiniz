@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
-import { computeEntryHashFromObject } from '../content/manifest.js'
+import { computeEntryHashFromObject } from '../content/manifest'
 
 type Manifest = { schema: number; generatedAt: string; algo?: string; entries: { file: string; sha256: string }[] }
 

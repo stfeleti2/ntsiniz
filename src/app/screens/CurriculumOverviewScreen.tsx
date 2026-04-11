@@ -9,6 +9,7 @@ import { Box } from '@/ui'
 import { enableGuidedJourneyV3 } from '@/core/config/flags'
 import { ensureJourneyV3Progress, getCurrentJourneyV3, getLessonsForStage, getStageProgress } from '@/core/guidedJourney/progress'
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { getAssessmentForStage, getLessonOutcomes } from '@/core/guidedJourney/v6Selectors'
 import { BrandWorldBackdrop, ChapterHeroCard, MilestoneCard, StatusPill } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CurriculumOverview'>
@@ -18,10 +19,11 @@ type OverviewVm = {
   stageTitle: string
   stageProfile: string
   goals: string[]
+  promotionLine: string
   progressLine: string
   currentLessonId: string
   currentLessonTitle: string
-  lessons: Array<{ id: string; title: string; purpose: string; locked: boolean; current: boolean }>
+  lessons: Array<{ id: string; title: string; purpose: string; outcomes: string[]; locked: boolean; current: boolean }>
 }
 
 const copy = {
@@ -33,6 +35,7 @@ const copy = {
   lessonsTitle: 'Lesson list',
   startCurrent: 'Start current mission',
   openLesson: 'Open lesson',
+  openBenchmark: 'Open stage benchmark',
   loading: 'Loading your chapter…',
   locked: 'Locked',
   current: 'Current',
@@ -54,11 +57,18 @@ export function CurriculumOverviewScreen({ navigation }: Props) {
       const current = getCurrentJourneyV3(program, progress)
       const lessons = getLessonsForStage(program, current.stage.id)
       const stageProgress = getStageProgress(program, progress, current.stage.id)
+      const assessment = getAssessmentForStage(program, current.stage.id)
+      const assessmentRecord = progress.assessmentByStageId?.[current.stage.id]
       setVm({
         stageId: current.stage.id,
         stageTitle: current.stage.title,
         stageProfile: current.stage.learnerProfile,
         goals: current.stage.goals,
+        promotionLine:
+          assessmentRecord?.blockedPromotionReasons?.[0] ??
+          current.stage.promotionGateSummary ??
+          assessment?.title ??
+          'This chapter exits through a real benchmark, not just lesson count.',
         progressLine: `${stageProgress.completed}/${stageProgress.total} lessons complete`,
         currentLessonId: current.lesson.id,
         currentLessonTitle: current.lesson.title,
@@ -66,6 +76,7 @@ export function CurriculumOverviewScreen({ navigation }: Props) {
           id: lesson.id,
           title: lesson.title,
           purpose: lesson.purpose,
+          outcomes: getLessonOutcomes(lesson),
           locked: !(progress.unlockedLessonIds ?? []).includes(lesson.id) && lesson.id !== current.lesson.id && index > stageProgress.completed,
           current: lesson.id === current.lesson.id,
         })),
@@ -110,6 +121,10 @@ export function CurriculumOverviewScreen({ navigation }: Props) {
             <MilestoneCard key={`${goal}-${index}`} title={vm.stageTitle} body={goal} stat={String(index + 1)} />
           ))}
         </Box>
+        <Box style={{ height: 10 }} />
+        <Text preset="muted">{vm.promotionLine}</Text>
+        <Box style={{ height: 10 }} />
+        <Button text={copy.openBenchmark} variant="soft" onPress={() => navigation.navigate('StageAssessment', { stageId: vm.stageId })} />
       </Card>
 
       <Card tone="elevated">
@@ -124,6 +139,7 @@ export function CurriculumOverviewScreen({ navigation }: Props) {
                   <StatusPill state={lesson.locked ? 'blocked' : lesson.current ? 'ready' : 'success'} label={lesson.locked ? copy.locked : lesson.current ? copy.current : copy.open} />
                 </Box>
                 <Text preset="muted">{lesson.purpose}</Text>
+                {lesson.outcomes[0] ? <Text preset="muted">{`Outcome focus: ${lesson.outcomes[0]}`}</Text> : null}
                 <Button text={copy.openLesson} variant={lesson.current ? 'primary' : 'soft'} onPress={() => navigation.navigate('CurriculumDayPreview', { dayId: lesson.id })} />
               </Box>
             </Card>

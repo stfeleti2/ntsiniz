@@ -17,7 +17,12 @@ function Input({ value, onChangeText, placeholder, label, helperText, errorText,
                     borderRadius: radius[3],
                     borderWidth: 1,
                     borderColor: border,
-                    backgroundColor: colors.surface2,
+                    backgroundColor: colors.surfaceInset,
+                    shadowColor: colors.shadowDark,
+                    shadowOpacity: 0.2,
+                    shadowRadius: 8,
+                    shadowOffset: { width: 0, height: 2 },
+                    elevation: 1,
                     opacity: disabled ? 0.55 : 1,
                 }, children: [leftIcon, (0, jsx_runtime_1.jsx)(react_native_1.TextInput, { testID: testID, accessibilityLabel: accessibilityLabel ?? label ?? placeholder, editable: !disabled, value: value, onChangeText: onChangeText, placeholder: placeholder, placeholderTextColor: colors.muted, style: { flex: 1, color: colors.text, fontSize: 16 }, ...inputProps }), rightIcon] }), errorText ? (0, jsx_runtime_1.jsx)(primitives_1.Text, { size: "sm", tone: "danger", children: errorText }) : helperText ? (0, jsx_runtime_1.jsx)(primitives_1.Text, { size: "sm", tone: "muted", children: helperText }) : null] }));
 }

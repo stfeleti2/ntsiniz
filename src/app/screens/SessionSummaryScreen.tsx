@@ -15,17 +15,25 @@ import { getProfile } from '@/core/storage/profileRepo'
 import { RewardedBoostCard } from '@/ui/monetization/RewardedBoostCard'
 import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { getAdaptiveJourneyState } from '@/core/guidedJourney/adaptiveStateRepo'
+import { summarizeGuidedAttemptEvidence } from '@/core/guidedJourney/v6Selectors'
 import { NextStepCard, PlaybackInsightCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SessionSummary'>
 const uiCopy = {
   coachNoteTitle: 'Coach note',
+  continueGuidedTitle: 'Continue guided chapter',
+  continueGuidedBody: 'Return to the current stage mission instead of jumping sideways into a generic drill.',
+  continueGuidedCta: 'Open guided lesson',
   progressCompareTitle: 'Progress compare',
   progressCompareBody: 'Compare your baseline against your latest session when you are ready.',
   progressCompareCta: 'Open compare progress',
   weeklyFlexTitle: 'Weekly flex / share card',
   weeklyFlexBody: 'Use the weekly share card on a safe closure surface after the session ends.',
   weeklyFlexCta: 'Open weekly flex',
+  strongestTitle: 'Strongest evidence',
+  benchmarkTitle: 'Stage benchmark',
+  benchmarkBody: 'Check the current stage gate before the next session so the next rep stays pointed at the real blocker.',
+  benchmarkCta: 'Open benchmark',
 }
 
 export function SessionSummaryScreen({ navigation, route }: Props) {
@@ -46,6 +54,13 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
     const last = attempts[attempts.length - 1]
     return { avg: Math.round(avg), best, count: attempts.length, last }
   }, [attempts])
+  const evidence = useMemo(() => summarizeGuidedAttemptEvidence(attempts), [attempts])
+  const benchmarkStageId = stats.last?.metrics?.guidedJourney?.stageId ?? null
+  const guidedReturn = useMemo(() => {
+    const guided = stats.last?.metrics?.guidedJourney
+    if (!guided?.lessonId || !guided?.stageId) return null
+    return { lessonId: String(guided.lessonId), stageId: String(guided.stageId) }
+  }, [stats.last])
 
   const [nextDrillId, setNextDrillId] = useState<string | null>(null)
   const [voiceTip, setVoiceTip] = useState<string | null>(null)
@@ -88,9 +103,10 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
       </Card>
 
       {voiceTip ? <PlaybackInsightCard title={uiCopy.coachNoteTitle} body={voiceTip} /> : null}
+      {evidence.strongestDimensions[0] ? <PlaybackInsightCard title={uiCopy.strongestTitle} body={`${evidence.strongestDimensions[0].label}: ${evidence.strongestDimensions[0].score}`} /> : null}
 
       <Box h={14} />
-      <RewardedBoostCard />
+      <RewardedBoostCard surface="SessionSummary" />
 
       <Box h={14} />
 
@@ -101,10 +117,15 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
         </Text>
         <Box h={10} />
         <Button
-          text={t('nextAction.tryNext')}
+          text={guidedReturn ? uiCopy.continueGuidedCta : t('nextAction.tryNext')}
           variant="primary"
           onPress={() => {
-            if (nextDrillId) navigation.replace('Drill', { sessionId, drillId: nextDrillId })
+            if (guidedReturn) {
+              navigation.replace('MainTabs' as any, {
+                screen: 'Session',
+                params: { lessonId: guidedReturn.lessonId, stageId: guidedReturn.stageId },
+              } as any)
+            } else if (nextDrillId) navigation.replace('Drill', { sessionId, drillId: nextDrillId })
             else navigation.replace('Results', { sessionId })
           }}
           testID="btn-session-summary-next"
@@ -118,7 +139,9 @@ export function SessionSummaryScreen({ navigation, route }: Props) {
         />
       </Card>
 
+      {guidedReturn ? <NextStepCard title={uiCopy.continueGuidedTitle} body={uiCopy.continueGuidedBody} cta={uiCopy.continueGuidedCta} onPress={() => navigation.navigate('MainTabs' as any, { screen: 'Session', params: guidedReturn } as any)} /> : null}
       <NextStepCard title={uiCopy.progressCompareTitle} body={uiCopy.progressCompareBody} cta={uiCopy.progressCompareCta} onPress={() => navigation.navigate('CompareProgress')} />
+      {benchmarkStageId ? <NextStepCard title={uiCopy.benchmarkTitle} body={uiCopy.benchmarkBody} cta={uiCopy.benchmarkCta} onPress={() => navigation.navigate('StageAssessment', { stageId: benchmarkStageId })} /> : null}
       <NextStepCard title={uiCopy.weeklyFlexTitle} body={uiCopy.weeklyFlexBody} cta={uiCopy.weeklyFlexCta} onPress={() => navigation.navigate('WeeklyReport')} />
     </Screen>
   )

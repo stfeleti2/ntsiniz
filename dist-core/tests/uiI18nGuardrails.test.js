@@ -7,7 +7,7 @@ const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
 const node_fs_1 = __importDefault(require("node:fs"));
 const node_path_1 = __importDefault(require("node:path"));
-const en_js_1 = require("../i18n/en.js");
+const en_1 = require("../i18n/en");
 const ROOT = process.cwd();
 const SOURCE_DIRS = ['src/app', 'src/ui', 'src/core'];
 const IGNORE_DIR_NAMES = new Set(['node_modules', 'dist-core', 'dist-tests', 'android', 'ios', '.git', '.expo']);
@@ -32,7 +32,7 @@ function sourceFiles(ext) {
         .filter((f) => f.endsWith(ext));
 }
 function hasI18nPath(key) {
-    let cur = en_js_1.en;
+    let cur = en_1.en;
     for (const p of key.split('.')) {
         if (!cur || typeof cur !== 'object' || !(p in cur))
             return false;

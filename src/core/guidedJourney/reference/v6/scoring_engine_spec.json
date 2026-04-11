@@ -1,0 +1,98 @@
+{
+  "version": "6.0.0",
+  "goal": "support stricter multi-axis singing evaluation: technique, repeatability, transfer, style/communication, health, and independence",
+  "frame_inputs": [
+    "hz",
+    "midi",
+    "centsFromTarget",
+    "voiced",
+    "rms",
+    "pitchConfidence",
+    "targetHz",
+    "targetMidi",
+    "isReferencePlayback",
+    "isRecoveryState"
+  ],
+  "shared_metrics": [
+    "meanAbsCents",
+    "signedBiasCents",
+    "timeInGoodZoneMs",
+    "heldDurationMs",
+    "stabilityStddevCents",
+    "voicedRatio",
+    "meanConfidence",
+    "entryTimeMs",
+    "overshootEvents",
+    "contourCorrectness"
+  ],
+  "rubric_dimensions": [
+    {
+      "id": "ARD1",
+      "name": "technique_accuracy",
+      "description": "pitch/rhythm/landing/registration execution"
+    },
+    {
+      "id": "ARD2",
+      "name": "efficiency_health",
+      "description": "absence of strain flags, reasonable load tolerance, healthy recovery behavior"
+    },
+    {
+      "id": "ARD3",
+      "name": "stability_repeatability",
+      "description": "can reproduce the target without one-off luck"
+    },
+    {
+      "id": "ARD4",
+      "name": "transfer_application",
+      "description": "can carry the skill into phrase/repertoire/context"
+    },
+    {
+      "id": "ARD5",
+      "name": "stylism_communication",
+      "description": "style-appropriate tone, diction, timing, and emotional intent"
+    },
+    {
+      "id": "ARD6",
+      "name": "independence_self_coaching",
+      "description": "can describe what worked and select a useful next cue"
+    }
+  ],
+  "mastery_gate_dimensions": [
+    "technical_gate",
+    "retention_gate",
+    "transfer_gate",
+    "pressure_gate",
+    "health_gate"
+  ],
+  "periodization_hooks": [
+    "load tier influences expected completion tolerance",
+    "pressure ladders raise required repeatability only when health gate is clear",
+    "transfer drills weigh more heavily from S3 onward"
+  ],
+  "fairness_tuning": [
+    "ignore unvoiced/reference/recovery frames",
+    "use best valid windows for early beginner tasks",
+    "cap low-confidence penalties before chronic diagnosis labels",
+    "separate performance pressure misses from technical inability where evidence supports it"
+  ],
+  "sample_result_object": {
+    "finalScore": 83,
+    "band": "pass_strong",
+    "components": {
+      "accuracy": 82,
+      "control": 84,
+      "completion": 86,
+      "confidence": 80
+    },
+    "gates": {
+      "technical": true,
+      "retention": true,
+      "transfer": true,
+      "style_or_communication": true,
+      "pressure": false,
+      "health": true,
+      "independence": true
+    },
+    "recommendation": "promote with one-step-lower pressure revisit"
+  }
+}

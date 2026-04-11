@@ -1,16 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.colors = void 0;
-exports.colors = {
-    bg: '#0B0B10',
-    surface: '#141421',
-    surface2: '#1B1B2A',
-    text: '#F4F4F7',
-    muted: '#A9A9B8',
-    border: 'rgba(255,255,255,0.10)',
-    primary: '#7C5CFF',
-    success: '#2ECC71',
-    danger: '#FF4D4D',
-    warning: '#FFB020',
-    overlay: 'rgba(0,0,0,0.55)',
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("../../theme/tokens/colors"), exports);

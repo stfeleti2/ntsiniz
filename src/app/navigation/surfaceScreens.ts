@@ -12,6 +12,7 @@ import { ResultsScreen } from '../screens/ResultsScreen'
 import { PlaybackScreen } from '../screens/PlaybackScreen'
 import { RecoveredTakesScreen } from '../screens/RecoveredTakesScreen'
 import { CurriculumOverviewScreen } from '../screens/CurriculumOverviewScreen'
+import { StageAssessmentScreen } from '../screens/StageAssessmentScreen'
 import { CurriculumDayPreviewScreen } from '../screens/CurriculumDayPreviewScreen'
 import { LessonIntroScreen } from '../screens/LessonIntroScreen'
 import { ConceptExplainerScreen } from '../screens/ConceptExplainerScreen'
@@ -44,6 +45,12 @@ import { InsightsScreen } from '../screens/InsightsScreen'
 import { MilestonesScreen } from '../screens/MilestonesScreen'
 import { CompareProgressScreen } from '../screens/CompareProgressScreen'
 import { enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
+import { SandboxHubScreen } from '../screens/SandboxHubScreen'
+import { ComponentPlaygroundScreen } from '../screens/ComponentPlaygroundScreen'
+import { FlowPlaygroundScreen } from '../screens/FlowPlaygroundScreen'
+import { StorybookScreen } from '../screens/StorybookScreen'
+import { ScreenPreviewGalleryScreen } from '../screens/ScreenPreviewGalleryScreen'
+import { ScreenPreviewScenarioScreen } from '../screens/ScreenPreviewScenarioScreen'
 
 import type { RootStackParamList } from './types'
 
@@ -68,13 +75,23 @@ export type SurfaceFlags = {
   dev: boolean
 }
 
-export function buildLinkingConfig(flags: Pick<SurfaceFlags, 'socialOn' | 'invitesOn'>) {
+export function buildLinkingConfig(flags: Pick<SurfaceFlags, 'socialOn' | 'invitesOn' | 'dev'>) {
   return {
     prefixes: ['ntsiniz://'],
     config: {
       screens: {
         ...(flags.socialOn ? { ImportCode: 'import' } : {}),
         ...(flags.invitesOn ? { Invite: 'invite' } : {}),
+        ...(flags.dev
+          ? {
+              SandboxHub: 'dev/sandbox',
+              ComponentPlayground: 'dev/sandbox/components',
+              FlowPlayground: 'dev/sandbox/flow',
+              ScreenPreviewGallery: 'dev/sandbox/screens',
+              ScreenPreviewScenario: 'dev/sandbox/screens/:scenario',
+              StorybookScreen: 'dev/storybook',
+            }
+          : {}),
       },
     },
   } as any
@@ -98,6 +115,7 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     { name: 'Playback', component: PlaybackScreen, options: { animation: 'slide_from_right' } },
     { name: 'RecoveredTakes', component: RecoveredTakesScreen, options: { animation: 'slide_from_right' } },
     { name: 'CurriculumOverview', component: CurriculumOverviewScreen, options: { animation: 'slide_from_right' } },
+    { name: 'StageAssessment', component: StageAssessmentScreen, options: { animation: 'slide_from_right' } },
     { name: 'CurriculumDayPreview', component: CurriculumDayPreviewScreen, options: { animation: 'slide_from_right' } },
     { name: 'LessonIntro', component: LessonIntroScreen, options: { animation: 'slide_from_right' } },
     { name: 'ConceptExplainer', component: ConceptExplainerScreen, options: { animation: 'slide_from_right' } },
@@ -133,6 +151,12 @@ export function getEnabledStackScreens(flags: SurfaceFlags): ScreenDef[] {
     base.push(
       { name: 'Billing', component: BillingScreen, options: { animation: 'slide_from_right' } },
       { name: 'Privacy', component: PrivacyScreen, options: { animation: 'slide_from_right' } },
+      { name: 'SandboxHub', component: SandboxHubScreen, options: { animation: 'slide_from_right' } },
+      { name: 'ComponentPlayground', component: ComponentPlaygroundScreen, options: { animation: 'slide_from_right' } },
+      { name: 'FlowPlayground', component: FlowPlaygroundScreen, options: { animation: 'slide_from_right' } },
+      { name: 'ScreenPreviewGallery', component: ScreenPreviewGalleryScreen, options: { animation: 'slide_from_right' } },
+      { name: 'ScreenPreviewScenario', component: ScreenPreviewScenarioScreen, options: { animation: 'slide_from_right' } },
+      { name: 'StorybookScreen', component: StorybookScreen, options: { animation: 'slide_from_right' } },
     )
   }
 

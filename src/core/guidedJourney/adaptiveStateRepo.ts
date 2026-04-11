@@ -43,7 +43,15 @@ function safeParseMerge<T extends Record<string, any>>(value: unknown, fallback:
   try {
     const parsed = typeof value === 'string' ? JSON.parse(value) : value
     if (!parsed || typeof parsed !== 'object') return fallback
-    return { ...fallback, ...parsed }
+    return {
+      ...fallback,
+      ...parsed,
+      voiceProfile: {
+        ...(fallback as any).voiceProfile,
+        ...((parsed as any).voiceProfile ?? {}),
+      },
+      recentAttempts: Array.isArray((parsed as any).recentAttempts) ? (parsed as any).recentAttempts : fallback.recentAttempts,
+    }
   } catch {
     return fallback
   }

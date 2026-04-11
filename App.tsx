@@ -2,6 +2,7 @@ import 'react-native-url-polyfill/auto'
 import React, { useEffect, useState } from 'react'
 import { Alert, LogBox, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { t } from '@/app/i18n'
 import { AppNavigator } from '@/app/navigation/AppNavigator'
@@ -23,10 +24,15 @@ import { initAudioSupervisor } from '@/core/audio/audioSupervisor'
 import { setCoreLogger } from '@/core/observability/logger'
 
 import { RootErrorBoundary } from '@/app/errors/RootErrorBoundary'
-import { ThemeProvider } from '@/ui/theme'
+import { ThemeProvider } from '@/theme/provider'
 import { DevModulesProvider } from '@/ui/modules'
 import { SnackbarProvider } from '@/ui/components/kit/Snackbar'
 import { DevPerfOverlay } from '@/app/components/DevPerfOverlay'
+
+const storybookEnabled = __DEV__ && process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true'
+const storybookRootEnabled = storybookEnabled && process.env.EXPO_PUBLIC_STORYBOOK_ROOT === 'true'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const StorybookUIRoot = storybookEnabled ? require('./.rnstorybook').default : null
 
 if (__DEV__) {
   // Expo SDK 54 still emits this from expo-av at runtime.
@@ -34,6 +40,10 @@ if (__DEV__) {
 }
 
 export default function App() {
+  if (storybookRootEnabled && StorybookUIRoot) {
+    return <StorybookUIRoot />
+  }
+
   const [booted, setBooted] = useState(false)
   const [showPerf, setShowPerf] = useState(false)
 
@@ -146,16 +156,18 @@ export default function App() {
   }
 
   return (
-    <RootErrorBoundary>
-      <DevModulesProvider>
-        <ThemeProvider>
-          <SnackbarProvider>
-            <StatusBar style="light" />
-            <AppNavigator />
-            {showPerf ? <DevPerfOverlay /> : null}
-          </SnackbarProvider>
-        </ThemeProvider>
-      </DevModulesProvider>
-    </RootErrorBoundary>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootErrorBoundary>
+        <DevModulesProvider>
+          <ThemeProvider>
+            <SnackbarProvider>
+              <StatusBar style="light" />
+              <AppNavigator />
+              {showPerf ? <DevPerfOverlay /> : null}
+            </SnackbarProvider>
+          </ThemeProvider>
+        </DevModulesProvider>
+      </RootErrorBoundary>
+    </GestureHandlerRootView>
   )
 }

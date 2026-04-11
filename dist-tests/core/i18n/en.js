@@ -1124,6 +1124,8 @@ exports.en = {
         unavailable: 'Playback unavailable',
         restart: 'Restart',
         seekHint: 'Tip: tap the waveform to seek.',
+        currentTake: 'Current take',
+        comparisonTake: 'Comparison take',
         routeChanged: {
             title: 'Audio route changed',
             bluetooth: 'Your Bluetooth audio route changed. Playback was paused.',
@@ -1157,6 +1159,13 @@ exports.en = {
             timing: 'Timing',
             confidence: 'Confidence',
         },
+    },
+    lessonIntro: {
+        techniqueCues: 'Technique cues',
+    },
+    compareProgress: {
+        sessionTrend: 'Session trend',
+        notEnough: 'Not enough sessions in this range yet.',
     },
     badges: {
         personalBest: 'New personal best',
@@ -1447,6 +1456,20 @@ exports.en = {
         resultSubtitle: 'Keep the momentum—one more focused rep.',
         tryNext: 'Do next drill',
         playback: 'Playback take',
+    },
+    guidedFlow: {
+        rangePositionTitle: 'Range position',
+        onboardingNowWhyNext: 'Now: choose your level. Why: this keeps guidance fair to your experience. Next: mic trust check.',
+        permissionsNowWhyNext: 'Now: confirm microphone trust. Why: fair pitch scoring needs clean live input. Next: first live drill.',
+        wakeNowWhyNext: 'Now: capture one fair rep. Why: trust starts with clean signal lock. Next: playback and save best.',
+        homeNowWhyNext: 'Now: start today’s session. Why: keeps scoring fair over time. Next: save best and continue.',
+        sessionNowWhyNext: 'Now: follow this stack in order. Why: stable progression improves fairness. Next: continue to the active drill.',
+        lessonIntroNext: 'Next: start live drill and hold one clean phrase.',
+        drillNowWhyNext: 'Now: sing this phrase. Why: this rep trains fair repeatable scoring. Next: playback and save best.',
+        playbackNowWhyNext: 'Now: review this take. Why: fair scoring improves with clear comparisons. Next: save best and continue.',
+        rangeSnapshotNowWhyNext: 'Now: review your likely zone. Why: this keeps starting targets fair. Next: continue with today\'s live drill.',
+        recoveryNowWhyNext: 'Now: recover input quality. Why: this protects fair scoring. Next: retry the same drill flow.',
+        firstWinNowWhyNext: 'Now: start your first chapter. Why: momentum locks fair progress. Next: record, playback, save best.',
     },
     telemetry: {
         prompt: {

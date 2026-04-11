@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const sessionPlan_js_1 = require("../profile/sessionPlan.js");
+const sessionPlan_1 = require("../profile/sessionPlan");
 const pack = {
     packId: "t",
     language: "en",
@@ -18,22 +18,22 @@ const pack = {
     ]
 };
 (0, node_test_1.default)("createSessionPlan makes 3-drill plan", () => {
-    const p = (0, sessionPlan_js_1.createSessionPlan)("sess1", pack, "m1");
+    const p = (0, sessionPlan_1.createSessionPlan)("sess1", pack, "m1");
     strict_1.default.equal(p.drillIds.length, 3);
     strict_1.default.equal(p.drillIds[0], "m1");
-    strict_1.default.equal((0, sessionPlan_js_1.getPlan)("sess1")?.drillIds.length, 3);
+    strict_1.default.equal((0, sessionPlan_1.getPlan)("sess1")?.drillIds.length, 3);
 });
 (0, node_test_1.default)("advancePlan increments index", () => {
-    (0, sessionPlan_js_1.createSessionPlan)("sess2", pack, "m1");
-    const p1 = (0, sessionPlan_js_1.getPlan)("sess2");
+    (0, sessionPlan_1.createSessionPlan)("sess2", pack, "m1");
+    const p1 = (0, sessionPlan_1.getPlan)("sess2");
     strict_1.default.equal(p1.index, 0);
-    (0, sessionPlan_js_1.advancePlan)("sess2");
-    const p2 = (0, sessionPlan_js_1.getPlan)("sess2");
+    (0, sessionPlan_1.advancePlan)("sess2");
+    const p2 = (0, sessionPlan_1.getPlan)("sess2");
     strict_1.default.equal(p2.index, 1);
 });
 (0, node_test_1.default)("markFail increments fail streak", () => {
-    (0, sessionPlan_js_1.createSessionPlan)("sess3", pack, "m1");
-    (0, sessionPlan_js_1.markFail)("sess3", "m1");
-    (0, sessionPlan_js_1.markFail)("sess3", "m1");
-    strict_1.default.equal((0, sessionPlan_js_1.getPlan)("sess3").failStreakByDrill["m1"], 2);
+    (0, sessionPlan_1.createSessionPlan)("sess3", pack, "m1");
+    (0, sessionPlan_1.markFail)("sess3", "m1");
+    (0, sessionPlan_1.markFail)("sess3", "m1");
+    strict_1.default.equal((0, sessionPlan_1.getPlan)("sess3").failStreakByDrill["m1"], 2);
 });

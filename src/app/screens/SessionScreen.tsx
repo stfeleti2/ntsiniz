@@ -2,13 +2,17 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { CompositeScreenProps } from '@react-navigation/native'
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { StyleSheet, useWindowDimensions } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
 import { Card } from '@/ui/components/Card'
 import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
+
 import type { MainTabParamList, RootStackParamList } from '../navigation/types'
-import { enableGuidedJourneyV3, enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
+import { enableGuidedJourneyV3 } from '@/core/config/flags'
 import { createSession } from '@/core/storage/sessionsRepo'
 import { createSessionPlan, createSessionPlanFromIds, getPlan } from '@/core/profile/sessionPlan'
 import { setSessionMeta } from '@/core/profile/sessionMeta'
@@ -18,9 +22,9 @@ import { loadAllBundledPacks } from '@/core/drills/loader'
 import { pickNextDrill } from '@/core/profile/nextDrill'
 import { ensureJourneyV3Progress, getCurrentJourneyV3 } from '@/core/guidedJourney/progress'
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
-import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { mapPackLessonToHostDrills, type HostMappedPackDrill } from '@/core/guidedJourney/hostDrillMapper'
-import { BrandWorldBackdrop, ChapterHeroCard, CoachInset, DemoLoopCard, NextStepCard, PrimaryActionBar, StatusPill, TechniqueVisualCard, VoiceGuideCard } from '@/ui/guidedJourney'
+import { BrandWorldBackdrop, StatusPill } from '@/ui/guidedJourney'
+import { t } from '@/app/i18n'
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Session'>,
@@ -29,52 +33,31 @@ type Props = CompositeScreenProps<
 
 type SessionVm = {
   sessionId: string
-  lessonId: string
   stageId: string
   stageTitle: string
+  lessonId: string
   lessonTitle: string
-  lessonPurpose: string
-  estimatedTime: string
-  coachingLine: string
-  whyItMatters: string
-  successLooksLike: string
-  techniqueCue: string
   plan: HostMappedPackDrill[]
-  recommended: HostMappedPackDrill | null
+  fallbackDrillId: string | null
 }
 
-const copy = {
-  fallbackTitle: 'Training session',
-  fallbackBody: 'The guided lesson launcher is off, so we are starting from the host drill pack.',
-  fallbackStart: 'Start drill',
-  title: 'Start your mission',
-  subtitle: 'One lesson, one clear purpose, and a real drill plan under it.',
-  lessonBlockTitle: 'What this lesson trains',
-  planTitle: 'Mission ladder',
-  quickPick: 'Quick pick',
-  unsupported: 'Pack-backed only',
-  supported: 'Live',
-  loading: 'Building your lesson…',
-  noPlan: 'We could not map this lesson cleanly yet, so we are falling back to the next best live drill.',
-  coachModeTitle: 'Coach mode',
-  whyTitle: 'Why this matters',
-  successTitle: 'What success looks like',
-  techniqueTitle: 'Technique help',
-  startLesson: 'Start lesson',
-  preparingLesson: 'Preparing lesson',
-  reviewLessonFlow: 'Review lesson flow',
-  karaokeTitle: 'Song mode',
-  karaokeBody: 'Launch a melody-first phrase rep when you want a more musical moment.',
-  karaokeCta: 'Open song mode',
-  performanceTitle: 'Performance mode',
-  performanceBody: 'Capture a short performance clip when you want pressure-ready reps.',
-  performanceCta: 'Open performance mode',
-  back: 'Back',
+const COPY = {
+  title: 'Today’s plan',
+  subtitle: 'Record → Playback → Save Best → Next',
+  loading: 'Building your guided plan…',
+  continue: 'Continue',
+  start: 'Start session',
+  review: 'Lesson intro',
+  fallbackTitle: 'Guided plan unavailable',
+  fallbackBody: 'We will start from the best next live drill.',
 }
+
+const STAGE_TABS = ['Foundation', 'Control', 'Tone & Style', 'Musicality']
 
 export function SessionScreen({ navigation, route }: Props) {
   const [vm, setVm] = useState<SessionVm | null>(null)
-  const [fallbackDrillId, setFallbackDrillId] = useState<string | null>(null)
+  const { width } = useWindowDimensions()
+  const isWide = width >= 940
 
   useEffect(() => {
     ;(async () => {
@@ -84,22 +67,15 @@ export function SessionScreen({ navigation, route }: Props) {
       if (!enableGuidedJourneyV3()) {
         const [profile, attempts] = await Promise.all([getProfile(), listRecentAttempts(20)])
         const next = pickNextDrill(hostPack, profile, { lastDrillId: attempts[0]?.drillId, lastScore: attempts[0]?.score })
-        createSessionPlan(hostPack.packId ? session.id : session.id, hostPack, next)
-        setFallbackDrillId(next)
+        createSessionPlan(session.id, hostPack, next)
         setVm({
           sessionId: session.id,
+          stageId: 'S1',
+          stageTitle: COPY.fallbackTitle,
           lessonId: '',
-          stageId: '',
-          stageTitle: copy.fallbackTitle,
-          lessonTitle: hostPack.drills.find((drill) => drill.id === next)?.title ?? next,
-          lessonPurpose: copy.fallbackBody,
-          estimatedTime: '3 drills',
-          coachingLine: 'We are using the host drill picker because the V3 journey flag is disabled.',
-          whyItMatters: 'You still get a valid live practice rep with the existing drill runner.',
-          successLooksLike: 'Start the drill, finish the rep, then use results to choose the next move.',
-          techniqueCue: 'Listen first, sing second, and keep the onset clean.',
+          lessonTitle: next,
           plan: [],
-          recommended: null,
+          fallbackDrillId: next,
         })
         return
       }
@@ -110,8 +86,6 @@ export function SessionScreen({ navigation, route }: Props) {
       const lesson = route.params?.lessonId ? program.lessonsById[route.params.lessonId] ?? current.lesson : current.lesson
       const stage = program.stagesById[route.params?.stageId ?? lesson.stageId] ?? program.stagesById[lesson.stageId] ?? current.stage
       const plan = mapPackLessonToHostDrills(lesson.id, progress.routeId)
-      const voice = await getVoiceIdentity()
-      const recommended = plan[0] ?? null
 
       if (plan.length) {
         createSessionPlanFromIds(session.id, plan.map((item) => item.hostDrillId))
@@ -126,56 +100,72 @@ export function SessionScreen({ navigation, route }: Props) {
       } else {
         const [profile, attempts] = await Promise.all([getProfile(), listRecentAttempts(20)])
         const next = pickNextDrill(hostPack, profile, { lastDrillId: attempts[0]?.drillId, lastScore: attempts[0]?.score })
-        createSessionPlan(hostPack.packId ? session.id : session.id, hostPack, next)
-        setFallbackDrillId(next)
+        createSessionPlan(session.id, hostPack, next)
       }
 
-      const firstPackDrill = recommended ? program.drillsById[recommended.packDrillId] : null
       setVm({
         sessionId: session.id,
-        lessonId: lesson.id,
         stageId: stage.id,
         stageTitle: stage.title,
+        lessonId: lesson.id,
         lessonTitle: lesson.title,
-        lessonPurpose: lesson.purpose,
-        estimatedTime: lesson.estimatedTime,
-        coachingLine: coachingModeLine(voice.coachingMode),
-        whyItMatters: firstPackDrill?.targetSkill ? `This mission leans on ${humanize(firstPackDrill.targetSkill)} so songs feel easier later.` : stage.learnerProfile,
-        successLooksLike: firstPackDrill?.passCriteria || lesson.completionCriteria[0] || 'Finish the short mission and land at least one clear pass.',
-        techniqueCue: firstPackDrill?.correctionCues[0] || firstPackDrill?.coachCues[0] || 'Move calmly toward the center instead of forcing the note.',
         plan,
-        recommended,
+        fallbackDrillId: null,
       })
     })().catch(() => setVm(null))
   }, [route.params?.lessonId, route.params?.stageId])
 
-  const planItems = useMemo<Array<HostMappedPackDrill & { active: boolean }>>(() => {
-    if (!vm?.sessionId) return []
-    const plan = getPlan(vm.sessionId)
-    return (vm.plan ?? []).map((item, index) => ({ ...item, active: index === (plan?.index ?? -1) }))
+  const activeStageTab = useMemo(() => {
+    if (!vm?.stageTitle) return STAGE_TABS[0]
+    const lower = vm.stageTitle.toLowerCase()
+    if (lower.includes('control')) return STAGE_TABS[1]
+    if (lower.includes('tone') || lower.includes('style')) return STAGE_TABS[2]
+    if (lower.includes('music')) return STAGE_TABS[3]
+    return STAGE_TABS[0]
+  }, [vm?.stageTitle])
+
+  const cards = useMemo(() => {
+    if (!vm) return [] as Array<{ icon: string; title: string; status: string; difficulty: string; progress: number; drill?: HostMappedPackDrill }>
+    const planState = getPlan(vm.sessionId)
+    const labels = ['Warmup', 'Match Note', 'Pitch Slides', 'Bonus Drill', 'Upcoming']
+    const populated = vm.plan.slice(0, 5)
+    return labels.map((label, index) => {
+      const drill = populated[index]
+      const status = index < (planState?.index ?? 0) ? 'Completed' : index === (planState?.index ?? 0) ? 'Now' : 'New'
+      return {
+        icon: iconForDrill(drill?.family ?? ''),
+        title: drill?.title ?? label,
+        status,
+        difficulty: drill?.loadTier ?? 'LT1',
+        progress: Math.max(0.08, Math.min(1, (index + 1) / Math.max(1, labels.length))),
+        drill,
+      }
+    })
   }, [vm])
 
-  const startGuided = () => {
-    if (!vm?.sessionId) return
-    if (vm.recommended) {
+  const startNow = () => {
+    if (!vm) return
+    const next = cards.find((card) => card.status === 'Now' && card.drill)?.drill ?? vm.plan[0]
+    if (next) {
       navigation.navigate('Drill', {
         sessionId: vm.sessionId,
-        drillId: vm.recommended.hostDrillId,
-        packDrillId: vm.recommended.packDrillId,
+        drillId: next.hostDrillId,
+        packDrillId: next.packDrillId,
         lessonId: vm.lessonId,
         stageId: vm.stageId,
       })
       return
     }
-    if (fallbackDrillId) navigation.navigate('Drill', { sessionId: vm.sessionId, drillId: fallbackDrillId })
+    if (vm.fallbackDrillId) {
+      navigation.navigate('Drill', { sessionId: vm.sessionId, drillId: vm.fallbackDrillId })
+    }
   }
 
   if (!vm) {
     return (
       <Screen background="hero">
-        <BrandWorldBackdrop />
-        <Text preset="h1">{copy.title}</Text>
-        <Text preset="muted">{copy.loading}</Text>
+        <Text preset="h1">{COPY.title}</Text>
+        <Text preset="muted">{COPY.loading}</Text>
       </Screen>
     )
   }
@@ -183,69 +173,83 @@ export function SessionScreen({ navigation, route }: Props) {
   return (
     <Screen scroll background="hero">
       <BrandWorldBackdrop />
-
       <Box style={{ gap: 6 }}>
-        <Text preset="h1">{copy.title}</Text>
-        <Text preset="muted">{copy.subtitle}</Text>
+        <Text preset="h1">{COPY.title}</Text>
+        <Text preset="muted">{COPY.subtitle}</Text>
       </Box>
 
-      <ChapterHeroCard
-        title={vm.lessonTitle}
-        subtitle={`${vm.stageTitle} · ${vm.estimatedTime}`}
-        stageLabel={vm.stageTitle}
-      />
+      {!vm.plan.length ? (
+        <Card tone="warning">
+          <Text preset="h3">{COPY.fallbackTitle}</Text>
+          <Text preset="muted">{COPY.fallbackBody}</Text>
+        </Card>
+      ) : null}
 
-      <VoiceGuideCard title={copy.lessonBlockTitle} body={vm.lessonPurpose} pill={vm.recommended ? humanize(vm.recommended.family) : copy.quickPick} />
-      <CoachInset title={copy.coachModeTitle} body={vm.coachingLine} />
-      <DemoLoopCard title={copy.whyTitle} body={vm.whyItMatters} />
-      <TechniqueVisualCard title={copy.successTitle} body={vm.successLooksLike} />
-      <TechniqueVisualCard title={copy.techniqueTitle} body={vm.techniqueCue} />
-
-      <Card tone="elevated">
-        <Text preset="h2">{copy.planTitle}</Text>
-        <Box style={{ height: 10 }} />
-        {planItems.length ? (
-          <Box style={{ gap: 10 }}>
-            {planItems.map((item) => (
-              <Card key={item.packDrillId} tone={item.active ? 'glow' : 'default'}>
-                <Box style={{ gap: 8 }}>
-                  <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
-                    <Text preset="body" style={{ fontWeight: '900', flex: 1 }}>{item.title}</Text>
-                    <StatusPill state={item.supported ? 'ready' : 'locked'} label={item.supported ? copy.supported : copy.unsupported} />
-                  </Box>
-                  <Text preset="muted">{item.instructions}</Text>
-                </Box>
-              </Card>
-            ))}
-          </Box>
-        ) : (
-          <Text preset="muted">{copy.noPlan}</Text>
-        )}
+      <Card tone="elevated" style={{ overflow: 'hidden' }}>
+        <LinearGradient colors={['rgba(80,48,186,0.36)', 'rgba(17,11,45,0.42)']} style={StyleSheet.absoluteFill} />
+        <Box style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+          {STAGE_TABS.map((tab, tabIndex) => (
+            <StatusPill key={`tab-${tabIndex}`} state={tab === activeStageTab ? 'ready' : 'paused'} label={tab} />
+          ))}
+        </Box>
       </Card>
 
-      <PrimaryActionBar
-        primaryLabel={vm.recommended || fallbackDrillId ? copy.startLesson : copy.preparingLesson}
-        onPrimary={startGuided}
-        secondaryLabel={copy.reviewLessonFlow}
-        onSecondary={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })}
-        helperText={vm.recommended ? `First live step: ${vm.recommended.title}` : copy.noPlan}
-      />
+      <Card tone="glow">
+        <Box style={{ gap: 8 }}>
+          <Text preset="h3">{vm.lessonTitle}</Text>
+          <Text preset="muted">{vm.stageTitle}</Text>
+          <Text preset="muted">{t('guidedFlow.sessionNowWhyNext')}</Text>
+        </Box>
+      </Card>
 
-      {enableKaraokeV1() ? <NextStepCard title={copy.karaokeTitle} body={copy.karaokeBody} cta={copy.karaokeCta} onPress={() => navigation.navigate('KaraokeMode')} /> : null}
-      {enablePerformanceModeV1() && vm.stageId === 'S5' ? <NextStepCard title={copy.performanceTitle} body={copy.performanceBody} cta={copy.performanceCta} onPress={() => navigation.navigate('PerformanceMode')} /> : null}
+      <Box style={{ flexDirection: isWide ? 'row' : 'column', flexWrap: isWide ? 'wrap' : 'nowrap', gap: 10 }}>
+        {cards.map((card, index) => (
+          <Card key={`${card.title}-${index}`} tone={card.status === 'Now' ? 'glow' : 'default'} style={{ width: isWide ? '48%' : '100%' }}>
+            <Box style={{ gap: 8 }}>
+              <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
+                <Text preset="body">{`${card.icon} ${card.title}`}</Text>
+                <StatusPill state={card.status === 'Completed' ? 'success' : card.status === 'Now' ? 'ready' : 'paused'} label={card.status} />
+              </Box>
+              <Text preset="muted">{`Difficulty: ${card.difficulty}`}</Text>
+              <ViewProgress progress={card.progress} />
+            </Box>
+          </Card>
+        ))}
+      </Box>
 
-      <Button text={copy.back} variant="ghost" onPress={() => navigation.goBack()} />
+      <Button text={COPY.continue} onPress={startNow} testID="btn-session-start" />
+      <Button text={COPY.review} variant="ghost" onPress={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })} />
     </Screen>
   )
 }
 
-function humanize(value: string) {
-  return value.replace(/_/g, ' ')
+function iconForDrill(family: string) {
+  if (family.includes('match')) return '◉'
+  if (family.includes('slide')) return '↗'
+  if (family.includes('sustain')) return '▬'
+  if (family.includes('interval')) return '⇅'
+  if (family.includes('melody')) return '♪'
+  return '●'
 }
 
-function coachingModeLine(mode: string) {
-  if (mode === 'performerCoach') return 'Dense cues, tighter expectations, and less hand-holding.'
-  if (mode === 'practised') return 'Shorter prompts with stronger technical nudges.'
-  if (mode === 'casual') return 'Light guidance that stays out of the way while you sing.'
-  return 'Clear, gentle, beginner-friendly guidance that keeps the moment calm.'
+function ViewProgress({ progress }: { progress: number }) {
+  return (
+    <Box
+      style={{
+        height: 8,
+        borderRadius: 999,
+        backgroundColor: 'rgba(255,255,255,0.13)',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        style={{
+          height: 8,
+          width: `${Math.round(progress * 100)}%`,
+          borderRadius: 999,
+          backgroundColor: 'rgba(170, 150, 255, 0.86)',
+        }}
+      />
+    </Box>
+  )
 }

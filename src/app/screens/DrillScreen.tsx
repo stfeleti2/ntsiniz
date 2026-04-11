@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import type { NativeStackScreenProps } from "@react-navigation/native-stack"
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSpring, withTiming } from "react-native-reanimated"
 import { LinearGradient } from "expo-linear-gradient"
 import { View } from "react-native"
 import { onInterruption } from '@/core/audio/interruptions'
@@ -15,7 +15,9 @@ import { NextActionBar } from '@/ui/components/NextActionBar'
 import { AudioRoutePill } from '@/ui/components/AudioRoutePill'
 import { AudioInputPicker } from '@/ui/components/AudioInputPicker'
 import { useTheme } from "@/theme/useTheme"
-import { AdaptiveInstructionBlock, BrandWorldBackdrop, CurrentZoneChip, HexagonStateRenderer, StatusPill } from '@/ui/guidedJourney'
+import { BrandWorldBackdrop, CurrentZoneChip, StatusPill } from '@/ui/guidedJourney'
+import { PremiumRangePracticePanel } from '@/ui/onboarding/PremiumRangePracticePanel'
+import { likelyZoneFromMidi } from '@/ui/onboarding/rangeLadder'
 
 import type { RootStackParamList } from "../navigation/types"
 import { loadAllBundledPacks } from "@/core/drills/loader"
@@ -79,6 +81,7 @@ export function DrillScreen({ navigation, route }: Props) {
   const [overlayMode, setOverlayMode] = useState<'full' | 'pill'>('full')
   const [elapsedMs, setElapsedMs] = useState(0)
   const [activeFeedbackPlan, setActiveFeedbackPlan] = useState<FeedbackPlan | null>(null)
+  const [liveTrace, setLiveTrace] = useState<number[]>([])
 
 
   // Reliability: if the app is backgrounded during an active drill, abort cleanly.
@@ -164,9 +167,6 @@ export function DrillScreen({ navigation, route }: Props) {
   const guidedMeta = getSessionMeta(sessionId)?.guidedJourney ?? null
   const guidedCopy = useMemo(
     () => ({
-      liveCoachTitle: 'Live coach',
-      readyBody: packDrill?.coachCues[0] || packDrill?.instructions || 'Listen first, sing second, and keep the pitch move calm.',
-      trackingBody: packDrill?.correctionCues[0] || 'Small corrections usually lock faster than big jumps.',
       summaryLabel: packDrill?.drillType ? packDrill.drillType.replace(/_/g, ' ') : 'host drill',
       currentZone: packDrill?.targetSkill ? packDrill.targetSkill.replace(/_/g, ' ') : 'Live pitch',
     }),
@@ -220,6 +220,7 @@ export function DrillScreen({ navigation, route }: Props) {
     await new Promise((r) => setTimeout(r, 1000))
 
     setStatus("running")
+    setLiveTrace([])
     const ctrl = new AbortController()
     abortRef.current = ctrl
     recordingStartMsRef.current = Date.now()
@@ -271,6 +272,15 @@ export function DrillScreen({ navigation, route }: Props) {
           setGhostState(ev?.ghost ?? null)
           setGhostReading(ev?.reading ?? null)
           setGhostDiag(ev?.diag ?? null)
+          const cents = typeof ev?.reading?.cents === 'number' ? ev.reading.cents : null
+          if (cents != null) {
+            setLiveTrace((prev) => {
+              const normalized = clamp01((cents + 75) / 150)
+              const previous = prev.length ? prev[prev.length - 1]! : normalized
+              const smoothed = previous * 0.68 + normalized * 0.32
+              return [...prev.slice(-95), smoothed]
+            })
+          }
         },
       } as any)
 
@@ -314,6 +324,12 @@ export function DrillScreen({ navigation, route }: Props) {
             preferredInputUid: (settings as any)?.preferredInputUid ?? null,
           },
         },
+        routeStabilityScore: routeStabilityScore(recordingRouteStartRef.current, routeBroker.getState().route ?? audioRoute),
+        snrDb: (res.metrics as any)?.snrDb ?? null,
+        noiseFloorDb: (res.metrics as any)?.noiseFloorDb ?? null,
+        vadConfidence: (res.metrics as any)?.vadConfidence ?? null,
+        clippingRate: (res.metrics as any)?.clippingRate ?? null,
+        silenceRate: (res.metrics as any)?.silenceRate ?? null,
       }
 
       const guidedScore = packDrillId
@@ -324,6 +340,11 @@ export function DrillScreen({ navigation, route }: Props) {
             abortFlag: false,
             packFamily: packDrill?.drillType,
             masteryThreshold: packDrill?.masteryThreshold,
+            scoringLogic: packDrill?.scoringLogic,
+            assessmentEvidence: packDrill?.assessmentEvidence,
+            loadTier: packDrill?.loadTier ?? null,
+            pressureLadderStep: packDrill?.pressureLadderStep ?? null,
+            selfRatingPrompt: packDrill?.selfRatingPrompt ?? null,
           })
         : null
       const effectiveScore = guidedScore?.finalScore ?? res.score
@@ -340,6 +361,17 @@ export function DrillScreen({ navigation, route }: Props) {
               completionRatio: (mergedMetrics as any)?.voicedRatio ?? null,
               entryTimeMs: (mergedMetrics as any)?.timeToEnterMs ?? null,
               pitchFamily: packDrill?.drillType ?? null,
+              rubricDimensions: guidedScore.rubricDimensions,
+              gateStatus: guidedScore.gateStatus,
+              blockedBy: guidedScore.blockedBy,
+              healthStatus: guidedScore.healthStatus,
+              healthBlocked: guidedScore.healthBlocked,
+              loadTier: guidedScore.loadTier,
+              pressureLadderStep: guidedScore.pressureLadderStep,
+              assessmentEvidence: guidedScore.assessmentEvidence ?? null,
+              styleEvidence: guidedScore.styleEvidence,
+              pressureEvidence: guidedScore.pressureEvidence,
+              selfCoachingCaptured: guidedScore.selfCoachingCaptured,
             },
           }
         : mergedMetrics
@@ -429,6 +461,10 @@ export function DrillScreen({ navigation, route }: Props) {
           completionRatio: (mergedMetrics as any)?.voicedRatio ?? undefined,
           abortFlag: false,
           timestamp: Date.now(),
+          loadTier: guidedScore.loadTier,
+          blockedBy: guidedScore.blockedBy,
+          rubricDimensions: guidedScore.rubricDimensions,
+          pressureLadderStep: guidedScore.pressureLadderStep,
         },
         (guidedMeta?.routeId as any) ?? undefined,
       ).catch(() => {})
@@ -458,7 +494,11 @@ export function DrillScreen({ navigation, route }: Props) {
         await completeChallengeDay(day, effectiveScore)
       } catch {}
       if (guidedMeta?.lessonId) {
-        await completeJourneyLesson(guidedMeta.lessonId).catch(() => {})
+        await completeJourneyLesson(guidedMeta.lessonId, {
+          sessionId,
+          attemptId: attempt.id,
+          diagnosisTags: guidedScore?.diagnosisTags,
+        }).catch(() => {})
       }
       await finishSession(
         sessionId,
@@ -490,6 +530,10 @@ export function DrillScreen({ navigation, route }: Props) {
         }
         track('drill_cancel', { sessionId, drillId })
       } else {
+        track('recording_pipeline_error', {
+          stage: 'drill_run',
+          reason: String(e?.reason ?? e?.message ?? 'unknown'),
+        } as any)
         captureException(e, { kind: 'drill_run', sessionId, drillId })
         snackbar.show(e?.message ?? t('common.tryAgain'))
       }
@@ -498,6 +542,7 @@ export function DrillScreen({ navigation, route }: Props) {
       abortRef.current = null
       setGhostState(null)
       setGhostReading(null)
+      setLiveTrace([])
     }
   }
 
@@ -517,99 +562,126 @@ export function DrillScreen({ navigation, route }: Props) {
     abortRef.current?.abort()
   }
 
+  const controlLabel =
+    status === 'referencing'
+      ? t('drill.reference.ready') ?? 'Ready…'
+      : status === 'running'
+        ? t('drill.listening')
+        : t('common.start')
+  const phraseLine = packDrill?.microGoal ?? packDrill?.instructions ?? description
+  const phraseChunks = useMemo(() => splitPhraseChunks(phraseLine), [phraseLine])
+  const likelyZone = useMemo(() => inferLikelyZone(ghostReading), [ghostReading])
+  const timelineProgress = useMemo(() => clamp01(progressPct / 100), [progressPct])
+  const totalLabel = useMemo(() => {
+    const rough = Math.max(45, Math.round((drill.countdownMs + drill.holdMs * Math.max(1, (drill as any).reps ?? 3)) / 1000))
+    const mm = String(Math.floor(rough / 60)).padStart(2, '0')
+    const ss = String(rough % 60).padStart(2, '0')
+    return `${mm}:${ss}`
+  }, [drill])
+  const liveHelper = helperLineForDiag(ghostDiag?.reason, packDrill?.correctionCues?.[0])
+  const liveStatus = useMemo(
+    () => deriveLiveStatus(status, ghostDiag?.reason, routeChangedBanner, routeChangedTo?.inputName ?? routeChangedTo?.routeType ?? null),
+    [status, ghostDiag?.reason, routeChangedBanner, routeChangedTo?.inputName, routeChangedTo?.routeType],
+  )
+
   return (
     <Screen scroll background={packDrill ? 'hero' : 'gradient'}>
       {packDrill ? <BrandWorldBackdrop /> : null}
-      <Box style={{ gap: 6 }}>
-        <Text preset="h1">{packDrill?.title ?? drill.title}</Text>
-        <Text preset="muted">{description}</Text>
-
-        {packDrill ? (
-          <>
-            <StatusPill state={status === 'running' ? 'listening' : 'ready'} label={guidedCopy.summaryLabel} />
-            <HexagonStateRenderer
-              state={status === 'running' ? 'tracking' : 'ready'}
-              title={packDrill.title}
-              subtitle={packDrill.targetSkill.replace(/_/g, ' ')}
-              progress={Math.max(0.18, progressPct / 100)}
-            />
-            <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
-              <CurrentZoneChip label={guidedCopy.currentZone} />
-              {packDrill.passCriteria ? <CurrentZoneChip label={packDrill.passCriteria} /> : null}
+      <Card tone={liveStatus.tone}>
+        <Box style={{ gap: 8 }}>
+          <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <LivePulse active={status === 'running'} />
+              <StatusPill state={liveStatus.state} label={liveStatus.pill} />
             </Box>
-            <AdaptiveInstructionBlock
-              title={guidedCopy.liveCoachTitle}
-              body={status === 'running' ? guidedCopy.trackingBody : guidedCopy.readyBody}
-              state={status === 'running' ? 'tracking' : 'ready'}
-            />
-          </>
-        ) : null}
-
-        <AudioRoutePill route={audioRoute} onPress={() => setShowInputPicker(true)} />
-
-        {drill.demoUri ? (
-          <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 6 }}>
-            <Button
-              text={demo.isPlaying ? (t('common.pause') ?? 'Pause demo') : (t('common.play') ?? 'Play demo')}
-              variant="soft"
-              onPress={() => demo.toggle()}
-              disabled={status !== 'idle'}
-            />
-            <Text preset="muted">{demo.progressLabel}</Text>
+            {status === 'running' ? <Text preset="muted">{elapsedLabel}</Text> : null}
           </Box>
-        ) : null}
+          <Text preset="h3">{liveStatus.title}</Text>
+          <Text preset="muted">{liveStatus.body}</Text>
+        </Box>
+      </Card>
 
-        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 6, flexWrap: 'wrap' }}>
+      <Card tone="elevated">
+        <Box style={{ gap: 8 }}>
+          <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <StatusPill state={status === 'running' ? 'listening' : 'ready'} label={packDrill ? guidedCopy.summaryLabel : t('drill.howItWorksTitle')} />
+            <AudioRoutePill route={audioRoute} onPress={() => setShowInputPicker(true)} />
+          </Box>
+          <Text preset="h1">{packDrill?.title ?? drill.title}</Text>
+          <Text preset="muted">{description}</Text>
+          <Box style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+            <CurrentZoneChip label={guidedCopy.currentZone} />
+            {packDrill?.passCriteria ? <CurrentZoneChip label={packDrill.passCriteria} /> : null}
+          </Box>
+        </Box>
+      </Card>
+
+      <Card tone="glow">
+        <Box style={{ gap: 10 }}>
+          <Text preset="muted">{phraseLine}</Text>
+          <Box style={{ height: 10, borderRadius: 999, backgroundColor: "rgba(255,255,255,0.10)", overflow: "hidden" }}>
+            <Animated.View style={[{ height: 10 }, barStyle]}>
+              <LinearGradient colors={theme.gradients.primary as any} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ height: 10 }} />
+            </Animated.View>
+          </Box>
+          <Text preset="muted">{liveHelper}</Text>
+        </Box>
+      </Card>
+
+      <PremiumRangePracticePanel
+        likelyZone={likelyZone}
+        progress={timelineProgress}
+        traceValues={liveTrace}
+        phraseChunks={phraseChunks}
+        elapsedLabel={elapsedLabel}
+        totalLabel={totalLabel}
+      />
+
+      {routeChangedBanner ? (
+        <Card tone="warning">
+          <Text preset="h2">{t('drill.routeChangedTitle')}</Text>
+          <Text preset="muted">
+            {t('drill.routeChangedBody', {
+              to: routeChangedTo?.inputName ?? routeChangedTo?.routeType ?? 'unknown',
+            })}
+          </Text>
+          <Box style={{ flexDirection: 'row', gap: 10, marginTop: 12 }}>
+            <Button text={t('drill.resume')} onPress={run} />
+            <Button text={t('drill.chooseMic')} variant="ghost" onPress={() => setShowInputPicker(true)} />
+          </Box>
+        </Card>
+      ) : null}
+
+      <Card tone="glow">
+        <Box style={{ gap: 10 }}>
+          <Text preset="muted">{t('guidedFlow.drillNowWhyNext')}</Text>
+          <Text preset="muted">{listenThenSing ? t('drill.listenThenSingOn') : t('drill.listenThenSingOff')}</Text>
+          <Box style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+            <Button
+              text={demo.isPlaying ? (t('common.pause') ?? 'Pause') : (t('common.play') ?? 'Play')}
+              variant="ghost"
+              onPress={() => demo.toggle()}
+              disabled={status === 'running'}
+            />
+            <Button text={controlLabel} disabled={status === "running" || status === 'referencing'} onPress={run} testID="btn-drill-start" />
+            <Button text={t('drill.chooseMic')} variant="ghost" onPress={() => setShowInputPicker(true)} />
+          </Box>
           <Button
             text={customRefUri ? (t('drill.reference.customSelected') ?? 'Custom reference selected') : (t('drill.reference.useMyAudio') ?? 'Use my audio as reference')}
             variant="ghost"
             onPress={pickCustomReference}
             disabled={status !== 'idle'}
           />
-          {customRefUri ? <Text preset="muted">{t('drill.reference.customHint') ?? 'We will play it first, then start recording.'}</Text> : null}
         </Box>
-
-        {status === 'referencing' ? (
-          <Card tone="elevated" style={{ marginTop: 10 }}>
-            <Text preset="h2">{t('drill.reference.title') ?? 'Listen & match'}</Text>
-            <Text preset="muted">{t('drill.reference.body') ?? 'We’ll play a reference, then you sing it back.'}</Text>
-            <Box style={{ height: 8 }} />
-            <Text preset="muted">{t('drill.reference.ready') ?? 'Ready…'}</Text>
-          </Card>
-        ) : null}
-
-        {routeChangedBanner ? (
-          <Card tone="glow" style={{ marginTop: 6 }}>
-            <Text preset="h2">{t('drill.routeChangedTitle')}</Text>
-            <Text preset="muted">
-              {t('drill.routeChangedBody', {
-                to: routeChangedTo?.inputName ?? routeChangedTo?.routeType ?? 'unknown',
-              })}
-            </Text>
-            <Box style={{ flexDirection: 'row', gap: 10, marginTop: 12 }}>
-              <Button text={t('drill.resume')} onPress={run} />
-              <Button text={t('drill.chooseMic')} variant="ghost" onPress={() => setShowInputPicker(true)} />
-            </Box>
-          </Card>
-        ) : null}
-
-        {plan ? (
-          <Box style={{ gap: 6, marginTop: 4 }}>
-            <Text preset="muted">{t('drill.step', { step: plan.index + 1, total: plan.drillIds.length, pct: progressPct })}</Text>
-            <Box style={{ height: 10, borderRadius: 999, backgroundColor: "rgba(255,255,255,0.10)", overflow: "hidden" }}>
-              <Animated.View style={[{ height: 10 }, barStyle]}>
-                <LinearGradient colors={theme.gradients.primary as any} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ height: 10 }} />
-              </Animated.View>
-            </Box>
-          </Box>
-        ) : null}
-      </Box>
-
-      <Card tone="glow">
-        <Text preset="h2">{t('drill.howItWorksTitle')}</Text>
-        <Text preset="muted">{listenThenSing ? t('drill.listenThenSingOn') : t('drill.listenThenSingOff')}</Text>
-        <Button text={status === 'running' ? t('drill.listening') : t('common.start')} disabled={status === "running"} onPress={run} testID="btn-drill-start" />
       </Card>
+
+      {status === 'referencing' ? (
+        <Card tone="elevated">
+          <Text preset="h2">{t('drill.reference.title') ?? 'Listen & match'}</Text>
+          <Text preset="muted">{t('drill.reference.body') ?? 'We’ll play a reference, then you sing it back.'}</Text>
+          <Text preset="muted">{t('drill.reference.ready') ?? 'Ready…'}</Text>
+        </Card>
+      ) : null}
 
       <AudioInputPicker
         visible={showInputPicker}
@@ -689,4 +761,136 @@ export function DrillScreen({ navigation, route }: Props) {
 
 function buildGuidedSummary(title: string, band: string, score: number) {
   return `${title} finished at ${score}. Band: ${band.replace(/_/g, ' ')}.`
+}
+
+function helperLineForDiag(reason?: string | null, fallback?: string) {
+  if (reason === 'too_quiet') return 'Move a little closer and keep a speaking-level tone.'
+  if (reason === 'low_confidence') return 'Hold the note a bit longer so we can score it fairly.'
+  if (reason === 'silence' || reason === 'silence_detected') return 'Start with a short clear vowel so the engine can lock in.'
+  if (reason === 'clipping') return 'Back off the volume slightly to avoid clipping.'
+  return fallback ?? 'Listen once, then sing with calm steady airflow.'
+}
+
+function deriveLiveStatus(
+  status: 'idle' | 'referencing' | 'running',
+  diagReason?: string | null,
+  routeChanged?: boolean,
+  routeName?: string | null,
+): {
+  tone: 'default' | 'elevated' | 'glow' | 'warning'
+  state: 'ready' | 'listening' | 'noisy' | 'blocked' | 'retry'
+  pill: string
+  title: string
+  body: string
+} {
+  if (routeChanged) {
+    return {
+      tone: 'warning',
+      state: 'blocked',
+      pill: 'Route changed',
+      title: 'Input route changed',
+      body: `We paused to keep scoring fair. ${routeName ? `Now using ${routeName}.` : ''}`.trim(),
+    }
+  }
+  if (status === 'referencing') {
+    return {
+      tone: 'elevated',
+      state: 'ready',
+      pill: 'Listen first',
+      title: 'Match the reference first',
+      body: 'This keeps the next score fair and repeatable.',
+    }
+  }
+  if (status === 'running' && diagReason === 'too_quiet') {
+    return {
+      tone: 'warning',
+      state: 'noisy',
+      pill: 'Input too quiet',
+      title: 'Move a little closer',
+      body: 'We need a clearer signal before we grade this rep.',
+    }
+  }
+  if (status === 'running' && (diagReason === 'silence' || diagReason === 'silence_detected')) {
+    return {
+      tone: 'warning',
+      state: 'retry',
+      pill: 'No voice detected',
+      title: 'Start with a clear vowel',
+      body: 'We are listening, but we need a sustained tone to score.',
+    }
+  }
+  if (status === 'running') {
+    return {
+      tone: 'glow',
+      state: 'listening',
+      pill: 'Live listening',
+      title: 'Nice, we can hear you clearly',
+      body: 'Keep the note steady and let the timing line pass through.',
+    }
+  }
+  return {
+    tone: 'elevated',
+    state: 'ready',
+    pill: 'Ready',
+    title: 'Ready for the next fair rep',
+    body: 'Record, review, save your best, then move on.',
+  }
+}
+
+function LivePulse({ active }: { active: boolean }) {
+  const glow = useSharedValue(active ? 1 : 0.5)
+
+  useEffect(() => {
+    if (active) {
+      glow.value = withRepeat(withTiming(1, { duration: 640, easing: Easing.inOut(Easing.quad) }), -1, true)
+      return
+    }
+    glow.value = withTiming(0.5, { duration: 220, easing: Easing.out(Easing.quad) })
+  }, [active, glow])
+
+  const style = useAnimatedStyle(() => ({
+    opacity: 0.5 + glow.value * 0.5,
+    transform: [{ scale: 0.85 + glow.value * 0.2 }],
+  }))
+
+  return (
+    <Animated.View
+      style={[
+        {
+          width: 10,
+          height: 10,
+          borderRadius: 999,
+          backgroundColor: '#8F88FF',
+        },
+        style,
+      ]}
+    />
+  )
+}
+
+function splitPhraseChunks(phraseLine: string) {
+  const parts = phraseLine
+    .replace(/[“”"']/g, '')
+    .split(/[ -]+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+  return parts.length ? parts.slice(0, 7) : ['ah', 'ah', 'aa']
+}
+
+function inferLikelyZone(reading: PitchReading | null) {
+  if (!reading) return 'Alto'
+  const midi = Math.round(12 * Math.log2(reading.freqHz / 440) + 69)
+  return likelyZoneFromMidi(midi)
+}
+
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value))
+}
+
+function routeStabilityScore(start: RouteInfo | null, end: RouteInfo | null) {
+  if (!start || !end) return 0.72
+  const changed = start.routeType !== end.routeType || start.inputUid !== end.inputUid
+  if (!changed) return 1
+  if (start.routeType === end.routeType) return 0.62
+  return 0.44
 }

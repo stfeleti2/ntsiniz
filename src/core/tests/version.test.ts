@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { compareVersions, isVersionInRange } from '../util/version.js'
+import { compareVersions, isVersionInRange } from '../util/version'
 
 test('compareVersions orders semver-ish versions', () => {
   assert.equal(compareVersions('1.2.3', '1.2.3'), 0)

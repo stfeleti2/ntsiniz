@@ -25,6 +25,9 @@ exports.DEFAULT_SETTINGS = {
     ghostAdvanced: false,
     onboardingIntent: 'justExplore',
     coachingMode: 'starter',
+    singingLevel: 'justStarting',
+    helperDensity: 'high',
+    guideTone: 'gentle',
     routeHint: null,
     firstWinComplete: false,
     firstWinVersion: 0,
@@ -42,6 +45,9 @@ exports.DEFAULT_SETTINGS = {
     micCalibratedPeak: 0,
     micCalibratedClipped: false,
     preferredSampleRate: 0,
+    dspEnabled: true,
+    dspSuppressionMode: 'conservativeAdaptive',
+    roomReadCalibration: null,
 };
 async function getSettings() {
     const d = await (0, db_1.getDb)();

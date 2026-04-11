@@ -35,7 +35,15 @@ function safeParseMerge(value, fallback) {
         const parsed = typeof value === 'string' ? JSON.parse(value) : value;
         if (!parsed || typeof parsed !== 'object')
             return fallback;
-        return { ...fallback, ...parsed };
+        return {
+            ...fallback,
+            ...parsed,
+            voiceProfile: {
+                ...fallback.voiceProfile,
+                ...(parsed.voiceProfile ?? {}),
+            },
+            recentAttempts: Array.isArray(parsed.recentAttempts) ? parsed.recentAttempts : fallback.recentAttempts,
+        };
     }
     catch {
         return fallback;

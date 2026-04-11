@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { hzToNote, hzToMidi, midiToHz } from "../pitch/hzToNote.js"
+import { hzToNote, hzToMidi, midiToHz } from "../pitch/hzToNote"
 
 test("hzToNote 440Hz -> A4", () => {
   const n = hzToNote(440)

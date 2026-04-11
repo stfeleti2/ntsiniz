@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const permissionGate_js_1 = require("../audio/permissionGate.js");
-const drillExecutor_js_1 = require("../drills/drillExecutor.js");
+const permissionGate_1 = require("../audio/permissionGate");
+const drillExecutor_1 = require("../drills/drillExecutor");
 function makeSineFrame(freqHz, sampleRate, durationMs, phase, amp = 0.65) {
     const n = Math.round((sampleRate * durationMs) / 1000);
     const out = new Float32Array(n);
@@ -36,7 +36,7 @@ const baseProfile = {
     confidence: 0.8,
 };
 (0, node_test_1.default)("runDrillWithDrivers: respects Listen-Then-Sing ordering (reference playback before mic capture)", async () => {
-    (0, permissionGate_js_1.resetPermissionGate)();
+    (0, permissionGate_1.resetPermissionGate)();
     let now = 0;
     const realNow = Date.now;
     Date.now = () => now;
@@ -53,7 +53,7 @@ const baseProfile = {
         target: { note: "A4" },
     };
     try {
-        const res = await (0, drillExecutor_js_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, {
+        const res = await (0, drillExecutor_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, {
             ensureMicPermission: async () => {
                 calls.push("perm");
                 return true;
@@ -100,7 +100,7 @@ const baseProfile = {
     }
 });
 (0, node_test_1.default)("runDrillWithDrivers: mic permission check is gated (prompt once across runs)", async () => {
-    (0, permissionGate_js_1.resetPermissionGate)();
+    (0, permissionGate_1.resetPermissionGate)();
     let now = 0;
     const realNow = Date.now;
     Date.now = () => now;
@@ -138,8 +138,8 @@ const baseProfile = {
         },
     };
     try {
-        await (0, drillExecutor_js_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, drivers);
-        await (0, drillExecutor_js_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, drivers);
+        await (0, drillExecutor_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, drivers);
+        await (0, drillExecutor_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, drivers);
         strict_1.default.equal(permCalls, 1);
     }
     finally {
@@ -148,7 +148,7 @@ const baseProfile = {
     }
 });
 (0, node_test_1.default)("runDrillWithDrivers: repeatability (same audio frames -> stable score)", async () => {
-    (0, permissionGate_js_1.resetPermissionGate)();
+    (0, permissionGate_1.resetPermissionGate)();
     let now = 0;
     const realNow = Date.now;
     Date.now = () => now;
@@ -173,7 +173,7 @@ const baseProfile = {
     }
     const runOnce = async () => {
         now = 0;
-        return (0, drillExecutor_js_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, {
+        return (0, drillExecutor_1.runDrillWithDrivers)({ drill, settings: baseSettings, profile: baseProfile }, {
             ensureMicPermission: async () => true,
             startMic: async (_cfg, onFrame) => {
                 for (const s of frames) {

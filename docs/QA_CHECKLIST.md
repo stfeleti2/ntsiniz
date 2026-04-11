@@ -59,7 +59,7 @@ Minimum smoke matrix (per release candidate):
 
 ## UI Library sanity
 
-- Component Lab opens in **dev only**
+- UI Sandbox / Component Playground opens in **dev only**
 - Buttons/Inputs have `testID` where relevant
 - Basic accessibility labels present on pressables
 

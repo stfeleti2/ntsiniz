@@ -22,6 +22,9 @@ export type Settings = {
     | 'choirWorship'
     | 'justExplore'
   coachingMode?: 'starter' | 'casual' | 'practised' | 'performerCoach'
+  singingLevel?: 'justStarting' | 'casual' | 'serious' | 'professionalCoach'
+  helperDensity?: 'light' | 'balanced' | 'high'
+  guideTone?: 'gentle' | 'balanced' | 'direct'
   routeHint?: 'R1' | 'R2' | 'R3' | 'R4' | 'R5' | null
   firstWinComplete?: boolean
   firstWinVersion?: number
@@ -78,6 +81,16 @@ export type Settings = {
   /** Preferred audio input format (best-effort). */
   preferredSampleRate?: number
 
+  /** DSP quality path (native/JIT). */
+  dspEnabled?: boolean
+  dspSuppressionMode?: 'off' | 'conservativeAdaptive'
+  roomReadCalibration?: {
+    completedAt?: number
+    noiseFloorDb?: number
+    snrDb?: number
+    routeStabilityScore?: number
+  } | null
+
   /** 7-day Pitch Lock Challenge state (optional, stored locally). */
   pitchLockChallenge?: any
 }
@@ -105,6 +118,9 @@ export const DEFAULT_SETTINGS: Settings = {
   ghostAdvanced: false,
   onboardingIntent: 'justExplore',
   coachingMode: 'starter',
+  singingLevel: 'justStarting',
+  helperDensity: 'high',
+  guideTone: 'gentle',
   routeHint: null,
   firstWinComplete: false,
   firstWinVersion: 0,
@@ -125,6 +141,9 @@ export const DEFAULT_SETTINGS: Settings = {
   micCalibratedPeak: 0,
   micCalibratedClipped: false,
   preferredSampleRate: 0,
+  dspEnabled: true,
+  dspSuppressionMode: 'conservativeAdaptive',
+  roomReadCalibration: null,
 }
 
 export async function getSettings(): Promise<Settings> {

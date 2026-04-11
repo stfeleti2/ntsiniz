@@ -1,5 +1,7 @@
+const path = require('node:path')
+
 module.exports = {
-  testTimeout: 180000,
-  setupFilesAfterEnv: ["<rootDir>/e2e/setup.js"],
-  testMatch: ["**/*.e2e.js"],
+  rootDir: path.resolve(__dirname),
+  setupFilesAfterEnv: ['<rootDir>/setup.js'],
+  testMatch: ['<rootDir>/**/*.e2e.js'],
 }

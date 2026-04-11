@@ -46,13 +46,53 @@ function names(flags) {
         'Marketplace',
         'CoachTools',
         'ModTools',
+        'SandboxHub',
+        'ComponentPlayground',
+        'FlowPlayground',
+        'ScreenPreviewGallery',
+        'ScreenPreviewScenario',
+        'StorybookScreen',
     ];
     for (const f of forbidden) {
         strict_1.default.equal(set.has(f), false, `forbidden screen leaked into store build: ${f}`);
     }
     // Core surfaces must remain.
-    for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult', 'LessonIntro', 'ConceptExplainer', 'TechniqueHelp', 'WhyThisMatters', 'DrillPrep', 'PerformanceMode', 'PerformancePreview']) {
+    for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult', 'StageAssessment', 'LessonIntro', 'ConceptExplainer', 'TechniqueHelp', 'WhyThisMatters', 'DrillPrep', 'PerformanceMode', 'PerformancePreview']) {
         strict_1.default.equal(set.has(required), true, `required screen missing: ${required}`);
+    }
+});
+(0, node_test_1.default)('dev surfaces stay gated behind dev flag', () => {
+    const prodLike = names({
+        storeBuild: false,
+        cloudOn: true,
+        socialOn: true,
+        invitesOn: true,
+        duetsOn: true,
+        competitionsOn: true,
+        marketplaceOn: true,
+        diagnosticsOn: false,
+        karaokeOn: true,
+        performanceOn: true,
+        dev: false,
+    });
+    for (const hidden of ['SandboxHub', 'ComponentPlayground', 'FlowPlayground', 'ScreenPreviewGallery', 'ScreenPreviewScenario', 'StorybookScreen']) {
+        strict_1.default.equal(prodLike.has(hidden), false, `dev-only surface should not appear without dev flag: ${hidden}`);
+    }
+    const devSet = names({
+        storeBuild: false,
+        cloudOn: true,
+        socialOn: true,
+        invitesOn: true,
+        duetsOn: true,
+        competitionsOn: true,
+        marketplaceOn: true,
+        diagnosticsOn: true,
+        karaokeOn: true,
+        performanceOn: true,
+        dev: true,
+    });
+    for (const required of ['SandboxHub', 'ComponentPlayground', 'FlowPlayground', 'ScreenPreviewGallery', 'ScreenPreviewScenario', 'StorybookScreen']) {
+        strict_1.default.equal(devSet.has(required), true, `dev-only surface missing when dev flag on: ${required}`);
     }
 });
 (0, node_test_1.default)('non-store build with social+cloud+invites enables expected surfaces', () => {

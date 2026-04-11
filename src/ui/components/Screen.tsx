@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { ScrollView, StyleSheet, ViewStyle, type StyleProp } from 'react-native'
+import React, { useEffect, useMemo } from "react"
+import { ScrollView, StyleSheet, ViewStyle, type StyleProp, useWindowDimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { LinearGradient } from "expo-linear-gradient"
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated"
@@ -21,6 +21,12 @@ type Props = {
 
 export function Screen({ children, scroll = false, style, background = "plain", title, subtitle, onBack }: Props) {
   const t = useTheme()
+  const { width } = useWindowDimensions()
+  const layout = useMemo(() => {
+    if (width >= t.breakpoints.tabletLg) return { paddingHorizontal: 34, paddingVertical: 22, gap: 18 }
+    if (width >= t.breakpoints.tablet) return { paddingHorizontal: 26, paddingVertical: 20, gap: 16 }
+    return { paddingHorizontal: 16, paddingVertical: 16, gap: 14 }
+  }, [width, t.breakpoints.tablet, t.breakpoints.tabletLg])
 
   const Shell = ({ children: inner }: { children: React.ReactNode }) => {
     if (background === "plain") {
@@ -29,8 +35,8 @@ export function Screen({ children, scroll = false, style, background = "plain", 
 
     const colors =
       background === "hero"
-        ? [t.colors.bg, "#2A1255", t.colors.bg]
-        : [t.colors.bg, "#10162D", t.colors.bg]
+        ? [t.colors.bg, '#13112A', '#201A41', '#131125', t.colors.bg]
+        : [t.colors.bg, '#10182F', '#121A32', t.colors.bg]
 
     return (
       <SafeAreaView style={[styles.safe, { backgroundColor: t.colors.bg }]}>
@@ -58,7 +64,7 @@ export function Screen({ children, scroll = false, style, background = "plain", 
   if (scroll) {
     return (
       <Shell>
-        <ScrollView contentContainerStyle={[styles.container, style]} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={[styles.container, layout, style]} showsVerticalScrollIndicator={false}>
           {header}
           {children}
         </ScrollView>
@@ -68,7 +74,7 @@ export function Screen({ children, scroll = false, style, background = "plain", 
 
   return (
     <Shell>
-      <Animated.View style={[styles.container, style]}>
+      <Animated.View style={[styles.container, layout, style]}>
         {header}
         {children}
       </Animated.View>
@@ -98,9 +104,9 @@ function Backdrop({ variant }: { variant: Background }) {
     transform: [{ translateX: (p3.value - 0.5) * 16 }, { translateY: (p3.value - 0.5) * -16 }, { rotate: "20deg" }],
   }))
 
-  const accent = "rgba(124, 92, 255, 0.28)"
-  const pink = "rgba(255, 61, 206, 0.18)"
-  const cyan = "rgba(0, 229, 255, 0.14)"
+  const accent = "rgba(122, 107, 255, 0.30)"
+  const pink = "rgba(236, 166, 255, 0.16)"
+  const cyan = "rgba(137, 233, 255, 0.18)"
 
   return (
     <>
@@ -114,7 +120,7 @@ function Backdrop({ variant }: { variant: Background }) {
             top: -140,
             left: -120,
             backgroundColor: accent,
-            opacity: variant === "hero" ? 0.9 : 0.65,
+            opacity: variant === "hero" ? 0.92 : 0.7,
           },
           a1,
         ]}
@@ -142,10 +148,10 @@ function Backdrop({ variant }: { variant: Background }) {
             {
               width: 220,
               height: 220,
-              top: 140,
-              right: -90,
+              top: 124,
+              right: -84,
               backgroundColor: cyan,
-              opacity: 0.55,
+              opacity: 0.62,
             },
             a3,
           ]}
@@ -157,9 +163,13 @@ function Backdrop({ variant }: { variant: Background }) {
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  container: { flexGrow: 1, padding: 16, gap: 14 },
+  container: { flexGrow: 1 },
   blob: {
     position: "absolute",
     borderRadius: 999,
+    shadowColor: '#8E89FF',
+    shadowOpacity: 0.34,
+    shadowRadius: 42,
+    shadowOffset: { width: 0, height: 18 },
   },
 })

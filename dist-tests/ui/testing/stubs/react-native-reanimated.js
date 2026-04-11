@@ -18,8 +18,13 @@ const Animated = {
 };
 exports.default = Animated;
 exports.Easing = {
+    out: (x) => x,
+    in: (x) => x,
     inOut: (x) => x,
+    linear: {},
     quad: {},
+    cubic: {},
+    bezier: () => ({}),
 };
 function useSharedValue(value) {
     return { value };

@@ -45,6 +45,12 @@ test('store build does not expose Phase 3 / social / cloud surfaces', () => {
     'Marketplace',
     'CoachTools',
     'ModTools',
+    'SandboxHub',
+    'ComponentPlayground',
+    'FlowPlayground',
+    'ScreenPreviewGallery',
+    'ScreenPreviewScenario',
+    'StorybookScreen',
   ]
 
   for (const f of forbidden) {
@@ -52,8 +58,46 @@ test('store build does not expose Phase 3 / social / cloud surfaces', () => {
   }
 
   // Core surfaces must remain.
-  for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult', 'LessonIntro', 'ConceptExplainer', 'TechniqueHelp', 'WhyThisMatters', 'DrillPrep', 'PerformanceMode', 'PerformancePreview']) {
+  for (const required of ['Welcome', 'PermissionsPrimer', 'WakeYourVoice', 'FirstWinResult', 'Recovery', 'MainTabs', 'Drill', 'DrillResult', 'StageAssessment', 'LessonIntro', 'ConceptExplainer', 'TechniqueHelp', 'WhyThisMatters', 'DrillPrep', 'PerformanceMode', 'PerformancePreview']) {
     assert.equal(set.has(required), true, `required screen missing: ${required}`)
+  }
+})
+
+test('dev surfaces stay gated behind dev flag', () => {
+  const prodLike = names({
+    storeBuild: false,
+    cloudOn: true,
+    socialOn: true,
+    invitesOn: true,
+    duetsOn: true,
+    competitionsOn: true,
+    marketplaceOn: true,
+    diagnosticsOn: false,
+    karaokeOn: true,
+    performanceOn: true,
+    dev: false,
+  })
+
+  for (const hidden of ['SandboxHub', 'ComponentPlayground', 'FlowPlayground', 'ScreenPreviewGallery', 'ScreenPreviewScenario', 'StorybookScreen']) {
+    assert.equal(prodLike.has(hidden), false, `dev-only surface should not appear without dev flag: ${hidden}`)
+  }
+
+  const devSet = names({
+    storeBuild: false,
+    cloudOn: true,
+    socialOn: true,
+    invitesOn: true,
+    duetsOn: true,
+    competitionsOn: true,
+    marketplaceOn: true,
+    diagnosticsOn: true,
+    karaokeOn: true,
+    performanceOn: true,
+    dev: true,
+  })
+
+  for (const required of ['SandboxHub', 'ComponentPlayground', 'FlowPlayground', 'ScreenPreviewGallery', 'ScreenPreviewScenario', 'StorybookScreen']) {
+    assert.equal(devSet.has(required), true, `dev-only surface missing when dev flag on: ${required}`)
   }
 })
 

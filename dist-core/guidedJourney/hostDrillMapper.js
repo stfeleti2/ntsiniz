@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mapPackLessonToHostDrills = mapPackLessonToHostDrills;
 const loader_1 = require("@/core/drills/loader");
-const flags_1 = require("@/core/config/flags");
 const loader_2 = require("./loader");
 const familyToHostType = {
     match_note: 'match_note',
@@ -43,14 +42,23 @@ function mapSinglePackDrill(packDrill, hostDrills, used, index) {
     const fallback = pool[index % pool.length];
     const picked = preferred ?? fallback;
     used.add(picked.id);
-    const supported = (0, flags_1.enableExtendedPackFamilies)() ||
-        ['match_note', 'sustain_hold', 'pitch_slide', 'interval_jump', 'melody_echo', 'confidence_rep'].includes(packDrill.drillType);
+    // All guided families are first-class in scoring + adaptive routing.
+    // Host type mapping still picks the closest runner implementation where needed.
+    const supported = true;
     return {
         packDrillId: packDrill.id,
         hostDrillId: picked.id,
+        hostType: picked.type,
         family: packDrill.drillType,
         title: packDrill.title,
         supported,
         instructions: packDrill.instructions,
+        loadTier: packDrill.loadTier,
+        pressureLadderStep: packDrill.pressureLadderStep,
+        transferTaskType: packDrill.transferTaskType,
+        styleBranchHooks: packDrill.styleBranchHooks,
+        repertoireBridge: packDrill.repertoireBridge,
+        microGoal: packDrill.microGoal,
+        assessmentEvidence: packDrill.assessmentEvidence,
     };
 }

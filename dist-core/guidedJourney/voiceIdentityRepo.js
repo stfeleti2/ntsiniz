@@ -15,6 +15,10 @@ exports.DEFAULT_VOICE_IDENTITY = {
     currentFocus: [],
     comfortZone: { lowMidi: null, highMidi: null },
     likelyFamily: { label: null, confidence: 0 },
+    recommendedLoadTier: null,
+    activeRemediationBundleId: null,
+    activeRemediationBundleName: null,
+    currentAssessmentFocus: [],
 };
 async function getVoiceIdentity() {
     const d = await (0, db_1.getDb)();

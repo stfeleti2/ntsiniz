@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.upsertBestTakeForAttempt = upsertBestTakeForAttempt;
 exports.getBestTakeAttemptId = getBestTakeAttemptId;
+exports.setBestTakeForAttempt = setBestTakeForAttempt;
 exports.listBestTakeAttemptIdsForSession = listBestTakeAttemptIdsForSession;
 const db_1 = require("./db");
 /**
@@ -41,6 +42,19 @@ async function getBestTakeAttemptId(sessionId, drillId) {
         drillId,
     ]);
     return rows[0]?.attemptId ? String(rows[0].attemptId) : null;
+}
+/**
+ * Explicitly marks an attempt as best take.
+ * Used by manual "Save Best" controls in playback.
+ */
+async function setBestTakeForAttempt(input) {
+    const d = await (0, db_1.getDb)();
+    await (0, db_1.exec)(d, `INSERT INTO best_takes (sessionId, drillId, attemptId, score, updatedAt)
+     VALUES (?, ?, ?, ?, ?)
+     ON CONFLICT(sessionId, drillId) DO UPDATE SET
+       attemptId = excluded.attemptId,
+       score = excluded.score,
+       updatedAt = excluded.updatedAt;`, [input.sessionId, input.drillId, input.attemptId, input.score, Date.now()]);
 }
 /**
  * Returns mapping of drillId -> attemptId for a session.

@@ -34,9 +34,37 @@ This file is the **canonical list** of telemetry events that can be buffered loc
   - When: the guided first-win flow completes and a soft route is assigned.
   - Payload: `{ routeId }`
 
+- `room_read_started`
+  - When: onboarding room profiling starts for the first live drill.
+  - Payload: `{ source }`
+
+- `room_read_failed`
+  - When: room profiling or signal lock fails before first-win completion.
+  - Payload: `{ reason, attempt }`
+
+- `signal_lock_acquired`
+  - When: live vocal signal lock is acquired during onboarding first drill.
+  - Payload: `{ latencyMs, snrDb }`
+
+- `first_drill_quality_gate`
+  - When: onboarding first-drill quality gate passes or fails.
+  - Payload: `{ status, reason?, snrDb?, vadConfidence? }`
+
+- `recording_pipeline_error`
+  - When: capture/recording pipeline throws in trust-critical paths.
+  - Payload: `{ stage, reason }`
+
+- `first_win_completed_v2`
+  - When: onboarding first win finishes with the upgraded DSP/quality path.
+  - Payload: `{ routeId, snrDb, routeStabilityScore }`
+
 - `guided_lesson_opened`
   - When: a guided lesson teach screen opens.
   - Payload: `{ lessonId, screen }`
+
+- `stage_assessment_opened`
+  - When: the dedicated V6 stage benchmark screen opens.
+  - Payload: `{ stageId, assessmentId }`
 
 - `karaoke_started`
   - When: user starts a song-phrase karaoke mission.

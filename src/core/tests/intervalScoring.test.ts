@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { scoreAttempt } from "../scoring/drillScoring.js"
+import { scoreAttempt } from "../scoring/drillScoring"
 
 test("interval scoring rewards correct interval", () => {
   const base = {

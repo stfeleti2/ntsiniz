@@ -2,6 +2,7 @@ import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
 import { ensureJourneyV3Progress } from '@/core/guidedJourney/progress'
 import { mapPackLessonToHostDrills, type HostMappedPackDrill } from '@/core/guidedJourney/hostDrillMapper'
 import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
+import { getLessonCarryoverCue, getLessonFocusSummary, getLessonOutcomes, getLessonPrimaryDrill, getLessonTransferBridge } from '@/core/guidedJourney/v6Selectors'
 
 export type GuidedLessonVm = {
   lessonId: string
@@ -38,8 +39,11 @@ export async function loadGuidedLessonVm(lessonId?: string): Promise<GuidedLesso
   const stage = program.stagesById[lesson.stageId] ?? program.stages[0]
   const route = program.routesById[progress.routeId ?? 'R4'] ?? program.routes[0]
   const plan = mapPackLessonToHostDrills(lesson.id, progress.routeId)
-  const firstMapped = plan[0] ?? null
-  const firstPackDrill = firstMapped ? program.drillsById[firstMapped.packDrillId] ?? null : null
+  const firstPackDrill = getLessonPrimaryDrill(program, lesson, progress.routeId)
+  const lessonOutcomes = getLessonOutcomes(lesson)
+  const lessonFocusSummary = getLessonFocusSummary(lesson, firstPackDrill)
+  const transferBridge = getLessonTransferBridge(lesson, firstPackDrill)
+  const carryoverCue = getLessonCarryoverCue(lesson, firstPackDrill)
 
   return {
     lessonId: lesson.id,
@@ -52,22 +56,20 @@ export async function loadGuidedLessonVm(lessonId?: string): Promise<GuidedLesso
     purpose: lesson.purpose,
     estimatedTime: lesson.estimatedTime,
     coachingLine: coachingModeLine(voice?.coachingMode ?? 'starter'),
-    conceptBody:
-      firstPackDrill?.coachCues[0] ??
-      `${humanize(firstPackDrill?.targetSkill ?? 'clean_note_matching')} is the main thing this lesson is teaching.`,
+    conceptBody: lessonOutcomes[0] ?? firstPackDrill?.coachCues[0] ?? `${humanize(firstPackDrill?.targetSkill ?? 'clean_note_matching')} is the main thing this lesson is teaching.`,
     whyThisMatters:
-      firstPackDrill?.targetSkill
+      transferBridge ??
+      (firstPackDrill?.targetSkill
         ? `This lesson builds ${humanize(firstPackDrill.targetSkill)} so real songs feel steadier and less tense.`
-        : stage.learnerProfile,
-    musicalPayoff:
-      firstPackDrill?.skillCategory
-        ? payoffFromCategory(firstPackDrill.skillCategory)
-        : 'It helps you carry the same control from drills into actual singing.',
+        : stage.learnerProfile),
+    musicalPayoff: transferBridge ?? (firstPackDrill?.skillCategory ? payoffFromCategory(firstPackDrill.skillCategory) : 'It helps you carry the same control from drills into actual singing.'),
     successLine:
+      lessonOutcomes[1] ??
       firstPackDrill?.passCriteria ??
       lesson.completionCriteria[0] ??
       'Finish the mission with one real pass and one clean correction.',
     techniqueLine:
+      lessonFocusSummary ??
       firstPackDrill?.correctionCues[0] ??
       firstPackDrill?.coachCues[0] ??
       'Keep the breath easy and move toward the pitch instead of grabbing at it.',
@@ -75,6 +77,7 @@ export async function loadGuidedLessonVm(lessonId?: string): Promise<GuidedLesso
       inferBodyCue(firstPackDrill?.skillCategory, firstPackDrill?.drillType) ??
       'Release the jaw, let the neck stay quiet, and aim for a calm onset.',
     referenceCue:
+      carryoverCue ??
       firstPackDrill?.coachCues[1] ??
       firstPackDrill?.instructions ??
       'Listen once, picture the line, then answer with the same shape.',

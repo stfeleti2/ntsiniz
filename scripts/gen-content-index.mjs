@@ -34,7 +34,7 @@ for (const abs of files) {
 }
 lines.push('}')
 lines.push('')
-lines.push('export function getBundledContentJson(filePath) {')
+lines.push('export function getBundledContentJson(filePath: string) {')
 lines.push('  return CONTENT_INDEX[filePath] ?? null')
 lines.push('}')
 lines.push('')

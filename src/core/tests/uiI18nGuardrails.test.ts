@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
-import { en } from '../i18n/en.js'
+import { en } from '../i18n/en'
 
 const ROOT = process.cwd()
 const SOURCE_DIRS = ['src/app', 'src/ui', 'src/core']

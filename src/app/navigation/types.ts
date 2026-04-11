@@ -1,4 +1,6 @@
 import type { Drill } from "@/core/drills/schema"
+import type { FlowScenarioId, SandboxDataSource } from "@/app/dev/sandbox/types"
+import type { ScreenPreviewScenario } from "@/screens/previews"
 
 export type MainTabParamList = {
   Home: undefined
@@ -19,7 +21,12 @@ export type MainTabParamList = {
 }
 
 export type RootStackParamList = {
-  Welcome: undefined
+  Welcome:
+    | {
+        context?: 'firstTime' | 'returning' | 'nextLesson' | 'postSession' | 'milestone' | 'recentProgress'
+        next?: { name: string; params?: any }
+      }
+    | undefined
   Calibration: undefined
   Onboarding: undefined
   WakeYourVoice: undefined
@@ -33,6 +40,9 @@ export type RootStackParamList = {
       | 'tooQuiet'
       | 'tooLoud'
       | 'routeChanged'
+      | 'clipping'
+      | 'silenceDetected'
+      | 'permissionLost'
       | 'audioSetup'
       | 'retune'
     next?: { name: string; params?: any }
@@ -44,6 +54,7 @@ export type RootStackParamList = {
   Results: { sessionId: string }
   Playback: { attemptId: string }
   CurriculumOverview: undefined
+  StageAssessment: { stageId?: string } | undefined
   CurriculumDayPreview: { dayId: string }
   LessonIntro: { lessonId: string }
   ConceptExplainer: { lessonId: string }
@@ -72,6 +83,12 @@ export type RootStackParamList = {
   Account: undefined
   SignIn: undefined
   ComponentLab: undefined
+  SandboxHub: undefined
+  ComponentPlayground: undefined
+  FlowPlayground: { scenario?: FlowScenarioId; source?: SandboxDataSource } | undefined
+  ScreenPreviewGallery: undefined
+  ScreenPreviewScenario: { scenario: ScreenPreviewScenario } | undefined
+  StorybookScreen: undefined
 
   // EPIC 14
   DuetsHub: undefined

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const weekly_js_1 = require("../progress/weekly.js");
+const weekly_1 = require("../progress/weekly");
 (0, node_test_1.default)("computeWeeklyReport calculates deltas and daily averages", () => {
     const day = 24 * 60 * 60 * 1000;
     const weekStart = Date.UTC(2026, 0, 5, 0, 0, 0); // Mon
@@ -22,7 +22,7 @@ const weekly_js_1 = require("../progress/weekly.js");
         { id: "p1", createdAt: weekStart - day + 10_000, sessionId: "p", drillId: "match_note", score: 50, metrics: { drillType: "match_note", avgAbsCents: 28, wobbleCents: 16, voicedRatio: 0.6, confidenceAvg: 0.85, timeToEnterMs: 2100 } },
         { id: "p2", createdAt: weekStart - day + 20_000, sessionId: "p", drillId: "sustain", score: 60, metrics: { drillType: "sustain", avgAbsCents: 18, wobbleCents: 12, voicedRatio: 0.7, confidenceAvg: 0.9, timeToEnterMs: 1800 } },
     ];
-    const wk = (0, weekly_js_1.computeWeeklyReport)({
+    const wk = (0, weekly_1.computeWeeklyReport)({
         weekStartMs: weekStart,
         aggs,
         attempts: attemptsThis,

@@ -1,0 +1,24 @@
+249:      android.permission.RECORD_AUDIO
+253:      com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE: granted=true
+254:      com.google.android.c2dm.permission.RECEIVE: granted=true
+255:      android.permission.MODIFY_AUDIO_SETTINGS: granted=true
+256:      android.permission.FOREGROUND_SERVICE: granted=true
+257:      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+258:      android.permission.INTERNET: granted=true
+259:      com.android.vending.BILLING: granted=true
+260:      android.permission.ACCESS_NETWORK_STATE: granted=true
+261:      android.permission.USE_FINGERPRINT: granted=true
+262:      android.permission.FOREGROUND_SERVICE_MICROPHONE: granted=true
+263:      android.permission.VIBRATE: granted=true
+264:      android.permission.USE_BIOMETRIC: granted=true
+265:      com.ntsiniz.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+266:      android.permission.WAKE_LOCK: granted=true
+280:        android.permission.POST_NOTIFICATIONS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+281:        android.permission.READ_MEDIA_VISUAL_USER_SELECTED: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+282:        android.permission.READ_EXTERNAL_STORAGE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+283:        android.permission.READ_MEDIA_IMAGES: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+284:        android.permission.CAMERA: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+285:        android.permission.READ_MEDIA_AUDIO: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+286:        android.permission.READ_MEDIA_VIDEO: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+287:        android.permission.WRITE_EXTERNAL_STORAGE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT]
+288:        android.permission.RECORD_AUDIO: granted=false, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]

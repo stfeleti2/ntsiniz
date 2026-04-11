@@ -1,0 +1,15 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml:1:1-44
+INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml:1:1-44
+	package
+		ADDED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml:1:11-41
+		INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml
+INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/promise.feliti/cofa-tools/ntsiniz/modules/ntsiniz-voice-dsp/android/src/main/AndroidManifest.xml

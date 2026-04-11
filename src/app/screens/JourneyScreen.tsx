@@ -11,6 +11,7 @@ import type { MainTabParamList, RootStackParamList } from '../navigation/types'
 import { enableGuidedJourneyV3, enableKaraokeV1, enablePerformanceModeV1 } from '@/core/config/flags'
 import { ensureJourneyV3Progress, getCurrentJourneyV3, getStageProgress } from '@/core/guidedJourney/progress'
 import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { getAssessmentForStage } from '@/core/guidedJourney/v6Selectors'
 import { BrandWorldBackdrop, ChapterHeroCard, JourneyPath, MilestoneCard, NextStepCard } from '@/ui/guidedJourney'
 
 type Props = CompositeScreenProps<
@@ -24,6 +25,7 @@ type JourneyVm = {
   currentLessonTitle: string
   stageProfile: string
   progressLine: string
+  assessmentLine: string
   stageItems: Array<{ id: string; title: string }>
   lockedIds: string[]
   stageCards: Array<{ id: string; title: string; body: string; stat: string }>
@@ -37,6 +39,9 @@ const copy = {
   chapterTitle: 'Current chapter',
   milestonesTitle: 'Milestones',
   milestonesBody: 'See unlocked wins and current momentum.',
+  benchmarkTitle: 'Stage benchmark',
+  benchmarkBody: 'Inspect the multi-gate stage check instead of guessing what unlocks the next chapter.',
+  benchmarkCta: 'Open benchmark',
   compareTitle: 'Compare progress',
   compareBody: 'Compare your baseline against your latest guided work.',
   openMilestones: 'Open milestones',
@@ -67,6 +72,8 @@ export function JourneyScreen({ navigation }: Props) {
       const current = getCurrentJourneyV3(program, progress)
       const routeStageIds = program.routesById[progress.routeId ?? 'R4']?.primaryStageIds ?? program.stages.map((stage) => stage.id)
       const currentStageIndex = routeStageIds.indexOf(current.stage.id)
+      const assessment = getAssessmentForStage(program, current.stage.id)
+      const assessmentRecord = progress.assessmentByStageId?.[current.stage.id]
       const lockedIds = program.stages
         .filter((stage) => {
           if (stage.id === current.stage.id) return false
@@ -82,14 +89,21 @@ export function JourneyScreen({ navigation }: Props) {
         currentLessonTitle: current.lesson.title,
         stageProfile: current.stage.learnerProfile,
         progressLine: `${getStageProgress(program, progress, current.stage.id).completed}/${getStageProgress(program, progress, current.stage.id).total} lessons complete in ${current.stage.title}.`,
+        assessmentLine: assessment
+          ? assessmentRecord?.completed
+            ? `${assessment.title} cleared.`
+            : assessmentRecord?.blockedPromotionReasons?.[0] ?? `${assessment.title} is still ahead as the stage gate.`
+          : current.stage.promotionGateSummary ?? 'Complete the lesson path before the next stage opens.',
         stageItems: program.stages.map((stage) => ({ id: stage.id, title: stage.title })),
         lockedIds,
         stageCards: program.stages.map((stage) => {
           const stageProgress = getStageProgress(program, progress, stage.id)
+          const stageAssessment = getAssessmentForStage(program, stage.id)
+          const stageAssessmentRecord = progress.assessmentByStageId?.[stage.id]
           return {
             id: stage.id,
             title: stage.title,
-            body: stage.learnerProfile,
+            body: stageAssessmentRecord?.blockedPromotionReasons?.[0] ?? stageAssessment?.title ?? stage.learnerProfile,
             stat: `${stageProgress.completed}/${stageProgress.total}`,
           }
         }),
@@ -138,6 +152,7 @@ export function JourneyScreen({ navigation }: Props) {
         <JourneyPath items={vm.stageItems} activeId={vm.currentStageId} lockedIds={vm.lockedIds} />
         <Box style={{ height: 10 }} />
         <Text preset="muted">{vm.progressLine}</Text>
+        <Text preset="muted">{vm.assessmentLine}</Text>
         <Box style={{ height: 10 }} />
         <Button text={copy.openChapter} onPress={() => (navigation as any).navigate('CurriculumOverview')} />
       </Card>
@@ -151,6 +166,7 @@ export function JourneyScreen({ navigation }: Props) {
       </Card>
 
       <NextStepCard title={copy.milestonesTitle} body={copy.milestonesBody} cta={copy.openMilestones} onPress={() => (navigation as any).navigate('Milestones')} />
+      <NextStepCard title={copy.benchmarkTitle} body={vm.assessmentLine || copy.benchmarkBody} cta={copy.benchmarkCta} onPress={() => (navigation as any).navigate('StageAssessment', { stageId: vm.currentStageId })} />
       <NextStepCard title={copy.compareTitle} body={copy.compareBody} cta={copy.openCompare} onPress={() => (navigation as any).navigate('CompareProgress')} />
       {enableKaraokeV1() ? <NextStepCard title={copy.karaokeTitle} body={copy.karaokeBody} cta={copy.karaokeCta} onPress={() => (navigation as any).navigate('KaraokeMode')} /> : null}
       {enablePerformanceModeV1() && vm.currentStageId === 'S5' ? <NextStepCard title={copy.performanceTitle} body={copy.performanceBody} cta={copy.performanceCta} onPress={() => (navigation as any).navigate('PerformanceMode')} /> : null}

@@ -1,8 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { t } from '@/app/i18n'
-import { ThemeProvider } from '@/ui/theme'
-import { theme } from '@/ui/theme/theme'
 import { Box, Stack, Text, Divider } from '@/ui/primitives'
 import {
   Button,
@@ -64,9 +62,8 @@ export function ComponentLabScreen() {
   )
 
   return (
-    <ThemeProvider theme={theme}>
-      <ScrollView contentInsetAdjustmentBehavior="always">
-        <Box style={{ padding: 16 }}>
+    <ScrollView contentInsetAdjustmentBehavior="always">
+      <Box style={{ padding: 16 }}>
           <Text size="xl" weight="bold">
             {t('dev.componentLab')}
           </Text>
@@ -367,21 +364,20 @@ export function ComponentLabScreen() {
           </Card>
         </Box>
 
-        <RecordingOverlay
-          visible={overlay}
-          mode="full"
-          elapsedLabel="00:12"
-          paused={paused}
-          onStop={() => {
-            setOverlay(false)
-            setPaused(false)
-          }}
-          onPause={() => setPaused(true)}
-          onResume={() => setPaused(false)}
-          onMinimize={() => setOverlay(false)}
-          testID="lab.recordingOverlay"
-        />
-      </ScrollView>
-    </ThemeProvider>
+      <RecordingOverlay
+        visible={overlay}
+        mode="full"
+        elapsedLabel="00:12"
+        paused={paused}
+        onStop={() => {
+          setOverlay(false)
+          setPaused(false)
+        }}
+        onPause={() => setPaused(true)}
+        onResume={() => setPaused(false)}
+        onMinimize={() => setOverlay(false)}
+        testID="lab.recordingOverlay"
+      />
+    </ScrollView>
   )
 }

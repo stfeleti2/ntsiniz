@@ -1,5 +1,6 @@
 import { getMonetizationState } from './monetizationState'
 import { getAudioSupervisorSnapshot } from '@/core/audio/audioSupervisor'
+import { canShowPassiveMonetization } from './surfacePolicy'
 
 export type MonetizationDecision = {
   canRewarded: boolean
@@ -7,7 +8,11 @@ export type MonetizationDecision = {
   reason?: string
 }
 
-export async function decideMonetization(): Promise<MonetizationDecision> {
+export async function decideMonetization(options?: { surface?: string | null; userInitiated?: boolean }): Promise<MonetizationDecision> {
+  if (!options?.userInitiated && options?.surface && !canShowPassiveMonetization(options.surface)) {
+    return { canRewarded: false, canInterstitial: false, reason: 'unsafe_surface' }
+  }
+
   const s = await getMonetizationState()
   const audio = getAudioSupervisorSnapshot?.() as any
 

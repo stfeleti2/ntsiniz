@@ -21,16 +21,16 @@ export type HexagonState =
   | 'paused'
 
 const stateMeta: Record<HexagonState, { glow: string; border: string; label: string }> = {
-  idle: { glow: 'rgba(132, 104, 255, 0.22)', border: '#9D8CFF', label: 'Idle' },
-  ready: { glow: 'rgba(156, 133, 255, 0.30)', border: '#C8BCFF', label: 'Ready' },
-  listening: { glow: 'rgba(115, 201, 255, 0.28)', border: '#7FD8FF', label: 'Listening' },
-  voiceDetected: { glow: 'rgba(118, 255, 190, 0.30)', border: '#79F0C7', label: 'Voice detected' },
-  tracking: { glow: 'rgba(139, 191, 255, 0.28)', border: '#8FB8FF', label: 'Tracking' },
-  locked: { glow: 'rgba(255, 216, 125, 0.28)', border: '#FFD472', label: 'Locked' },
-  unstable: { glow: 'rgba(255, 141, 186, 0.26)', border: '#FF9AC7', label: 'Unstable' },
-  success: { glow: 'rgba(125, 255, 179, 0.34)', border: '#76F7A6', label: 'Success' },
-  needsRetry: { glow: 'rgba(255, 168, 99, 0.28)', border: '#FFB474', label: 'Retry' },
-  paused: { glow: 'rgba(176, 178, 208, 0.22)', border: '#C4C8DF', label: 'Paused' },
+  idle: { glow: 'rgba(140, 116, 255, 0.2)', border: 'rgba(186, 176, 245, 0.7)', label: 'Idle' },
+  ready: { glow: 'rgba(156, 133, 255, 0.28)', border: '#C8BCFF', label: 'Ready' },
+  listening: { glow: 'rgba(128, 229, 255, 0.26)', border: '#86EFFF', label: 'Listening' },
+  voiceDetected: { glow: 'rgba(132, 247, 195, 0.28)', border: '#92F9CE', label: 'Voice detected' },
+  tracking: { glow: 'rgba(151, 203, 255, 0.26)', border: '#9FD4FF', label: 'Tracking' },
+  locked: { glow: 'rgba(255, 223, 145, 0.26)', border: '#FFE09A', label: 'Locked' },
+  unstable: { glow: 'rgba(255, 141, 186, 0.24)', border: '#FFB0CC', label: 'Unstable' },
+  success: { glow: 'rgba(132, 255, 189, 0.3)', border: '#7CF4B8', label: 'Success' },
+  needsRetry: { glow: 'rgba(255, 175, 112, 0.24)', border: '#FFC48E', label: 'Retry' },
+  paused: { glow: 'rgba(190, 194, 222, 0.2)', border: '#D4D9F5', label: 'Paused' },
 }
 
 const UI_STRINGS = {
@@ -48,10 +48,11 @@ const UI_STRINGS = {
 export function BrandWorldBackdrop({ children }: { children?: React.ReactNode }) {
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
-      <LinearGradient colors={['#080714', '#1A1034', '#29134E', '#0D0A16']} style={StyleSheet.absoluteFill} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
+      <LinearGradient colors={['#070911', '#171332', '#251A49', '#110E23']} style={StyleSheet.absoluteFill} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
       <View style={[styles.orb, styles.orbLeft]} />
       <View style={[styles.orb, styles.orbRight]} />
       <View style={[styles.orb, styles.orbBottom]} />
+      <View style={styles.vignette} />
       {children}
     </View>
   )
@@ -135,8 +136,8 @@ export function StatusPill({ state, label }: { state: HexagonState | 'noisy' | '
   return (
     <Box
       style={{
-        paddingHorizontal: 12,
-        paddingVertical: 7,
+        paddingHorizontal: 11,
+        paddingVertical: 6,
         borderRadius: 999,
         backgroundColor: meta.glow,
         borderWidth: 1,
@@ -144,9 +145,14 @@ export function StatusPill({ state, label }: { state: HexagonState | 'noisy' | '
         flexDirection: 'row',
         alignItems: 'center',
         gap: 6,
+        shadowColor: '#04040D',
+        shadowOpacity: 0.22,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2,
       }}
     >
-      <Text>{statusGlyph(state)}</Text>
+      <Text style={{ fontSize: 11 }}>{statusGlyph(state)}</Text>
       <Text size="sm" weight="semibold">{label ?? meta.label}</Text>
     </Box>
   )
@@ -517,6 +523,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 999,
     backgroundColor: 'rgba(177, 151, 255, 0.16)',
+    shadowColor: '#2E1A6C',
+    shadowOpacity: 0.3,
+    shadowRadius: 44,
+    shadowOffset: { width: 0, height: 22 },
   },
   orbLeft: {
     width: 260,
@@ -529,14 +539,18 @@ const styles = StyleSheet.create({
     height: 220,
     right: -60,
     top: 120,
-    backgroundColor: 'rgba(104, 201, 255, 0.14)',
+    backgroundColor: 'rgba(104, 201, 255, 0.16)',
   },
   orbBottom: {
     width: 300,
     height: 300,
     bottom: -140,
     left: 40,
-    backgroundColor: 'rgba(255, 158, 220, 0.12)',
+    backgroundColor: 'rgba(255, 158, 220, 0.15)',
+  },
+  vignette: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(6, 8, 20, 0.26)',
   },
   meterTrack: {
     height: 10,

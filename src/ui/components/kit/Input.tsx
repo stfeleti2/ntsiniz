@@ -49,7 +49,12 @@ export function Input({
           borderRadius: radius[3],
           borderWidth: 1,
           borderColor: border,
-          backgroundColor: colors.surface2,
+          backgroundColor: colors.surfaceInset,
+          shadowColor: colors.shadowDark,
+          shadowOpacity: 0.2,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 2 },
+          elevation: 1,
           opacity: disabled ? 0.55 : 1,
         }}
       >

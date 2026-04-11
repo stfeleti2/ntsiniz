@@ -12,6 +12,10 @@ export const DEFAULT_VOICE_IDENTITY: VoiceIdentitySnapshot = {
   currentFocus: [],
   comfortZone: { lowMidi: null, highMidi: null },
   likelyFamily: { label: null, confidence: 0 },
+  recommendedLoadTier: null,
+  activeRemediationBundleId: null,
+  activeRemediationBundleName: null,
+  currentAssessmentFocus: [],
 }
 
 export async function getVoiceIdentity(): Promise<VoiceIdentitySnapshot> {

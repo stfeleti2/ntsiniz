@@ -11,12 +11,12 @@ import { getMonetizationState, updateMonetizationState } from '@/core/monetizati
  * Rewarded ads entry point (safe placement).
  * This is provider-agnostic; wire AdMob later.
  */
-export function RewardedBoostCard() {
+export function RewardedBoostCard({ surface }: { surface: string }) {
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    decideMonetization().then((d) => setEnabled(!!d.canRewarded))
-  }, [])
+    decideMonetization({ surface }).then((d) => setEnabled(!!d.canRewarded))
+  }, [surface])
 
   if (!enabled) return null
 

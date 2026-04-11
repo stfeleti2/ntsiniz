@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const frameBus_js_1 = require("../audio/frameBus.js");
+const frameBus_1 = require("../audio/frameBus");
 (0, node_test_1.default)('FrameBus drops oldest when maxQueue exceeded', async () => {
-    const bus = new frameBus_js_1.FrameBus({ maxQueue: 5, maxPerTick: 10, preferAnimationFrame: false });
+    const bus = new frameBus_1.FrameBus({ maxQueue: 5, maxPerTick: 10, preferAnimationFrame: false });
     const drained = [];
     for (let i = 0; i < 20; i++) {
         bus.push(i, (v) => drained.push(v));
@@ -24,7 +24,7 @@ const frameBus_js_1 = require("../audio/frameBus.js");
     strict_1.default.ok(!drained.includes(0) || st.dropped >= 1);
 });
 (0, node_test_1.default)('FrameBus stop clears queue and prevents further drains', async () => {
-    const bus = new frameBus_js_1.FrameBus({ maxQueue: 5, maxPerTick: 1, preferAnimationFrame: false });
+    const bus = new frameBus_1.FrameBus({ maxQueue: 5, maxPerTick: 1, preferAnimationFrame: false });
     const drained = [];
     bus.push(1, (v) => drained.push(v));
     bus.stop();

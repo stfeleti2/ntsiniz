@@ -18,6 +18,7 @@ const CORE_STACK_SCREENS = [
     'Playback',
     'RecoveredTakes',
     'CurriculumOverview',
+    'StageAssessment',
     'CurriculumDayPreview',
     'LessonIntro',
     'ConceptExplainer',
@@ -48,7 +49,7 @@ function getEnabledStackScreenNames(flags) {
         names.push('PerformanceMode', 'PerformancePreview');
     }
     if (flags.dev) {
-        names.push('Billing', 'Privacy');
+        names.push('Billing', 'Privacy', 'SandboxHub', 'ComponentPlayground', 'FlowPlayground', 'ScreenPreviewGallery', 'ScreenPreviewScenario', 'StorybookScreen');
     }
     if (!flags.storeBuild) {
         names.push('Missions', 'AdminContent');

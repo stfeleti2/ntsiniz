@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useTheme = useTheme;
-const theme_1 = require("@/ui/theme/theme");
+const provider_1 = require("@/theme/provider");
 /**
  * Back-compat theme hook.
  *
- * The app previously used `src/theme/*` directly. The new UI system lives under `src/ui/*`.
- * This hook keeps legacy callers stable while all styling values now come from the new tokens.
+ * Legacy app surfaces still read from `src/theme/useTheme`.
+ * This adapter keeps those callers stable while canonical tokens and providers live in `src/theme/*`.
  */
 function useTheme() {
-    const c = theme_1.theme.colors;
+    const uiTheme = (0, provider_1.useTheme)();
+    const c = uiTheme.colors;
     // Map new tokens to old keys used across legacy components/screens.
     return {
         colors: {
@@ -26,21 +27,21 @@ function useTheme() {
             line: c.border,
         },
         gradients: {
-            primary: [c.primary, "#FF3DCE", c.warning],
-            hero: [c.bg, "#2A1255", c.bg],
-            surface: [c.surface, c.surface2],
-            glow: ["rgba(124, 92, 255, 0.35)", "rgba(255, 61, 206, 0.22)", "rgba(0, 229, 255, 0.16)"],
+            primary: [c.primary, c.accentPink, c.secondary],
+            hero: [c.bg, '#1A1436', '#231B45', c.bg],
+            surface: [c.surfaceBase, c.surfaceRaised],
+            glow: ['rgba(153, 129, 255, 0.38)', 'rgba(246, 166, 255, 0.24)', 'rgba(137, 233, 255, 0.2)'],
         },
         spacing: {
-            xs: theme_1.theme.spacing.xs,
-            sm: theme_1.theme.spacing.sm,
-            md: theme_1.theme.spacing.md,
-            lg: theme_1.theme.spacing.lg,
-            xl: theme_1.theme.spacing.xl,
+            xs: uiTheme.spacing.xs,
+            sm: uiTheme.spacing.sm,
+            md: uiTheme.spacing.md,
+            lg: uiTheme.spacing.lg,
+            xl: uiTheme.spacing.xl,
         },
         radius: {
-            md: theme_1.theme.radius.md,
-            lg: theme_1.theme.radius.lg,
+            md: uiTheme.radius.md,
+            lg: uiTheme.radius.lg,
         },
     };
 }

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Easing = exports.Animated = exports.useWindowDimensions = exports.Linking = exports.PixelRatio = exports.Dimensions = exports.AppState = exports.Alert = exports.Platform = exports.StyleSheet = exports.ActivityIndicator = exports.KeyboardAvoidingView = exports.TouchableOpacity = exports.TextInput = exports.FlatList = exports.Image = exports.Modal = exports.SafeAreaView = exports.ScrollView = exports.Pressable = exports.Text = exports.View = void 0;
+exports.Easing = exports.Animated = exports.useColorScheme = exports.useWindowDimensions = exports.Linking = exports.PixelRatio = exports.Dimensions = exports.AppState = exports.Alert = exports.Platform = exports.StyleSheet = exports.ActivityIndicator = exports.KeyboardAvoidingView = exports.TouchableOpacity = exports.TextInput = exports.FlatList = exports.Image = exports.Modal = exports.SafeAreaView = exports.ScrollView = exports.Pressable = exports.Text = exports.View = void 0;
 const react_1 = __importDefault(require("react"));
 function host(name) {
     return react_1.default.forwardRef((props, ref) => react_1.default.createElement(name, { ...props, ref }, props.children));
@@ -50,6 +50,8 @@ exports.Linking = {
 };
 const useWindowDimensions = () => ({ width: 390, height: 844, scale: 3, fontScale: 1 });
 exports.useWindowDimensions = useWindowDimensions;
+const useColorScheme = () => 'dark';
+exports.useColorScheme = useColorScheme;
 const AnimatedView = host('AnimatedView');
 exports.Animated = { View: AnimatedView };
 exports.Easing = { inOut: (x) => x, quad: {} };
@@ -74,6 +76,7 @@ const ReactNative = {
     PixelRatio: exports.PixelRatio,
     Linking: exports.Linking,
     useWindowDimensions: exports.useWindowDimensions,
+    useColorScheme: exports.useColorScheme,
     Animated: exports.Animated,
     Easing: exports.Easing,
 };

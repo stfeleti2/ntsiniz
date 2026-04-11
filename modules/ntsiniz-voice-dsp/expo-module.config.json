@@ -1,0 +1,11 @@
+{
+  "name": "NtsinizVoiceDsp",
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["NtsinizVoiceDspModule"]
+  },
+  "android": {
+    "modules": ["com.ntsiniz.voicedsp.NtsinizVoiceDspModule"]
+  }
+}
+

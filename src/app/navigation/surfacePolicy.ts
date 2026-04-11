@@ -31,6 +31,7 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'Playback',
   'RecoveredTakes',
   'CurriculumOverview',
+  'StageAssessment',
   'CurriculumDayPreview',
   'LessonIntro',
   'ConceptExplainer',
@@ -65,7 +66,16 @@ export function getEnabledStackScreenNames(flags: SurfaceFlags): string[] {
   }
 
   if (flags.dev) {
-    names.push('Billing', 'Privacy')
+    names.push(
+      'Billing',
+      'Privacy',
+      'SandboxHub',
+      'ComponentPlayground',
+      'FlowPlayground',
+      'ScreenPreviewGallery',
+      'ScreenPreviewScenario',
+      'StorybookScreen',
+    )
   }
 
   if (!flags.storeBuild) {

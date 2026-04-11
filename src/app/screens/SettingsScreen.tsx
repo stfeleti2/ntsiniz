@@ -424,7 +424,8 @@ export function SettingsScreen({ navigation }: Props) {
           <Text preset="h2">{t('settings.qaTitle')}</Text>
           <Text preset="muted">{t('settings.qaSubtitle')}</Text>
 
-          <Button text={t('dev.openComponentLab')} variant="soft" onPress={() => navigation.navigate('ComponentLab' as any)} />
+          <Button text={t('dev.openComponentLab', 'Open UI Sandbox')} variant="soft" onPress={() => (navigation as any).getParent()?.navigate('SandboxHub')} />
+          <Button text={t('dev.componentLab', 'Open Component Playground')} variant="ghost" onPress={() => (navigation as any).getParent()?.navigate('ComponentPlayground')} />
 
           <Button text={t('dev.openRepeatability')} variant="soft" onPress={() => (navigation as any).getParent()?.navigate('DevRepeatability')} />
 

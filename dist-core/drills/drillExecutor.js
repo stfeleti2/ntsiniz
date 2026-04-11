@@ -10,6 +10,7 @@ const frameBus_1 = require("../audio/frameBus");
 const perfMonitor_1 = require("../perf/perfMonitor");
 const audioFormatProbe_1 = require("../audio/audioFormatProbe");
 const logger_1 = require("../observability/logger");
+const voiceDsp_1 = require("../audio/dsp/voiceDsp");
 class DrillAbortError extends Error {
     reason;
     constructor(reason = 'drill_aborted') {
@@ -71,6 +72,10 @@ async function runDrillWithDrivers(ctx, drivers, opts) {
         noiseGateRms: noiseGate,
         minConfidence: 0.55 / sensitivity,
         noteChangeConfirmFrames: 2,
+    });
+    const dsp = (0, voiceDsp_1.createVoiceDspSession)({
+        sampleRate,
+        suppressionMode: settings.dspSuppressionMode ?? 'conservativeAdaptive',
     });
     // Analyze every Nth frame to reduce CPU without reducing input fidelity.
     // We still ingest every frame so the analysis window is correct.
@@ -146,11 +151,16 @@ async function runDrillWithDrivers(ctx, drivers, opts) {
                 const frameRms = pitch.getLastFrameRms();
                 const framePeak = pitch.getLastFramePeak();
                 const clipped = pitch.getLastFrameClipped();
+                const dspOut = dsp.pushFrame({
+                    sampleRate,
+                    pcmBase64: frame.pcmBase64,
+                    samples: frame.samples,
+                });
                 // UI telemetry (Ghost Guide): emit before ticking so UI sees the current target.
                 try {
                     const diag = !reading
                         ? {
-                            reason: frameRms != null && frameRms < noiseGate * 1.2
+                            reason: dspOut.signalQuality === 'poor' || (frameRms != null && frameRms < noiseGate * 1.2)
                                 ? 'too_quiet'
                                 : 'low_confidence',
                             frameRms,
@@ -176,6 +186,17 @@ async function runDrillWithDrivers(ctx, drivers, opts) {
             }
         }, (msg) => fail(new Error(msg)));
         const result = await resultPromise;
+        const dspSummary = dsp.summary();
+        const baseMetrics = result.metrics ?? {};
+        result.metrics = {
+            ...baseMetrics,
+            snrDb: Number.isFinite(dspSummary.avgSnrDb) ? Number(dspSummary.avgSnrDb.toFixed(2)) : null,
+            noiseFloorDb: Number.isFinite(dspSummary.avgNoiseFloorDb) ? Number(dspSummary.avgNoiseFloorDb.toFixed(2)) : null,
+            vadConfidence: Number.isFinite(dspSummary.avgVadProb) ? Number(dspSummary.avgVadProb.toFixed(3)) : null,
+            clippingRate: Number.isFinite(dspSummary.clippingRate) ? Number(dspSummary.clippingRate.toFixed(3)) : null,
+            silenceRate: Number.isFinite(dspSummary.silenceRate) ? Number(dspSummary.silenceRate.toFixed(3)) : null,
+            signalQuality: dspSummary.signalQuality,
+        };
         if (settings.soundCues && drivers.playSfx) {
             try {
                 if (result.score >= 85)
@@ -205,6 +226,7 @@ async function runDrillWithDrivers(ctx, drivers, opts) {
             signal.removeEventListener?.('abort', onAbort);
         clock.clearTimeout(timeoutId);
         bus.stop();
+        await dsp.close().catch((e) => logger_1.logger.warn('dsp close failed', e));
         await mic?.stop().catch((e) => logger_1.logger.warn('mic stop failed', e));
         await drivers.stopTone?.().catch((e) => logger_1.logger.warn('stopTone failed', e));
         await drivers.stopSfx?.().catch((e) => logger_1.logger.warn('stopSfx failed', e));

@@ -22,3 +22,4 @@ __exportStar(require("./voiceIdentityRepo"), exports);
 __exportStar(require("./adaptiveStateRepo"), exports);
 __exportStar(require("./scoringAdapter"), exports);
 __exportStar(require("./hostDrillMapper"), exports);
+__exportStar(require("./v6Selectors"), exports);

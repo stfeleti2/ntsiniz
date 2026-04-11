@@ -3,7 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.decideMonetization = decideMonetization;
 const monetizationState_1 = require("./monetizationState");
 const audioSupervisor_1 = require("@/core/audio/audioSupervisor");
-async function decideMonetization() {
+const surfacePolicy_1 = require("./surfacePolicy");
+async function decideMonetization(options) {
+    if (!options?.userInitiated && options?.surface && !(0, surfacePolicy_1.canShowPassiveMonetization)(options.surface)) {
+        return { canRewarded: false, canInterstitial: false, reason: 'unsafe_surface' };
+    }
     const s = await (0, monetizationState_1.getMonetizationState)();
     const audio = (0, audioSupervisor_1.getAudioSupervisorSnapshot)?.();
     // Never show ads while audio is active.

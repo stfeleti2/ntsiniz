@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_test_1 = __importDefault(require("node:test"));
 const strict_1 = __importDefault(require("node:assert/strict"));
-const yin_js_1 = require("../pitch/yin.js");
+const yin_1 = require("../pitch/yin");
 function sine(freq, sampleRate, n) {
     const out = new Float32Array(n);
     for (let i = 0; i < n; i++)
@@ -21,7 +21,7 @@ function addNoise(x, amp = 0.02) {
 (0, node_test_1.default)("yinDetect 220Hz", () => {
     const sr = 16000;
     const x = addNoise(sine(220, sr, 2048), 0.01);
-    const r = (0, yin_js_1.yinDetect)(x, sr);
+    const r = (0, yin_1.yinDetect)(x, sr);
     strict_1.default.ok(r.freqHz != null);
     strict_1.default.ok(Math.abs(r.freqHz - 220) < 3);
     strict_1.default.ok(r.confidence > 0.6);
@@ -29,7 +29,7 @@ function addNoise(x, amp = 0.02) {
 (0, node_test_1.default)("yinDetect 440Hz", () => {
     const sr = 16000;
     const x = addNoise(sine(440, sr, 2048), 0.01);
-    const r = (0, yin_js_1.yinDetect)(x, sr);
+    const r = (0, yin_1.yinDetect)(x, sr);
     strict_1.default.ok(r.freqHz != null);
     strict_1.default.ok(Math.abs(r.freqHz - 440) < 5);
     strict_1.default.ok(r.confidence > 0.6);

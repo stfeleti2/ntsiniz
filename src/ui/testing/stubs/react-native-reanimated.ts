@@ -9,8 +9,13 @@ const Animated = {
 export default Animated
 
 export const Easing = {
+  out: (x: any) => x,
+  in: (x: any) => x,
   inOut: (x: any) => x,
+  linear: {},
   quad: {},
+  cubic: {},
+  bezier: () => ({}),
 }
 
 export function useSharedValue<T>(value: T) {

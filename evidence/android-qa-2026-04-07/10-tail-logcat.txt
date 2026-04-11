@@ -1,0 +1,180 @@
+04-07 13:26:26.310  3001  3001 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/0000002b/dl-VisionOcr.optional_260834100000.apk has no usable artifacts
+04-07 13:26:26.310  3001  3001 W artd    : Could not get dex checksums for location /data/app/~~R49jiJKTWeb2KTyiSxCk7Q==/com.google.android.gms-DIlyUlpBWEyIZeN18hyR-w==/base.apk, fd=-1
+04-07 13:26:26.312  3001  3001 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_250834100400.apk has no usable artifacts
+04-07 13:26:26.312  3001  3001 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.apk has no usable artifacts
+04-07 13:26:26.451  4970  5022 I HWUI    : Davey! duration=780ms; Flags=0, FrameTimelineVsyncId=26616, IntendedVsync=589234860551, Vsync=589468193875, InputEventId=0, HandleInputStart=589473713572, AnimationStart=589473714406, PerformTraversalsStart=589496090531, DrawStart=589496408781, FrameDeadline=590451527169, FrameStartTime=589473336281, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=589496436822, SyncStart=590325169364, IssueDrawCommandsStart=590325298156, SwapBuffers=590363499573, FrameCompleted=590844102531, DequeueBufferDuration=454855708, QueueBufferDuration=306167, GpuCompleted=590817692031, SwapBuffersCompleted=590844102531, DisplayPresentTime=0, CommandSubmissionCompleted=590363499573, 
+04-07 13:26:27.143  4970  5022 I HWUI    : Davey! duration=1319ms; Flags=0, FrameTimelineVsyncId=26632, IntendedVsync=589534860539, Vsync=590351527173, InputEventId=0, HandleInputStart=590365543073, AnimationStart=590365544864, PerformTraversalsStart=590465486448, DrawStart=590465730156, FrameDeadline=590834860487, FrameStartTime=590365285448, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=590465755156, SyncStart=590844214823, IssueDrawCommandsStart=590844381156, SwapBuffers=590989137073, FrameCompleted=591232801781, DequeueBufferDuration=81864084, QueueBufferDuration=271334, GpuCompleted=591232801781, SwapBuffersCompleted=591073835656, DisplayPresentTime=0, CommandSubmissionCompleted=590989137073, 
+04-07 13:26:27.171  4970  4970 I Choreographer: Skipped 38 frames!  The application may be doing too much work on its main thread.
+04-07 13:26:27.335  4970  4984 I HWUI    : Davey! duration=1182ms; Flags=0, FrameTimelineVsyncId=26648, IntendedVsync=590434860503, Vsync=590901527151, InputEventId=-223334294, HandleInputStart=590909420281, AnimationStart=590909422865, PerformTraversalsStart=590989073906, DrawStart=590989430865, FrameDeadline=591251527137, FrameStartTime=590904474365, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=590989462490, SyncStart=591073962865, IssueDrawCommandsStart=591074061240, SwapBuffers=591229766323, FrameCompleted=591701590115, DequeueBufferDuration=470642000, QueueBufferDuration=303666, GpuCompleted=591701178157, SwapBuffersCompleted=591701590115, DisplayPresentTime=0, CommandSubmissionCompleted=591229766323, 
+04-07 13:26:28.245  4970  4984 I HWUI    : Davey! duration=1347ms; Flags=0, FrameTimelineVsyncId=26677, IntendedVsync=591084860477, Vsync=591718193785, InputEventId=-584102115, HandleInputStart=591729303073, AnimationStart=591729304323, PerformTraversalsStart=591736618532, DrawStart=591736823782, FrameDeadline=592168193767, FrameStartTime=591729048698, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=591736851865, SyncStart=591944865615, IssueDrawCommandsStart=591945002532, SwapBuffers=592148780907, FrameCompleted=592640320615, DequeueBufferDuration=1990917, QueueBufferDuration=265833, GpuCompleted=592640320615, SwapBuffersCompleted=592345499574, DisplayPresentTime=0, CommandSubmissionCompleted=592148780907, 
+04-07 13:26:28.856  4970  4984 I HWUI    : Davey! duration=882ms; Flags=0, FrameTimelineVsyncId=26692, IntendedVsync=591734860451, Vsync=591934860443, InputEventId=-690550369, HandleInputStart=591949860448, AnimationStart=591949861907, PerformTraversalsStart=591954767698, DrawStart=591955263823, FrameDeadline=592668193747, FrameStartTime=591949515240, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=591955298198, SyncStart=592345609199, IssueDrawCommandsStart=592345762907, SwapBuffers=592679813782, FrameCompleted=593007474657, DequeueBufferDuration=15333, QueueBufferDuration=354166, GpuCompleted=593007474657, SwapBuffersCompleted=592854365866, DisplayPresentTime=0, CommandSubmissionCompleted=592679813782, 
+04-07 13:26:29.404   661  1958 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+04-07 13:26:29.433   496   622 D AudioFlinger: mixer(0xb400007b993c9770) throttle end: throttle time(36)
+04-07 13:26:29.471  4970  4984 I HWUI    : Davey! duration=1049ms; Flags=0, FrameTimelineVsyncId=26722, IntendedVsync=592468193755, Vsync=592868193739, InputEventId=0, HandleInputStart=592913538324, AnimationStart=592913540907, PerformTraversalsStart=592940641074, DrawStart=592941008616, FrameDeadline=593051527065, FrameStartTime=592879018407, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=592941041782, SyncStart=593415081491, IssueDrawCommandsStart=593415233907, SwapBuffers=593418052782, FrameCompleted=593991818741, DequeueBufferDuration=364796125, QueueBufferDuration=345458, GpuCompleted=593991818741, SwapBuffersCompleted=593783960366, DisplayPresentTime=0, CommandSubmissionCompleted=593418052782, 
+04-07 13:26:29.489  4970  5022 I HWUI    : Davey! duration=815ms; Flags=0, FrameTimelineVsyncId=26737, IntendedVsync=592934860403, Vsync=593418193717, InputEventId=-489800711, HandleInputStart=593420746741, AnimationStart=593420748116, PerformTraversalsStart=593505138657, DrawStart=593506230116, FrameDeadline=594018193693, FrameStartTime=593420419741, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=593506261532, SyncStart=593785409491, IssueDrawCommandsStart=593785525824, SwapBuffers=593787067408, FrameCompleted=594029928574, DequeueBufferDuration=241573500, QueueBufferDuration=504417, GpuCompleted=594029589824, SwapBuffersCompleted=594029928574, DisplayPresentTime=0, CommandSubmissionCompleted=593787067408, 
+04-07 13:26:29.597   661   984 I system_server: AssetManager2(0xb400007325c677d8) locale list changing from [] to [en-US]
+04-07 13:26:29.598   661   984 D CompatChangeReporter: Compat change id reported: 358129114; UID 10226; state: ENABLED
+04-07 13:26:29.599   661   984 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+04-07 13:26:29.599   661   984 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+04-07 13:26:29.599   661   984 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+04-07 13:26:29.599   661   984 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+04-07 13:26:29.600   661   984 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+04-07 13:26:29.600   500   770 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+04-07 13:26:29.601   661   984 I ActivityTaskManager: START u0 {act=android.content.pm.action.REQUEST_PERMISSIONS xflg=0x4 pkg=com.google.android.permissioncontroller cmp=com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity (has extras)} with LAUNCH_MULTIPLE from uid 10226 (rr=34586651) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+04-07 13:26:29.601   910   974 V WindowManagerShell: Transition requested (#15): android.os.BinderProxy@d4ca447 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=77 effectiveUid=10226 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=exp+ntsiniz://expo-development-client/... flg=0x10000000 cmp=com.ntsiniz.app/.MainActivity } baseActivity=ComponentInfo{com.ntsiniz.app/com.ntsiniz.app.MainActivity} topActivity=ComponentInfo{com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity} origActivity=null realActivity=ComponentInfo{com.ntsiniz.app/com.ntsiniz.app.MainActivity} numActivities=2 lastActiveTime=594158 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@999c474} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{60c2d9d com.android.permissioncontroller.permission.ui.GrantPermissionsActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=true isActivityStackTransparent=false lastNonFullscreenBounds=Rect(278, 711 - 803, 1791) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2424) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 15 }
+04-07 13:26:29.603   910   974 D ShellSplitScreen: logExit: no-op, mLoggerSessionId is null
+04-07 13:26:29.607  4970  4970 W unknown:BridgelessReact: ReactHost{0}.onUserLeaveHint(activity)
+04-07 13:26:29.608  4970  4970 W unknown:BridgelessReact: ReactHost{0}.onHostPause(activity)
+04-07 13:26:29.613   500   500 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+04-07 13:26:29.624  4970  4970 W unknown:BridgelessReact: ReactContext.onHostPause()
+04-07 13:26:29.635   661  1972 I MediaFocusControl: abandonAudioFocus() from uid/pid 10226/4970 clientId=android.media.AudioManager@8d5dbdaexpo.modules.av.AVManager@1b6a6f3 callingPack=com.ntsiniz.app
+04-07 13:26:29.637   661  1972 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+04-07 13:26:29.637   661  1972 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:29.637   661  1972 D ActivityManager: quick sync unfreeze 1141 for 1
+04-07 13:26:29.647   661   696 D ActivityManager: sync unfroze 1141 com.google.android.permissioncontroller for 1
+04-07 13:26:29.677   661   867 D BackgroundInstallControlService: Package event received: 0
+04-07 13:26:29.677   661   867 D BackgroundInstallControlService: Package event received: 0
+04-07 13:26:29.677   661   867 D BackgroundInstallControlService: Package event received: 0
+04-07 13:26:29.677   661   867 D BackgroundInstallControlService: Package event received: 0
+04-07 13:26:29.768  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.768  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.774   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.779  1141  1141 I ssioncontroller: AssetManager2(0xb400007325bc5c58) locale list changing from [] to [en-US]
+04-07 13:26:29.780  1141  5697 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+04-07 13:26:29.791  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.791  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.791   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.792  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.792  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.792   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.792  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.793  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.793   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.793  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.793  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.793   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.793  1141  1216 D AccessibilitySourceService: enabled a11y services count 0
+04-07 13:26:29.793  1141  1216 D AccessibilitySourceService: a11y source sending 0 issue to sc
+04-07 13:26:29.793   661  1825 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+04-07 13:26:29.807  1141  5697 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+04-07 13:26:29.807  1141  5697 I EGL_emulation: Opening libGLESv2_emulation.so
+04-07 13:26:29.823  1141  5697 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+04-07 13:26:29.824  1141  5697 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+04-07 13:26:29.880  1141  1141 D CompatChangeReporter: Compat change id reported: 376561342; UID 10195; state: ENABLED
+04-07 13:26:29.945  1141  1141 W LOTTIE  : Animation contains merge paths. Merge paths are only supported on KitKat+ and must be manually enabled by calling enableMergePathsForKitKatAndAbove().
+04-07 13:26:29.955  1141  1141 W LOTTIE  : Animation contains merge paths but they are disabled.
+04-07 13:26:29.967  1141  1141 D CompatChangeReporter: Compat change id reported: 377864165; UID 10195; state: ENABLED
+04-07 13:26:29.973  1141  1141 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+04-07 13:26:29.992  1141  1141 W HWUI    : Unknown dataspace 0
+04-07 13:26:30.033   661   696 W WindowManager: onPointerDownOutsideFocusLocked, drop event because ActivityRecord{34586651 u0 com.ntsiniz.app/.MainActivity t77} is occluded and should not be focused.
+04-07 13:26:30.123   661  1972 D CoreBackPreview: Window{e01c6a5 u0 com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@f46c334, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}
+04-07 13:26:30.126   500   770 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10195 pid=1141
+04-07 13:26:30.126   500   770 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10195 => denied (233 us)
+04-07 13:26:30.126   500   770 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10195 pid=1141
+04-07 13:26:30.126   500   770 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10195 => denied (26 us)
+04-07 13:26:30.127   500   770 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10195 pid=1141
+04-07 13:26:30.127   500  1035 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10195 pid=0
+04-07 13:26:30.127   500  1035 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10195 => denied (1151 us)
+04-07 13:26:30.127   500  1035 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10195 pid=0
+04-07 13:26:30.127   500  1035 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10195 => denied (311 us)
+04-07 13:26:30.127   500   770 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10195 => denied (1313 us)
+04-07 13:26:30.192   661   984 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10195 pid=0
+04-07 13:26:30.200   661   984 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10195 => denied (8065 us)
+04-07 13:26:30.200   661   984 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10195 pid=0
+04-07 13:26:30.200   661   984 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10195 => denied (76 us)
+04-07 13:26:30.200   661   984 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10195 pid=0
+04-07 13:26:30.200   661   984 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10195 => denied (6 us)
+04-07 13:26:30.243   910  1589 V WindowManagerShell: onTransitionReady(transaction=2838973383440)
+04-07 13:26:30.250   910   974 V WindowManagerShell: onTransitionReady (#15) android.os.BinderProxy@d4ca447: {id=15 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+04-07 13:26:30.250   910   974 V WindowManagerShell:         {m=OPEN f=TRANSLUCENT|FILLS_TASK leash=Surface(name=ActivityRecord{196300658 u0 com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity)/@0xd837212 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2424) epz=Point(1080, 2424) d=-1->0 r=-1->0:-1 bc=ffeeedf4 component=com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity opt={t=FROM_STYLE mUserId=0}}
+04-07 13:26:30.250   910   974 V WindowManagerShell:     ]}
+04-07 13:26:30.250   910   974 V WindowManagerShell: Playing animation for (#15) android.os.BinderProxy@d4ca447@0
+04-07 13:26:30.250   910   974 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+04-07 13:26:30.250   910   974 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=15 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=TRANSLUCENT|FILLS_TASK leash=Surface(name=ActivityRecord{196300658 u0 com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity)/@0xd837212 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2424) epz=Point(1080, 2424) d=-1->0 r=-1->0:-1 bc=ffeeedf4 component=com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity opt={t=FROM_STYLE mUserId=0}}]}
+04-07 13:26:30.250   910   974 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null taskFragmentToken=android.os.BinderProxy@4c8b3e0 windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@f830699, appThread = android.app.IApplicationThread$Stub$Proxy@a229d5e, debugName = overlayBackTransition }}
+04-07 13:26:30.251   910   974 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@163d53f, appThread = android.app.IApplicationThread$Stub$Proxy@352e0c, debugName = LauncherToDream }}
+04-07 13:26:30.251   910   974 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@3f47355, appThread = android.app.IApplicationThread$Stub$Proxy@2f7316a, debugName = QuickstepLaunchHome }}
+04-07 13:26:30.251   910   974 V WindowManagerShell:  Delegate animation for (#15) to null
+04-07 13:26:30.251   910   974 V WindowManagerShell: start default transition animation, info = {id=15 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=TRANSLUCENT|FILLS_TASK leash=Surface(name=ActivityRecord{196300658 u0 com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity)/@0xd837212 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2424) epz=Point(1080, 2424) d=-1->0 r=-1->0:-1 bc=ffeeedf4 component=com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity opt={t=FROM_STYLE mUserId=0}}]}
+04-07 13:26:30.251   910   974 V WindowManagerShell: loadAnimation: anim=null animAttr=0x4 type=OPEN isEntrance=true
+04-07 13:26:30.252   910   974 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#15) android.os.BinderProxy@d4ca447@0
+04-07 13:26:30.252   661   696 D OomAdjuster: Not killing cached processes
+04-07 13:26:30.259   661   693 I ActivityTaskManager: Displayed com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity for user 0: +691ms
+04-07 13:26:30.259   661   693 V WindowManager: Sent Transition (#15) createdAt=04-07 13:26:29.598 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=77 effectiveUid=10226 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=exp+ntsiniz://expo-development-client/... flg=0x10000000 cmp=com.ntsiniz.app/.MainActivity } baseActivity=ComponentInfo{com.ntsiniz.app/com.ntsiniz.app.MainActivity} topActivity=ComponentInfo{com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity} origActivity=null realActivity=ComponentInfo{com.ntsiniz.app/com.ntsiniz.app.MainActivity} numActivities=2 lastActiveTime=594158 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{ada2cc6 Task{42add24 #77 type=standard A=10226:com.ntsiniz.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{821ba59 com.android.permissioncontroller.permission.ui.GrantPermissionsActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=true isActivityStackTransparent=false lastNonFullscreenBounds=Rect(278, 711 - 803, 1791) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2424) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 15 }
+04-07 13:26:30.259   661   693 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+04-07 13:26:30.259   661   693 V WindowManager:     info={id=15 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+04-07 13:26:30.259   661   693 V WindowManager:         {m=OPEN f=TRANSLUCENT|FILLS_TASK leash=Surface(name=ActivityRecord{196300658 u0 com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity)/@0x8376ed2 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2424) epz=Point(1080, 2424) d=-1->0 r=-1->0:-1 bc=ffeeedf4 component=com.google.android.permissioncontroller/com.android.permissioncontroller.permission.ui.GrantPermissionsActivity opt={t=FROM_STYLE mUserId=0}}
+04-07 13:26:30.259   661   693 V WindowManager:     ]}
+04-07 13:26:30.259   661   693 V WindowManager: Finish Transition (#15): created at 04-07 13:26:29.598 collect-started=0.016ms request-sent=2.381ms started=4.461ms ready=40.481ms sent=644.197ms commit=9.365ms finished=654.769ms
+04-07 13:26:30.260   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.260   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.261   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.263   661   696 W IPCThreadState: Sending oneway calls to frozen process.
+04-07 13:26:30.271   910   974 V WindowManagerShell: Track 0 became idle
+04-07 13:26:30.271   910   974 V WindowManagerShell: All active transition animations finished
+04-07 13:26:30.271   910   974 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@ccd6434
+04-07 13:26:30.272   910   974 V WindowManagerShell: Track 0 became idle
+04-07 13:26:30.272   910   974 V WindowManagerShell: All active transition animations finished
+04-07 13:26:30.274  1141  1141 I ssioncontroller: AssetManager2(0xb400007325bd8538) locale list changing from [] to [en-US]
+04-07 13:26:30.436  1476  1476 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2113 
+04-07 13:26:30.436  1476  1476 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():103 repeatCheckTimes = 0, locked = false
+04-07 13:26:30.436  1476  1476 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1384 onStartInput(EditorInfo{EditorInfo{packageName=com.google.android.permissioncontroller, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+04-07 13:26:30.436  1476  1476 W AndroidIME: LatinIMEBase.updateInputViewCoverNavigation():319 Null input view, cannot update padding!
+04-07 13:26:30.436  1476  1476 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():103 repeatCheckTimes = 1, locked = false
+04-07 13:26:30.437   661  2075 W PackageConfigPersister: App-specific configuration not found for packageName: com.google.android.permissioncontroller and userId: 0
+04-07 13:26:30.442   661  1926 I ImeTracker: system_server:e3c9d4bf: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+04-07 13:26:30.443   661   696 I ImeTracker: system_server:e3c9d4bf: onCancelled at PHASE_SERVER_SHOULD_HIDE
+04-07 13:26:31.239  1141  5695 I HWUI    : Davey! duration=864ms; Flags=1, FrameTimelineVsyncId=27105, IntendedVsync=594834860327, Vsync=594834860327, InputEventId=0, HandleInputStart=594849202533, AnimationStart=594849202700, PerformTraversalsStart=594849202825, DrawStart=594874186908, FrameDeadline=594851526993, FrameStartTime=594849201741, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=594874468741, SyncStart=594942511533, IssueDrawCommandsStart=594942569491, SwapBuffers=595676562117, FrameCompleted=595767814742, DequeueBufferDuration=70006416, QueueBufferDuration=134000, GpuCompleted=595767814742, SwapBuffersCompleted=595749695742, DisplayPresentTime=0, CommandSubmissionCompleted=595676562117, 
+04-07 13:26:31.893  5712  5712 W screencap: Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be implemented. serviceName: SurfaceFlingerAIDL
+04-07 13:26:31.895  5712  5712 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+04-07 13:26:31.895  5712  5712 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+04-07 13:26:31.922   500   550 E HwcComposer: getLuts failed Status(-8, EX_SERVICE_SPECIFIC): '8: '
+04-07 13:26:31.922   500   550 E HWComposer: getLuts: getLuts failed for display 4619827259835644672: UNSUPPORTED (8)
+04-07 13:26:32.308   457  5694 W android.hardware.audio@7.1-impl.ranchu: pcmWrite:259 pcm_writei failed with 'cannot read/write stream data: I/O error' (-1)
+04-07 13:26:32.308   457  5694 E android.hardware.audio@7.1-impl.ranchu: pcmWrite:260 failure: -1
+04-07 13:26:32.410   457  5694 W android.hardware.audio@7.1-impl.ranchu: pcmWrite:259 pcm_writei failed with 'cannot read/write stream data: I/O error' (-1)
+04-07 13:26:32.410   457  5694 E android.hardware.audio@7.1-impl.ranchu: pcmWrite:260 failure: -1
+04-07 13:26:32.476   457  5309 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 594048
+04-07 13:26:32.476   457  5309 D android.hardware.audio@7.1-impl.ranchu: ~TinyalsaSink: joining consumeThread
+04-07 13:26:32.514   457  5694 W android.hardware.audio@7.1-impl.ranchu: pcmWrite:259 pcm_writei failed with 'cannot read/write stream data: I/O error' (-1)
+04-07 13:26:32.514   457  5694 E android.hardware.audio@7.1-impl.ranchu: pcmWrite:260 failure: -1
+04-07 13:26:32.514   457  5694 D android.hardware.audio@7.1-impl.ranchu: consumeThread: exiting
+04-07 13:26:32.514   457  5309 D android.hardware.audio@7.1-impl.ranchu: ~TinyalsaSink: stopping PCM stream

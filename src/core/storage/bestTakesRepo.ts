@@ -60,6 +60,29 @@ export async function getBestTakeAttemptId(sessionId: string, drillId: string): 
 }
 
 /**
+ * Explicitly marks an attempt as best take.
+ * Used by manual "Save Best" controls in playback.
+ */
+export async function setBestTakeForAttempt(input: {
+  sessionId: string
+  drillId: string
+  attemptId: string
+  score: number
+}) {
+  const d = await getDb()
+  await exec(
+    d,
+    `INSERT INTO best_takes (sessionId, drillId, attemptId, score, updatedAt)
+     VALUES (?, ?, ?, ?, ?)
+     ON CONFLICT(sessionId, drillId) DO UPDATE SET
+       attemptId = excluded.attemptId,
+       score = excluded.score,
+       updatedAt = excluded.updatedAt;`,
+    [input.sessionId, input.drillId, input.attemptId, input.score, Date.now()],
+  )
+}
+
+/**
  * Returns mapping of drillId -> attemptId for a session.
  */
 export async function listBestTakeAttemptIdsForSession(sessionId: string): Promise<Record<string, string>> {

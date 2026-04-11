@@ -1,11 +1,29 @@
+import { listAttemptsBySession } from '@/core/storage/attemptsRepo'
 import { getUserState, upsertUserState } from '@/core/storage/userStateRepo'
 import { loadGuidedJourneyProgram } from './loader'
-import type { GuidedJourneyLesson, GuidedJourneyProgram, JourneyRouteId } from './types'
+import { getVoiceIdentity, upsertVoiceIdentity } from './voiceIdentityRepo'
+import type {
+  GuidedJourneyAssessment,
+  GuidedJourneyLesson,
+  GuidedJourneyProgram,
+  GuidedJourneyStoredAssessment,
+  JourneyRouteId,
+} from './types'
+import { evaluateGuidedLessonSession, getAssessmentForStage, getStagePassThreshold } from './v6Selectors'
 
 export type JourneyV3Progress = NonNullable<Awaited<ReturnType<typeof getUserState>>['journeyV3']>
 
 function unique(values: string[]) {
   return Array.from(new Set(values))
+}
+
+function stageRequiresStyleGate(stageId: string) {
+  const num = Number(String(stageId).replace(/\D/g, ''))
+  return Number.isFinite(num) && num >= 3
+}
+
+function uniqueNonEmpty(values: Array<string | null | undefined>) {
+  return Array.from(new Set(values.filter((value): value is string => typeof value === 'string' && value.trim().length > 0)))
 }
 
 export async function getJourneyV3Progress(): Promise<JourneyV3Progress> {
@@ -18,6 +36,9 @@ export async function getJourneyV3Progress(): Promise<JourneyV3Progress> {
     completedLessonIds: state.journeyV3?.completedLessonIds ?? [],
     completedStageIds: state.journeyV3?.completedStageIds ?? [],
     assessmentByStageId: state.journeyV3?.assessmentByStageId ?? {},
+    lessonGateByLessonId: state.journeyV3?.lessonGateByLessonId ?? {},
+    activeRemediationBundleId: state.journeyV3?.activeRemediationBundleId ?? null,
+    blockedPromotionReasons: state.journeyV3?.blockedPromotionReasons ?? [],
     compareBaseline: state.journeyV3?.compareBaseline ?? null,
     firstWinSnapshotId: state.journeyV3?.firstWinSnapshotId ?? null,
     firstWinCompletedAt: state.journeyV3?.firstWinCompletedAt ?? null,
@@ -65,6 +86,9 @@ export async function startJourneyFromPlacement(routeId: JourneyRouteId, snapsho
     completedLessonIds: [],
     completedStageIds: [],
     assessmentByStageId: {},
+    lessonGateByLessonId: {},
+    activeRemediationBundleId: null,
+    blockedPromotionReasons: [],
     compareBaseline: null,
     firstWinSnapshotId: snapshotId ?? null,
     firstWinCompletedAt: Date.now(),
@@ -96,16 +120,152 @@ export function getStageProgress(program: GuidedJourneyProgram, progress: Journe
   }
 }
 
-export async function completeJourneyLesson(lessonId: string) {
+function canUnlockLesson(lesson: GuidedJourneyLesson | undefined, completedLessonIds: string[]) {
+  if (!lesson) return false
+  if (!lesson.prerequisites.length) return true
+  return lesson.prerequisites.every((id) => completedLessonIds.includes(id))
+}
+
+function buildStageAssessmentRecord(args: {
+  assessment: GuidedJourneyAssessment | null
+  lessonScore: number
+  attemptId?: string | null
+  gateStatus: Record<string, boolean | undefined>
+  rubricDimensions: Record<string, number | undefined>
+  blockedReasons: string[]
+  remediationBundleId?: string | null
+  lessonCompleted: boolean
+  stageId: string
+}): GuidedJourneyStoredAssessment | undefined {
+  if (!args.assessment) return undefined
+  const basePass =
+    !!args.gateStatus.technical &&
+    !!args.gateStatus.transfer &&
+    !!args.gateStatus.health &&
+    (!stageRequiresStyleGate(args.stageId) || !!args.gateStatus.style_or_communication)
+  return {
+    completed: args.lessonCompleted && basePass,
+    score: args.lessonScore,
+    attemptId: args.attemptId ?? undefined,
+    recordedAt: Date.now(),
+    blockedPromotionReasons: basePass ? [] : args.blockedReasons,
+    recommendedLoadTier: basePass ? null : 'LT1',
+    remediationBundleId: args.remediationBundleId ?? null,
+    outcome: basePass ? args.assessment.outcomes[0] ?? 'advance to next stage' : args.assessment.outcomes[1] ?? 'repeat current stage with targeted remediation bundle',
+    rubricDimensions: args.rubricDimensions,
+    gateStatus: args.gateStatus,
+  }
+}
+
+export async function completeJourneyLesson(
+  lessonId: string,
+  options?: {
+    sessionId?: string
+    attemptId?: string | null
+    diagnosisTags?: string[]
+  },
+) {
   const program = loadGuidedJourneyProgram()
   const current = await ensureJourneyV3Progress()
   const lesson = program.lessonsById[lessonId]
   if (!lesson) return current
 
+  const attempts = options?.sessionId ? await listAttemptsBySession(options.sessionId).catch(() => []) : []
+  const evaluation = evaluateGuidedLessonSession(program, lesson, attempts, options?.diagnosisTags ?? [])
+  const assessment = getAssessmentForStage(program, lesson.stageId)
+  const voiceIdentity = await getVoiceIdentity().catch(() => null)
+
+  async function syncVoiceIdentity(activeRemediationBundleId: string | null, focusFallback: string[]) {
+    if (!voiceIdentity) return
+    const bundle = activeRemediationBundleId
+      ? program.remediationRules.remediationBundles.find((item) => item.id === activeRemediationBundleId)
+      : null
+    await upsertVoiceIdentity({
+      ...voiceIdentity,
+      updatedAt: Date.now(),
+      recommendedLoadTier: activeRemediationBundleId ? 'LT1' : lesson.loadTierTarget ?? null,
+      activeRemediationBundleId,
+      activeRemediationBundleName: bundle?.name ?? null,
+      currentAssessmentFocus: assessment?.sections.map((section) => section.description).slice(0, 3) ?? [],
+      currentFocus: uniqueNonEmpty([
+        ...(focusFallback.length ? focusFallback : voiceIdentity.currentFocus),
+        lesson.carryoverCue,
+      ]).slice(0, 4),
+    })
+  }
+
+  const lessonGateByLessonId = {
+    ...(current.lessonGateByLessonId ?? {}),
+    [lesson.id]: {
+      completed: evaluation.completed,
+      score: evaluation.score,
+      threshold: evaluation.threshold,
+      recordedAt: Date.now(),
+      passedDrillCount: evaluation.passedDrillCount,
+      transferPassed: evaluation.transferPassed,
+      healthCleared: evaluation.healthCleared,
+      blockedReasons: evaluation.blockedReasons,
+      remediationBundleId: evaluation.remediationBundleId,
+    },
+  }
+
+  if (!evaluation.completed) {
+    const fallbackLesson = lesson.fallbackLessonIds.map((id) => program.lessonsById[id]).find(Boolean)
+    const next: JourneyV3Progress = {
+      ...current,
+      lessonId: fallbackLesson?.id ?? lesson.id,
+      stageId: fallbackLesson?.stageId ?? lesson.stageId,
+      unlockedLessonIds: unique([...(current.unlockedLessonIds ?? []), ...(fallbackLesson ? [fallbackLesson.id] : [])]),
+      lessonGateByLessonId,
+      activeRemediationBundleId: evaluation.remediationBundleId,
+      blockedPromotionReasons: evaluation.blockedReasons,
+      assessmentByStageId: {
+        ...(current.assessmentByStageId ?? {}),
+        [lesson.stageId]:
+          buildStageAssessmentRecord({
+            assessment: getAssessmentForStage(program, lesson.stageId),
+            lessonScore: evaluation.score,
+            attemptId: options?.attemptId,
+            gateStatus: evaluation.gateStatus,
+            rubricDimensions: evaluation.rubricDimensions,
+            blockedReasons: evaluation.blockedReasons,
+            remediationBundleId: evaluation.remediationBundleId,
+            lessonCompleted: false,
+            stageId: lesson.stageId,
+          }) ?? (current.assessmentByStageId ?? {})[lesson.stageId],
+      },
+    }
+    await upsertJourneyV3Progress(next)
+    await syncVoiceIdentity(
+      evaluation.remediationBundleId,
+      uniqueNonEmpty([
+        evaluation.blockedReasons[0],
+        lesson.healthWatchouts[0],
+        lesson.lessonOutcomes[0],
+      ]),
+    )
+    return next
+  }
+
   const completedLessonIds = unique([...(current.completedLessonIds ?? []), lessonId])
   let completedStageIds = [...(current.completedStageIds ?? [])]
   const stage = program.stagesById[lesson.stageId]
-  if (stage && stage.lessonIds.every((id) => completedLessonIds.includes(id))) {
+  const stageLessonsComplete = stage ? stage.lessonIds.every((id) => completedLessonIds.includes(id)) : false
+  const stageAssessment = getAssessmentForStage(program, lesson.stageId)
+  const stageAssessmentRecord =
+    buildStageAssessmentRecord({
+      assessment: stageAssessment,
+      lessonScore: evaluation.score || getStagePassThreshold(program, lesson.stageId),
+      attemptId: options?.attemptId,
+      gateStatus: evaluation.gateStatus,
+      rubricDimensions: evaluation.rubricDimensions,
+      blockedReasons: evaluation.blockedReasons,
+      remediationBundleId: evaluation.remediationBundleId,
+      lessonCompleted: true,
+      stageId: lesson.stageId,
+    }) ?? null
+
+  if (stageLessonsComplete && (!stageAssessment || stageAssessmentRecord?.completed)) {
     completedStageIds = unique([...completedStageIds, stage.id])
   }
 
@@ -114,13 +274,18 @@ export async function completeJourneyLesson(lessonId: string) {
     : stage?.lessonIds.filter((id) => !completedLessonIds.includes(id) && id !== lessonId) ?? []
   let nextLesson = candidates.map((id) => program.lessonsById[id]).find((candidate) => canUnlockLesson(candidate, completedLessonIds))
 
-  if (!nextLesson) {
+  if (!nextLesson && stage && stageLessonsComplete && (!stageAssessment || stageAssessmentRecord?.completed)) {
     const routeStages = program.routesById[(current.routeId ?? 'R4') as JourneyRouteId]?.primaryStageIds ?? []
     const stageIdx = routeStages.indexOf(lesson.stageId)
     const nextStageId = stageIdx >= 0 ? routeStages[stageIdx + 1] : undefined
     const nextStage = nextStageId ? program.stagesById[nextStageId] : undefined
     nextLesson = nextStage ? nextStage.lessonIds.map((id) => program.lessonsById[id]).find(Boolean) : undefined
   }
+
+  const blockedPromotionReasons =
+    stageLessonsComplete && stageAssessment && !stageAssessmentRecord?.completed
+      ? stageAssessmentRecord?.blockedPromotionReasons ?? ['Stage benchmark still needs a clean pass.']
+      : []
 
   const next: JourneyV3Progress = {
     ...current,
@@ -133,13 +298,22 @@ export async function completeJourneyLesson(lessonId: string) {
       ...(nextLesson ? [nextLesson.id] : []),
       ...(stage?.lessonIds.filter((id) => completedLessonIds.includes(id)) ?? []),
     ]),
+    lessonGateByLessonId,
+    activeRemediationBundleId: stageAssessmentRecord?.completed ? null : evaluation.remediationBundleId,
+    blockedPromotionReasons,
+    assessmentByStageId: {
+      ...(current.assessmentByStageId ?? {}),
+      ...(stageAssessmentRecord ? { [lesson.stageId]: stageAssessmentRecord } : {}),
+    },
   }
   await upsertJourneyV3Progress(next)
+  await syncVoiceIdentity(
+    stageAssessmentRecord?.completed ? null : evaluation.remediationBundleId,
+    uniqueNonEmpty([
+      lesson.lessonOutcomes[0],
+      lesson.carryoverCue,
+      stageAssessmentRecord?.completed ? assessment?.title : blockedPromotionReasons[0],
+    ]),
+  )
   return next
-}
-
-function canUnlockLesson(lesson: GuidedJourneyLesson | undefined, completedLessonIds: string[]) {
-  if (!lesson) return false
-  if (!lesson.prerequisites.length) return true
-  return lesson.prerequisites.every((id) => completedLessonIds.includes(id))
 }

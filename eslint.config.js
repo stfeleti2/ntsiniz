@@ -4,7 +4,7 @@ const globals = require('globals')
 
 module.exports = [
   {
-    ignores: ['dist-core/**', 'dist-tests/**', 'node_modules/**', 'modules/**/build/**'],
+    ignores: ['dist-core/**', 'dist-tests/**', 'node_modules/**', 'modules/**/build/**', '.rnstorybook/**'],
   },
   {
     rules: {
