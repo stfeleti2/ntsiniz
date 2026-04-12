@@ -144,6 +144,36 @@ npm run storybook:ios
 npm run storybook:android
 ```
 
+### Run Storybook on Web
+
+```bash
+npm run storybook:web
+```
+
+### Build Storybook for Web
+
+```bash
+npm run storybook:web:build
+```
+
+Web Storybook uses React Native Web and the same `src/**/*.stories.tsx` stories as mobile. Native-only modules are mocked in the browser config so the shared component system stays single-source.
+
+### Design-System Governance
+
+```bash
+# Generate coverage map + state matrix
+npm run design-system:audit
+
+# Strict mode (fails if Storybook coverage/state contracts are incomplete)
+npm run check:design-system
+```
+
+Generated artifacts:
+
+- `docs/design-system/storybook_coverage_report.json`
+- `docs/design-system/storybook_expansion_map.md`
+- `docs/design-system/NEOMORPH_STORYBOOK_SYSTEM_SPEC.md`
+
 ---
 
 ### Storybook Includes

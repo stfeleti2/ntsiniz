@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { Heading } from '@/components/ui/atoms'
+import { Heading } from '@/ui/components/kit'
 
 const meta: Meta<typeof Heading> = {
   title: 'Atoms/Heading',
@@ -36,3 +36,10 @@ export const StackPreview: Story = {
     </View>
   ),
 }
+
+export const Default = Level1
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

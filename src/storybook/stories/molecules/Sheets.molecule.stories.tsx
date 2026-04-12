@@ -1,8 +1,11 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { BottomSheetPanel, ModalSheet } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, SecondaryButton } from '@/components/ui/atoms'
+import { BottomSheetPanel } from '@/ui/components/BottomSheetPanel'
+import { ModalSheet } from '@/ui/components/ModalSheet'
+import { Heading } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
 
 const meta: Meta<typeof ModalSheet> = {
   title: 'Molecules/Sheets',
@@ -20,19 +23,26 @@ export const ModalAndBottomSheet: Story = {
 
     return (
       <View style={{ gap: 10 }}>
-        <PrimaryButton label="Open Modal" onPress={() => setVisible(true)} />
-        <SecondaryButton label="Open Bottom Sheet" onPress={() => ref.current?.snapToIndex(0)} />
+        <Button text="Open Modal" onPress={() => setVisible(true)} />
+        <Button text="Open Bottom Sheet" variant="secondary" onPress={() => ref.current?.snapToIndex(0)} />
 
         <ModalSheet visible={visible} onClose={() => setVisible(false)}>
           <Heading level={3}>Modal Sheet</Heading>
-          <BodyText tone="muted">Reusable modal wrapper with neumorphic shell.</BodyText>
+          <Text preset="muted">Reusable modal wrapper with neumorphic shell.</Text>
         </ModalSheet>
 
         <BottomSheetPanel ref={ref} snapPoints={['45%']}>
           <Heading level={3}>Bottom Sheet</Heading>
-          <BodyText tone="muted">Vendor API stays wrapped by app-specific component.</BodyText>
+          <Text preset="muted">Vendor API stays wrapped by app-specific component.</Text>
         </BottomSheetPanel>
       </View>
     )
   },
 }
+
+export const Default = ModalAndBottomSheet
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

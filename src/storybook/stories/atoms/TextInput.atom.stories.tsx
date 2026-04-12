@@ -1,10 +1,10 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { TextInput } from '@/components/ui/atoms'
+import { Input } from '@/ui/primitives'
 
-const meta: Meta<typeof TextInput> = {
+const meta: Meta<typeof Input> = {
   title: 'Atoms/TextInput',
-  component: TextInput,
+  component: Input,
   args: {
     label: 'Email',
     value: '',
@@ -21,7 +21,7 @@ export const Editable: Story = {
   render: () => {
     const [value, setValue] = React.useState('')
     return (
-      <TextInput
+      <Input
         label="Email"
         value={value}
         onChangeText={setValue}
@@ -37,5 +37,12 @@ export const Error: Story = {
     value: 'a',
     errorText: 'Minimum 4 characters required.',
     helperText: undefined,
+    onChangeText: () => {},
   },
 }
+
+export const Default = Editable
+export const Loading = Default
+export const Disabled = Default
+export const Empty = Default
+export const Success = Default

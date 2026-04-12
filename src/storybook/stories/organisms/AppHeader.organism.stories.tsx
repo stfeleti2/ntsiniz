@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { AppHeader } from '@/components/ui/organisms'
+import { AppHeader } from '@/ui/components/AppHeader'
 
 const meta: Meta<typeof AppHeader> = {
   title: 'Organisms/AppHeader',
@@ -15,3 +15,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

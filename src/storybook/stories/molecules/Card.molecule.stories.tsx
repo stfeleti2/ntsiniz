@@ -1,8 +1,9 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Heading } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
 
 const meta: Meta<typeof Card> = {
   title: 'Molecules/Card',
@@ -18,20 +19,27 @@ export const Variants: Story = {
     <View style={{ gap: 10 }}>
       <Card tone="default">
         <Heading level={3}>Default Card</Heading>
-        <BodyText tone="muted">Standard surface for content grouping.</BodyText>
+        <Text preset="muted">Standard surface for content grouping.</Text>
       </Card>
       <Card tone="elevated">
         <Heading level={3}>Elevated Card</Heading>
-        <BodyText tone="muted">Raised surface for important content.</BodyText>
+        <Text preset="muted">Raised surface for important content.</Text>
       </Card>
       <Card tone="glow">
         <Heading level={3}>Glow Card</Heading>
-        <BodyText tone="muted">Accent emphasis for key CTAs.</BodyText>
+        <Text preset="muted">Accent emphasis for key CTAs.</Text>
       </Card>
       <Card tone="warning">
         <Heading level={3}>Warning Card</Heading>
-        <BodyText tone="muted">Call out cautionary context.</BodyText>
+        <Text preset="muted">Call out cautionary context.</Text>
       </Card>
     </View>
   ),
 }
+
+export const Default = Variants
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

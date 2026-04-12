@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { StatusBanner } from '@/components/ui/molecules'
+import { StatusBanner } from '@/ui/components/StatusBanner'
 
 const meta: Meta<typeof StatusBanner> = {
   title: 'Molecules/StatusBanner',
@@ -29,3 +29,9 @@ export const Matrix: Story = {
     </View>
   ),
 }
+
+export const Default = Success
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default

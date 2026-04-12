@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { Icon } from '@/components/ui/atoms'
+import { Icon } from '@/ui/primitives'
 
 const meta: Meta<typeof Icon> = {
   title: 'Atoms/Icon',
@@ -29,3 +29,10 @@ export const Gallery: Story = {
     </View>
   ),
 }
+
+export const Default = Gallery
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

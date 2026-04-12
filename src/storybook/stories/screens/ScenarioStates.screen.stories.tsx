@@ -1,11 +1,13 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { Container, Card, StatusBanner } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, SecondaryButton, GhostButton } from '@/components/ui/atoms'
+import { Screen } from '@/ui/components/Screen'
+import { Card } from '@/ui/components/kit'
+import { Button } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
 
-const meta: Meta<typeof Container> = {
+const meta: Meta<typeof Screen> = {
   title: 'Screens/ScenarioStates',
-  component: Container,
+  component: Screen,
 }
 
 export default meta
@@ -14,31 +16,34 @@ type Story = StoryObj<typeof meta>
 
 export const LoadingErrorDisabledPressedMatrix: Story = {
   render: () => (
-    <Container>
+    <Screen scroll>
       <Card tone="elevated">
-        <Heading level={3}>Loading</Heading>
-        <BodyText tone="muted">Analyzing microphone quality...</BodyText>
-        <SecondaryButton label="Please wait" disabled />
+        <Text preset="h3">Loading</Text>
+        <Text preset="muted">Analyzing microphone quality...</Text>
+        <Button text="Please wait" variant="secondary" disabled />
       </Card>
 
       <Card tone="warning">
-        <Heading level={3}>Error</Heading>
-        <StatusBanner tone="danger" title="Permission blocked" body="Enable microphone access in settings." />
-        <PrimaryButton label="Retry Permission" />
+        <Text preset="h3">Error</Text>
+        <Text preset="muted">Permission blocked. Enable microphone access in settings.</Text>
+        <Button text="Retry Permission" />
       </Card>
 
       <Card tone="default">
-        <Heading level={3}>Disabled</Heading>
-        <BodyText tone="muted">Action disabled until required fields are complete.</BodyText>
-        <GhostButton label="Continue" disabled />
+        <Text preset="h3">Disabled</Text>
+        <Text preset="muted">Action disabled until required fields are complete.</Text>
+        <Button text="Continue" variant="ghost" disabled />
       </Card>
 
       <Card tone="glow">
-        <Heading level={3}>Pressed Simulation</Heading>
-        <BodyText tone="muted">Use on-device Storybook to press and inspect interaction states.</BodyText>
-        <PrimaryButton label="Press Me" />
+        <Text preset="h3">Pressed Simulation</Text>
+        <Text preset="muted">Use on-device Storybook to press and inspect interaction states.</Text>
+        <Button text="Press Me" />
       </Card>
-    </Container>
+    </Screen>
   ),
 }
 
+export const Default = LoadingErrorDisabledPressedMatrix
+export const Empty = Default
+export const Success = Default

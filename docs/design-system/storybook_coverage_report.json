@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-04-12T13:33:26.632Z",
+  "totals": {
+    "components": 31,
+    "primitives": 14,
+    "screens": 83,
+    "stories": 136
+  },
+  "coverage": {
+    "componentsCovered": 31,
+    "primitivesCovered": 14,
+    "screensCovered": 83
+  },
+  "missing": {
+    "components": [],
+    "primitives": [],
+    "screens": [],
+    "storyFilesMissingRequiredStates": []
+  }
+}

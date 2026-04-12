@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { DrillControlPanel } from '@/components/ui/organisms'
+import { DrillControlPanel } from '@/ui/components/DrillControlPanel'
 
 const meta: Meta<typeof DrillControlPanel> = {
   title: 'Organisms/DrillControlPanel',
@@ -21,3 +21,9 @@ export const Loading: Story = {
     status: 'Analyzing room noise...',
   },
 }
+
+export const Default = Ready
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

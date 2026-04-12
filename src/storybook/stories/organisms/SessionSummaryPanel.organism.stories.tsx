@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { SessionSummaryPanel } from '@/components/ui/organisms'
+import { SessionSummaryPanel } from '@/ui/components/SessionSummaryPanel'
 
 const meta: Meta<typeof SessionSummaryPanel> = {
   title: 'Organisms/SessionSummaryPanel',
@@ -20,3 +20,9 @@ export const NeedsWork: Story = {
     score: 62,
   },
 }
+
+export const Default = Success
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
-import { ChartPanel } from '@/components/ui/organisms'
+import { ChartPanel } from '@/ui/components/ChartPanel'
 
 const meta: Meta<typeof ChartPanel> = {
   title: 'Organisms/ChartPanel',
@@ -17,3 +17,9 @@ export const ImprovingTrend: Story = {
     points: [54, 59, 61, 64, 68, 72, 79],
   },
 }
+
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default

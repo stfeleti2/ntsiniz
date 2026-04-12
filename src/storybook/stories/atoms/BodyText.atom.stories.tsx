@@ -1,11 +1,11 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
-import { BodyText, HelperText } from '@/components/ui/atoms'
+import { Text } from '@/ui/components/Typography'
 
-const meta: Meta<typeof BodyText> = {
+const meta: Meta<typeof Text> = {
   title: 'Atoms/BodyText',
-  component: BodyText,
+  component: Text,
   args: {
     children: 'Consistent body copy for onboarding and drill guidance.',
   },
@@ -20,11 +20,17 @@ export const Default: Story = {}
 export const Tones: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
-      <BodyText>Primary text tone</BodyText>
-      <BodyText tone="muted">Muted helper tone</BodyText>
-      <BodyText tone="success">Success tone</BodyText>
-      <BodyText tone="warning">Warning tone</BodyText>
-      <HelperText>Compact helper text</HelperText>
+      <Text preset="body">Primary text tone</Text>
+      <Text preset="muted">Muted helper tone</Text>
+      <Text preset="body" tone="success">Success tone</Text>
+      <Text preset="body">Warning tone</Text>
+      <Text preset="caption">Compact helper text</Text>
     </View>
   ),
 }
+
+export const Loading = Default
+export const Disabled = Default
+export const Error = Default
+export const Empty = Default
+export const Success = Default
