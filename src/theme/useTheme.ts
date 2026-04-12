@@ -26,10 +26,10 @@ export function useTheme() {
       line: c.border,
     },
     gradients: {
-      primary: [c.primary, c.accentPink, c.secondary],
-      hero: [c.bg, '#1A1436', '#231B45', c.bg],
-      surface: [c.surfaceBase, c.surfaceRaised],
-      glow: ['rgba(153, 129, 255, 0.38)', 'rgba(246, 166, 255, 0.24)', 'rgba(137, 233, 255, 0.2)'],
+      primary: uiTheme.gradients.primary,
+      hero: uiTheme.gradients.hero,
+      surface: uiTheme.gradients.surface,
+      glow: uiTheme.gradients.glow,
     },
     spacing: {
       xs: uiTheme.spacing.xs,

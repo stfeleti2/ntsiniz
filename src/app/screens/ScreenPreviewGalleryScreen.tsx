@@ -3,8 +3,9 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { View } from 'react-native'
 import { orderedScreenPreviews } from '@/screens/previews'
 import { SandboxScreenShell } from '@/components/shared'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, SecondaryButton } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
 import { useTheme } from '@/theme/provider'
 import type { RootStackParamList } from '../navigation/types'
 
@@ -20,15 +21,16 @@ export function ScreenPreviewGalleryScreen({ navigation }: Props) {
     >
       {orderedScreenPreviews.map((preview) => (
         <Card key={preview.id} tone="elevated">
-          <Heading level={3}>{preview.title}</Heading>
-          <BodyText tone="muted">{preview.description}</BodyText>
+          <Text preset="h3">{preview.title}</Text>
+          <Text preset="muted">{preview.description}</Text>
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <PrimaryButton
-              label="Open Preview"
+            <Button
+              text="Open Preview"
               onPress={() => navigation.navigate('ScreenPreviewScenario', { scenario: preview.id })}
             />
-            <SecondaryButton
-              label="Open in Flow Playground"
+            <Button
+              text="Open in Flow Playground"
+              variant="secondary"
               onPress={() =>
                 navigation.navigate('FlowPlayground', {
                   scenario: preview.id === 'session-summary' ? 'singing-start' : 'onboarding',

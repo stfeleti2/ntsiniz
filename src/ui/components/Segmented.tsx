@@ -29,12 +29,12 @@ export function Segmented<T extends string>({ value, options, onChange, testIDPr
   const indicator = useAnimatedStyle(() => ({ transform: [{ translateX: x.value * 120 }] }))
 
   return (
-    <Box style={[styles.wrap, { borderColor: t.colors.line, backgroundColor: "rgba(255,255,255,0.06)" }]}>
+    <Box style={[styles.wrap, { borderColor: t.colors.line, backgroundColor: t.colors.card }]}> 
       <AnimatedGradient
         colors={t.gradients.primary as any}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={[styles.indicator, { borderColor: "rgba(255,255,255,0.18)" }, indicator]}
+        style={[styles.indicator, { borderColor: t.colors.line }, indicator]}
       />
       {options.map((o) => {
         const active = o.key === value

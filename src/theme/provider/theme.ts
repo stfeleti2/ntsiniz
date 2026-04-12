@@ -2,6 +2,8 @@ import {
   breakpoints,
   darkColors,
   elevation,
+  darkGradients,
+  lightGradients,
   lightColors,
   motion as baseMotion,
   radius,
@@ -44,10 +46,12 @@ export function buildTheme(options?: {
 }) {
   const mode = options?.mode ?? 'dark'
   const colors = mode === 'light' ? lightColors : darkColors
+  const gradients = mode === 'light' ? lightGradients : darkGradients
   const motion = buildMotion(options?.motionPreset ?? 'normal', !!options?.reducedMotion)
 
   return {
     colors,
+    gradients,
     spacing,
     typography,
     radius,

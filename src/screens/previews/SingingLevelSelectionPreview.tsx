@@ -1,7 +1,9 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Container, Card } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, SecondaryButton } from '@/components/ui/atoms'
+import { Screen } from '@/ui/components/Screen'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
+import { Stack } from '@/ui'
 import { useTheme } from '@/theme/provider'
 
 const levels = ['Just starting', 'Casual', 'Serious', 'Professional / Coach']
@@ -10,20 +12,20 @@ export function SingingLevelSelectionPreview() {
   const { spacing } = useTheme()
 
   return (
-    <Container>
-      <Heading level={2}>Select your singing level</Heading>
-      <BodyText tone="muted">This tunes helper density for your first drill.</BodyText>
-      <View style={{ gap: spacing[2] }}>
+    <Screen scroll>
+      <Text preset="h2">Select your singing level</Text>
+      <Text preset="muted">This tunes helper density for your first drill.</Text>
+      <Stack gap={spacing[2]}>
         {levels.map((level, idx) => (
           <Card key={level} tone={idx === 1 ? 'glow' : 'default'}>
-            <BodyText>{level}</BodyText>
+            <Text preset="body">{level}</Text>
           </Card>
         ))}
-      </View>
-      <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-        <PrimaryButton label="Continue" />
-        <SecondaryButton label="Back" />
-      </View>
-    </Container>
+      </Stack>
+      <Stack direction="horizontal" gap={spacing[2]} style={{ flexWrap: 'wrap' }}>
+        <Button text="Continue" />
+        <Button text="Back" variant="secondary" />
+      </Stack>
+    </Screen>
   )
 }

@@ -2,9 +2,10 @@ import type { ViewStyle } from 'react-native'
 import type { Theme } from '@/theme/provider'
 import type { SurfaceVariant } from '@/theme/tokens'
 import { getNeumorphismRule } from './rules'
-import type { NeumorphismState } from './types'
+import type { NeumorphismState, SurfaceQuality } from './types'
 
-export type SurfaceQuality = 'full' | 'lite'
+// Re-export so callers that imported from this file continue to work.
+export type { SurfaceQuality }
 
 export type NeumorphicSurfaceOptions = {
   variant?: SurfaceVariant
@@ -24,7 +25,7 @@ function hexToRgba(hex: string, alpha: number) {
   return `rgba(${r},${g},${b},${alpha})`
 }
 
-function withAlpha(color: string, alpha: number) {
+export function withAlpha(color: string, alpha: number) {
   if (color.startsWith('rgba(')) {
     return color.replace(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*[\d.]+\)/, `rgba($1, $2, $3, ${alpha})`)
   }

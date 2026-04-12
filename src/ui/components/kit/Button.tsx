@@ -1,21 +1,26 @@
 import React from 'react'
 import { ActivityIndicator, ViewStyle, StyleProp } from 'react-native'
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { Pressable, Text, Stack } from '../../primitives'
+import { SurfacePressable, Stack, Text } from '../../primitives'
 import { useTheme } from '../../theme'
 
 export type ButtonProps = {
-  label: string
+  text?: string
+  title?: string
+  children?: React.ReactNode
+  label?: string
   onPress?: () => void
   disabled?: boolean
   loading?: boolean
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'soft'
   style?: StyleProp<ViewStyle>
   testID?: string
   accessibilityLabel?: string
 }
 
 export function Button({
+  text,
+  title,
+  children,
   label,
   onPress,
   disabled,
@@ -25,88 +30,71 @@ export function Button({
   testID,
   accessibilityLabel,
 }: ButtonProps) {
-  const { colors, radius, spacing, elevation: elev } = useTheme()
-  const press = useSharedValue(disabled ? 1 : 0)
+  const { colors, radius, spacing } = useTheme()
 
-  React.useEffect(() => {
-    if (disabled || loading) {
-      press.value = withTiming(0, { duration: 120, easing: Easing.out(Easing.quad) })
-    }
-  }, [disabled, loading, press])
+  const resolvedLabel =
+    label ?? text ?? title ?? (typeof children === 'string' ? children : '')
+
+  const resolvedVariant = variant === 'soft' ? 'secondary' : variant
 
   const bg =
-    variant === 'primary'
+    resolvedVariant === 'primary'
       ? colors.primary
-      : variant === 'secondary'
+      : resolvedVariant === 'secondary'
         ? colors.surfaceRaised
-        : variant === 'danger'
+        : resolvedVariant === 'danger'
           ? colors.danger
           : colors.surfaceGlass
 
-  const borderColor =
-    variant === 'primary'
-      ? 'rgba(227, 220, 255, 0.64)'
-      : variant === 'ghost'
-        ? colors.borderStrong
-        : variant === 'danger'
-          ? 'rgba(255, 196, 208, 0.6)'
-          : colors.border
-
   const textColor =
-    variant === 'primary' ? '#100B20' : variant === 'danger' ? '#2C0E18' : colors.text
-
-  const animatedStyle = useAnimatedStyle(() => {
-    const pressed = press.value
-    const depth = pressed > 0.5 ? elev.neumorphic.pressed : elev.neumorphic.raised
-    return {
-      transform: [{ translateY: pressed > 0.5 ? 1 : 0 }, { scale: pressed > 0.5 ? 0.995 : 1 }],
-      shadowOpacity: depth.shadowOpacity,
-      shadowRadius: depth.shadowRadius,
-      shadowOffset: depth.shadowOffset,
-      elevation: depth.elevation,
-    }
-  })
+    resolvedVariant === 'primary'
+      ? colors.highContrastText
+      : resolvedVariant === 'danger'
+        ? colors.highContrastText
+        : colors.text
 
   return (
-    <Pressable
-      testID={testID}
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel ?? label}
+    <SurfacePressable
+      elevation="raised"
       disabled={disabled || loading}
+      haptic
       onPress={onPress}
-      onPressIn={() => {
-        if (disabled || loading) return
-        press.value = withTiming(1, { duration: 110, easing: Easing.out(Easing.quad) })
-      }}
-      onPressOut={() => {
-        press.value = withTiming(0, { duration: 150, easing: Easing.out(Easing.cubic) })
-      }}
-      style={{ opacity: disabled ? 0.52 : 1 }}
+      accessibilityLabel={accessibilityLabel ?? resolvedLabel}
+      testID={testID}
+      style={[
+        {
+          minHeight: 48,
+          paddingVertical: spacing[3],
+          paddingHorizontal: spacing[4],
+          borderRadius: radius[3],
+          backgroundColor: bg,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        style,
+      ]}
     >
-      <Animated.View
-        style={[
-          {
-            minHeight: 48,
-            paddingVertical: spacing[3],
-            paddingHorizontal: spacing[4],
-            borderRadius: radius[3],
-            backgroundColor: bg,
-            borderWidth: 1,
-            borderColor,
-            justifyContent: 'center',
-            shadowColor: colors.shadowDark,
-          },
-          animatedStyle,
-          style as any,
-        ]}
-      >
-        <Stack direction="horizontal" gap={8} align="center" justify="center">
-          {loading ? <ActivityIndicator color={textColor} /> : null}
-          <Text weight="semibold" style={{ textAlign: 'center', color: textColor }}>
-            {label}
-          </Text>
-        </Stack>
-      </Animated.View>
-    </Pressable>
+      <Stack direction="horizontal" gap={8} align="center" justify="center">
+        {loading ? <ActivityIndicator color={textColor} size="small" /> : null}
+        <Text weight="semibold" style={{ color: textColor, textAlign: 'center' }}>
+          {resolvedLabel}
+        </Text>
+      </Stack>
+    </SurfacePressable>
   )
 }
+
+
+// Backward compatibility: variant-specific button exports for migration from old components
+export function PrimaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="primary" />
+}
+
+export function SecondaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="secondary" />
+}
+
+export function GhostButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="ghost" />
+}
+

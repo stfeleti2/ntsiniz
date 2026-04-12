@@ -4,8 +4,8 @@ import Animated, { FadeInDown } from "react-native-reanimated"
 import type { JourneyNodeState } from "@/core/progress/journeyPath"
 import { useTheme } from "@/theme/useTheme"
 import { Text } from "@/ui/components/Typography"
-import { Button } from "@/ui/components/Button"
-import { Card } from "@/ui/components/Card"
+import { Button } from "@/ui/components/kit"
+import { Card } from "@/ui/components/kit"
 import { Box } from '@/ui'
 
 type Props = {

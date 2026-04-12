@@ -1,6 +1,7 @@
 import React from 'react'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Button } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
 
 export function DrillSessionCard({
   title,
@@ -15,9 +16,9 @@ export function DrillSessionCard({
 }) {
   return (
     <Card tone="elevated">
-      <Heading level={3}>{title}</Heading>
-      {subtitle ? <BodyText tone="muted">{subtitle}</BodyText> : null}
-      <PrimaryButton label={ctaLabel} onPress={onStart} />
+      <Text preset="h3">{title}</Text>
+      {subtitle ? <Text preset="muted">{subtitle}</Text> : null}
+      <Button text={ctaLabel} onPress={onStart} />
     </Card>
   )
 }

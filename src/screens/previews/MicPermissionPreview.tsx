@@ -1,15 +1,20 @@
 import React from 'react'
-import { Container, StatusBanner } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, GhostButton } from '@/components/ui/atoms'
+import { Screen } from '@/ui/components/Screen'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
 
 export function MicPermissionPreview() {
   return (
-    <Container>
-      <Heading level={2}>Microphone Access</Heading>
-      <BodyText tone="muted">We only use the mic during active singing drills.</BodyText>
-      <StatusBanner title="Permission needed" body="Enable microphone to continue into calibration." tone="warning" />
-      <PrimaryButton label="Allow Microphone" />
-      <GhostButton label="Not Now" />
-    </Container>
+    <Screen scroll>
+      <Text preset="h2">Microphone Access</Text>
+      <Text preset="muted">We only use the mic during active singing drills.</Text>
+      <Card tone="warning">
+        <Text preset="h3">Permission needed</Text>
+        <Text preset="muted">Enable microphone to continue into calibration.</Text>
+      </Card>
+      <Button text="Allow Microphone" />
+      <Button text="Not Now" variant="ghost" />
+    </Screen>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
-import { Pressable, Icon } from '../../primitives'
+import { SurfacePressable, Icon } from '../../primitives'
 import { useTheme } from '../../theme'
 
 export type IconButtonProps = {
@@ -14,30 +14,29 @@ export type IconButtonProps = {
 }
 
 export function IconButton({ icon, onPress, disabled, size = 40, style, testID, accessibilityLabel }: IconButtonProps) {
-  const { colors, radius } = useTheme()
+  const { radius } = useTheme()
   return (
-    <Pressable
+    <SurfacePressable
       testID={testID}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? icon}
       disabled={disabled}
       onPress={onPress}
-      style={({ pressed }) => [
+      elevation="raised"
+      haptic
+      containerStyle={{ alignSelf: 'flex-start' }}
+      style={[
         {
           width: size,
           height: size,
           borderRadius: radius.pill,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: colors.surface2,
-          borderWidth: 1,
-          borderColor: colors.border,
-          opacity: disabled ? 0.5 : pressed ? 0.9 : 1,
         },
-        style as any,
+        style,
       ]}
     >
       <Icon name={icon} />
-    </Pressable>
+    </SurfacePressable>
   )
 }

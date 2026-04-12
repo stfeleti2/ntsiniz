@@ -26,13 +26,13 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   })
 
   return (
-    <Box style={[styles.wrap, { paddingBottom: Math.max(insets.bottom, 10), backgroundColor: "rgba(10, 12, 18, 0.92)", borderTopColor: t.colors.line }]}>
+    <Box style={[styles.wrap, { paddingBottom: Math.max(insets.bottom, 10), backgroundColor: t.colors.card, borderTopColor: t.colors.line }]}> 
       <Box style={[styles.inner, { borderColor: t.colors.line }]}> 
         <AnimatedGradient
           colors={t.gradients.primary as any}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={[styles.indicator, { borderColor: "rgba(255,255,255,0.18)" }, indicator]}
+          style={[styles.indicator, { borderColor: t.colors.line }, indicator]}
         />
 
         {state.routes.map((route, index) => {

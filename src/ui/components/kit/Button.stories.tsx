@@ -39,3 +39,7 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
+
+export const Error = Primary
+export const Empty = Primary
+export const Success = Primary

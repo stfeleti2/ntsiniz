@@ -1,8 +1,8 @@
 import React from 'react'
 import { useWindowDimensions } from 'react-native'
-import { Card } from './Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from './Typography'
-import { Button } from './Button'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
 
 export type NextActionBarProps = {

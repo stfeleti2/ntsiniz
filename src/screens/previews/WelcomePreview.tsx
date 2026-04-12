@@ -1,21 +1,28 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Container, StatusBanner } from '@/components/ui/molecules'
-import { AppHeader } from '@/components/ui/organisms'
-import { PrimaryButton, GhostButton } from '@/components/ui/atoms'
+import { Screen } from '@/ui/components/Screen'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
+import { Stack } from '@/ui'
 import { useTheme } from '@/theme/provider'
 
 export function WelcomePreview() {
   const { spacing } = useTheme()
 
   return (
-    <Container>
-      <AppHeader title="Ntsiniz" subtitle="A fair ear for your voice." />
-      <StatusBanner title="Welcome back" body="Let us sharpen your voice in one focused session." tone="info" />
-      <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-        <PrimaryButton label="Start" />
-        <GhostButton label="Skip" />
-      </View>
-    </Container>
+    <Screen scroll>
+      <Stack gap={spacing[2]}>
+        <Text preset="h1">Ntsiniz</Text>
+        <Text preset="muted">A fair ear for your voice.</Text>
+      </Stack>
+      <Card tone="elevated">
+        <Text preset="h3">Welcome back</Text>
+        <Text preset="muted">Let us sharpen your voice in one focused session.</Text>
+      </Card>
+      <Stack direction="horizontal" gap={spacing[2]} style={{ flexWrap: 'wrap' }}>
+        <Button text="Start" />
+        <Button text="Skip" variant="ghost" />
+      </Stack>
+    </Screen>
   )
 }

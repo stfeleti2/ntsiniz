@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
-import { BlurView } from 'expo-blur'
+import { View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 
@@ -8,14 +7,16 @@ import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
 import { Box } from '@/ui'
-import { Button } from '@/ui/components/Button'
-import { Card } from '@/ui/components/Card'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
+import { SurfacePressable } from '@/ui/primitives'
 import { BrandWorldBackdrop } from '@/ui/guidedJourney'
 
 import { getSettings, upsertSettings } from '@/core/storage/settingsRepo'
 import { profileForSingingLevel, type SingingLevel } from '@/core/guidedJourney/singingLevel'
 import { getVoiceIdentity, upsertVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>
 
@@ -54,6 +55,7 @@ const LEVEL_OPTIONS: LevelOption[] = [
 ]
 
 export function OnboardingScreen({ navigation }: Props) {
+  const theme = useTheme()
   const [level, setLevel] = useState<SingingLevel>('justStarting')
   const [busy, setBusy] = useState(false)
   const copy = {
@@ -111,7 +113,7 @@ export function OnboardingScreen({ navigation }: Props) {
     <Screen scroll background="hero">
       <BrandWorldBackdrop />
       <Card tone="glow" style={{ overflow: 'hidden' }}>
-        <LinearGradient colors={['rgba(98,56,227,0.48)', 'rgba(29,16,73,0.84)']} style={StyleSheet.absoluteFill} />
+        <LinearGradient colors={['rgba(98,56,227,0.48)', 'rgba(29,16,73,0.84)']} style={ABS_FILL} />
         <Box style={{ gap: 8 }}>
           <Text preset="h1">{copy.title}</Text>
           <Text preset="muted">{copy.subtitle}</Text>
@@ -122,18 +124,51 @@ export function OnboardingScreen({ navigation }: Props) {
         {LEVEL_OPTIONS.map((option) => {
           const selected = option.id === level
           return (
-            <Pressable key={option.id} onPress={() => setLevel(option.id)} accessibilityRole="button">
-              <BlurView intensity={selected ? 44 : 30} tint="dark" style={[styles.optionCard, selected ? styles.optionCardSelected : null]}>
-                <View style={[styles.iconPill, selected ? styles.iconPillSelected : null]}>
+            <SurfacePressable
+              key={option.id}
+              onPress={() => setLevel(option.id)}
+              accessibilityRole="button"
+              accessibilityLabel={option.title}
+              elevation={selected ? 'glass' : 'raised'}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 12,
+                paddingHorizontal: theme.spacing[3],
+                paddingVertical: theme.spacing[3],
+                backgroundColor: selected ? 'rgba(138,116,238,0.22)' : theme.colors.surfaceGlass,
+                borderColor: selected ? theme.colors.borderStrong : theme.colors.border,
+              }}
+            >
+              <View
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 17,
+                  borderWidth: 1,
+                  borderColor: selected ? theme.colors.borderStrong : 'rgba(255,255,255,0.24)',
+                  backgroundColor: selected ? 'rgba(164,139,255,0.46)' : 'rgba(255,255,255,0.1)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
                   <Text preset="body">{option.icon}</Text>
                 </View>
                 <Box style={{ flex: 1, gap: 4 }}>
                   <Text preset="h3">{option.title}</Text>
                   <Text preset="muted">{option.description}</Text>
                 </Box>
-                <View style={[styles.selectDot, selected ? styles.selectDotSelected : null]} />
-              </BlurView>
-            </Pressable>
+                <View
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: selected ? 'rgba(176,255,233,0.9)' : 'rgba(255,255,255,0.46)',
+                    backgroundColor: selected ? 'rgba(122,248,226,0.78)' : 'transparent',
+                  }}
+                />
+            </SurfacePressable>
           )
         })}
       </Box>
@@ -150,51 +185,4 @@ export function OnboardingScreen({ navigation }: Props) {
   )
 }
 
-const styles = StyleSheet.create({
-  optionCard: {
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: 'rgba(194,186,244,0.34)',
-    paddingHorizontal: 14,
-    paddingVertical: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    backgroundColor: 'rgba(29,24,54,0.58)',
-    shadowColor: '#060410',
-    shadowOpacity: 0.36,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 4,
-  },
-  optionCardSelected: {
-    borderColor: 'rgba(224,218,255,0.74)',
-    backgroundColor: 'rgba(138,116,238,0.3)',
-  },
-  iconPill: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.24)',
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconPillSelected: {
-    borderColor: 'rgba(228,220,255,0.9)',
-    backgroundColor: 'rgba(164,139,255,0.46)',
-  },
-  selectDot: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.46)',
-    backgroundColor: 'transparent',
-  },
-  selectDotSelected: {
-    borderColor: 'rgba(176,255,233,0.9)',
-    backgroundColor: 'rgba(122,248,226,0.78)',
-  },
-})
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

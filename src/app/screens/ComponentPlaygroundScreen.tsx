@@ -2,24 +2,18 @@ import React, { useMemo, useRef, useState } from 'react'
 import { View } from 'react-native'
 import type BottomSheet from '@gorhom/bottom-sheet'
 import { SandboxScreenShell } from '@/components/shared'
-import {
-  Heading,
-  BodyText,
-  HelperText,
-  PrimaryButton,
-  SecondaryButton,
-  GhostButton,
-  IconButton,
-  TextInput,
-} from '@/components/ui/atoms'
-import {
-  Card,
-  FieldGroup,
-  StatusBanner,
-  BottomSheetPanel,
-  ModalSheet,
-} from '@/components/ui/molecules'
-import { AppHeader, ChartPanel, DrillControlPanel, PlaybackControlPanel } from '@/components/ui/organisms'
+import { Heading, IconButton, Input } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
+import { FieldGroup } from '@/ui/components/FieldGroup'
+import { StatusBanner } from '@/ui/components/StatusBanner'
+import { BottomSheetPanel } from '@/ui/components/BottomSheetPanel'
+import { ModalSheet } from '@/ui/components/ModalSheet'
+import { AppHeader } from '@/ui/components/AppHeader'
+import { ChartPanel } from '@/ui/components/ChartPanel'
+import { DrillControlPanel } from '@/ui/components/DrillControlPanel'
+import { PlaybackControlPanel } from '@/ui/components/PlaybackControlPanel'
 import { useThemeControls, useTheme } from '@/theme/provider'
 
 export function ComponentPlaygroundScreen() {
@@ -44,39 +38,40 @@ export function ComponentPlaygroundScreen() {
       <Card tone="elevated">
         <FieldGroup title="Theme">
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <PrimaryButton label="Dark" onPress={() => setMode('dark')} />
-            <SecondaryButton label="Light" onPress={() => setMode('light')} />
-            <GhostButton label="System" onPress={() => setMode('system')} />
+            <Button text="Dark" onPress={() => setMode('dark')} />
+            <Button text="Light" variant="secondary" onPress={() => setMode('light')} />
+            <Button text="System" variant="ghost" onPress={() => setMode('system')} />
           </View>
-          <BodyText tone="muted">Current mode: {mode}</BodyText>
+          <Text preset="muted">Current mode: {mode}</Text>
         </FieldGroup>
 
         <FieldGroup title="Motion">
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <SecondaryButton label="Snappy" onPress={() => setMotionPreset('snappy')} />
-            <PrimaryButton label="Normal" onPress={() => setMotionPreset('normal')} />
-            <GhostButton label="Calm" onPress={() => setMotionPreset('calm')} />
+            <Button text="Snappy" variant="secondary" onPress={() => setMotionPreset('snappy')} />
+            <Button text="Normal" onPress={() => setMotionPreset('normal')} />
+            <Button text="Calm" variant="ghost" onPress={() => setMotionPreset('calm')} />
           </View>
-          <GhostButton
-            label={reducedMotion ? 'Reduced Motion: On' : 'Reduced Motion: Off'}
+          <Button
+            text={reducedMotion ? 'Reduced Motion: On' : 'Reduced Motion: Off'}
+            variant="ghost"
             onPress={() => setReducedMotion(!reducedMotion)}
           />
-          <HelperText>Motion preset: {motionPreset}</HelperText>
+          <Text preset="caption">Motion preset: {motionPreset}</Text>
         </FieldGroup>
       </Card>
 
       <Card>
         <FieldGroup title="Atoms">
           <Heading level={3}>Heading</Heading>
-          <BodyText>Body copy for the component system.</BodyText>
-          <HelperText>Helper copy for form states and subtle guidance.</HelperText>
+          <Text preset="body">Body copy for the component system.</Text>
+          <Text preset="caption">Helper copy for form states and subtle guidance.</Text>
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <PrimaryButton label="Primary" />
-            <SecondaryButton label="Secondary" />
-            <GhostButton label="Ghost" />
+            <Button text="Primary" />
+            <Button text="Secondary" variant="secondary" />
+            <Button text="Ghost" variant="ghost" />
             <IconButton icon="mic" />
           </View>
-          <TextInput
+          <Input
             label="Drill Name"
             value={inputValue}
             onChangeText={setInputValue}
@@ -95,14 +90,14 @@ export function ComponentPlaygroundScreen() {
             tone={bannerTone}
           />
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <SecondaryButton label="Info" onPress={() => setBannerTone('info')} />
-            <SecondaryButton label="Success" onPress={() => setBannerTone('success')} />
-            <SecondaryButton label="Warning" onPress={() => setBannerTone('warning')} />
-            <SecondaryButton label="Danger" onPress={() => setBannerTone('danger')} />
+            <Button text="Info" variant="secondary" onPress={() => setBannerTone('info')} />
+            <Button text="Success" variant="secondary" onPress={() => setBannerTone('success')} />
+            <Button text="Warning" variant="secondary" onPress={() => setBannerTone('warning')} />
+            <Button text="Danger" variant="secondary" onPress={() => setBannerTone('danger')} />
           </View>
           <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-            <PrimaryButton label="Open Modal" onPress={() => setShowModal(true)} />
-            <SecondaryButton label="Open Bottom Sheet" onPress={() => bottomSheetRef.current?.snapToIndex(0)} />
+            <Button text="Open Modal" onPress={() => setShowModal(true)} />
+            <Button text="Open Bottom Sheet" variant="secondary" onPress={() => bottomSheetRef.current?.snapToIndex(0)} />
           </View>
         </FieldGroup>
       </Card>
@@ -118,12 +113,12 @@ export function ComponentPlaygroundScreen() {
 
       <ModalSheet visible={showModal} onClose={() => setShowModal(false)}>
         <Heading level={3}>Modal Sheet</Heading>
-        <BodyText tone="muted">Reusable modal shell for quick content validation.</BodyText>
+        <Text preset="muted">Reusable modal shell for quick content validation.</Text>
       </ModalSheet>
 
       <BottomSheetPanel ref={bottomSheetRef} snapPoints={['45%']}>
         <Heading level={3}>Bottom Sheet</Heading>
-        <BodyText tone="muted">This wrapper is based on @gorhom/bottom-sheet.</BodyText>
+        <Text preset="muted">This wrapper is based on @gorhom/bottom-sheet.</Text>
       </BottomSheetPanel>
     </SandboxScreenShell>
   )

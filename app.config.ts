@@ -117,6 +117,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       supabaseUrl: process.env.SUPABASE_URL ?? (config.extra as any)?.supabaseUrl ?? '',
       supabaseAnonKey: process.env.SUPABASE_ANON_KEY ?? (config.extra as any)?.supabaseAnonKey ?? '',
       cloudAutoSync: (process.env.CLOUD_AUTO_SYNC ?? '') !== 'false' && ((config.extra as any)?.cloudAutoSync ?? true),
+      // Store listing metadata
+      storeListingTitle: (config.extra as any)?.storeListingTitle ?? "Ntsiniz",
+      storeListingDescription:
+        (config.extra as any)?.storeListingDescription ?? "Sing with a Ghost Guide. Train pitch, timing, and confidence.",
+      storeListingKeywords:
+        (config.extra as any)?.storeListingKeywords ?? "singing, vocal training, pitch, tuner, ear training, karaoke, music, practice",
+      storeDescription:
+        (config.extra as any)?.storeDescription ??
+        "Train your voice with clarity, not anxiety.\n\nNtsiniz helps you sing in tune and on time using a beautiful Aurora Ghost Guide that makes practice feel like a game.\n\nHow it works:\n1) Pick a drill or program day.\n2) Sing along with the Ghost Guide lane.\n3) Get a simple phrase grade (Perfect / Clean / Almost) and a clear \"What now?\" fix.\n\nBuilt for real progress:\n- Targeted drills for pitch stability, intervals, resonance, vibrato, agility\n- Explainable grading and next-step coaching\n- A calm, modern neumorphic UI that keeps you moving forward\n\nOptional Pro:\nUnlock advanced Ghost Guide insights and premium training content. Cancel anytime.",
+      supportUrl: (config.extra as any)?.supportUrl ?? "https://ntsiniz.com/support",
+      category: (config.extra as any)?.category ?? "Music",
+      contentRating: (config.extra as any)?.contentRating ?? 4,
       // Store links (replace with your hosted URLs before submission)
       termsUrl: process.env.TERMS_URL ?? (config.extra as any)?.termsUrl ?? "https://ntsiniz.com/terms",
       privacyUrl: process.env.PRIVACY_URL ?? (config.extra as any)?.privacyUrl ?? "https://ntsiniz.com/privacy",

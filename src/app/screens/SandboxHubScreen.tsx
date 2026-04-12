@@ -2,8 +2,9 @@ import React from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { View } from 'react-native'
 import { SandboxScreenShell } from '@/components/shared'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText, PrimaryButton, SecondaryButton } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
 import { useTheme } from '@/theme/provider'
 import type { RootStackParamList } from '../navigation/types'
 
@@ -18,26 +19,27 @@ export function SandboxHubScreen({ navigation }: Props) {
       subtitle="Fast experimentation lane for components, full screens, and flow variants."
     >
       <Card tone="glow">
-        <Heading level={3}>Component Playground</Heading>
-        <BodyText tone="muted">Build reusable atoms, molecules, and organisms in isolation.</BodyText>
-        <PrimaryButton
-          label="Open Component Playground"
+        <Text preset="h3">Component Playground</Text>
+        <Text preset="muted">Build reusable atoms, molecules, and organisms in isolation.</Text>
+        <Button
+          text="Open Component Playground"
           onPress={() => navigation.navigate('ComponentPlayground')}
           testID="sandbox.open.components"
         />
       </Card>
 
       <Card tone="elevated">
-        <Heading level={3}>Flow Playground</Heading>
-        <BodyText tone="muted">Switch instantly between mock and real-navigation flow checks.</BodyText>
+        <Text preset="h3">Flow Playground</Text>
+        <Text preset="muted">Switch instantly between mock and real-navigation flow checks.</Text>
         <View style={{ flexDirection: 'row', gap: spacing[2], flexWrap: 'wrap' }}>
-          <PrimaryButton
-            label="Open Flow Playground"
+          <Button
+            text="Open Flow Playground"
             onPress={() => navigation.navigate('FlowPlayground')}
             testID="sandbox.open.flows"
           />
-          <SecondaryButton
-            label="Onboarding"
+          <Button
+            text="Onboarding"
+            variant="secondary"
             onPress={() =>
               navigation.navigate('FlowPlayground', {
                 scenario: 'onboarding',
@@ -45,8 +47,9 @@ export function SandboxHubScreen({ navigation }: Props) {
               })
             }
           />
-          <SecondaryButton
-            label="Singing Start"
+          <Button
+            text="Singing Start"
+            variant="secondary"
             onPress={() =>
               navigation.navigate('FlowPlayground', {
                 scenario: 'singing-start',
@@ -58,20 +61,20 @@ export function SandboxHubScreen({ navigation }: Props) {
       </Card>
 
       <Card>
-        <Heading level={3}>Screen Previews</Heading>
-        <BodyText tone="muted">Open full-screen mocked containers without touching production flow.</BodyText>
-        <PrimaryButton
-          label="Open Screen Preview Gallery"
+        <Text preset="h3">Screen Previews</Text>
+        <Text preset="muted">Open full-screen mocked containers without touching production flow.</Text>
+        <Button
+          text="Open Screen Preview Gallery"
           onPress={() => navigation.navigate('ScreenPreviewGallery')}
           testID="sandbox.open.screen-previews"
         />
       </Card>
 
       <Card>
-        <Heading level={3}>Storybook</Heading>
-        <BodyText tone="muted">Component-first build lane with controls and decorators.</BodyText>
-        <PrimaryButton
-          label="Open Storybook Screen"
+        <Text preset="h3">Storybook</Text>
+        <Text preset="muted">Component-first build lane with controls and decorators.</Text>
+        <Button
+          text="Open Storybook Screen"
           onPress={() => navigation.navigate('StorybookScreen')}
           testID="sandbox.open.storybook"
         />

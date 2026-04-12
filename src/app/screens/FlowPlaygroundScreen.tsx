@@ -12,8 +12,9 @@ import { getLocale, setLocale } from '@/app/i18n'
 import { flowScenarios, viewportWidths } from '@/app/dev/sandbox/scenarios'
 import type { FlowScenarioId, SandboxDataSource, ViewportPreset } from '@/app/dev/sandbox/types'
 import { SandboxScreenShell } from '@/components/shared'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText, HelperText, PrimaryButton, SecondaryButton, GhostButton } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
+import { Button } from '@/ui/components/kit'
 import { useTheme, useThemeControls } from '@/theme/provider'
 import type { RootStackParamList } from '../navigation/types'
 
@@ -36,99 +37,104 @@ export function FlowPlaygroundScreen({ navigation, route }: Props) {
       subtitle="Switch scenarios instantly. Validate with mock containers or real navigation."
     >
       <Card tone="elevated">
-        <Heading level={3}>Scenario</Heading>
-        <BodyText tone="muted">{scenario.description}</BodyText>
+        <Text preset="h3">Scenario</Text>
+        <Text preset="muted">{scenario.description}</Text>
         <View style={styles.row}>
-          <SecondaryButton label="Onboarding" onPress={() => setScenarioId('onboarding')} />
-          <SecondaryButton label="Sign-In" onPress={() => setScenarioId('signin')} />
-          <SecondaryButton label="Singing Start" onPress={() => setScenarioId('singing-start')} />
+          <Button text="Onboarding" variant="secondary" onPress={() => setScenarioId('onboarding')} />
+          <Button text="Sign-In" variant="secondary" onPress={() => setScenarioId('signin')} />
+          <Button text="Singing Start" variant="secondary" onPress={() => setScenarioId('singing-start')} />
         </View>
       </Card>
 
       <Card>
-        <Heading level={3}>Data Source</Heading>
-        <BodyText tone="muted">Mock mode is fastest; real-nav validates transition contracts.</BodyText>
+        <Text preset="h3">Data Source</Text>
+        <Text preset="muted">Mock mode is fastest; real-nav validates transition contracts.</Text>
         <View style={styles.row}>
-          <PrimaryButton label="Mock" onPress={() => setDataSource('mock')} />
-          <SecondaryButton label="Real Nav" onPress={() => setDataSource('real-nav')} />
+          <Button text="Mock" onPress={() => setDataSource('mock')} />
+          <Button text="Real Nav" variant="secondary" onPress={() => setDataSource('real-nav')} />
         </View>
       </Card>
 
       <Card>
-        <Heading level={3}>Theme + Motion</Heading>
+        <Text preset="h3">Theme + Motion</Text>
         <View style={styles.row}>
-          <GhostButton label="Dark" onPress={() => setMode('dark')} />
-          <GhostButton label="Light" onPress={() => setMode('light')} />
-          <GhostButton label="System" onPress={() => setMode('system')} />
+          <Button text="Dark" variant="ghost" onPress={() => setMode('dark')} />
+          <Button text="Light" variant="ghost" onPress={() => setMode('light')} />
+          <Button text="System" variant="ghost" onPress={() => setMode('system')} />
         </View>
         <View style={styles.row}>
-          <GhostButton label="Snappy" onPress={() => setMotionPreset('snappy')} />
-          <GhostButton label="Normal" onPress={() => setMotionPreset('normal')} />
-          <GhostButton label="Calm" onPress={() => setMotionPreset('calm')} />
+          <Button text="Snappy" variant="ghost" onPress={() => setMotionPreset('snappy')} />
+          <Button text="Normal" variant="ghost" onPress={() => setMotionPreset('normal')} />
+          <Button text="Calm" variant="ghost" onPress={() => setMotionPreset('calm')} />
         </View>
-        <GhostButton
-          label={reducedMotion ? 'Reduced Motion: On' : 'Reduced Motion: Off'}
+        <Button
+          text={reducedMotion ? 'Reduced Motion: On' : 'Reduced Motion: Off'}
+          variant="ghost"
           onPress={() => setReducedMotion(!reducedMotion)}
         />
-        <HelperText>
+        <Text preset="caption">
           Theme: {mode} | Motion: {motionPreset}
-        </HelperText>
+        </Text>
         <MotionPreview />
       </Card>
 
       <Card>
-        <Heading level={3}>Viewport + Locale</Heading>
+        <Text preset="h3">Viewport + Locale</Text>
         <View style={styles.row}>
-          <SecondaryButton label="Phone S" onPress={() => setViewport('phone-sm')} />
-          <SecondaryButton label="Phone L" onPress={() => setViewport('phone-lg')} />
-          <SecondaryButton label="Tablet" onPress={() => setViewport('tablet')} />
+          <Button text="Phone S" variant="secondary" onPress={() => setViewport('phone-sm')} />
+          <Button text="Phone L" variant="secondary" onPress={() => setViewport('phone-lg')} />
+          <Button text="Tablet" variant="secondary" onPress={() => setViewport('tablet')} />
         </View>
         <View style={styles.row}>
-          <GhostButton
-            label="EN"
+          <Button
+            text="EN"
+            variant="ghost"
             onPress={() => {
               setLocale('en')
               setLocaleState('en')
             }}
           />
-          <GhostButton
-            label="ZU"
+          <Button
+            text="ZU"
+            variant="ghost"
             onPress={() => {
               setLocale('zu')
               setLocaleState('zu')
             }}
           />
-          <GhostButton
-            label="XH"
+          <Button
+            text="XH"
+            variant="ghost"
             onPress={() => {
               setLocale('xh')
               setLocaleState('xh')
             }}
           />
         </View>
-        <HelperText>
+        <Text preset="caption">
           Locale: {locale} | Viewport width: {viewportWidth}px
-        </HelperText>
+        </Text>
       </Card>
 
       <Card tone={dataSource === 'mock' ? 'glow' : 'elevated'}>
-        <Heading level={3}>{scenario.title}</Heading>
-        <BodyText tone="muted">
+        <Text preset="h3">{scenario.title}</Text>
+        <Text preset="muted">
           {dataSource === 'mock'
             ? 'Mock container preview for rapid UX edits.'
             : 'Jump to production screens to validate integration.'}
-        </BodyText>
+        </Text>
 
         {dataSource === 'real-nav' ? (
           <View style={[styles.row, { marginTop: 8 }]}>
-            <PrimaryButton
-              label="Open Start Screen"
+            <Button
+              text="Open Start Screen"
               onPress={() => (navigation as any).navigate(scenario.startRoute, scenario.startParams)}
             />
             {scenario.steps.map((step) => (
-              <SecondaryButton
+              <Button
                 key={step.id}
-                label={step.title}
+                text={step.title}
+                variant="secondary"
                 onPress={() => {
                   if (!step.route) return
                   ;(navigation as any).navigate(step.route, step.params)
@@ -149,8 +155,8 @@ export function FlowPlaygroundScreen({ navigation, route }: Props) {
           >
             {scenario.steps.map((step, index) => (
               <Card key={step.id} tone={index === 0 ? 'glow' : 'default'}>
-                <Heading level={3}>{`${index + 1}. ${step.title}`}</Heading>
-                <BodyText tone="muted">{step.summary}</BodyText>
+                <Text preset="h3">{`${index + 1}. ${step.title}`}</Text>
+                <Text preset="muted">{step.summary}</Text>
               </Card>
             ))}
           </View>
@@ -158,9 +164,9 @@ export function FlowPlaygroundScreen({ navigation, route }: Props) {
       </Card>
 
       <Card>
-        <Heading level={3}>Screen Preview Gallery</Heading>
-        <BodyText tone="muted">Open full-screen containers without entering main app business flows.</BodyText>
-        <PrimaryButton label="Open Gallery" onPress={() => navigation.navigate('ScreenPreviewGallery')} />
+        <Text preset="h3">Screen Preview Gallery</Text>
+        <Text preset="muted">Open full-screen containers without entering main app business flows.</Text>
+        <Button text="Open Gallery" onPress={() => navigation.navigate('ScreenPreviewGallery')} />
       </Card>
     </SandboxScreenShell>
   )
@@ -194,7 +200,7 @@ function MotionPreview() {
   return (
     <View style={styles.motionWrap}>
       <Animated.View style={[styles.pulseDot, animated, { backgroundColor: colors.primary }]} />
-      <HelperText>Animation follows selected motion preset.</HelperText>
+      <Text preset="caption">Animation follows selected motion preset.</Text>
     </View>
   )
 }

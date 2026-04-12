@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import React from 'react'
 
 import { render } from '../render'
-import { BottomSheetPanel } from '@/components/ui/molecules'
-import { Heading } from '@/components/ui/atoms'
+import { BottomSheetPanel } from '@/ui/components/BottomSheetPanel'
+import { Heading } from '@/ui/components/kit'
 
 test('bottom sheet panel renders and exposes content', () => {
   const tree = render(

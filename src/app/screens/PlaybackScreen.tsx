@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { StyleSheet } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { BlurView } from 'expo-blur'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
 import { Box, Stack } from '@/ui/primitives'
 import { formatDate } from '@/core/i18n'
 import { BrandWorldBackdrop, CurrentZoneChip } from '@/ui/guidedJourney'
@@ -162,7 +160,7 @@ export function PlaybackScreen({ navigation, route }: Props) {
       ) : null}
 
       <Card tone="glow" style={{ overflow: 'hidden' }}>
-        <LinearGradient colors={['rgba(102,60,225,0.42)', 'rgba(24,14,58,0.88)']} style={StyleSheet.absoluteFill} />
+        <LinearGradient colors={['rgba(102,60,225,0.42)', 'rgba(24,14,58,0.88)']} style={ABS_FILL} />
         <Stack direction="horizontal" justify="space-between" align="center">
           <Stack gap={2} style={{ flex: 1 }}>
             <Text preset="h1">{COPY.title}</Text>
@@ -195,7 +193,7 @@ export function PlaybackScreen({ navigation, route }: Props) {
         </Box>
       </Card>
 
-      <BlurView intensity={50} tint="dark" style={styles.transportCard}>
+      <Card tone="elevated" style={{ overflow: 'hidden' }}>
         <Stack direction="horizontal" justify="space-between" align="center">
           <Stack gap={2} style={{ flex: 1 }}>
             <Text preset="h3">{COPY.title}</Text>
@@ -222,7 +220,7 @@ export function PlaybackScreen({ navigation, route }: Props) {
           <Button text={COPY.share} variant="ghost" onPress={() => navigation.navigate('Results', { sessionId: attempt.sessionId })} />
         </Stack>
         {savedToast ? <Text preset="muted">{COPY.savedBest}</Text> : null}
-      </BlurView>
+      </Card>
 
       {compareOn && bestAttempt ? (
         <Card tone="elevated">
@@ -278,12 +276,4 @@ function toCompareMetrics(attempt: Attempt): { voiced: string; stability: string
   return { voiced, stability, entry }
 }
 
-const styles = StyleSheet.create({
-  transportCard: {
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: 'rgba(188,171,255,0.3)',
-    overflow: 'hidden',
-    padding: 14,
-  },
-})
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

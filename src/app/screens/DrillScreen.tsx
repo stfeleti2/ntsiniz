@@ -9,8 +9,8 @@ import type { RouteInfo } from '@/core/audio/routeManager'
 
 import { Screen } from "@/ui/components/Screen"
 import { Text } from "@/ui/components/Typography"
-import { Button } from "@/ui/components/Button"
-import { Card } from "@/ui/components/Card"
+import { Button } from "@/ui/components/kit"
+import { Card } from "@/ui/components/kit"
 import { NextActionBar } from '@/ui/components/NextActionBar'
 import { AudioRoutePill } from '@/ui/components/AudioRoutePill'
 import { AudioInputPicker } from '@/ui/components/AudioInputPicker'

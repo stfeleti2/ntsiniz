@@ -2,6 +2,7 @@ import React from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
 import { Box, Text } from '../../primitives'
 import { useTheme } from '../../theme'
+import { withAlpha } from '@/theme/neumorphism/style'
 
 export function Badge({
   label,
@@ -15,14 +16,15 @@ export function Badge({
   testID?: string
 }) {
   const { colors, radius, spacing } = useTheme()
+
   const bg =
     tone === 'success'
-      ? 'rgba(46, 204, 113, 0.16)'
+      ? withAlpha(colors.success, 0.16)
       : tone === 'danger'
-        ? 'rgba(255, 77, 77, 0.16)'
+        ? withAlpha(colors.danger, 0.16)
         : tone === 'warning'
-          ? 'rgba(255, 176, 32, 0.16)'
-          : 'rgba(124, 92, 255, 0.16)'
+          ? withAlpha(colors.warning, 0.16)
+          : withAlpha(colors.primary, 0.16)
 
   const textTone = tone === 'default' ? 'default' : tone
 

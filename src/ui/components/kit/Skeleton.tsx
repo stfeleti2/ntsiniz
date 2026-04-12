@@ -13,7 +13,7 @@ export function Skeleton({ height = 12, width = '100%', radius = 10, style, test
           height,
           width,
           borderRadius: radius,
-          backgroundColor: 'rgba(255,255,255,0.10)',
+          backgroundColor: colors.neumorphicHighlight,
           borderWidth: 1,
           borderColor: colors.border,
         },

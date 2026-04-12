@@ -17,12 +17,14 @@ type Props = {
 }
 
 export function JourneyNextUpModule({ progress, mission, onStartMission, testID }: Props) {
+  const theme = useTheme()
+
   return (
     <Card
       testID={testID}
       style={{
         borderWidth: 1,
-        borderColor: 'rgba(255, 61, 206, 0.28)',
+        borderColor: theme.colors.line,
       }}
     >
       <Text size="lg" weight="bold">
@@ -47,6 +49,7 @@ export function JourneyNextUpModule({ progress, mission, onStartMission, testID 
 
 function ProgressRow({ done, total, pct }: { done: number; total: number; pct: number }) {
   const theme = useTheme()
+
   return (
     <Box style={{ gap: 6, marginTop: 6 }}>
       <Box style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -61,7 +64,7 @@ function ProgressRow({ done, total, pct }: { done: number; total: number; pct: n
         style={{
           height: 10,
           borderRadius: 999,
-          backgroundColor: 'rgba(255,255,255,0.10)',
+          backgroundColor: theme.colors.card,
           overflow: 'hidden',
         }}
       >

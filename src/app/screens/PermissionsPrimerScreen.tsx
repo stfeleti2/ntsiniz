@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Linking, Platform, StyleSheet, View } from 'react-native'
+import { Linking, Platform, View } from 'react-native'
 import { Camera } from 'expo-camera'
-import { BlurView } from 'expo-blur'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
-import { Card } from '@/ui/components/Card'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
 import { Box } from '@/ui'
 import { BrandWorldBackdrop } from '@/ui/guidedJourney'
 import { getSettings, upsertSettings } from '@/core/storage/settingsRepo'
 import { StatusPill } from '@/ui/guidedJourney'
 import { getMicPermissionState, requestMicPermission, type MicPermissionState } from '@/core/audio/micStream'
 import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
 type Kind = 'mic' | 'camera'
 type PermissionUiState = 'notRequested' | 'granted' | 'denied' | 'blocked' | 'error'
@@ -25,6 +25,7 @@ type PermissionStatusLike = {
 }
 
 export function PermissionsPrimerScreen({ navigation, route }: any) {
+  const theme = useTheme()
   const kind: Kind = route?.params?.kind ?? 'mic'
   const next = route?.params?.next
   const isMic = kind === 'mic'
@@ -182,17 +183,28 @@ export function PermissionsPrimerScreen({ navigation, route }: any) {
     <Screen scroll background="hero">
       <BrandWorldBackdrop />
       <Card tone="glow" style={{ overflow: 'hidden' }}>
-        <LinearGradient colors={['rgba(95,55,220,0.5)', 'rgba(31,18,78,0.84)']} style={StyleSheet.absoluteFill} />
+        <LinearGradient colors={['rgba(95,55,220,0.5)', 'rgba(31,18,78,0.84)']} style={ABS_FILL} />
         <Box style={{ gap: 8 }}>
           <Text preset="h1">{copy.title}</Text>
           <Text preset="muted">{copy.body}</Text>
         </Box>
       </Card>
 
-      <BlurView intensity={48} tint="dark" style={styles.statusCard}>
+      <Card tone="elevated" style={{ backgroundColor: theme.colors.surfaceGlass }}>
         <Box style={{ gap: 12, alignItems: 'center' }}>
           <StatusPill state={statusMeta.pillState} label={statusMeta.pillLabel} />
-          <View style={styles.iconBubble}>
+          <View
+            style={{
+              width: 74,
+              height: 74,
+              borderRadius: 37,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(149,132,255,0.3)',
+              borderWidth: 1,
+              borderColor: theme.colors.borderStrong,
+            }}
+          >
             <Text preset="h2">{statusMeta.icon}</Text>
           </View>
           <Text preset="body" style={{ textAlign: 'center' }}>
@@ -202,7 +214,7 @@ export function PermissionsPrimerScreen({ navigation, route }: any) {
             {instructionLine}
           </Text>
         </Box>
-      </BlurView>
+      </Card>
 
       <Card tone="elevated">
         <Box style={{ gap: 10 }}>
@@ -226,33 +238,4 @@ function fromMicState(state: MicPermissionState): PermissionUiState {
   return 'error'
 }
 
-const styles = StyleSheet.create({
-  statusCard: {
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(202,192,255,0.42)',
-    overflow: 'hidden',
-    padding: 16,
-    backgroundColor: 'rgba(27,20,53,0.58)',
-    shadowColor: '#090613',
-    shadowOpacity: 0.4,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 5,
-  },
-  iconBubble: {
-    width: 74,
-    height: 74,
-    borderRadius: 37,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(149,132,255,0.3)',
-    borderWidth: 1,
-    borderColor: 'rgba(211,203,255,0.46)',
-    shadowColor: '#8F82FF',
-    shadowOpacity: 0.26,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 3,
-  },
-})
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

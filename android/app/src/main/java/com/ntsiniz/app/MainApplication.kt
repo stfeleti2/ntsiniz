@@ -45,7 +45,9 @@ class MainApplication : Application(), ReactApplication {
     } catch (e: IllegalArgumentException) {
       ReleaseLevel.STABLE
     }
-    loadReactNative(this)
+    if (!BuildConfig.DEBUG) {
+      loadReactNative(this)
+    }
     ApplicationLifecycleDispatcher.onApplicationCreate(this)
   }
 

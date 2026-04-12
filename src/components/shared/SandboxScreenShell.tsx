@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, View } from 'react-native'
 import { useTheme } from '@/theme/provider'
-import { Heading, HelperText } from '@/components/ui/atoms'
+import { Text } from '@/ui/components/Typography'
 
 export function SandboxScreenShell({
   title,
@@ -19,8 +19,8 @@ export function SandboxScreenShell({
   const content = (
     <View style={{ paddingHorizontal: spacing[4], paddingVertical: spacing[4], gap: spacing[3] }}>
       <View style={{ gap: spacing[1] }}>
-        <Heading level={2}>{title}</Heading>
-        {subtitle ? <HelperText>{subtitle}</HelperText> : null}
+        <Text preset="h2">{title}</Text>
+        {subtitle ? <Text preset="muted">{subtitle}</Text> : null}
       </View>
       {children}
     </View>

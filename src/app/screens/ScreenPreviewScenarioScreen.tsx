@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from 'react-native'
 import { screenPreviewRegistry } from '@/screens/previews'
 import { useTheme } from '@/theme/provider'
-import { PrimaryButton, SecondaryButton } from '@/components/ui/atoms'
+import { Button } from '@/ui/components/kit'
 import type { RootStackParamList } from '../navigation/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ScreenPreviewScenario'>
@@ -18,9 +18,9 @@ export function ScreenPreviewScenarioScreen({ navigation, route }: Props) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
       <View style={{ padding: spacing[3], flexDirection: 'row', gap: spacing[2] }}>
-        <SecondaryButton label="Back to Gallery" onPress={() => navigation.navigate('ScreenPreviewGallery')} />
-        <PrimaryButton
-          label="Flow Playground"
+        <Button text="Back to Gallery" variant="secondary" onPress={() => navigation.navigate('ScreenPreviewGallery')} />
+        <Button
+          text="Flow Playground"
           onPress={() => navigation.navigate('FlowPlayground', { source: 'mock', scenario: 'onboarding' })}
         />
       </View>

@@ -7,8 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
-import { Card } from '@/ui/components/Card'
-import { Button } from '@/ui/components/Button'
+import { Card } from '@/ui/components/kit'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
 
 import type { MainTabParamList, RootStackParamList } from '../navigation/types'

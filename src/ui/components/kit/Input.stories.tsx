@@ -38,3 +38,7 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
+
+export const Loading = Default
+export const Empty = Default
+export const Success = Default

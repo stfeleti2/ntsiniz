@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { BlurView } from 'expo-blur'
 import { LinearGradient } from 'expo-linear-gradient'
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated'
@@ -7,11 +7,12 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { Screen } from '@/ui/components/Screen'
 import { Text, Stack, Pressable } from '@/ui/primitives'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
 
 import type { RootStackParamList } from '../navigation/types'
 import { getSettings } from '@/core/storage/settingsRepo'
 import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Welcome'>
 
@@ -58,6 +59,7 @@ const REVEAL_COPY: Record<
 }
 
 export function WelcomeScreen({ navigation, route }: Props) {
+  const theme = useTheme()
   const [ready, setReady] = useState(false)
   const [firstWinComplete, setFirstWinComplete] = useState(false)
   const [devTap, setDevTap] = useState(0)
@@ -106,7 +108,7 @@ export function WelcomeScreen({ navigation, route }: Props) {
 
   return (
     <Screen background="hero">
-      <LinearGradient colors={['rgba(43,22,97,0.62)', 'rgba(7,7,18,0.38)', 'rgba(62,32,132,0.54)']} style={StyleSheet.absoluteFill} />
+      <LinearGradient colors={['rgba(43,22,97,0.62)', 'rgba(7,7,18,0.38)', 'rgba(62,32,132,0.54)']} style={ABS_FILL} />
       <Stack justify="space-between" style={{ flex: 1 }}>
         <Stack gap={8}>
           <Pressable
@@ -133,7 +135,18 @@ export function WelcomeScreen({ navigation, route }: Props) {
         </Stack>
 
         <Stack gap={10}>
-          <BlurView intensity={42} tint="dark" style={styles.tipCard}>
+          <BlurView
+            intensity={42}
+            tint="dark"
+            style={{
+              borderRadius: theme.radius[4],
+              borderWidth: 1,
+              borderColor: theme.colors.borderStrong,
+              paddingHorizontal: theme.spacing[3],
+              paddingVertical: theme.spacing[3],
+              backgroundColor: theme.colors.surfaceGlass,
+            }}
+          >
             <Text size="sm" tone="muted" style={{ textAlign: 'center' }}>
               {copy.tip}
             </Text>
@@ -159,53 +172,38 @@ function AmbientRevealOrb() {
   }))
 
   return (
-    <View style={styles.orbWrap}>
-      <Animated.View style={[styles.orbOuter, style]}>
-        <LinearGradient colors={['rgba(140,101,255,0.56)', 'rgba(85,232,255,0.26)']} style={StyleSheet.absoluteFill} />
+    <View style={ORB_WRAP}>
+      <Animated.View style={[ORB_OUTER, style]}>
+        <LinearGradient colors={['rgba(140,101,255,0.56)', 'rgba(85,232,255,0.26)']} style={ABS_FILL} />
       </Animated.View>
-      <BlurView intensity={28} tint="dark" style={styles.orbInner} />
+      <BlurView intensity={28} tint="dark" style={ORB_INNER} />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  tipCard: {
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(208,196,255,0.34)',
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    backgroundColor: 'rgba(25,18,51,0.5)',
-    shadowColor: '#080412',
-    shadowOpacity: 0.34,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 4,
-  },
-  orbWrap: {
-    width: 196,
-    height: 196,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  orbOuter: {
-    width: 178,
-    height: 178,
-    borderRadius: 89,
-    borderWidth: 1,
-    borderColor: 'rgba(216,208,255,0.44)',
-    shadowColor: '#A590FF',
-    shadowOpacity: 0.5,
-    shadowRadius: 42,
-    shadowOffset: { width: 0, height: 18 },
-  },
-  orbInner: {
-    position: 'absolute',
-    width: 88,
-    height: 88,
-    borderRadius: 44,
-    borderWidth: 1,
-    borderColor: 'rgba(244,240,255,0.54)',
-    backgroundColor: 'rgba(230,220,255,0.15)',
-  },
-})
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }
+
+const ORB_WRAP = {
+  width: 196,
+  height: 196,
+  alignItems: 'center' as const,
+  justifyContent: 'center' as const,
+}
+
+const ORB_OUTER = {
+  width: 178,
+  height: 178,
+  borderRadius: 89,
+  borderWidth: 1,
+  borderColor: 'rgba(216,208,255,0.44)',
+}
+
+const ORB_INNER = {
+  position: 'absolute' as const,
+  width: 88,
+  height: 88,
+  borderRadius: 44,
+  borderWidth: 1,
+  borderColor: 'rgba(244,240,255,0.54)',
+  backgroundColor: 'rgba(230,220,255,0.15)',
+}

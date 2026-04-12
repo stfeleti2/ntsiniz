@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { BlurView } from 'expo-blur'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
 import { Box } from '@/ui'
-import { Button } from '@/ui/components/Button'
-import { Card } from '@/ui/components/Card'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
 import { BrandWorldBackdrop, CurrentZoneChip } from '@/ui/guidedJourney'
 import { PremiumRangePracticePanel } from '@/ui/onboarding/PremiumRangePracticePanel'
 import { likelyZoneFromBand } from '@/ui/onboarding/rangeLadder'
@@ -80,7 +79,7 @@ export function RangeSnapshotScreen({ navigation }: Props) {
       </Box>
 
       <Card tone="glow" style={{ overflow: 'hidden' }}>
-        <LinearGradient colors={['rgba(103,60,226,0.44)', 'rgba(21,14,58,0.9)']} style={StyleSheet.absoluteFill} />
+        <LinearGradient colors={['rgba(103,60,226,0.44)', 'rgba(21,14,58,0.9)']} style={ABS_FILL} />
         <Box style={{ gap: 8 }}>
           <CurrentZoneChip label={`Closest to ${likelyZone}`} />
           <Text preset="h1">{likelyZone}</Text>
@@ -102,7 +101,7 @@ export function RangeSnapshotScreen({ navigation }: Props) {
         }}
       />
 
-      <BlurView intensity={54} tint="dark" style={styles.controlsCard}>
+      <Card tone="elevated">
         <Box style={{ gap: 8 }}>
           <Text preset="h3">{COPY.controls}</Text>
           <Text preset="muted">{latestAttempt ? pb.progressLabel : COPY.noRecentTake}</Text>
@@ -111,7 +110,7 @@ export function RangeSnapshotScreen({ navigation }: Props) {
             <Button text={COPY.back} variant="ghost" onPress={() => navigation.goBack()} />
           </View>
         </Box>
-      </BlurView>
+      </Card>
     </Screen>
   )
 }
@@ -131,12 +130,4 @@ function clamp01(value: number) {
   return Math.max(0, Math.min(1, value))
 }
 
-const styles = StyleSheet.create({
-  controlsCard: {
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: 'rgba(190,175,255,0.3)',
-    overflow: 'hidden',
-    padding: 14,
-  },
-})
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { SandboxScreenShell } from '@/components/shared'
-import { Card } from '@/components/ui/molecules'
-import { Heading, BodyText } from '@/components/ui/atoms'
+import { Card } from '@/ui/components/kit'
+import { Text } from '@/ui/components/Typography'
 
 function tryLoadStorybook() {
   if (!__DEV__) return null
@@ -26,17 +26,17 @@ export function StorybookScreen() {
       subtitle="Start Metro in Storybook mode to bundle component stories and on-device addons."
     >
       <Card tone="warning">
-        <Heading level={3}>Run this command</Heading>
-        <BodyText>npm run storybook</BodyText>
-        <BodyText tone="muted">
+        <Text preset="h3">Run this command</Text>
+        <Text preset="body">npm run storybook</Text>
+        <Text preset="muted">
           For in-app route usage keep `EXPO_PUBLIC_STORYBOOK_ENABLED=true` and `EXPO_PUBLIC_STORYBOOK_ROOT=false`.
-        </BodyText>
+        </Text>
       </Card>
 
       <Card>
-        <Heading level={3}>Quick launch shortcuts</Heading>
-        <BodyText>npm run storybook:ios</BodyText>
-        <BodyText>npm run storybook:android</BodyText>
+        <Text preset="h3">Quick launch shortcuts</Text>
+        <Text preset="body">npm run storybook:ios</Text>
+        <Text preset="body">npm run storybook:android</Text>
       </Card>
     </SandboxScreenShell>
   )
