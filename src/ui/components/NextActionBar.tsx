@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card } from './Card'
+import { useWindowDimensions } from 'react-native'
+import { Card } from '@/ui/components/kit'
 import { Text } from './Typography'
-import { Button } from './Button'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
 
 export type NextActionBarProps = {
@@ -26,15 +27,17 @@ export type NextActionBarProps = {
  */
 export function NextActionBar(props: NextActionBarProps) {
   const { title, subtitle, primaryLabel, onPrimary, secondaryLabel, onSecondary, testID } = props
+  const { width } = useWindowDimensions()
+  const stackButtons = width < 420
   return (
-    <Card testID={testID ?? 'next.action'}>
+    <Card testID={testID ?? 'next.action'} tone="glow">
       <Box style={{ gap: 10 }}>
         <Box style={{ gap: 4 }}>
           <Text preset="h3">{title}</Text>
           {subtitle ? <Text preset="muted">{subtitle}</Text> : null}
         </Box>
 
-        <Box style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
+        <Box style={{ flexDirection: stackButtons ? 'column' : 'row', gap: 8, flexWrap: 'wrap' }}>
           <Button text={primaryLabel} testID={props.primaryTestID} onPress={onPrimary} />
           {secondaryLabel && onSecondary ? <Button text={secondaryLabel} testID={props.secondaryTestID} variant="ghost" onPress={onSecondary} /> : null}
         </Box>

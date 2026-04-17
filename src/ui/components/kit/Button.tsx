@@ -1,68 +1,107 @@
 import React from 'react'
 import { ActivityIndicator, ViewStyle, StyleProp } from 'react-native'
-import { Pressable, Text, Stack } from '../../primitives'
+import { SurfacePressable, Stack, Text } from '../../primitives'
 import { useTheme } from '../../theme'
+import type { ButtonVariantKey } from '@/design-system/components/Button'
 
 export type ButtonProps = {
-  label: string
+  text?: string
+  title?: string
+  children?: React.ReactNode
+  label?: string
   onPress?: () => void
   disabled?: boolean
   loading?: boolean
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  variant?: ButtonVariantKey | 'soft'
   style?: StyleProp<ViewStyle>
   testID?: string
   accessibilityLabel?: string
 }
 
 export function Button({
+  text,
+  title,
+  children,
   label,
   onPress,
   disabled,
   loading,
-  variant = 'primary',
+  variant = 'primary-light-rounded',
   style,
   testID,
   accessibilityLabel,
 }: ButtonProps) {
   const { colors, radius, spacing } = useTheme()
 
-  const bg =
-    variant === 'primary'
-      ? colors.primary
-      : variant === 'secondary'
-        ? colors.surface2
-        : variant === 'danger'
-          ? colors.danger
-          : 'transparent'
+  const resolvedLabel =
+    label ?? text ?? title ?? (typeof children === 'string' ? children : '')
 
-  const borderColor = variant === 'ghost' ? colors.border : 'transparent'
+  const resolvedVariant = variant === 'soft' ? 'secondary' : variant
+
+  const bg =
+    resolvedVariant === 'primary' || resolvedVariant === 'primary-light-rounded'
+      ? colors.primary
+      : resolvedVariant === 'active-led-button'
+        ? colors.surfaceGlass
+        : resolvedVariant === 'icon-round-dark'
+          ? colors.surface2
+      : resolvedVariant === 'secondary'
+        ? colors.surfaceRaised
+        : resolvedVariant === 'danger'
+          ? colors.danger
+          : colors.surfaceGlass
+
+  const textColor =
+    resolvedVariant === 'primary' || resolvedVariant === 'primary-light-rounded'
+      ? colors.highContrastText
+      : resolvedVariant === 'danger'
+        ? colors.highContrastText
+        : resolvedVariant === 'active-led-button'
+          ? colors.primary
+        : colors.text
 
   return (
-    <Pressable
-      testID={testID}
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel ?? label}
+    <SurfacePressable
+      elevation="raised"
       disabled={disabled || loading}
+      haptic
       onPress={onPress}
-      style={({ pressed }) => [
+      accessibilityLabel={accessibilityLabel ?? resolvedLabel}
+      testID={testID}
+      style={[
         {
+          minHeight: 48,
           paddingVertical: spacing[3],
           paddingHorizontal: spacing[4],
           borderRadius: radius[3],
           backgroundColor: bg,
-          borderWidth: borderColor === 'transparent' ? 0 : 1,
-          borderColor,
-          opacity: disabled ? 0.55 : pressed ? 0.9 : 1,
+          justifyContent: 'center',
+          alignItems: 'center',
         },
-        style as any,
+        style,
       ]}
     >
       <Stack direction="horizontal" gap={8} align="center" justify="center">
-        {loading ? <ActivityIndicator /> : null}
-        <Text weight="semibold" style={{ textAlign: 'center' }}>
-          {label}
+        {loading ? <ActivityIndicator color={textColor} size="small" /> : null}
+        <Text weight="semibold" style={{ color: textColor, textAlign: 'center' }}>
+          {resolvedLabel}
         </Text>
       </Stack>
-    </Pressable>
+    </SurfacePressable>
   )
 }
+
+
+// Backward compatibility: variant-specific button exports for migration from old components
+export function PrimaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="primary" />
+}
+
+export function SecondaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="secondary" />
+}
+
+export function GhostButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button {...props} variant="ghost" />
+}
+

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { makeInviteCode, parseInviteCode } from '../util/inviteCode.js'
+import { makeInviteCode, parseInviteCode } from '../util/inviteCode'
 
 test('invite codes round-trip and validate checksum', () => {
   const userId = 'user_01HXY9KZ2ZQ8W3R9S5T6U7V8W9'

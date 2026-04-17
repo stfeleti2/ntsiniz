@@ -1,9 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
 import { reportUiError } from '@/app/telemetry/report'
 import { t } from '@/app/i18n'
 

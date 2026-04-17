@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { buildDrillBadges } from "../share/drillBadges.js"
+import { buildDrillBadges } from "../share/drillBadges"
 
 test("buildDrillBadges includes PB + accuracy/stability", () => {
   const attempt: any = {

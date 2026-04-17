@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
 import { Box } from '@/ui'
 import { t } from '@/app/i18n'

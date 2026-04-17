@@ -1,124 +1,188 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { View } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
 import { Box } from '@/ui'
-import { ensureSelfPerson, updateSelfProfile } from '@/core/social/peopleRepo'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
+import { SurfacePressable } from '@/ui/primitives'
+import { BrandWorldBackdrop } from '@/ui/guidedJourney'
+
 import { getSettings, upsertSettings } from '@/core/storage/settingsRepo'
+import { profileForSingingLevel, type SingingLevel } from '@/core/guidedJourney/singingLevel'
+import { getVoiceIdentity, upsertVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
 import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>
 
-type Goal = 'practice' | 'social' | 'compete' | 'coach'
+type LevelOption = {
+  id: SingingLevel
+  icon: string
+  title: string
+  description: string
+}
+
+const LEVEL_OPTIONS: LevelOption[] = [
+  {
+    id: 'justStarting',
+    icon: '◌',
+    title: 'Just starting',
+    description: 'My voice and I are still getting to know each other.',
+  },
+  {
+    id: 'casual',
+    icon: '◔',
+    title: 'Casual',
+    description: 'I sing for fun, and sometimes I surprise myself.',
+  },
+  {
+    id: 'serious',
+    icon: '◉',
+    title: 'Serious',
+    description: 'I want real progress, not just vibes.',
+  },
+  {
+    id: 'professionalCoach',
+    icon: '⬢',
+    title: 'Professional / Coach',
+    description: 'I know what I am working on. Let us go.',
+  },
+]
 
 export function OnboardingScreen({ navigation }: Props) {
-  const [step, setStep] = useState<0 | 1 | 2>(0)
-  const [name, setName] = useState<string>('')
-  const [goal, setGoal] = useState<Goal>('practice')
+  const theme = useTheme()
+  const [level, setLevel] = useState<SingingLevel>('justStarting')
+  const [busy, setBusy] = useState(false)
+  const copy = {
+    title: 'Select your singing level',
+    subtitle: 'This tunes helper density and explanation depth for your real first drill.',
+    saving: 'Saving…',
+    continue: 'Continue',
+  }
 
   useEffect(() => {
-    ;(async () => {
-      const me = await ensureSelfPerson()
-      setName(me.displayName === 'You' ? '' : me.displayName)
-      const s = await getSettings()
-      if (s.onboardingGoal) setGoal(s.onboardingGoal)
-    })().catch(() => {})
+    getSettings()
+      .then((settings) => {
+        setLevel(settings.singingLevel ?? 'justStarting')
+      })
+      .catch(() => {})
   }, [])
 
-  const title = useMemo(() => {
-    if (step === 0) return t('onboarding.step1Title')
-    if (step === 1) return t('onboarding.step2Title')
-    return t('onboarding.step3Title')
-  }, [step])
+  const helperLine = useMemo(() => {
+    const profile = profileForSingingLevel(level)
+    if (profile.helperDensity === 'high') return 'You will get stronger step-by-step guidance.'
+    if (profile.helperDensity === 'light') return 'You will get compact cues and faster flow.'
+    return 'You will get balanced coaching with room to sing.'
+  }, [level])
 
-  const next = async () => {
-    if (step === 0) {
-      if (name.trim().length >= 2) {
-        await updateSelfProfile({ displayName: name.trim() }).catch(() => {})
+  const onContinue = async () => {
+    setBusy(true)
+    try {
+      const current = await getSettings()
+      const profile = profileForSingingLevel(level)
+      await upsertSettings({
+        ...current,
+        singingLevel: level,
+        helperDensity: profile.helperDensity,
+        guideTone: profile.guideTone,
+        coachingMode: profile.coachingMode,
+        onboardingIntent: profile.onboardingIntent,
+        routeHint: profile.routeHint,
+      })
+      const voiceIdentity = await getVoiceIdentity().catch(() => null)
+      if (voiceIdentity) {
+        await upsertVoiceIdentity({
+          ...voiceIdentity,
+          updatedAt: Date.now(),
+          coachingMode: profile.coachingMode,
+          onboardingIntent: profile.onboardingIntent,
+        }).catch(() => {})
       }
-      setStep(1)
-      return
+      navigation.replace('PermissionsPrimer', { kind: 'mic', next: { name: 'WakeYourVoice' } })
+    } finally {
+      setBusy(false)
     }
-    if (step === 1) {
-      const s = await getSettings()
-      await upsertSettings({ ...s, onboardingGoal: goal })
-      setStep(2)
-      return
-    }
-
-    const s = await getSettings()
-    await upsertSettings({ ...s, onboardingComplete: true, onboardingGoal: goal })
-    navigation.reset({ index: 0, routes: [{ name: 'MainTabs' as any }] })
-    // First win routing (tailored):
-    if (goal === 'practice') (navigation as any).navigate('Tuner')
-    if (goal === 'social') (navigation as any).navigate('MainTabs', { screen: 'Community' })
-    if (goal === 'compete') (navigation as any).navigate('CompetitionsHub')
-    if (goal === 'coach') (navigation as any).navigate('Marketplace')
   }
 
   return (
-    <Screen scroll background="gradient">
-      <Box style={{ gap: 6 }}>
-        <Text preset="h1">{title}</Text>
-        <Text preset="muted">{t('onboarding.subtitle')}</Text>
+    <Screen scroll background="hero">
+      <BrandWorldBackdrop />
+      <Card tone="glow" style={{ overflow: 'hidden' }}>
+        <LinearGradient colors={['rgba(98,56,227,0.48)', 'rgba(29,16,73,0.84)']} style={ABS_FILL} />
+        <Box style={{ gap: 8 }}>
+          <Text preset="h1">{copy.title}</Text>
+          <Text preset="muted">{copy.subtitle}</Text>
+        </Box>
+      </Card>
+
+      <Box style={{ gap: 10 }}>
+        {LEVEL_OPTIONS.map((option) => {
+          const selected = option.id === level
+          return (
+            <SurfacePressable
+              key={option.id}
+              onPress={() => setLevel(option.id)}
+              accessibilityRole="button"
+              accessibilityLabel={option.title}
+              elevation={selected ? 'glass' : 'raised'}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 12,
+                paddingHorizontal: theme.spacing[3],
+                paddingVertical: theme.spacing[3],
+                backgroundColor: selected ? 'rgba(138,116,238,0.22)' : theme.colors.surfaceGlass,
+                borderColor: selected ? theme.colors.borderStrong : theme.colors.border,
+              }}
+            >
+              <View
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 17,
+                  borderWidth: 1,
+                  borderColor: selected ? theme.colors.borderStrong : 'rgba(255,255,255,0.24)',
+                  backgroundColor: selected ? 'rgba(164,139,255,0.46)' : 'rgba(255,255,255,0.1)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                  <Text preset="body">{option.icon}</Text>
+                </View>
+                <Box style={{ flex: 1, gap: 4 }}>
+                  <Text preset="h3">{option.title}</Text>
+                  <Text preset="muted">{option.description}</Text>
+                </Box>
+                <View
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: selected ? 'rgba(176,255,233,0.9)' : 'rgba(255,255,255,0.46)',
+                    backgroundColor: selected ? 'rgba(122,248,226,0.78)' : 'transparent',
+                  }}
+                />
+            </SurfacePressable>
+          )
+        })}
       </Box>
 
-      {step === 0 ? (
-        <Card>
-          <Text preset="h2">{t('onboarding.nameTitle')}</Text>
-          <Text preset="muted">{t('onboarding.nameSubtitle')}</Text>
-          {/* Keep it simple: tap-to-cycle suggestions (no TextInput dependency). */}
-          <Box style={{ marginTop: 12, gap: 10 }}>
-            <Button
-              text={name.trim() ? `${t('onboarding.nameCurrent')}: ${name.trim()}` : t('onboarding.namePick')}
-              variant="soft"
-              onPress={() => {
-                const presets = ['Promise', 'Singer', 'Vocalist', 'You']
-                const i = Math.max(0, presets.indexOf(name.trim()))
-                setName(presets[(i + 1) % presets.length])
-              }}
-            />
-            <Button text={t('common.next')} variant="primary" onPress={next} />
-            <Button text={t('common.skip')} variant="ghost" onPress={() => setStep(1)} />
-          </Box>
-        </Card>
-      ) : null}
+      <Card tone="elevated">
+        <Box style={{ gap: 6 }}>
+          <Text preset="muted">{helperLine}</Text>
+          <Text preset="muted">{t('guidedFlow.onboardingNowWhyNext')}</Text>
+        </Box>
+      </Card>
 
-      {step === 1 ? (
-        <Card>
-          <Text preset="h2">{t('onboarding.goalTitle')}</Text>
-          <Text preset="muted">{t('onboarding.goalSubtitle')}</Text>
-          <Box style={{ marginTop: 12, gap: 10 }}>
-            <Button text={t('onboarding.goal.practice')} variant={goal === 'practice' ? 'primary' : 'soft'} onPress={() => setGoal('practice')} />
-            <Button text={t('onboarding.goal.social')} variant={goal === 'social' ? 'primary' : 'soft'} onPress={() => setGoal('social')} />
-            <Button text={t('onboarding.goal.compete')} variant={goal === 'compete' ? 'primary' : 'soft'} onPress={() => setGoal('compete')} />
-            <Button text={t('onboarding.goal.coach')} variant={goal === 'coach' ? 'primary' : 'soft'} onPress={() => setGoal('coach')} />
-            <Button text={t('common.next')} variant="primary" onPress={next} />
-          </Box>
-        </Card>
-      ) : null}
-
-      {step === 2 ? (
-        <Card tone="glow">
-          <Text preset="h2">{t('onboarding.firstWinTitle')}</Text>
-          <Text preset="muted">{t('onboarding.firstWinSubtitle')}</Text>
-          <Box style={{ marginTop: 12, gap: 10 }}>
-            <Button text={t('onboarding.finish')} variant="primary" onPress={next} />
-            <Text preset="muted" style={{ marginTop: 8 }}>
-              {goal === 'practice'
-                ? t('onboarding.firstWin.practice')
-                : goal === 'social'
-                  ? t('onboarding.firstWin.social')
-                  : goal === 'compete'
-                    ? t('onboarding.firstWin.compete')
-                    : t('onboarding.firstWin.coach')}
-            </Text>
-          </Box>
-        </Card>
-      ) : null}
+      <Button text={busy ? copy.saving : copy.continue} onPress={() => void onContinue()} disabled={busy} />
     </Screen>
   )
 }
+
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

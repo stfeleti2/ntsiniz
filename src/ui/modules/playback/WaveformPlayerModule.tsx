@@ -1,7 +1,7 @@
 import React from 'react'
 import type { ViewStyle, StyleProp } from 'react-native'
 import { Box, Stack, Text } from '@/ui/primitives'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
 import { WaveformSeek, WaveformSkeleton } from '@/ui/patterns'
 import { t } from '@/app/i18n'
 

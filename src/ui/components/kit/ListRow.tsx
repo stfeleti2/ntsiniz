@@ -1,6 +1,6 @@
 import React from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
-import { Pressable, Stack, Text, Icon } from '../../primitives'
+import { SurfacePressable, Stack, Text, Icon } from '../../primitives'
 import { useTheme } from '../../theme'
 
 export type ListRowProps = {
@@ -15,25 +15,21 @@ export type ListRowProps = {
 }
 
 export function ListRow({ title, subtitle, leftIcon, right, onPress, disabled, testID, style }: ListRowProps) {
-  const { colors, spacing, radius } = useTheme()
+  const { spacing } = useTheme()
   return (
-    <Pressable
+    <SurfacePressable
       testID={testID}
       accessibilityRole={onPress ? 'button' : 'text'}
       accessibilityLabel={title}
+      elevation="raised"
       disabled={disabled || !onPress}
       onPress={onPress}
-      style={({ pressed }) => [
+      style={[
         {
           paddingHorizontal: spacing[4],
           paddingVertical: spacing[3],
-          borderRadius: radius[3],
-          backgroundColor: colors.surface2,
-          borderWidth: 1,
-          borderColor: colors.border,
-          opacity: disabled ? 0.5 : pressed ? 0.92 : 1,
         },
-        style as any,
+        style,
       ]}
     >
       <Stack direction="horizontal" gap={12} align="center" justify="space-between">
@@ -46,6 +42,6 @@ export function ListRow({ title, subtitle, leftIcon, right, onPress, disabled, t
         </Stack>
         {right ?? (onPress ? <Icon name={'> '} /> : null)}
       </Stack>
-    </Pressable>
+    </SurfacePressable>
   )
 }

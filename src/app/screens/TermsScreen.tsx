@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
 import { Box } from '@/ui'
 import { t } from '@/app/i18n'

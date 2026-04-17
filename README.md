@@ -1,165 +1,443 @@
 # Ntsiniz
 
-Ntsiniz is an audio-first singing coach app built with Expo and React Native.
+Ntsiniz is an audio-first singing coach app built with Expo + React Native.
 
-This repo contains the mobile app and local native modules used for real-time audio features.
+This repo contains:
+- the mobile app
+- local native audio modules
+- Storybook / UI sandbox for fast iteration
+- drill engine, scoring, and playback systems
 
-## What the app does
+---
 
-Ntsiniz helps users practice singing with a simple loop:
+## What Ntsiniz Does
 
-1. Choose a drill.
-2. Listen to a reference.
-3. Record your voice.
-4. Get live feedback.
-5. Replay and review.
-6. Save your best take.
+Ntsiniz helps users improve singing through guided drills:
 
-## For people browsing on GitHub
+1. Select a drill
+2. Hear the reference
+3. Sing / record
+4. Get live pitch feedback
+5. Replay / review
+6. Save best take
+7. Track progress over time
 
-- This is an active app codebase, not a demo project.
-- The app uses native modules, so Expo Go is not enough.
-- You need a development build (`npm run ios` or `npm run android`).
+---
+
+## Tech Stack
+
+- Expo SDK 54
+- React Native 0.81
+- React 19
+- TypeScript
+- Expo Dev Client
+- React Native Reanimated
+- Storybook (on-device)
+- Local native modules for audio DSP
+
+---
 
 ## Prerequisites
+
+Make sure you have:
 
 - Node.js `>=20.19.0 <25`
 - npm `>=10`
 - Git
-- For iOS: Xcode
-- For Android: Android Studio + SDK + emulator
 
-Notes:
+### iOS
+- Xcode
+- CocoaPods
+- iOS Simulator
 
-- The repo uses `engine-strict=true`, so wrong Node/npm versions will fail install.
-- If you use `nvm`, run `nvm use` in the project root.
+### Android
+- Android Studio
+- Android SDK
+- Android Emulator
 
-## Setup
+### Notes
+- This repo uses strict engine checks.
+- Wrong Node / npm versions will fail install.
+- Recommended: use `nvm`.
 
-1. Install dependencies:
+```bash
+nvm use
+````
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
 
 ```bash
 npm ci
 ```
 
-2. Optional: create local env values:
+### 2. Optional: set local env
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in only the values you need (for example Sentry or RevenueCat).
+Fill in:
 
-## Run the app
+* Sentry (optional)
+* RevenueCat (optional)
+* any local overrides
 
-### iOS
+---
+
+## Running the App
+
+> Important: This app uses native modules. Expo Go is **not supported**.
+
+### iOS dev build
 
 ```bash
 npm run ios
 ```
 
-### Android
+### Android dev build
 
 ```bash
 npm run android
 ```
 
-### Clean build (if needed)
+### Start Metro in dev client mode
+
+Use this after the native build is installed:
 
 ```bash
-npm run ios -c
-npm run android -c
+npm run dev
 ```
 
-## First-time app use (manual smoke test)
+This gives:
 
-After the app opens:
+* fast refresh
+* sandbox routes
+* debug tools
 
-1. Allow microphone permission.
-2. Start a drill from the home screen.
-3. Confirm you can hear reference audio.
-4. Record a short take.
-5. Confirm feedback and playback work.
+---
 
-## Useful scripts
+## Storybook / UI Sandbox
 
-Run CI checks locally:
+Ntsiniz includes full Storybook + screen sandbox for fast UI development.
+
+---
+
+### Run Storybook (cross-platform)
 
 ```bash
-npm run ci
+npm run storybook
 ```
 
-Typecheck only:
+### Run Storybook on iOS
+
+```bash
+npm run storybook:ios
+```
+
+### Run Storybook on Android
+
+```bash
+npm run storybook:android
+```
+
+### Run Storybook on Web
+
+```bash
+npm run storybook:web
+```
+
+### Build Storybook for Web
+
+```bash
+npm run storybook:web:build
+```
+
+Web Storybook uses React Native Web and the same `src/**/*.stories.tsx` stories as mobile. Native-only modules are mocked in the browser config so the shared component system stays single-source.
+
+### Design-System Governance
+
+```bash
+# Generate coverage map + state matrix
+npm run design-system:audit
+
+# Strict mode (fails if Storybook coverage/state contracts are incomplete)
+npm run check:design-system
+```
+
+Generated artifacts:
+
+- `docs/design-system/storybook_coverage_report.json`
+- `docs/design-system/storybook_expansion_map.md`
+- `docs/design-system/NEOMORPH_STORYBOOK_SYSTEM_SPEC.md`
+
+---
+
+### Storybook Includes
+
+#### Shared UI Components
+
+* AppText / headings / body text
+* Buttons
+* Inputs
+* Cards
+* Bottom sheets
+* Banners
+* Modals
+
+#### Ntsiniz-specific UI
+
+* Mic permission UI
+* Drill controls
+* Pitch indicators
+* Vocal range ladder
+* Session summary cards
+* Waveform visualizers
+
+#### Full Screen Flows
+
+* Welcome / splash
+* Onboarding level select
+* Mic setup
+* Range finder
+* Singing drill
+* Playback
+* Session summary
+
+---
+
+## UI Sandbox Workflow
+
+For rapid iteration:
+
+### Main dev lane
+
+```bash
+npm run dev
+```
+
+Use:
+
+* full app navigation
+* QA tools
+* real flows
+
+### Storybook lane
+
+```bash
+npm run storybook
+```
+
+Use:
+
+* isolated components
+* screen previews
+* design testing
+
+### Sandbox access inside app
+
+Go to:
+
+**Settings → QA → Open UI Sandbox**
+
+Available:
+
+* Sandbox Hub
+* Component Playground
+* Flow Playground
+* Storybook Screen
+
+---
+
+## Common Development Commands
+
+### Type check
 
 ```bash
 npm run typecheck
 ```
 
-Tests:
+### Lint
+
+```bash
+npm run lint
+```
+
+### Run all tests
 
 ```bash
 npm test
 ```
 
-Regenerate native folders (rare):
+### Fast CI verification
+
+```bash
+npm run ci
+```
+
+### Full release checks
+
+```bash
+npm run ci:release
+```
+
+---
+
+## E2E Testing
+
+### Maestro
+
+```bash
+npm run e2e:maestro
+```
+
+### Killer loop smoke flow
+
+```bash
+npm run e2e:killer-loop
+```
+
+### Detox iOS
+
+Build:
+
+```bash
+npm run e2e:detox:build:ios
+```
+
+Test:
+
+```bash
+npm run e2e:detox:test:ios
+```
+
+### Detox Android
+
+Build:
+
+```bash
+npm run e2e:detox:build:android
+```
+
+Test:
+
+```bash
+npm run e2e:detox:test:android
+```
+
+---
+
+## Performance / Quality
+
+### Performance budget
+
+```bash
+npm run perf:budget
+```
+
+### Capture perf evidence
+
+```bash
+npm run perf:capture
+```
+
+### QA release evidence
+
+```bash
+npm run evidence:capture
+```
+
+---
+
+## Native / Build Utilities
+
+### Prebuild native folders
 
 ```bash
 npm run prebuild
 ```
 
+### Build safety check
+
+```bash
+npm run build:check
+```
+
+### Verify audio / config rules
+
+```bash
+npm run check:audio-mode
+npm run check:config
+npm run check:remote-config
+```
+
+---
+
+## First-Time Smoke Test
+
+After app launches:
+
+1. Allow microphone access
+2. Start onboarding
+3. Complete first drill
+4. Check live pitch feedback
+5. Record short take
+6. Play back saved take
+7. Confirm UI / audio loop works
+
+---
+
 ## Troubleshooting
 
-### Install fails because of Node/npm version
-
-Check versions:
+### Metro stale bundle
 
 ```bash
-node -v
-npm -v
+npx expo start -c
 ```
 
-Then switch to a supported Node version (for example with `nvm use`).
-
-### Android install fails with "not enough space"
-
-Free emulator storage, then retry:
-
-```bash
-adb -s emulator-5554 shell df -h /data
-adb -s emulator-5554 uninstall com.ntsiniz.app
-npm run android -c
-```
-
-### Watchman recrawl warning
+### Watchman issues
 
 ```bash
 watchman watch-del "$PWD"
 watchman watch-project "$PWD"
 ```
 
-### Metro cache issues or stale bundle
-
-```bash
-npx expo start -c
-```
-
-### Expo dependency mismatch
+### Expo package mismatch
 
 ```bash
 npx expo doctor
 ```
 
-If doctor suggests package versions, prefer:
+To fix package versions:
 
 ```bash
 npx expo install <package>
 ```
 
-## Project structure
+### Android emulator storage issue
 
-- `src/core` - audio, scoring, state, telemetry
-- `src/ui` - UI primitives, components, modules
-- `src/app` - app routes and screens
-- `modules` - local native modules
-- `scripts` - CI and maintenance scripts
-- `docs` - product and release docs
+```bash
+adb -s emulator-5554 shell df -h /data
+adb -s emulator-5554 uninstall com.ntsiniz.app
+npm run android
+```
+
+---
+
+## Project Structure
+
+```bash
+src/
+  app/          # app routes / screens
+  core/         # audio engine / scoring / telemetry
+  ui/           # shared UI / components / drill UI
+  theme/        # tokens / neumorphism system
+
+modules/        # local native modules
+scripts/        # CI / QA scripts
+docs/           # product / release docs
+storybook/      # stories / config
+```

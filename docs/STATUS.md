@@ -1,5 +1,8 @@
 # Ntsiniz Status Board
 
+Canonical current status for the Guided Journey V3 patch now lives at [`/STATUS.md`](/Users/promise.feliti/cofa-tools/ntsiniz/STATUS.md).
+This historical document is kept for earlier phase context only.
+
 _Last updated: 2026-02-24_
 
 ## Phase 1 (Competition Killer Coach) — Status

@@ -1,8 +1,8 @@
 import test from "node:test"
 import assert from "node:assert/strict"
 
-import { resetPermissionGate } from "../audio/permissionGate.js"
-import { runDrillWithDrivers } from "../drills/drillExecutor.js"
+import { resetPermissionGate } from "../audio/permissionGate"
+import { runDrillWithDrivers } from "../drills/drillExecutor"
 
 type AnyDrill = any
 

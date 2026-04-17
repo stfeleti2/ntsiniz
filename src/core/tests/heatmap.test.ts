@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { computeHeatmapDays } from "../progress/heatmap.js"
+import { computeHeatmapDays } from "../progress/heatmap"
 
 test("computeHeatmapDays returns fixed window with counts", () => {
   const day = 24 * 60 * 60 * 1000

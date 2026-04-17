@@ -9,6 +9,8 @@ export type SurfaceFlags = {
   competitionsOn: boolean
   marketplaceOn: boolean
   diagnosticsOn: boolean
+  karaokeOn: boolean
+  performanceOn: boolean
   dev: boolean
 }
 
@@ -16,6 +18,10 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'Welcome',
   'Calibration',
   'Onboarding',
+  'PermissionsPrimer',
+  'WakeYourVoice',
+  'FirstWinResult',
+  'Recovery',
   'MainTabs',
   'Tuner',
   'MicTest',
@@ -25,7 +31,13 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'Playback',
   'RecoveredTakes',
   'CurriculumOverview',
+  'StageAssessment',
   'CurriculumDayPreview',
+  'LessonIntro',
+  'ConceptExplainer',
+  'TechniqueHelp',
+  'WhyThisMatters',
+  'DrillPrep',
   'DayComplete',
   'Billing',
   'Privacy',
@@ -33,13 +45,37 @@ const CORE_STACK_SCREENS: Array<keyof RootStackParamList> = [
   'SessionSummary',
   'WeeklyReport',
   'PitchLockChallenge',
+  'VoiceProfile',
+  'RangeSnapshot',
+  'VocalFamily',
+  'PersonalPlan',
+  'Insights',
+  'Milestones',
+  'CompareProgress',
 ]
 
 export function getEnabledStackScreenNames(flags: SurfaceFlags): string[] {
   const names = [...CORE_STACK_SCREENS] as string[]
 
+  if (flags.karaokeOn) {
+    names.push('KaraokeMode')
+  }
+
+  if (flags.performanceOn) {
+    names.push('PerformanceMode', 'PerformancePreview')
+  }
+
   if (flags.dev) {
-    names.push('Billing', 'PermissionsPrimer', 'Privacy')
+    names.push(
+      'Billing',
+      'Privacy',
+      'SandboxHub',
+      'ComponentPlayground',
+      'FlowPlayground',
+      'ScreenPreviewGallery',
+      'ScreenPreviewScenario',
+      'StorybookScreen',
+    )
   }
 
   if (!flags.storeBuild) {

@@ -1,351 +1,255 @@
-import React, { useEffect, useMemo, useState } from "react"
-import { CompositeScreenProps } from "@react-navigation/native"
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
-import type { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { Screen } from "@/ui/components/Screen"
-import { Text } from "@/ui/components/Typography"
-import { Button } from "@/ui/components/Button"
-import { Card } from "@/ui/components/Card"
-import type { MainTabParamList, RootStackParamList } from "../navigation/types"
-import { loadAllBundledPacks } from "@/core/drills/loader"
-import { pickNextDrill } from "@/core/profile/nextDrill"
-import { createSession } from "@/core/storage/sessionsRepo"
-import { listRecentAttempts } from "@/core/storage/attemptsRepo"
-import { getProfile } from "@/core/storage/profileRepo"
-import { createSessionPlan, createSessionPlanFromIds, getPlan } from "@/core/profile/sessionPlan"
+import React, { useEffect, useMemo, useState } from 'react'
+import { CompositeScreenProps } from '@react-navigation/native'
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { StyleSheet, useWindowDimensions } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+
+import { Screen } from '@/ui/components/Screen'
+import { Text } from '@/ui/components/Typography'
+import { Card } from '@/ui/components/kit'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
-import { t } from '@/app/i18n'
-import { reportUiError } from '@/app/telemetry/report'
-import { SessionSummaryModule, useModuleEnabled } from '@/ui/modules'
-import { loadCurriculum } from '@/core/curriculum/loader'
-import { getCurriculumState } from '@/core/curriculum/progress'
-import { loadPhase1Lessons, loadProRegimenLessons, loadProRegimen12Lessons, findLesson } from '@/core/coaching/lessons'
-import { getDailyChallenge } from '@/core/challenges/dailyChallenge'
-import { getWeeklyChallengeById } from '@/core/challenges/weeklyChallenges'
-import { getIsoWeekKey } from '@/core/time/week'
-import { playToneSequence } from '@/app/audio/tonePlayer'
-import { parseNoteToMidi } from '@/core/pitch/noteParse'
-import { midiToHz } from '@/core/pitch/hzToNote'
+
+import type { MainTabParamList, RootStackParamList } from '../navigation/types'
+import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { createSession } from '@/core/storage/sessionsRepo'
+import { createSessionPlan, createSessionPlanFromIds, getPlan } from '@/core/profile/sessionPlan'
 import { setSessionMeta } from '@/core/profile/sessionMeta'
-import type { FeedbackPlan } from '@/core/coaching/feedbackPolicy'
-import * as Speech from 'expo-speech'
-import { getLessonVoiceAsset } from '@/app/audio/lessonVoiceAssets'
-import { playVoiceDemo, stopVoiceDemo } from '@/app/audio/voiceDemoPlayer'
-import { getSettings } from '@/core/storage/settingsRepo'
+import { getProfile } from '@/core/storage/profileRepo'
+import { listRecentAttempts } from '@/core/storage/attemptsRepo'
+import { loadAllBundledPacks } from '@/core/drills/loader'
+import { pickNextDrill } from '@/core/profile/nextDrill'
+import { ensureJourneyV3Progress, getCurrentJourneyV3 } from '@/core/guidedJourney/progress'
+import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { mapPackLessonToHostDrills, type HostMappedPackDrill } from '@/core/guidedJourney/hostDrillMapper'
+import { BrandWorldBackdrop, StatusPill } from '@/ui/guidedJourney'
+import { t } from '@/app/i18n'
 
 type Props = CompositeScreenProps<
-  BottomTabScreenProps<MainTabParamList, "Session">,
+  BottomTabScreenProps<MainTabParamList, 'Session'>,
   NativeStackScreenProps<RootStackParamList>
 >
 
+type SessionVm = {
+  sessionId: string
+  stageId: string
+  stageTitle: string
+  lessonId: string
+  lessonTitle: string
+  plan: HostMappedPackDrill[]
+  fallbackDrillId: string | null
+}
+
+const COPY = {
+  title: 'Today’s plan',
+  subtitle: 'Record → Playback → Save Best → Next',
+  loading: 'Building your guided plan…',
+  continue: 'Continue',
+  start: 'Start session',
+  review: 'Lesson intro',
+  fallbackTitle: 'Guided plan unavailable',
+  fallbackBody: 'We will start from the best next live drill.',
+}
+
+const STAGE_TABS = ['Foundation', 'Control', 'Tone & Style', 'Musicality']
+
 export function SessionScreen({ navigation, route }: Props) {
-  const pack = useMemo(() => loadAllBundledPacks(), [])
-  const [sessionId, setSessionId] = useState<string | null>(null)
-  const [activeCurriculum, setActiveCurriculum] = useState<'phase1' | 'pro_regimen' | 'pro_regimen12'>('phase1')
-  const [activeTrack, setActiveTrack] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
-  const [recommended, setRecommended] = useState<string | null>(null)
-  const [lessonTitle, setLessonTitle] = useState<string | null>(null)
-  const [lessonBody, setLessonBody] = useState<string | null>(null)
-  const [lessonDemo, setLessonDemo] = useState<{ freqHz: number; durationMs: number; gapMs?: number }[] | null>(null)
-  const [lessonKeyPoints, setLessonKeyPoints] = useState<string[] | null>(null)
-  const [lessonDo, setLessonDo] = useState<string[] | null>(null)
-  const [lessonAvoid, setLessonAvoid] = useState<string[] | null>(null)
-  const [lessonScript, setLessonScript] = useState<string[] | null>(null)
-  const [lessonVoiceAsset, setLessonVoiceAsset] = useState<number | null>(null)
-  const [voicePlaying, setVoicePlaying] = useState(false)
-  const [headerTitle, setHeaderTitle] = useState<string | null>(null)
-  const [headerSubtitle, setHeaderSubtitle] = useState<string | null>(null)
+  const [vm, setVm] = useState<SessionVm | null>(null)
+  const { width } = useWindowDimensions()
+  const isWide = width >= 940
 
   useEffect(() => {
     ;(async () => {
-      const settings = await getSettings().catch(() => null)
-      setActiveCurriculum((settings?.activeCurriculum ?? 'phase1') as any)
-      setActiveTrack((settings?.activeTrack ?? 'beginner') as any)
+      const hostPack = loadAllBundledPacks()
+      const session = await createSession()
 
-      const s = await createSession()
-      setSessionId(s.id)
-
-      const attempts = await listRecentAttempts(40)
-      const profile = await getProfile()
-      const last = attempts[0]
-
-      const curriculumDayId = route.params?.curriculumDayId
-      const dailyChallenge = !!route.params?.dailyChallenge
-      const weeklyChallengeId = route.params?.weeklyChallengeId
-
-      if (curriculumDayId) {
-        const curr = loadCurriculum(activeCurriculum as any, activeTrack as any)
-        const day = curr.days.find((d) => d.id === curriculumDayId) ?? curr.days[0]
-        const idx = curr.days.findIndex((d) => d.id === day?.id)
-        const st = await getCurriculumState(curr).catch(() => null as any)
-        const maxStartIndex = st ? (st.doneToday ? st.displayIndex : st.dayIndex) : 0
-        if (idx > maxStartIndex) {
-          // Defensive gate: future days are preview-only.
-          ;(navigation as any).getParent?.()?.navigate?.('CurriculumDayPreview', { dayId: day.id })
-          return
-        }
-        setHeaderTitle(day ? `${t('curriculum.today')}: ${day.title}` : t('session.title'))
-        setHeaderSubtitle(day?.focus ?? t('session.subtitle'))
-
-        const lessons =
-          activeCurriculum === 'pro_regimen12'
-            ? loadProRegimen12Lessons(activeTrack)
-            : activeCurriculum === 'pro_regimen'
-              ? loadProRegimenLessons()
-              : loadPhase1Lessons()
-        const lesson = findLesson(lessons, day?.lessonId)
-        const baseFeedbackPlan: Partial<FeedbackPlan> | null = (lesson as any)?.meta?.feedbackPlan ?? null
-        setLessonTitle(lesson?.title ?? null)
-        setLessonBody(lesson?.body ?? null)
-        setLessonKeyPoints((lesson as any)?.keyPoints ?? null)
-        setLessonDo((lesson as any)?.doThis ?? null)
-        setLessonAvoid((lesson as any)?.avoidThis ?? null)
-        setLessonScript((lesson as any)?.coachScript ?? null)
-        setLessonVoiceAsset(getLessonVoiceAsset(lesson?.id ?? null))
-        setLessonDemo(
-          lesson?.demo
-            ? lesson.demo
-                .map((x) => {
-                  const midi = parseNoteToMidi(x.note)
-                  return midi == null ? null : { freqHz: midiToHz(midi), durationMs: x.durationMs, gapMs: x.gapMs }
-                })
-                .filter(Boolean) as any
-            : null,
-        )
-
-        const ids = (day?.drillIds ?? []).filter((id: string) => pack.drills.some((d) => d.id === id))
-        const fallback = pickNextDrill(pack, profile, { lastDrillId: last?.drillId, lastScore: last?.score })
-        const list = ids.length ? ids : [fallback]
-        setRecommended(list[0])
-        createSessionPlanFromIds(s.id, list)
-        setSessionMeta(s.id, {
-          curriculumDayId,
-          lessonId: day?.lessonId,
-          track: (activeTrack as any) ?? 'beginner',
-          week: day?.week,
-          day: day?.day,
-          baseFeedbackPlan: baseFeedbackPlan ?? undefined,
+      if (!enableGuidedJourneyV3()) {
+        const [profile, attempts] = await Promise.all([getProfile(), listRecentAttempts(20)])
+        const next = pickNextDrill(hostPack, profile, { lastDrillId: attempts[0]?.drillId, lastScore: attempts[0]?.score })
+        createSessionPlan(session.id, hostPack, next)
+        setVm({
+          sessionId: session.id,
+          stageId: 'S1',
+          stageTitle: COPY.fallbackTitle,
+          lessonId: '',
+          lessonTitle: next,
+          plan: [],
+          fallbackDrillId: next,
         })
         return
       }
 
-      if (dailyChallenge) {
-        const c = getDailyChallenge()
-        setHeaderTitle(t('challenge.sessionTitle'))
-        setHeaderSubtitle(t('challenge.sessionSubtitle'))
-        setLessonTitle(t('challenge.miniCoachTitle'))
-        setLessonBody(t('challenge.miniCoachBody'))
+      const program = loadGuidedJourneyProgram()
+      const progress = await ensureJourneyV3Progress()
+      const current = getCurrentJourneyV3(program, progress)
+      const lesson = route.params?.lessonId ? program.lessonsById[route.params.lessonId] ?? current.lesson : current.lesson
+      const stage = program.stagesById[route.params?.stageId ?? lesson.stageId] ?? program.stagesById[lesson.stageId] ?? current.stage
+      const plan = mapPackLessonToHostDrills(lesson.id, progress.routeId)
 
-        // Plan: challenge + 2 support drills
-        const support = pickNextDrill(pack, profile, { lastDrillId: c.drillId, lastScore: 0, focusType: pack.drills.find((d) => d.id === c.drillId)?.type })
-        const support2 = pickNextDrill(pack, profile, { lastDrillId: support, lastScore: 0 })
-        const list = [c.drillId, support, support2].filter(Boolean)
-        setRecommended(c.drillId)
-        createSessionPlanFromIds(s.id, list as any)
-        setSessionMeta(s.id, { dailyChallenge: true })
-        return
+      if (plan.length) {
+        createSessionPlanFromIds(session.id, plan.map((item) => item.hostDrillId))
+        setSessionMeta(session.id, {
+          guidedJourney: {
+            routeId: progress.routeId ?? 'R4',
+            stageId: stage.id,
+            lessonId: lesson.id,
+            plan,
+          },
+        })
+      } else {
+        const [profile, attempts] = await Promise.all([getProfile(), listRecentAttempts(20)])
+        const next = pickNextDrill(hostPack, profile, { lastDrillId: attempts[0]?.drillId, lastScore: attempts[0]?.score })
+        createSessionPlan(session.id, hostPack, next)
       }
 
-      if (weeklyChallengeId) {
-        const wk = getWeeklyChallengeById(weeklyChallengeId)
-        if (wk) {
-          setHeaderTitle(t('challenge.weeklyTitle'))
-          setHeaderSubtitle(wk.subtitle)
-          setLessonTitle(t('challenge.weeklyCoachTitle'))
-          setLessonBody(t('challenge.weeklyCoachBody'))
-          const ids = wk.drillIds.filter((id) => pack.drills.some((d) => d.id === id))
-          const list = ids.length ? ids : [pickNextDrill(pack, profile, { lastDrillId: last?.drillId, lastScore: last?.score })]
-          setRecommended(list[0] ?? null)
-          createSessionPlanFromIds(s.id, list as any)
-          setSessionMeta(s.id, { weeklyChallengeId, weeklyPeriodKey: getIsoWeekKey() })
-          return
-        }
-      }
+      setVm({
+        sessionId: session.id,
+        stageId: stage.id,
+        stageTitle: stage.title,
+        lessonId: lesson.id,
+        lessonTitle: lesson.title,
+        plan,
+        fallbackDrillId: null,
+      })
+    })().catch(() => setVm(null))
+  }, [route.params?.lessonId, route.params?.stageId])
 
-      const focusType = route.params?.focusType
-      const next = pickNextDrill(pack, profile, { lastDrillId: last?.drillId, lastScore: last?.score, focusType })
-      setRecommended(next)
-      createSessionPlan(s.id, pack, next)
-    })().catch((e) => reportUiError(e, { screen: 'Session' }))
-  }, [pack, route.params?.focusType, route.params?.curriculumDayId, route.params?.dailyChallenge, route.params?.weeklyChallengeId])
+  const activeStageTab = useMemo(() => {
+    if (!vm?.stageTitle) return STAGE_TABS[0]
+    const lower = vm.stageTitle.toLowerCase()
+    if (lower.includes('control')) return STAGE_TABS[1]
+    if (lower.includes('tone') || lower.includes('style')) return STAGE_TABS[2]
+    if (lower.includes('music')) return STAGE_TABS[3]
+    return STAGE_TABS[0]
+  }, [vm?.stageTitle])
 
-  useEffect(() => {
-    return () => {
-      Speech.stop()
-      void stopVoiceDemo()
-    }
-  }, [])
-
-  const recTitle = useMemo(() => {
-    if (!recommended) return t('common.ellipsis')
-    return pack.drills.find((d) => d.id === recommended)?.title ?? recommended
-  }, [pack.drills, recommended])
-
-  const plan = sessionId ? getPlan(sessionId) : null
-  const summaryEnabled = useModuleEnabled('module.session.summary')
-
-  const planItems = useMemo(() => {
-    if (!plan) return []
-    return plan.drillIds.map((id, idx) => {
-      const d = pack.drills.find((x) => x.id === id)
+  const cards = useMemo(() => {
+    if (!vm) return [] as Array<{ icon: string; title: string; status: string; difficulty: string; progress: number; drill?: HostMappedPackDrill }>
+    const planState = getPlan(vm.sessionId)
+    const labels = ['Warmup', 'Match Note', 'Pitch Slides', 'Bonus Drill', 'Upcoming']
+    const populated = vm.plan.slice(0, 5)
+    return labels.map((label, index) => {
+      const drill = populated[index]
+      const status = index < (planState?.index ?? 0) ? 'Completed' : index === (planState?.index ?? 0) ? 'Now' : 'New'
       return {
-        id,
-        label: d?.title ?? id,
-        isCurrent: idx === plan.index,
-        isDone: idx < plan.index,
+        icon: iconForDrill(drill?.family ?? ''),
+        title: drill?.title ?? label,
+        status,
+        difficulty: drill?.loadTier ?? 'LT1',
+        progress: Math.max(0.08, Math.min(1, (index + 1) / Math.max(1, labels.length))),
+        drill,
       }
     })
-  }, [pack.drills, plan])
+  }, [vm])
+
+  const startNow = () => {
+    if (!vm) return
+    const next = cards.find((card) => card.status === 'Now' && card.drill)?.drill ?? vm.plan[0]
+    if (next) {
+      navigation.navigate('Drill', {
+        sessionId: vm.sessionId,
+        drillId: next.hostDrillId,
+        packDrillId: next.packDrillId,
+        lessonId: vm.lessonId,
+        stageId: vm.stageId,
+      })
+      return
+    }
+    if (vm.fallbackDrillId) {
+      navigation.navigate('Drill', { sessionId: vm.sessionId, drillId: vm.fallbackDrillId })
+    }
+  }
+
+  if (!vm) {
+    return (
+      <Screen background="hero">
+        <Text preset="h1">{COPY.title}</Text>
+        <Text preset="muted">{COPY.loading}</Text>
+      </Screen>
+    )
+  }
 
   return (
-    <Screen scroll background="gradient">
-      {lessonTitle && lessonBody ? (
-        <Card tone="glow">
-          <Text preset="h2">{lessonTitle}</Text>
-          <Text preset="muted">{lessonBody}</Text>
+    <Screen scroll background="hero">
+      <BrandWorldBackdrop />
+      <Box style={{ gap: 6 }}>
+        <Text preset="h1">{COPY.title}</Text>
+        <Text preset="muted">{COPY.subtitle}</Text>
+      </Box>
 
-          {lessonKeyPoints?.length ? (
-            <Box style={{ marginTop: 10, gap: 4 }}>
-              <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.keyPointsTitle')}</Text>
-              {lessonKeyPoints.slice(0, 6).map((x, idx) => (
-                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
-              ))}
-            </Box>
-          ) : null}
-
-          {lessonDo?.length ? (
-            <Box style={{ marginTop: 10, gap: 4 }}>
-              <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.doThisTitle')}</Text>
-              {lessonDo.slice(0, 6).map((x, idx) => (
-                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
-              ))}
-            </Box>
-          ) : null}
-
-          {lessonAvoid?.length ? (
-            <Box style={{ marginTop: 10, gap: 4 }}>
-              <Text preset="body" style={{ fontWeight: '900' }}>{t('lesson.avoidThisTitle')}</Text>
-              {lessonAvoid.slice(0, 6).map((x, idx) => (
-                <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
-              ))}
-            </Box>
-          ) : null}
-
-          {lessonScript?.length ? (
-            <Box style={{ marginTop: 12, gap: 10 }}>
-              <Button
-                text={voicePlaying ? t('lesson.stopVoice') : t('lesson.playVoiceDemo')}
-                variant="soft"
-                onPress={() => {
-                  if (voicePlaying) {
-                    Speech.stop()
-                    void stopVoiceDemo()
-                    setVoicePlaying(false)
-                    return
-                  }
-                  try {
-                    Speech.stop()
-                    void stopVoiceDemo()
-                    if (lessonVoiceAsset) {
-                      void playVoiceDemo(lessonVoiceAsset, { volume: 0.95, onDone: () => setVoicePlaying(false) }).catch(() => {})
-                      setVoicePlaying(true)
-                      return
-                    }
-                    Speech.speak(lessonScript.join(' '), {
-                      rate: 0.95,
-                      pitch: 1.0,
-                      onDone: () => setVoicePlaying(false),
-                      onStopped: () => setVoicePlaying(false),
-                    } as any)
-                    setVoicePlaying(true)
-                  } catch {
-                    // ignore
-                  }
-                }}
-              />
-            </Box>
-          ) : null}
-
-          {lessonDemo?.length ? (
-            <Button
-              text={t('lesson.playToneDemo')}
-              variant="soft"
-              onPress={async () => {
-                try {
-                  await playToneSequence(lessonDemo, { volume: 0.92 })
-                } catch {
-                  // ignore
-                }
-              }}
-            />
-          ) : null}
+      {!vm.plan.length ? (
+        <Card tone="warning">
+          <Text preset="h3">{COPY.fallbackTitle}</Text>
+          <Text preset="muted">{COPY.fallbackBody}</Text>
         </Card>
       ) : null}
 
-      {summaryEnabled ? (
-        <SessionSummaryModule
-          testID="session.summary"
-          recommendedTitle={recTitle}
-          primaryLabel={sessionId && recommended ? t('session.start') : t('session.preparing')}
-          primaryDisabled={!sessionId || !recommended}
-          onPrimary={() => (navigation as any).navigate('Drill', { sessionId: sessionId!, drillId: recommended! })}
-          planItems={planItems.length ? planItems : undefined}
-        />
-      ) : (
-        <>
-          <Box style={{ gap: 6 }}>
-            <Text preset="h1">{headerTitle ?? t('session.title')}</Text>
-            <Text preset="muted">{headerSubtitle ?? t('session.subtitle')}</Text>
-          </Box>
-
-          <Card tone="glow">
-            <Text preset="h2">{t('session.recommendedTitle')}</Text>
-            <Text preset="muted">{t('session.recommendedSubtitle')}</Text>
-            <Text preset="body" style={{ fontWeight: "900" }}>
-              {recTitle}
-            </Text>
-            <Button
-              text={sessionId && recommended ? t('session.start') : t('session.preparing')}
-              disabled={!sessionId || !recommended}
-              onPress={() => (navigation as any).navigate('Drill', { sessionId: sessionId!, drillId: recommended! })}
-              testID="btn-session-start"
-            />
-
-            {plan ? (
-              <Box style={{ gap: 8, marginTop: 10 }}>
-                <Text preset="muted">{t('session.planTitle')}</Text>
-                {plan.drillIds.map((id, idx) => {
-                  const d = pack.drills.find((x) => x.id === id)
-                  return (
-                    <Text key={`${id}-${idx}`} preset="body" style={{ fontWeight: idx === plan.index ? "900" : "700", opacity: idx < plan.index ? 0.7 : 1 }}>
-                      {idx + 1}. {d?.title ?? id}
-                    </Text>
-                  )
-                })}
-              </Box>
-            ) : null}
-          </Card>
-        </>
-      )}
-
-      <Card>
-        <Text preset="h2">{t('session.quickPickTitle')}</Text>
-        <Text preset="muted">{t('session.quickPickSubtitle')}</Text>
-        {pack.drills.map((d, idx) => (
-          <Button
-            key={`${d.id}-${idx}`}
-            text={d.title}
-            variant="ghost"
-            disabled={!sessionId}
-            onPress={() => {
-              createSessionPlanFromIds(sessionId!, [d.id])
-              ;(navigation as any).navigate('Drill', { sessionId: sessionId!, drillId: d.id })
-            }}
-          />
-        ))}
+      <Card tone="elevated" style={{ overflow: 'hidden' }}>
+        <LinearGradient colors={['rgba(80,48,186,0.36)', 'rgba(17,11,45,0.42)']} style={StyleSheet.absoluteFill} />
+        <Box style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+          {STAGE_TABS.map((tab, tabIndex) => (
+            <StatusPill key={`tab-${tabIndex}`} state={tab === activeStageTab ? 'ready' : 'paused'} label={tab} />
+          ))}
+        </Box>
       </Card>
 
-      <Button text={t('common.back')} variant="ghost" onPress={() => navigation.goBack()} />
+      <Card tone="glow">
+        <Box style={{ gap: 8 }}>
+          <Text preset="h3">{vm.lessonTitle}</Text>
+          <Text preset="muted">{vm.stageTitle}</Text>
+          <Text preset="muted">{t('guidedFlow.sessionNowWhyNext')}</Text>
+        </Box>
+      </Card>
+
+      <Box style={{ flexDirection: isWide ? 'row' : 'column', flexWrap: isWide ? 'wrap' : 'nowrap', gap: 10 }}>
+        {cards.map((card, index) => (
+          <Card key={`${card.title}-${index}`} tone={card.status === 'Now' ? 'glow' : 'default'} style={{ width: isWide ? '48%' : '100%' }}>
+            <Box style={{ gap: 8 }}>
+              <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
+                <Text preset="body">{`${card.icon} ${card.title}`}</Text>
+                <StatusPill state={card.status === 'Completed' ? 'success' : card.status === 'Now' ? 'ready' : 'paused'} label={card.status} />
+              </Box>
+              <Text preset="muted">{`Difficulty: ${card.difficulty}`}</Text>
+              <ViewProgress progress={card.progress} />
+            </Box>
+          </Card>
+        ))}
+      </Box>
+
+      <Button text={COPY.continue} onPress={startNow} testID="btn-session-start" />
+      <Button text={COPY.review} variant="ghost" onPress={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })} />
     </Screen>
+  )
+}
+
+function iconForDrill(family: string) {
+  if (family.includes('match')) return '◉'
+  if (family.includes('slide')) return '↗'
+  if (family.includes('sustain')) return '▬'
+  if (family.includes('interval')) return '⇅'
+  if (family.includes('melody')) return '♪'
+  return '●'
+}
+
+function ViewProgress({ progress }: { progress: number }) {
+  return (
+    <Box
+      style={{
+        height: 8,
+        borderRadius: 999,
+        backgroundColor: 'rgba(255,255,255,0.13)',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        style={{
+          height: 8,
+          width: `${Math.round(progress * 100)}%`,
+          borderRadius: 999,
+          backgroundColor: 'rgba(170, 150, 255, 0.86)',
+        }}
+      />
+    </Box>
   )
 }

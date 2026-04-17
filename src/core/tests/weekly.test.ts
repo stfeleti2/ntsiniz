@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { computeWeeklyReport } from "../progress/weekly.js"
+import { computeWeeklyReport } from "../progress/weekly"
 
 test("computeWeeklyReport calculates deltas and daily averages", () => {
   const day = 24 * 60 * 60 * 1000

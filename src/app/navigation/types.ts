@@ -1,4 +1,6 @@
 import type { Drill } from "@/core/drills/schema"
+import type { FlowScenarioId, SandboxDataSource } from "@/app/dev/sandbox/types"
+import type { ScreenPreviewScenario } from "@/screens/previews"
 
 export type MainTabParamList = {
   Home: undefined
@@ -7,6 +9,8 @@ export type MainTabParamList = {
         focusType?: Drill["type"]
         missionId?: string
         curriculumDayId?: string
+        lessonId?: string
+        stageId?: string
         dailyChallenge?: boolean
         weeklyChallengeId?: string
       }
@@ -17,18 +21,55 @@ export type MainTabParamList = {
 }
 
 export type RootStackParamList = {
-  Welcome: undefined
+  Welcome:
+    | {
+        context?: 'firstTime' | 'returning' | 'nextLesson' | 'postSession' | 'milestone' | 'recentProgress'
+        next?: { name: string; params?: any }
+      }
+    | undefined
   Calibration: undefined
   Onboarding: undefined
+  WakeYourVoice: undefined
+  FirstWinResult: { lessonId?: string; snapshotId?: string } | undefined
+  Recovery: {
+    reason:
+      | 'micDenied'
+      | 'micBlocked'
+      | 'noisyRoom'
+      | 'noVoice'
+      | 'tooQuiet'
+      | 'tooLoud'
+      | 'routeChanged'
+      | 'clipping'
+      | 'silenceDetected'
+      | 'permissionLost'
+      | 'audioSetup'
+      | 'retune'
+    next?: { name: string; params?: any }
+  }
   MainTabs: undefined
   Tuner: undefined
-  Drill: { sessionId: string; drillId: string }
-  DrillResult: { sessionId: string; drillId: string; attemptId: string; nextDrillId?: string; endToResults?: boolean }
+  Drill: { sessionId: string; drillId: string; packDrillId?: string; lessonId?: string; stageId?: string }
+  DrillResult: { sessionId: string; drillId: string; attemptId: string; nextDrillId?: string; nextPackDrillId?: string; packDrillId?: string; lessonId?: string; stageId?: string; endToResults?: boolean }
   Results: { sessionId: string }
   Playback: { attemptId: string }
   CurriculumOverview: undefined
+  StageAssessment: { stageId?: string } | undefined
   CurriculumDayPreview: { dayId: string }
+  LessonIntro: { lessonId: string }
+  ConceptExplainer: { lessonId: string }
+  TechniqueHelp: { lessonId: string }
+  WhyThisMatters: { lessonId: string }
+  DrillPrep: { lessonId: string; stageId?: string }
   DayComplete: { sessionId: string; completedDayId: string }
+  VoiceProfile: undefined
+  RangeSnapshot: undefined
+  VocalFamily: undefined
+  PersonalPlan: undefined
+  Insights: undefined
+  Milestones: undefined
+  CompareProgress: undefined
+  KaraokeMode: { drillId?: string } | undefined
 
   ChallengesHub: undefined
   Leaderboard: { period: 'daily' | 'weekly'; challengeId: string }
@@ -42,6 +83,12 @@ export type RootStackParamList = {
   Account: undefined
   SignIn: undefined
   ComponentLab: undefined
+  SandboxHub: undefined
+  ComponentPlayground: undefined
+  FlowPlayground: { scenario?: FlowScenarioId; source?: SandboxDataSource } | undefined
+  ScreenPreviewGallery: undefined
+  ScreenPreviewScenario: { scenario: ScreenPreviewScenario } | undefined
+  StorybookScreen: undefined
 
   // EPIC 14
   DuetsHub: undefined

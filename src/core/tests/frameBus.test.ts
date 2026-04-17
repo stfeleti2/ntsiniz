@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { FrameBus } from '../audio/frameBus.js'
+import { FrameBus } from '../audio/frameBus'
 
 test('FrameBus drops oldest when maxQueue exceeded', async () => {
   const bus = new FrameBus<number>({ maxQueue: 5, maxPerTick: 10, preferAnimationFrame: false })

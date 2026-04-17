@@ -1,0 +1,2384 @@
+{
+  "generatedAt": "2026-04-16T13:50:39.383Z",
+  "totals": {
+    "screenFiles": 85,
+    "registeredRoutes": 51,
+    "storyFiles": 87
+  },
+  "severity": {
+    "critical": 41,
+    "high": 69,
+    "medium": 20,
+    "low": 1
+  },
+  "gaps": {
+    "registeredWithoutScreen": [
+      "StorybookScreen"
+    ],
+    "screensWithoutRoute": [
+      "Account",
+      "ChallengesHub",
+      "CoachTools",
+      "Community",
+      "CompetitionDetail",
+      "CompetitionLeaderboard",
+      "CompetitionSubmit",
+      "CompetitionsHub",
+      "ComponentLab",
+      "CreatePost",
+      "DevRepeatability",
+      "Diagnostics",
+      "DuetCreate",
+      "DuetImport",
+      "DuetSession",
+      "DuetsHub",
+      "FeedbackDetail",
+      "FeedbackImport",
+      "FeedbackInbox",
+      "Friends",
+      "Home",
+      "ImportCode",
+      "Journey",
+      "Leaderboard",
+      "Marketplace",
+      "ModTools",
+      "PostDetail",
+      "ProgramDayComplete",
+      "ProgramDetail",
+      "ReportDetail",
+      "Session",
+      "Settings",
+      "SignIn",
+      "Storybook",
+      "Terms"
+    ],
+    "registeredWithoutStory": [
+      "ScreenPreviewGallery",
+      "ScreenPreviewScenario",
+      "StorybookScreen"
+    ],
+    "storiesWithoutRoute": [
+      "Account",
+      "ChallengesHub",
+      "CoachTools",
+      "Community",
+      "CompetitionDetail",
+      "CompetitionLeaderboard",
+      "CompetitionSubmit",
+      "CompetitionsHub",
+      "ComponentLab",
+      "CreatePost",
+      "DevRepeatability",
+      "Diagnostics",
+      "DuetCreate",
+      "DuetImport",
+      "DuetSession",
+      "DuetsHub",
+      "FeedbackDetail",
+      "FeedbackImport",
+      "FeedbackInbox",
+      "Friends",
+      "Home",
+      "ImportCode",
+      "Journey",
+      "Leaderboard",
+      "Marketplace",
+      "MicPermission",
+      "ModTools",
+      "PostDetail",
+      "ProgramDayComplete",
+      "ProgramDetail",
+      "RangeFinder",
+      "ReportDetail",
+      "ScenarioStates",
+      "Session",
+      "Settings",
+      "SignIn",
+      "SingingLevelSelection",
+      "Storybook",
+      "Terms"
+    ]
+  },
+  "screens": [
+    {
+      "name": "Account",
+      "file": "src/app/screens/AccountScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Account.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "AdminContent",
+      "file": "src/app/screens/AdminContentScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/AdminContent.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "AudioTortureLab",
+      "file": "src/app/screens/AudioTortureLabScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/AudioTortureLab.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Billing",
+      "file": "src/app/screens/BillingScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Billing.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 1
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Calibration",
+      "file": "src/app/screens/CalibrationScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Calibration.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ChallengesHub",
+      "file": "src/app/screens/ChallengesHubScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ChallengesHub.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading",
+        "empty"
+      ],
+      "issues": [
+        "missing-states:loading,empty"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CoachTools",
+      "file": "src/app/screens/CoachToolsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CoachTools.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Community",
+      "file": "src/app/screens/CommunityScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Community.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CompareProgress",
+      "file": "src/app/screens/CompareProgressScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/CompareProgress.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [
+        "hardcoded-color-tokens"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CompetitionDetail",
+      "file": "src/app/screens/CompetitionDetailScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CompetitionDetail.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CompetitionLeaderboard",
+      "file": "src/app/screens/CompetitionLeaderboardScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CompetitionLeaderboard.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CompetitionsHub",
+      "file": "src/app/screens/CompetitionsHubScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CompetitionsHub.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CompetitionSubmit",
+      "file": "src/app/screens/CompetitionSubmitScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CompetitionSubmit.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ComponentLab",
+      "file": "src/app/screens/ComponentLabScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ComponentLab.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [
+        "missing-screen-wrapper"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ComponentPlayground",
+      "file": "src/app/screens/ComponentPlaygroundScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/ComponentPlayground.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": true
+      },
+      "missingStates": [
+        "loading",
+        "error"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "missing-states:loading,error"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ConceptExplainer",
+      "file": "src/app/screens/ConceptExplainerScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/ConceptExplainer.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CreatePost",
+      "file": "src/app/screens/CreatePostScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/CreatePost.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CreatorProfile",
+      "file": "src/app/screens/CreatorProfileScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/CreatorProfile.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CurriculumDayPreview",
+      "file": "src/app/screens/CurriculumDayPreviewScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/CurriculumDayPreview.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "CurriculumOverview",
+      "file": "src/app/screens/CurriculumOverviewScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/CurriculumOverview.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DayComplete",
+      "file": "src/app/screens/DayCompleteScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/DayComplete.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 1
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DevRepeatability",
+      "file": "src/app/screens/DevRepeatabilityScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/DevRepeatability.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Diagnostics",
+      "file": "src/app/screens/DiagnosticsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Diagnostics.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Drill",
+      "file": "src/app/screens/DrillScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Drill.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 4
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": [
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "DrillPrep",
+      "file": "src/app/screens/DrillPrepScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/DrillPrep.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DrillResult",
+      "file": "src/app/screens/DrillResultScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/DrillResult.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DuetCreate",
+      "file": "src/app/screens/DuetCreateScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/DuetCreate.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DuetImport",
+      "file": "src/app/screens/DuetImportScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/DuetImport.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DuetSession",
+      "file": "src/app/screens/DuetSessionScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/DuetSession.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "DuetsHub",
+      "file": "src/app/screens/DuetsHubScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/DuetsHub.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "FeedbackDetail",
+      "file": "src/app/screens/FeedbackDetailScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/FeedbackDetail.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 1
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "FeedbackImport",
+      "file": "src/app/screens/FeedbackImportScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/FeedbackImport.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "FeedbackInbox",
+      "file": "src/app/screens/FeedbackInboxScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/FeedbackInbox.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "FirstWinResult",
+      "file": "src/app/screens/FirstWinResultScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/FirstWinResult.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "FlowPlayground",
+      "file": "src/app/screens/FlowPlaygroundScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/FlowPlayground.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Friends",
+      "file": "src/app/screens/FriendsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Friends.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Home",
+      "file": "src/app/screens/HomeScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Home.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 9
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ImportCode",
+      "file": "src/app/screens/ImportCodeScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ImportCode.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Insights",
+      "file": "src/app/screens/InsightsScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Insights.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": false,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-design-system-imports",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Invite",
+      "file": "src/app/screens/InviteScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Invite.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Journey",
+      "file": "src/app/screens/JourneyScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Journey.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "KaraokeMode",
+      "file": "src/app/screens/KaraokeModeScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/KaraokeMode.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Leaderboard",
+      "file": "src/app/screens/LeaderboardScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Leaderboard.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "LessonIntro",
+      "file": "src/app/screens/LessonIntroScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/LessonIntro.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 7
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Marketplace",
+      "file": "src/app/screens/MarketplaceScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Marketplace.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "MicTest",
+      "file": "src/app/screens/MicTestScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/MicTest.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Milestones",
+      "file": "src/app/screens/MilestonesScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Milestones.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "empty"
+      ],
+      "issues": [
+        "missing-states:empty"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Missions",
+      "file": "src/app/screens/MissionsScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Missions.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ModTools",
+      "file": "src/app/screens/ModToolsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ModTools.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Onboarding",
+      "file": "src/app/screens/OnboardingScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Onboarding.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 9
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Paywall",
+      "file": "src/app/screens/PaywallScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Paywall.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 1
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "PerformanceMode",
+      "file": "src/app/screens/PerformanceModeScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/PerformanceMode.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 1
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "PerformancePreview",
+      "file": "src/app/screens/PerformancePreviewScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/PerformancePreview.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 12
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "PermissionsPrimer",
+      "file": "src/app/screens/PermissionsPrimerScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/PermissionsPrimer.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 3
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [
+        "hardcoded-color-tokens"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "PersonalPlan",
+      "file": "src/app/screens/PersonalPlanScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/PersonalPlan.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": false,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-design-system-imports",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "PitchLockChallenge",
+      "file": "src/app/screens/PitchLockChallengeScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/PitchLockChallenge.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": true
+      },
+      "missingStates": [
+        "loading",
+        "error"
+      ],
+      "issues": [
+        "missing-states:loading,error"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Playback",
+      "file": "src/app/screens/PlaybackScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Playback.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": [
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "PostDetail",
+      "file": "src/app/screens/PostDetailScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/PostDetail.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Privacy",
+      "file": "src/app/screens/PrivacyScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Privacy.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ProgramDayComplete",
+      "file": "src/app/screens/ProgramDayCompleteScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ProgramDayComplete.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ProgramDetail",
+      "file": "src/app/screens/ProgramDetailScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ProgramDetail.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "loading"
+      ],
+      "issues": [
+        "missing-states:loading"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "RangeSnapshot",
+      "file": "src/app/screens/RangeSnapshotScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/RangeSnapshot.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "RecoveredTakes",
+      "file": "src/app/screens/RecoveredTakesScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/RecoveredTakes.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Recovery",
+      "file": "src/app/screens/RecoveryScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Recovery.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 2
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ReportDetail",
+      "file": "src/app/screens/ReportDetailScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/ReportDetail.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Results",
+      "file": "src/app/screens/ResultsScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Results.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "SandboxHub",
+      "file": "src/app/screens/SandboxHubScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/SandboxHub.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "ScreenPreviewGallery",
+      "file": "src/app/screens/ScreenPreviewGalleryScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/ScreenPreviewGallery.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": false,
+      "storyMissingStates": [
+        "default",
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "ScreenPreviewScenario",
+      "file": "src/app/screens/ScreenPreviewScenarioScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/ScreenPreviewScenario.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": true,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "direct-safe-area-usage",
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": false,
+      "storyMissingStates": [
+        "default",
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "Session",
+      "file": "src/app/screens/SessionScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Session.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 4
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [
+        "hardcoded-color-tokens"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "SessionSummary",
+      "file": "src/app/screens/SessionSummaryScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/SessionSummary.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": [
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "Settings",
+      "file": "src/app/screens/SettingsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Settings.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "SignIn",
+      "file": "src/app/screens/SignInScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/SignIn.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "StageAssessment",
+      "file": "src/app/screens/StageAssessmentScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/StageAssessment.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Storybook",
+      "file": "src/app/screens/StorybookScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Storybook.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": false,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-screen-wrapper",
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "SyncStatus",
+      "file": "src/app/screens/SyncStatusScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/SyncStatus.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "TechniqueHelp",
+      "file": "src/app/screens/TechniqueHelpScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/TechniqueHelp.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "empty",
+        "success"
+      ],
+      "issues": [
+        "missing-states:empty,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Terms",
+      "file": "src/app/screens/TermsScreen.tsx",
+      "routeRegistered": false,
+      "storyFile": "src/storybook/stories/screens/Terms.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": false,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:loading,empty,error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Tuner",
+      "file": "src/app/screens/TunerScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Tuner.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [],
+      "issues": [],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "VocalFamily",
+      "file": "src/app/screens/VocalFamilyScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/VocalFamily.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "VoiceProfile",
+      "file": "src/app/screens/VoiceProfileScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/VoiceProfile.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "WakeYourVoice",
+      "file": "src/app/screens/WakeYourVoiceScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/WakeYourVoice.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 7
+      },
+      "stateCoverage": {
+        "loading": false,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "loading",
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:loading,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "WeeklyReport",
+      "file": "src/app/screens/WeeklyReportScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/WeeklyReport.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": false,
+        "success": false
+      },
+      "missingStates": [
+        "error",
+        "success"
+      ],
+      "issues": [
+        "missing-states:error,success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    },
+    {
+      "name": "Welcome",
+      "file": "src/app/screens/WelcomeScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/Welcome.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 8
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": true,
+        "error": true,
+        "success": false
+      },
+      "missingStates": [
+        "success"
+      ],
+      "issues": [
+        "hardcoded-color-tokens",
+        "missing-states:success"
+      ],
+      "hasStory": true,
+      "storyMissingStates": [
+        "loading",
+        "disabled",
+        "error",
+        "empty",
+        "success"
+      ]
+    },
+    {
+      "name": "WhyThisMatters",
+      "file": "src/app/screens/WhyThisMattersScreen.tsx",
+      "routeRegistered": true,
+      "storyFile": "src/storybook/stories/screens/WhyThisMatters.screen.stories.tsx",
+      "uiCompliance": {
+        "usesScreenWrapper": true,
+        "usesSafeAreaDirectly": false,
+        "usesDesignSystemImports": true,
+        "hardcodedColorMatches": 0
+      },
+      "stateCoverage": {
+        "loading": true,
+        "empty": false,
+        "error": true,
+        "success": true
+      },
+      "missingStates": [
+        "empty"
+      ],
+      "issues": [
+        "missing-states:empty"
+      ],
+      "hasStory": true,
+      "storyMissingStates": []
+    }
+  ]
+}

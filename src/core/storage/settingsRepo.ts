@@ -14,6 +14,22 @@ export type Settings = {
   onboardingComplete?: boolean
   /** Selected onboarding goal (used to tailor the first win + home suggestions). */
   onboardingGoal?: 'practice' | 'social' | 'compete' | 'coach'
+  onboardingIntent?:
+    | 'justStarting'
+    | 'singInTune'
+    | 'moreControl'
+    | 'songsBetter'
+    | 'choirWorship'
+    | 'justExplore'
+  coachingMode?: 'starter' | 'casual' | 'practised' | 'performerCoach'
+  singingLevel?: 'justStarting' | 'casual' | 'serious' | 'professionalCoach'
+  helperDensity?: 'light' | 'balanced' | 'high'
+  guideTone?: 'gentle' | 'balanced' | 'direct'
+  routeHint?: 'R1' | 'R2' | 'R3' | 'R4' | 'R5' | null
+  firstWinComplete?: boolean
+  firstWinVersion?: number
+  sacredMomentsHoldout?: boolean
+  legacyCurriculumFallback?: boolean
 
   /** Permission primers (anti-anxiety, store-friendly). */
   seenMicPrimer?: boolean
@@ -65,6 +81,16 @@ export type Settings = {
   /** Preferred audio input format (best-effort). */
   preferredSampleRate?: number
 
+  /** DSP quality path (native/JIT). */
+  dspEnabled?: boolean
+  dspSuppressionMode?: 'off' | 'conservativeAdaptive'
+  roomReadCalibration?: {
+    completedAt?: number
+    noiseFloorDb?: number
+    snrDb?: number
+    routeStabilityScore?: number
+  } | null
+
   /** 7-day Pitch Lock Challenge state (optional, stored locally). */
   pitchLockChallenge?: any
 }
@@ -90,6 +116,16 @@ export const DEFAULT_SETTINGS: Settings = {
   seenMicPrimer: false,
   seenCameraPrimer: false,
   ghostAdvanced: false,
+  onboardingIntent: 'justExplore',
+  coachingMode: 'starter',
+  singingLevel: 'justStarting',
+  helperDensity: 'high',
+  guideTone: 'gentle',
+  routeHint: null,
+  firstWinComplete: false,
+  firstWinVersion: 0,
+  sacredMomentsHoldout: true,
+  legacyCurriculumFallback: true,
 
   devPerfOverlayEnabled: false,
   telemetryCrashReportingEnabled: true,
@@ -105,6 +141,9 @@ export const DEFAULT_SETTINGS: Settings = {
   micCalibratedPeak: 0,
   micCalibratedClipped: false,
   preferredSampleRate: 0,
+  dspEnabled: true,
+  dspSuppressionMode: 'conservativeAdaptive',
+  roomReadCalibration: null,
 }
 
 export async function getSettings(): Promise<Settings> {

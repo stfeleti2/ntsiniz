@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { computeMilestones } from "../progress/milestones.js"
+import { computeMilestones } from "../progress/milestones"
 
 test("computeMilestones picks baseline/day7/day30 sensibly", () => {
   const day = 24 * 60 * 60 * 1000

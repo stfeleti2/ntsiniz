@@ -9,7 +9,7 @@ import {
   degradeMode,
   upgradeMode,
   buildQualityConfig,
-} from '../perf/qualityHeuristics.js'
+} from '../perf/qualityHeuristics'
 
 test('quality: device tier classification is stable', () => {
   const low = classifyDeviceTier({ platform: 'android', widthPx: 360, heightPx: 740, pixelRatio: 2 }) // ~4.2M

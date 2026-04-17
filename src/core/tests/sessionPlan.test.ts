@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { createSessionPlan, getPlan, advancePlan, markFail } from "../profile/sessionPlan.js"
+import { createSessionPlan, getPlan, advancePlan, markFail } from "../profile/sessionPlan"
 
 const pack = {
   packId: "t",

@@ -1,87 +1,136 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Alert, Linking, Platform } from 'react-native'
-import { Audio } from 'expo-av'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { Linking, Platform, View } from 'react-native'
 import { Camera } from 'expo-camera'
+import { LinearGradient } from 'expo-linear-gradient'
+
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
 import { Box } from '@/ui'
-import { t } from '@/app/i18n'
+import { BrandWorldBackdrop } from '@/ui/guidedJourney'
 import { getSettings, upsertSettings } from '@/core/storage/settingsRepo'
+import { StatusPill } from '@/ui/guidedJourney'
+import { getMicPermissionState, requestMicPermission, type MicPermissionState } from '@/core/audio/micStream'
+import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
 type Kind = 'mic' | 'camera'
+type PermissionUiState = 'notRequested' | 'granted' | 'denied' | 'blocked' | 'error'
+
+type PermissionStatusLike = {
+  granted: boolean
+  canAskAgain?: boolean
+  status?: string
+}
 
 export function PermissionsPrimerScreen({ navigation, route }: any) {
+  const theme = useTheme()
   const kind: Kind = route?.params?.kind ?? 'mic'
   const next = route?.params?.next
-  const [busy, setBusy] = useState(false)
-  const [granted, setGranted] = useState(false)
+  const isMic = kind === 'mic'
 
-  const copy = useMemo(() => {
-    if (kind === 'camera') {
-      return {
-        title: t('permissions.cameraPrimerTitle'),
-        body: t('permissions.cameraPrimerBody'),
-        cta: t('permissions.allowCamera'),
+  const [busy, setBusy] = useState(false)
+  const [state, setState] = useState<PermissionUiState>('notRequested')
+  const [statusText, setStatusText] = useState('')
+
+  const copy = useMemo(
+    () => ({
+      title: 'Enable your microphone',
+      body: isMic
+        ? 'Pitch detection, scoring, and live feedback need clean microphone access.'
+        : 'Camera is optional, but this path requests recording permissions first.',
+      hintLine: isMic ? 'You can still explore without mic, but singing drills need access.' : 'You can continue and enable camera later.',
+      start: 'Press below to start',
+      begin: isMic ? 'Begin first exercise' : 'Continue',
+      retry: 'Try again',
+      openSettings: 'Open settings',
+      continueWithout: isMic ? 'Continue without mic' : 'Continue',
+      refresh: 'Check again',
+      busy: 'Requesting…',
+      grantedLabel: 'Microphone ready',
+      deniedLabel: 'Microphone denied',
+      blockedLabel: 'Settings required',
+      notRequestedLabel: 'Not requested yet',
+      errorLabel: 'Permission check failed',
+      grantedInstruction: 'Nice, we can hear you clearly.',
+      deniedInstruction: 'You can retry now. Singing drills need microphone access.',
+      blockedInstruction: 'Enable microphone in Settings, then come back.',
+      unknownInstruction: 'We could not confirm permission. Retry once.',
+    }),
+    [isMic],
+  )
+
+  const deriveUiState = useCallback((permission: PermissionStatusLike): PermissionUiState => {
+    if (permission.granted) return 'granted'
+    if (permission.status === 'undetermined') return 'notRequested'
+    if (permission.canAskAgain === false) return 'blocked'
+    return 'denied'
+  }, [])
+
+  const markSeen = useCallback(async () => {
+    const settings = await getSettings().catch(() => null)
+    if (!settings) return
+    if (isMic) settings.seenMicPrimer = true
+    else settings.seenCameraPrimer = true
+    await upsertSettings(settings).catch(() => {})
+  }, [isMic])
+
+  const setFromState = useCallback(
+    (nextState: PermissionUiState) => {
+      setState(nextState)
+      setStatusText(
+        nextState === 'granted'
+          ? copy.grantedInstruction
+          : nextState === 'denied'
+            ? copy.deniedInstruction
+            : nextState === 'blocked'
+              ? copy.blockedInstruction
+              : nextState === 'notRequested'
+                ? copy.start
+                : copy.unknownInstruction,
+      )
+    },
+    [copy.blockedInstruction, copy.deniedInstruction, copy.grantedInstruction, copy.start, copy.unknownInstruction],
+  )
+
+  const loadCurrentState = useCallback(async () => {
+    try {
+      if (isMic) {
+        const micState = await getMicPermissionState()
+        setFromState(fromMicState(micState))
+        return
       }
+      const permission = await Camera.getCameraPermissionsAsync()
+      setFromState(deriveUiState(permission as PermissionStatusLike))
+    } catch {
+      setFromState('error')
     }
-    return {
-      title: t('permissions.micPrimerTitle'),
-      body: t('permissions.micPrimerBody'),
-      cta: t('permissions.allowMic'),
-    }
-  }, [kind])
+  }, [deriveUiState, isMic, setFromState])
 
   useEffect(() => {
-    // Pre-check permission so the primer doesn't block users who already granted.
-    ;(async () => {
-      try {
-        if (kind === 'camera') {
-          const cam = await Camera.getCameraPermissionsAsync()
-          const mic = await Camera.getMicrophonePermissionsAsync()
-          setGranted(!!cam.granted && !!mic.granted)
-        } else {
-          const p = await Audio.getPermissionsAsync()
-          setGranted(!!p.granted)
-        }
-      } catch {
-        setGranted(false)
-      }
-    })()
-  }, [kind])
+    void loadCurrentState()
+  }, [loadCurrentState])
 
-  const markSeen = async () => {
-    const s = await getSettings().catch(() => null)
-    if (!s) return
-    if (kind === 'camera') s.seenCameraPrimer = true
-    else s.seenMicPrimer = true
-    await upsertSettings(s)
-  }
+  useEffect(() => {
+    const sub = navigation?.addListener?.('focus', () => {
+      void loadCurrentState()
+    })
+    return () => {
+      sub?.()
+    }
+  }, [loadCurrentState, navigation])
 
-  const request = async () => {
+  const requestPermission = async () => {
     setBusy(true)
     try {
-      if (kind === 'camera') {
-        const cam = await Camera.requestCameraPermissionsAsync()
-        const mic = await Camera.requestMicrophonePermissionsAsync()
-        const ok = !!cam.granted && !!mic.granted
-        setGranted(ok)
-        await markSeen()
-        if (!ok) {
-          Alert.alert(t('permissions.permissionDeniedTitle'), t('permissions.permissionDeniedBody'))
-        }
-      } else {
-        const p = await Audio.requestPermissionsAsync()
-        const ok = !!p.granted
-        setGranted(ok)
-        await markSeen()
-        if (!ok) {
-          Alert.alert(t('permissions.permissionDeniedTitle'), t('permissions.permissionDeniedBody'))
-        }
-      }
+      const nextState = isMic
+        ? fromMicState(await requestMicPermission())
+        : deriveUiState((await Camera.requestCameraPermissionsAsync()) as PermissionStatusLike)
+      await markSeen()
+      setFromState(nextState)
     } catch {
-      Alert.alert(t('common.error'), t('permissions.permissionRequestFailed'))
+      setFromState('error')
     } finally {
       setBusy(false)
     }
@@ -89,47 +138,104 @@ export function PermissionsPrimerScreen({ navigation, route }: any) {
 
   const openSettings = async () => {
     await markSeen()
-    // iOS/Android deep link to app settings.
-    const url = Platform.OS === 'ios' ? 'app-settings:' : undefined
     try {
-      if (url) await Linking.openURL(url)
+      if (Platform.OS === 'ios') await Linking.openURL('app-settings:')
       else await Linking.openSettings()
     } catch {
-      // ignore
+      // no-op
     }
   }
 
-  const done = async () => {
+  const goNext = async () => {
     await markSeen()
     if (next?.name) {
-      try {
-        navigation.replace(next.name, next.params)
-        return
-      } catch {
-        // fall through
-      }
+      navigation.replace(next.name, next.params)
+      return
     }
     navigation.goBack()
   }
 
-  return (
-    <Screen title={copy.title} scroll>
-      <Box gap={12}>
-        <Card tone="glow">
-          <Box gap={8}>
-            <Text size="lg" weight="semibold">{copy.title}</Text>
-            <Text muted>{copy.body}</Text>
-          </Box>
-        </Card>
+  const statusMeta = {
+    notRequested: { pillState: 'paused' as const, pillLabel: copy.notRequestedLabel, icon: '◌' },
+    granted: { pillState: 'success' as const, pillLabel: copy.grantedLabel, icon: '✓' },
+    denied: { pillState: 'retry' as const, pillLabel: copy.deniedLabel, icon: '↺' },
+    blocked: { pillState: 'blocked' as const, pillLabel: copy.blockedLabel, icon: '!' },
+    error: { pillState: 'retry' as const, pillLabel: copy.errorLabel, icon: '?' },
+  }[state]
 
-        <Card>
-          <Box gap={10}>
-            <Button title={busy ? t('common.loading') : copy.cta} onPress={request} disabled={busy} />
-            <Button title={t('permissions.openSettings')} variant="soft" onPress={openSettings} />
-            <Button title={granted ? t('common.continue') : t('common.notNow')} variant="ghost" onPress={done} />
-          </Box>
-        </Card>
-      </Box>
+  const instructionLine = {
+    notRequested: 'Press below to start',
+    granted: 'Permission is on. Next: begin your first voice check.',
+    denied: 'You can still explore, but singing features need microphone access.',
+    blocked: 'Microphone is blocked. Enable it in Settings to continue singing.',
+    error: 'We could not confirm permission. Retry once.',
+  }[state]
+
+  const primaryButton = {
+    notRequested: { text: busy ? copy.busy : copy.start, onPress: requestPermission, disabled: busy },
+    granted: { text: copy.begin, onPress: goNext, disabled: false },
+    denied: { text: busy ? copy.busy : copy.retry, onPress: requestPermission, disabled: busy },
+    blocked: { text: copy.openSettings, onPress: openSettings, disabled: false },
+    error: { text: copy.refresh, onPress: loadCurrentState, disabled: false },
+  }[state]
+
+  return (
+    <Screen scroll background="hero">
+      <BrandWorldBackdrop />
+      <Card tone="glow" style={{ overflow: 'hidden' }}>
+        <LinearGradient colors={['rgba(95,55,220,0.5)', 'rgba(31,18,78,0.84)']} style={ABS_FILL} />
+        <Box style={{ gap: 8 }}>
+          <Text preset="h1">{copy.title}</Text>
+          <Text preset="muted">{copy.body}</Text>
+        </Box>
+      </Card>
+
+      <Card tone="elevated" style={{ backgroundColor: theme.colors.surfaceGlass }}>
+        <Box style={{ gap: 12, alignItems: 'center' }}>
+          <StatusPill state={statusMeta.pillState} label={statusMeta.pillLabel} />
+          <View
+            style={{
+              width: 74,
+              height: 74,
+              borderRadius: 37,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(149,132,255,0.3)',
+              borderWidth: 1,
+              borderColor: theme.colors.borderStrong,
+            }}
+          >
+            <Text preset="h2">{statusMeta.icon}</Text>
+          </View>
+          <Text preset="body" style={{ textAlign: 'center' }}>
+            {statusText}
+          </Text>
+          <Text preset="muted" style={{ textAlign: 'center' }}>
+            {instructionLine}
+          </Text>
+        </Box>
+      </Card>
+
+      <Card tone="elevated">
+        <Box style={{ gap: 10 }}>
+          <Text preset="muted">{copy.hintLine}</Text>
+          <Text preset="muted">{t('guidedFlow.permissionsNowWhyNext')}</Text>
+          <Button text={primaryButton.text} onPress={primaryButton.onPress} disabled={primaryButton.disabled} />
+          {(state === 'denied' || state === 'blocked' || state === 'error') && isMic ? (
+            <Button text={copy.continueWithout} variant="ghost" onPress={goNext} />
+          ) : null}
+        </Box>
+      </Card>
     </Screen>
   )
 }
+
+function fromMicState(state: MicPermissionState): PermissionUiState {
+  if (state === 'notRequested') return 'notRequested'
+  if (state === 'granted') return 'granted'
+  if (state === 'blocked') return 'blocked'
+  if (state === 'denied') return 'denied'
+  return 'error'
+}
+
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }

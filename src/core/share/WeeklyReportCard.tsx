@@ -2,12 +2,12 @@ import React from "react"
 import { StyleSheet } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { Text } from "@/ui/components/Typography"
-import { useTheme } from "@/theme/useTheme"
 import { LineChart } from "@/ui/charts/LineChart"
 
 import type { WeeklyReportCardStats } from "./weeklyReportTypes"
 import { Box } from '@/ui'
 import { t } from '@/core/i18n'
+import { useTheme } from '@/theme/useTheme'
 
 export const WeeklyReportCard = React.forwardRef<React.ElementRef<typeof Box>, { stats: WeeklyReportCardStats }>(function WeeklyReportCard(
   { stats },

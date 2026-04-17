@@ -53,6 +53,7 @@ export const Linking = {
 }
 
 export const useWindowDimensions = () => ({ width: 390, height: 844, scale: 3, fontScale: 1 })
+export const useColorScheme = () => 'dark'
 
 const AnimatedView = host('AnimatedView')
 export const Animated = { View: AnimatedView }
@@ -79,6 +80,7 @@ const ReactNative = {
   PixelRatio,
   Linking,
   useWindowDimensions,
+  useColorScheme,
   Animated,
   Easing,
 }

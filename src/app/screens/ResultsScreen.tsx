@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import type { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { Screen } from "@/ui/components/Screen"
 import { Text } from "@/ui/components/Typography"
-import { Button } from "@/ui/components/Button"
-import { Card } from "@/ui/components/Card"
+import { Button } from "@/ui/components/kit"
+import { Card } from "@/ui/components/kit"
 import type { RootStackParamList } from "../navigation/types"
 import { getSession, listSessions } from "@/core/storage/sessionsRepo"
 import { listAttemptsBySession, type Attempt } from "@/core/storage/attemptsRepo"
@@ -24,8 +24,21 @@ import { AttemptWaveformList, ResultsScoreModule, ResultsShareModule, useModuleE
 import { track } from '@/app/telemetry'
 import { clearSessionMeta } from '@/core/profile/sessionMeta'
 import { captureException } from '@/app/telemetry/sentry'
+import { getVoiceIdentity } from '@/core/guidedJourney/voiceIdentityRepo'
+import { getAdaptiveJourneyState } from '@/core/guidedJourney/adaptiveStateRepo'
+import { humanizeGuidedKey } from '@/core/guidedJourney/v6Selectors'
+import { NextStepCard, PlaybackInsightCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, "Results">
+const uiCopy = {
+  coachNoteTitle: 'Coach note',
+  nextDrillTitle: 'Next recommended drill',
+  continueTraining: 'Continue training',
+  blockedTitle: 'Blocked by',
+  strongestTitle: 'Strongest dimension',
+  benchmarkTitle: 'Stage benchmark',
+  benchmarkCta: 'Open benchmark',
+}
 
 export function ResultsScreen({ navigation, route }: Props) {
   const { sessionId } = route.params
@@ -43,6 +56,11 @@ export function ResultsScreen({ navigation, route }: Props) {
   )
   const didCelebrate = useRef(false)
   const [shareToast, setShareToast] = useState<string | null>(null)
+  const [voiceTip, setVoiceTip] = useState<string | null>(null)
+  const [nextHint, setNextHint] = useState<string | null>(null)
+  const [blockedBy, setBlockedBy] = useState<string | null>(null)
+  const [topRubricLine, setTopRubricLine] = useState<string | null>(null)
+  const [benchmarkStageId, setBenchmarkStageId] = useState<string | null>(null)
 
   useEffect(() => {
     // Session meta is an in-memory map; clear it once we've reached a safe endpoint.
@@ -56,6 +74,21 @@ export function ResultsScreen({ navigation, route }: Props) {
       setSummary(s?.summary ?? "")
       const atts = await listAttemptsBySession(sessionId)
       setAttempts(atts)
+      const bestGuided = [...atts]
+        .filter((attempt) => attempt.metrics?.guidedJourney)
+        .sort((left, right) => right.score - left.score)[0]
+      const [voice, adaptive] = await Promise.all([getVoiceIdentity().catch(() => null), getAdaptiveJourneyState().catch(() => null)])
+      setVoiceTip(bestGuided?.metrics?.guidedJourney?.coachTip ?? voice?.currentFocus?.[0] ?? null)
+      setTopRubricLine(topRubricSummary(bestGuided?.metrics?.guidedJourney?.rubricDimensions))
+      setNextHint(
+        adaptive?.lastRecommendedBundleName
+          ? `Remediation lane: ${humanizeGuidedKey(adaptive.lastRecommendedBundleName)}.`
+          : adaptive?.lastRecommendedFamily
+            ? `Next family emphasis: ${String(adaptive.lastRecommendedFamily).replace(/_/g, ' ')}.`
+          : voice?.currentFocus?.[0] ?? null,
+      )
+      setBlockedBy(bestGuided?.metrics?.guidedJourney?.blockedBy?.[0] ?? adaptive?.lastRecommendedBundleName ?? null)
+      setBenchmarkStageId(bestGuided?.metrics?.guidedJourney?.stageId ?? null)
 
       // Best-takes for the session (drillId -> attemptId)
       const best = await listBestTakeAttemptIdsForSession(sessionId).catch(() => ({}))
@@ -131,6 +164,12 @@ export function ResultsScreen({ navigation, route }: Props) {
     <Screen scroll background="gradient">
       <Text preset="h1">{t('results.title')}</Text>
       <Text preset="muted">{summary || ""}</Text>
+
+      {voiceTip ? <PlaybackInsightCard title={uiCopy.coachNoteTitle} body={voiceTip} /> : null}
+      {blockedBy ? <PlaybackInsightCard title={uiCopy.blockedTitle} body={humanizeGuidedKey(String(blockedBy))} /> : null}
+      {topRubricLine ? <PlaybackInsightCard title={uiCopy.strongestTitle} body={topRubricLine} /> : null}
+      {nextHint ? <NextStepCard title={uiCopy.nextDrillTitle} body={nextHint} cta={uiCopy.continueTraining} onPress={() => (navigation as any).navigate('MainTabs', { screen: 'Session' })} /> : null}
+      {benchmarkStageId ? <NextStepCard title={uiCopy.benchmarkTitle} body={blockedBy ? `Current gate blocker: ${humanizeGuidedKey(String(blockedBy))}.` : 'Open the stage gate to see the live benchmark and promotion evidence.'} cta={uiCopy.benchmarkCta} onPress={() => navigation.navigate('StageAssessment', { stageId: benchmarkStageId })} /> : null}
 
       {showScoreModule ? (
         <ResultsScoreModule
@@ -229,6 +268,13 @@ export function ResultsScreen({ navigation, route }: Props) {
       />
     </Screen>
   )
+}
+
+function topRubricSummary(dimensions: Record<string, number> | null | undefined) {
+  if (!dimensions) return null
+  const [top] = Object.entries(dimensions).sort((left, right) => Number(right[1]) - Number(left[1]))
+  if (!top) return null
+  return `${humanizeGuidedKey(top[0])}: ${Math.round(Number(top[1]))}`
 }
 
 function avg(xs: number[]) {

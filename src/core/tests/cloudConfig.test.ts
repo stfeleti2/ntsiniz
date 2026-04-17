@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { getCloudConfig } from '../cloud/config.js'
+import { getCloudConfig } from '../cloud/config'
 
 test('getCloudConfig: cloudAutoSync defaults to false unless explicitly enabled', () => {
   const real = (globalThis as any).expo

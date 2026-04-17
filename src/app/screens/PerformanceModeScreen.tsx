@@ -7,8 +7,8 @@ import { t } from '@/app/i18n'
 import { formatNumber } from '@/core/i18n'
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
-import { Card } from '@/ui/components/Card'
+import { Button } from '@/ui/components/kit'
+import { Card } from '@/ui/components/kit'
 import { Box } from '@/ui'
 import { TunerGauge } from '@/ui/tuner/TunerGauge'
 
@@ -30,6 +30,7 @@ import { useGhostOverlayFrame } from '@/ui/ghost/useGhostOverlayFrame'
 import { getPerformanceGhostPlan } from '@/core/performance/ghostPlans'
 import { reportUiError } from '@/app/telemetry/report'
 import { probeAudioInputFormat } from '@/core/audio/audioFormatProbe'
+import { track } from '@/app/telemetry'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PerformanceMode'>
 
@@ -69,6 +70,10 @@ export function PerformanceModeScreen({ navigation, route }: Props) {
       setGhostAdvanced(!!(pro && s?.ghostAdvanced))
     })()
   }, [])
+
+  useEffect(() => {
+    track('performance_mode_opened', { templateId: initialTemplateId ?? PERFORMANCE_TEMPLATES[0].id } as any)
+  }, [initialTemplateId])
 
   useEffect(() => {
     setRemaining(tpl.durationSec)

@@ -10,7 +10,7 @@ type SnackbarCtx = {
 const Ctx = createContext<SnackbarCtx | null>(null)
 
 export function SnackbarProvider({ children }: { children: React.ReactNode }) {
-  const { colors, radius, spacing, zIndex } = useTheme()
+  const { spacing, zIndex, radius, colors } = useTheme()
   const [message, setMessage] = useState<string | null>(null)
   const opacity = useRef(new Animated.Value(0)).current
 
@@ -44,16 +44,23 @@ export function SnackbarProvider({ children }: { children: React.ReactNode }) {
             zIndex: zIndex.toast,
           }}
         >
+            {/* SurfacePanel cannot be inside Animated.View without extra wrapper —
+              use raw token-driven styles here so the Animated opacity works */}
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={message}
             onPress={() => setMessage(null)}
             style={{
-              backgroundColor: colors.surface2,
+              backgroundColor: colors.surfaceRaised,
               borderRadius: radius[3],
               padding: spacing[4],
               borderWidth: 1,
-              borderColor: colors.border,
+              borderColor: colors.borderStrong,
+              shadowColor: colors.shadowDark,
+              shadowOffset: { width: 4, height: 4 },
+              shadowOpacity: 0.32,
+              shadowRadius: 12,
+              elevation: 5,
             }}
           >
             <Text>{message}</Text>

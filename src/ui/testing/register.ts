@@ -8,13 +8,17 @@ const distRoot = path.join(root, 'dist-tests')
 const stubs: Record<string, string> = {
   'react-native': path.join(distRoot, 'ui/testing/stubs/react-native.js'),
   'react-native-reanimated': path.join(distRoot, 'ui/testing/stubs/react-native-reanimated.js'),
+  'react-native-gesture-handler': path.join(distRoot, 'ui/testing/stubs/react-native-gesture-handler.js'),
+  '@shopify/react-native-skia': path.join(distRoot, 'ui/testing/stubs/react-native-skia.js'),
   'expo-linear-gradient': path.join(distRoot, 'ui/testing/stubs/expo-linear-gradient.js'),
+  'expo-blur': path.join(distRoot, 'ui/testing/stubs/expo-blur.js'),
   'expo-haptics': path.join(distRoot, 'ui/testing/stubs/expo-haptics.js'),
   'expo-constants': path.join(distRoot, 'ui/testing/stubs/expo-constants.js'),
   'expo-av': path.join(distRoot, 'ui/testing/stubs/expo-av.js'),
   'expo-file-system': path.join(distRoot, 'ui/testing/stubs/expo-file-system.js'),
   'expo-file-system/legacy': path.join(distRoot, 'ui/testing/stubs/expo-file-system.js'),
   'ntsiniz-audio-route': path.join(distRoot, 'ui/testing/stubs/ntsiniz-audio-route.js'),
+  '@gorhom/bottom-sheet': path.join(distRoot, 'ui/testing/stubs/gorhom-bottom-sheet.js'),
 }
 
 function resolveAliasPath(request: string): string {

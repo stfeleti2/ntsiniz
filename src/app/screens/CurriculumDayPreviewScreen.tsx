@@ -1,127 +1,168 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
 import { Text } from '@/ui/components/Typography'
-import { Card } from '@/ui/components/Card'
-import { Button } from '@/ui/components/Button'
+import { Card } from '@/ui/components/kit'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
-import { t } from '@/app/i18n'
-import { loadCurriculum } from '@/core/curriculum/loader'
-import { getCurriculumState } from '@/core/curriculum/progress'
-import { loadAllBundledPacks } from '@/core/drills/loader'
-import { loadPhase1Lessons, loadProRegimenLessons, loadProRegimen12Lessons, findLesson } from '@/core/coaching/lessons'
-import { msUntilTomorrow, formatCountdown } from '@/core/time/countdown'
-import { getSettings } from '@/core/storage/settingsRepo'
+import { enableGuidedJourneyV3 } from '@/core/config/flags'
+import { ensureJourneyV3Progress } from '@/core/guidedJourney/progress'
+import { loadGuidedJourneyProgram } from '@/core/guidedJourney/loader'
+import { mapPackLessonToHostDrills, type HostMappedPackDrill } from '@/core/guidedJourney/hostDrillMapper'
+import { getLessonCarryoverCue, getLessonFocusSummary, getLessonOutcomes, getLessonPrimaryDrill, getLessonTransferBridge } from '@/core/guidedJourney/v6Selectors'
+import { BrandWorldBackdrop, ChapterHeroCard, NextStepCard, StatusPill, VoiceGuideCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CurriculumDayPreview'>
 
+type PreviewVm = {
+  lessonId: string
+  stageId: string
+  stageTitle: string
+  lessonTitle: string
+  purpose: string
+  estimatedTime: string
+  whyThisMatters: string
+  successLine: string
+  techniqueLine: string
+  focusLine: string
+  plan: HostMappedPackDrill[]
+}
+
+const copy = {
+  fallbackTitle: 'Lesson preview',
+  fallbackBody: 'The guided lesson preview is only available while the V3 journey flag is on.',
+  title: 'Lesson preview',
+  subtitle: 'A short teach flow, a drill preview, and one clean way into the mission.',
+  planTitle: 'Live drill plan',
+  startLesson: 'Start lesson',
+  loading: 'Loading this lesson…',
+  live: 'Live',
+  queued: 'Queued',
+  lessonIntroTitle: 'Lesson intro',
+  lessonIntroBody: 'Start with the promise, the payoff, and the clean lesson handoff.',
+  lessonIntroCta: 'Open lesson intro',
+  focusTitle: 'Lesson focus',
+  conceptTitle: 'Concept explainer',
+  conceptBody: 'See the core idea and body cue before the live rep.',
+  conceptCta: 'Open concept',
+  techniqueTitle: 'Technique help',
+  techniqueBody: 'Review the main cue, common miss, and reset.',
+  techniqueCta: 'Open technique help',
+  whyTitle: 'Why this matters',
+  whyBody: 'Tie the drill to a musical payoff that feels worth doing.',
+  whyCta: 'Open why this matters',
+  prepTitle: 'Drill prep',
+  prepBody: 'Check what success looks like right before the mission starts.',
+  prepCta: 'Open drill prep',
+  back: 'Back',
+}
+
 export function CurriculumDayPreviewScreen({ navigation, route }: Props) {
-  const { dayId } = route.params
-  const [activeCurriculum, setActiveCurriculum] = useState<'phase1' | 'pro_regimen' | 'pro_regimen12'>('phase1')
-  const [activeTrack, setActiveTrack] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
+  const [vm, setVm] = useState<PreviewVm | null>(null)
 
   useEffect(() => {
-    getSettings()
-      .then((s) => {
-        setActiveCurriculum((s.activeCurriculum ?? 'phase1') as any)
-        setActiveTrack((s.activeTrack ?? 'beginner') as any)
-      })
-      .catch(() => {})
-  }, [])
+    if (!enableGuidedJourneyV3()) {
+      setVm(null)
+      return
+    }
 
-  const curr = useMemo(() => loadCurriculum(activeCurriculum as any, activeTrack as any), [activeCurriculum, activeTrack])
-  const pack = useMemo(() => loadAllBundledPacks(), [])
-  const lessons = useMemo(() => {
-    if (activeCurriculum === 'pro_regimen12') return loadProRegimen12Lessons(activeTrack)
-    if (activeCurriculum === 'pro_regimen') return loadProRegimenLessons()
-    return loadPhase1Lessons()
-  }, [activeCurriculum, activeTrack])
-  const [locked, setLocked] = useState(false)
-  const [tomorrow, setTomorrow] = useState(false)
-  const [countdown, setCountdown] = useState<string | null>(null)
-
-  const day = useMemo(() => curr.days.find((d) => d.id === dayId) ?? curr.days[0], [curr.days, dayId])
-  const idx = useMemo(() => curr.days.findIndex((d) => d.id === day?.id), [curr.days, day?.id])
-
-  const lesson = useMemo(() => findLesson(lessons, (day as any)?.lessonId), [lessons, day])
-
-  useEffect(() => {
     ;(async () => {
-      const st = await getCurriculumState(curr)
-      const maxStartIndex = st.doneToday ? st.displayIndex : st.dayIndex
-      const isLocked = idx > maxStartIndex
-      const isTomorrow = st.doneToday && idx === st.dayIndex // next day is locked until tomorrow after you've completed today
-      setLocked(isLocked)
-      setTomorrow(isTomorrow)
-      setCountdown(isLocked && isTomorrow ? formatCountdown(msUntilTomorrow()) : null)
-    })().catch(() => {})
-  }, [curr, idx])
+      const program = loadGuidedJourneyProgram()
+      const progress = await ensureJourneyV3Progress()
+      const lesson = program.lessonsById[route.params.dayId] ?? program.lessonsById[progress.lessonId ?? ''] ?? program.lessons[0]
+      const stage = program.stagesById[lesson.stageId] ?? program.stages[0]
+      const mapped = mapPackLessonToHostDrills(lesson.id, progress.routeId)
+      const firstPackDrill = getLessonPrimaryDrill(program, lesson, progress.routeId)
+      const outcomes = getLessonOutcomes(lesson)
 
-  useEffect(() => {
-    if (!locked || !tomorrow) return
-    const id = setInterval(() => setCountdown(formatCountdown(msUntilTomorrow())), 1000)
-    return () => clearInterval(id)
-  }, [locked, tomorrow])
+      setVm({
+        lessonId: lesson.id,
+        stageId: stage.id,
+        stageTitle: stage.title,
+        lessonTitle: lesson.title,
+        purpose: lesson.purpose,
+        estimatedTime: lesson.estimatedTime,
+        whyThisMatters:
+          getLessonTransferBridge(lesson, firstPackDrill) ??
+          (firstPackDrill?.targetSkill ? `This lesson builds ${firstPackDrill.targetSkill.replace(/_/g, ' ')} so songs feel easier and steadier.` : stage.learnerProfile),
+        successLine: outcomes[0] || firstPackDrill?.passCriteria || lesson.completionCriteria[0] || 'Finish the mission with one real pass and one clean correction.',
+        techniqueLine: getLessonCarryoverCue(lesson, firstPackDrill) || firstPackDrill?.correctionCues[0] || firstPackDrill?.coachCues[0] || 'Keep the breath calm and make small pitch moves instead of jumping.',
+        focusLine: getLessonFocusSummary(lesson, firstPackDrill) || `${lesson.loadTierTarget ?? 'LT1'} focus · ${lesson.motorLearningFocus ?? 'blocked to serial'}`,
+        plan: mapped,
+      })
+    })().catch(() => setVm(null))
+  }, [route.params.dayId])
 
-  const drillTitles = useMemo(() => {
-    return (day?.drillIds ?? [])
-      .map((id) => pack.drills.find((x) => x.id === id)?.title ?? id)
-      .slice(0, 6)
-  }, [day, pack.drills])
+  if (!enableGuidedJourneyV3()) {
+    return (
+      <Screen background="gradient">
+        <Text preset="h1">{copy.fallbackTitle}</Text>
+        <Text preset="muted">{copy.fallbackBody}</Text>
+      </Screen>
+    )
+  }
+
+  if (!vm) {
+    return (
+      <Screen background="hero">
+        <BrandWorldBackdrop />
+        <Text preset="h1">{copy.title}</Text>
+        <Text preset="muted">{copy.loading}</Text>
+      </Screen>
+    )
+  }
 
   return (
-    <Screen scroll background="gradient">
+    <Screen scroll background="hero">
+      <BrandWorldBackdrop />
       <Box style={{ gap: 6 }}>
-        <Text preset="h1">{t('curriculumPreview.title')}</Text>
-        <Text preset="muted">
-          {t('curriculum.dayLabel', { week: day.week, day: day.day })} • {day.title}
-        </Text>
+        <Text preset="h1">{copy.title}</Text>
+        <Text preset="muted">{copy.subtitle}</Text>
       </Box>
 
-      <Card tone={locked ? 'default' : 'glow'}>
-        <Text preset="h2">{locked ? t('curriculumPreview.previewOnlyTitle') : t('curriculumPreview.readyTitle')}</Text>
-        <Text preset="muted">{day.focus}</Text>
+      <ChapterHeroCard title={vm.lessonTitle} subtitle={`${vm.stageTitle} · ${vm.estimatedTime}`} stageLabel={vm.stageTitle} cta={copy.startLesson} onPress={() => navigation.navigate('MainTabs' as any, { screen: 'Session', params: { lessonId: vm.lessonId, stageId: vm.stageId } } as any)} />
 
-        {locked ? (
-          <Box style={{ marginTop: 10, gap: 6 }}>
-            <Text preset="muted">{t('curriculumPreview.lockedLine')}</Text>
-            {tomorrow && countdown ? (
-              <Text preset="muted" style={{ fontWeight: '900' }}>
-                {t('curriculumPreview.unlocksIn', { value: countdown })}
-              </Text>
-            ) : null}
-          </Box>
-        ) : null}
+      <VoiceGuideCard title={copy.whyTitle} body={vm.whyThisMatters} pill={vm.stageTitle} />
+      <VoiceGuideCard title={copy.focusTitle} body={vm.focusLine} pill={vm.estimatedTime} />
+      <NextStepCard title={copy.lessonIntroTitle} body={copy.lessonIntroBody} cta={copy.lessonIntroCta} onPress={() => navigation.navigate('LessonIntro', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.conceptTitle} body={copy.conceptBody} cta={copy.conceptCta} onPress={() => navigation.navigate('ConceptExplainer', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.techniqueTitle} body={copy.techniqueBody} cta={copy.techniqueCta} onPress={() => navigation.navigate('TechniqueHelp', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.whyTitle} body={copy.whyBody} cta={copy.whyCta} onPress={() => navigation.navigate('WhyThisMatters', { lessonId: vm.lessonId })} />
+      <NextStepCard title={copy.prepTitle} body={copy.prepBody} cta={copy.prepCta} onPress={() => navigation.navigate('DrillPrep', { lessonId: vm.lessonId, stageId: vm.stageId })} />
 
-        {lesson ? (
-          <Box style={{ marginTop: 12, gap: 6 }}>
-            <Text preset="body" style={{ fontWeight: '900' }}>{t('curriculumPreview.lessonTitle')}</Text>
-            <Text preset="muted">{lesson.title}</Text>
-            <Text preset="muted">{lesson.body}</Text>
-          </Box>
-        ) : null}
-
-        {drillTitles.length ? (
-          <Box style={{ marginTop: 12, gap: 6 }}>
-            <Text preset="body" style={{ fontWeight: '900' }}>{t('curriculumPreview.drillsTitle')}</Text>
-            {drillTitles.map((x, idx) => (
-              <Text key={`${x}-${idx}`} preset="muted">{`• ${x}`}</Text>
-            ))}
-          </Box>
-        ) : null}
-
-        <Box style={{ marginTop: 14, gap: 10 }}>
-          {!locked ? (
-            <Button
-              text={t('curriculumPreview.startThisDay')}
-              onPress={() => (navigation as any).replace('MainTabs', { screen: 'Session', params: { curriculumDayId: day.id } })}
-            />
-          ) : null}
-          <Button text={t('curriculumPreview.openOverview')} variant="soft" onPress={() => navigation.replace('CurriculumOverview' as any)} />
-          <Button text={t('common.back')} variant="ghost" onPress={() => navigation.goBack()} />
+      <Card tone="elevated">
+        <Text preset="h2">{copy.planTitle}</Text>
+        <Box style={{ height: 10 }} />
+        <Box style={{ gap: 10 }}>
+          {vm.plan.map((item, index) => (
+            <Card key={item.packDrillId} tone={index === 0 ? 'glow' : 'default'}>
+              <Box style={{ gap: 8 }}>
+                <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
+                  <Text preset="body" style={{ fontWeight: '900', flex: 1 }}>{item.title}</Text>
+                  <StatusPill state={index === 0 ? 'ready' : 'paused'} label={index === 0 ? copy.live : copy.queued} />
+                </Box>
+                <Text preset="muted">{item.instructions}</Text>
+                <Text preset="muted">{describePlanMeta(item)}</Text>
+              </Box>
+            </Card>
+          ))}
         </Box>
       </Card>
+
+      <Button text={copy.startLesson} onPress={() => navigation.navigate('MainTabs' as any, { screen: 'Session', params: { lessonId: vm.lessonId, stageId: vm.stageId } } as any)} />
+      <Button text={copy.back} variant="ghost" onPress={() => navigation.goBack()} />
     </Screen>
   )
+}
+
+function describePlanMeta(item: HostMappedPackDrill) {
+  const parts = [
+    `Family: ${item.family.replace(/_/g, ' ')}`,
+    `Host runner: ${item.hostType.replace(/_/g, ' ')}`,
+    item.loadTier ? `Load ${item.loadTier}` : null,
+    item.pressureLadderStep ? `Pressure ${item.pressureLadderStep.replace(/_/g, ' ')}` : null,
+    item.styleBranchHooks[0] ? `Style ${item.styleBranchHooks[0].replace(/_/g, ' ')}` : null,
+  ].filter(Boolean)
+  return parts.join(' · ')
 }

@@ -3,8 +3,8 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack"
 import type { RootStackParamList } from "../navigation/types"
 import { Screen } from "@/ui/components/Screen"
 import { Text } from "@/ui/components/Typography"
-import { Card } from "@/ui/components/Card"
-import { Button } from "@/ui/components/Button"
+import { Card } from "@/ui/components/kit"
+import { Button } from "@/ui/components/kit"
 import { NextActionBar } from '@/ui/components/NextActionBar'
 import { loadAllBundledPacks } from "@/core/drills/loader"
 import { getAttemptById, listAttemptsByDrill, type Attempt } from "@/core/storage/attemptsRepo"
@@ -30,9 +30,9 @@ import { gradePhraseFromMetrics } from '@/core/scoring/phraseGrader'
 import { ShareCard } from '@/ui/share/ShareCard'
 import { shareCapturedCard } from '@/ui/share/shareCardCapture'
 import { View } from 'react-native'
-import { usePro } from '@/core/billing/usePro'
 import { scoreAttemptV2 } from '@/core/scoring/drillScoring'
 import { getPublicLinks } from '@/core/config/links'
+import { NextStepCard, ResultAnnotationCard } from '@/ui/guidedJourney'
 
 type Props = NativeStackScreenProps<RootStackParamList, "DrillResult"> 
 
@@ -51,8 +51,6 @@ export function DrillResultScreen({ navigation, route }: Props) {
   const [shareMode, setShareMode] = useState(false)
   const [shareToast, setShareToast] = useState<string | null>(null)
 
-  const { isPro } = usePro()
-
   const [celebrate, setCelebrate] = useState<null | { kind: "pb"; emoji: string; title: string; subtitle?: string }>(
     null,
   )
@@ -61,6 +59,27 @@ export function DrillResultScreen({ navigation, route }: Props) {
   const pack = useMemo(() => loadAllBundledPacks(), [])
   const drill = useMemo(() => pack.drills.find((d) => d.id === drillId)!, [pack.drills, drillId])
   const links = useMemo(() => getPublicLinks(), []);
+  const uiCopy = {
+    greatTitle: 'Great session!',
+    greatSubtitle: 'Fair scoring with clear next actions.',
+    successTitle: 'Key success',
+    fixTitle: 'Key fix',
+    nextTitle: 'Next recommended action',
+    finishLesson: 'Finish lesson',
+    scoreCard: 'Drill score',
+    bonus: 'Bonus progress',
+    drillsCompleted: 'Drills completed',
+    shareCard: 'Share card',
+  }
+  const guidedResult = attempt?.metrics?.guidedJourney as
+    | {
+        coachTip?: string
+        band?: string
+        family?: string
+        passed?: boolean
+        diagnosisTags?: string[]
+      }
+    | undefined
 
   useEffect(() => {
     ;(async () => {
@@ -213,7 +232,13 @@ export function DrillResultScreen({ navigation, route }: Props) {
       return
     }
     if (nextDrillId) {
-      navigation.replace("Drill", { sessionId, drillId: nextDrillId })
+      navigation.replace("Drill", {
+        sessionId,
+        drillId: nextDrillId,
+        packDrillId: route.params.nextPackDrillId,
+        lessonId: route.params.lessonId,
+        stageId: route.params.stageId,
+      })
       return
     }
     ;(navigation as any).replace("MainTabs", { screen: "Session" })
@@ -230,12 +255,52 @@ export function DrillResultScreen({ navigation, route }: Props) {
 
   const dateLabel = new Date(attempt.createdAt).toLocaleDateString()
   const deltaFromPrev = prevBefore == null ? undefined : attempt.score - prevBefore
-  const showProNudge = !isPro && attempt.score >= 82
 
   return (
     <Screen scroll background="gradient">
-      <Text preset="h1">{t('drillResult.niceTitle')}</Text>
-      <Text preset="muted">{t('drillResult.niceSubtitle')}</Text>
+      <Text preset="h1">{uiCopy.greatTitle}</Text>
+      <Text preset="muted">{uiCopy.greatSubtitle}</Text>
+
+      <Card tone="glow">
+        <Box style={{ gap: 10 }}>
+          <Text preset="h3">{uiCopy.drillsCompleted}</Text>
+          <Text preset="body">{endToResults ? t('common.finish') : t('common.next')}</Text>
+          <Box style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+            <Card style={{ padding: 10, minWidth: 120 }}>
+              <Text preset="muted">{uiCopy.scoreCard}</Text>
+              <Text preset="h2">{Math.round(attempt.score)}</Text>
+            </Card>
+            <Card style={{ padding: 10, minWidth: 120 }}>
+              <Text preset="muted">{uiCopy.bonus}</Text>
+              <Text preset="h2">{badges.length}</Text>
+            </Card>
+          </Box>
+          <Text preset="muted">{guidedResult?.coachTip ?? t('coach.nextActionSubtitle')}</Text>
+        </Box>
+      </Card>
+
+      {guidedResult ? (
+        <>
+          <ResultAnnotationCard
+            title={uiCopy.successTitle}
+            body={
+              guidedResult.passed
+                ? `You landed a real pass on ${guidedResult.family?.replace(/_/g, ' ') ?? 'this drill'}.`
+                : `You still gave us a usable rep on ${guidedResult.family?.replace(/_/g, ' ') ?? 'this drill'}.`
+            }
+          />
+          <ResultAnnotationCard
+            title={uiCopy.fixTitle}
+            body={guidedResult.coachTip ?? 'Keep the next correction smaller and calmer.'}
+          />
+          <NextStepCard
+            title={uiCopy.nextTitle}
+            body={endToResults ? 'Close the lesson, review the summary, and keep the next chapter moving.' : 'Take the next live drill while the same coaching cue is still fresh.'}
+            cta={endToResults ? uiCopy.finishLesson : t('common.next')}
+            onPress={continueNext}
+          />
+        </>
+      ) : null}
 
       {isBestTake ? (
         <Box style={{ alignSelf: 'flex-start', marginTop: 6 }}>
@@ -281,7 +346,7 @@ export function DrillResultScreen({ navigation, route }: Props) {
 
         <Box style={{ flexDirection: "row", gap: 10, marginTop: 12, flexWrap: 'wrap' }}>
           <Button text={t('common.share')} onPress={share} testID="btn-drillresult-share" />
-          <Button text={'Share card'} onPress={shareCard} />
+          <Button text={uiCopy.shareCard} onPress={shareCard} />
           <Button text={endToResults ? t('common.finish') : t('common.next')} variant="primary" onPress={continueNext} testID="btn-drillresult-next" />
         </Box>
 
@@ -405,22 +470,6 @@ export function DrillResultScreen({ navigation, route }: Props) {
           </Box>
         ) : null}
       </Card>
-
-      {showProNudge ? (
-        <Card style={{ marginTop: 14 }}>
-          <Text preset="h2">{t('billing.proTitle')}</Text>
-          <Text preset="muted" style={{ marginTop: 6 }}>
-            {t('billing.proDesc')}
-          </Text>
-          <Box style={{ height: 10 }} />
-          <Button
-            text={t('billing.buy')}
-            variant="primary"
-            onPress={() => navigation.navigate('Paywall', { reason: 'post_win' })}
-            testID="btn-pro-nudge"
-          />
-        </Card>
-      ) : null}
 
       <Button text={t('common.back')} variant="ghost" onPress={() => navigation.goBack()} testID="btn-drillresult-back" />
 

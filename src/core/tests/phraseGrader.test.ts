@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { gradePhraseFromMetrics } from '../scoring/phraseGrader.js'
+import { gradePhraseFromMetrics } from '../scoring/phraseGrader'
 
 test('gradePhraseFromMetrics: perfect phrase', () => {
   const g = gradePhraseFromMetrics({ avgAbsCents: 8, wobbleCents: 7, voicedRatio: 0.9, timeToEnterMs: 800, confidenceAvg: 0.95 })

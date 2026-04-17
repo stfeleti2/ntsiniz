@@ -1,12 +1,13 @@
 import type { Drill } from "./schema"
-import { ensureMicPermission, startMic } from "../audio/micStream"
-import { configureForVocalCapture, setPreferredInput, getCurrentRoute } from "../audio/routeManager"
+import { startMic } from "../audio/micStream"
+import { getCurrentRoute } from "../audio/routeManager"
 import type { Settings } from "../storage/settingsRepo"
 import type { VoiceProfile } from "../storage/profileRepo"
 import { runDrillWithDrivers } from "./drillExecutor"
 import { midiToHz } from "../pitch/hzToNote"
 import { parseNoteToMidi } from "../pitch/noteParse"
 import { logger } from "../observability/logger"
+import { runCapturePreflight, type CapturePreflightResult } from "../audio/capturePreflight"
 
 // Platform-side helpers (Expo audio playback + tones + sfx)
 import { playReferenceForDrill } from "@/core/audio/referenceTones"
@@ -52,6 +53,7 @@ const universalRunner: DrillRunnerPlugin = {
     let recorder = createAttemptWavRecorder({ sampleRate: 48000, waveformBars: 72 })
     let recorderSampleRate = 48000
     let micSampleRate = recorderSampleRate
+    const preflightRef: { current: CapturePreflightResult | null } = { current: null }
     const ensureRecorder = (sr: number) => {
       if (sr === recorderSampleRate) return
       // Reset recorder if sample rate changes to keep WAV headers correct.
@@ -66,29 +68,13 @@ const universalRunner: DrillRunnerPlugin = {
         { drill, settings, profile },
         {
           ensureMicPermission: async () => {
-            if (settings.qaBypassMicPermission) return true
-
-            const ok = await ensureMicPermission()
-            if (!ok) return false
-
-            // Configure platform audio session / focus for best vocal capture quality.
-            await configureForVocalCapture({
-              allowBluetooth: settings.allowBluetoothMic ?? true,
-              preferBuiltInMic: settings.preferBuiltInMic ?? false,
-              preferredSampleRateHz: 48000,
-              preferredIOBufferDurationMs: 10,
-            }).catch((e) => logger.warn('configureForVocalCapture failed', e))
-
-            if (settings.preferredInputUid) {
-              await setPreferredInput(settings.preferredInputUid).catch((e) => logger.warn('setPreferredInput failed', e))
-            }
-
-            // If route reports a stable sample rate, honor it; otherwise default to 48k for singing.
-            const route = await getCurrentRoute().catch((e) => {
-              logger.warn('getCurrentRoute failed', e)
+            preflightRef.current = await runCapturePreflight(settings).catch((e) => {
+              logger.warn('capture preflight failed', e)
               return null
             })
-            const desiredSampleRate = route?.sampleRateHz && route.sampleRateHz >= 32000 ? Math.round(route.sampleRateHz) : 48000
+            if (!preflightRef.current?.permissionGranted) return false
+
+            const desiredSampleRate = preflightRef.current.preferredSampleRate
             micSampleRate = desiredSampleRate
             ensureRecorder(desiredSampleRate)
             return true
@@ -143,6 +129,33 @@ const universalRunner: DrillRunnerPlugin = {
     }
 
     const audio = await recorder.finalize().catch(() => null)
+    const routeEnd = await getCurrentRoute().catch(() => null)
+    const preflight = preflightRef.current
+
+    const preflightRoute = preflight?.route
+    const routeChanged =
+      !!preflightRoute &&
+      !!routeEnd &&
+      (preflightRoute.routeType !== routeEnd.routeType || preflightRoute.inputUid !== routeEnd.inputUid)
+    const routeStabilityScore = clamp01(
+      (preflight?.routeStabilityScore ?? 0.72) * (routeChanged ? 0.55 : 1),
+    )
+
+    result.metrics = {
+      ...(result.metrics ?? {}),
+      routeStabilityScore,
+      capturePreflight: preflight
+        ? {
+            routeStabilityScore: preflight.routeStabilityScore,
+            stable: preflight.stable,
+            permissionState: preflight.permissionState,
+            routeType: preflight.route?.routeType ?? null,
+            inputUid: preflight.route?.inputUid ?? null,
+            sampleRate: preflight.preferredSampleRate,
+          }
+        : null,
+    }
+
     if (audio) {
       result.metrics = {
         ...(result.metrics ?? {}),
@@ -156,6 +169,10 @@ const universalRunner: DrillRunnerPlugin = {
     }
     return result
   },
+}
+
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value))
 }
 
 async function startSimulatedMic({

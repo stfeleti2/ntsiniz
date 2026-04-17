@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Pressable, ScrollView, View } from 'react-native'
 import { Text } from './Typography'
-import { Button } from './Button'
+import { Button } from '@/ui/components/kit'
 import { listInputs, setPreferredInput, type RouteInfo } from '@/core/audio/routeManager'
 import { t } from '@/core/i18n'
 

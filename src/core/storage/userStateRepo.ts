@@ -23,12 +23,75 @@ export type UserState = {
   dailyChallenge?: {
     bestByDate: Record<string, number>
   }
+
+  journeyV3?: {
+    routeId?: string | null
+    stageId?: string | null
+    lessonId?: string | null
+    unlockedLessonIds?: string[]
+    completedLessonIds?: string[]
+    completedStageIds?: string[]
+    assessmentByStageId?: Record<
+      string,
+      {
+        completed: boolean
+        score?: number
+        attemptId?: string
+        recordedAt?: number
+        blockedPromotionReasons?: string[]
+        recommendedLoadTier?: string | null
+        remediationBundleId?: string | null
+        outcome?: string | null
+        rubricDimensions?: Record<string, number>
+        gateStatus?: Record<string, boolean>
+      }
+    >
+    lessonGateByLessonId?: Record<
+      string,
+      {
+        completed: boolean
+        score?: number
+        threshold?: number
+        recordedAt?: number
+        passedDrillCount?: number
+        transferPassed?: boolean
+        healthCleared?: boolean
+        blockedReasons?: string[]
+        remediationBundleId?: string | null
+      }
+    >
+    activeRemediationBundleId?: string | null
+    blockedPromotionReasons?: string[]
+    compareBaseline?: {
+      score?: number | null
+      capturedAt?: number | null
+      attemptId?: string | null
+      sessionId?: string | null
+    } | null
+    firstWinSnapshotId?: string | null
+    firstWinCompletedAt?: number | null
+  }
 }
 
 export const DEFAULT_USER_STATE: UserState = {
   curriculum: { dayIndex: 0, completedDayKeys: [] },
   streakShield: { usedDayKeys: [] },
   dailyChallenge: { bestByDate: {} },
+  journeyV3: {
+    routeId: null,
+    stageId: null,
+    lessonId: null,
+    unlockedLessonIds: [],
+    completedLessonIds: [],
+    completedStageIds: [],
+    assessmentByStageId: {},
+    lessonGateByLessonId: {},
+    activeRemediationBundleId: null,
+    blockedPromotionReasons: [],
+    compareBaseline: null,
+    firstWinSnapshotId: null,
+    firstWinCompletedAt: null,
+  },
 }
 
 export async function getUserState(): Promise<UserState> {

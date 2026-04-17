@@ -1,1 +1,7 @@
 node_modules
+
+.expo/
+storybook-static/
+*.log
+dist-core/
+dist-tests/

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
-import { Button } from '@/ui/components/Button'
+import { Button } from '@/ui/components/kit'
 import { Box } from '@/ui'
 import { t } from '@/app/i18n'
 import { decideMonetization } from '@/core/monetization/monetizationGate'
@@ -11,12 +11,12 @@ import { getMonetizationState, updateMonetizationState } from '@/core/monetizati
  * Rewarded ads entry point (safe placement).
  * This is provider-agnostic; wire AdMob later.
  */
-export function RewardedBoostCard() {
+export function RewardedBoostCard({ surface }: { surface: string }) {
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    decideMonetization().then((d) => setEnabled(!!d.canRewarded))
-  }, [])
+    decideMonetization({ surface }).then((d) => setEnabled(!!d.canRewarded))
+  }, [surface])
 
   if (!enabled) return null
 

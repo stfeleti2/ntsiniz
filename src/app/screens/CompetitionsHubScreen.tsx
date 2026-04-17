@@ -3,7 +3,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import type { RootStackParamList } from '../navigation/types'
 import { Screen } from '@/ui/components/Screen'
-import { Card } from '@/ui/components/Card'
+import { Card } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
 import { ListRow } from '@/ui/components/kit/ListRow'
 import { Box } from '@/ui'

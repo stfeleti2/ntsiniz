@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildQualityConfig } from '../perf/qualityHeuristics.js'
+import { buildQualityConfig } from '../perf/qualityHeuristics'
 
 test('quality config includes audioAnalysisStride per mode', () => {
   const hi = buildQualityConfig('HIGH', 'MID')

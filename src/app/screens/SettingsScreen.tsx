@@ -5,8 +5,8 @@ import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import type { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { Screen } from "@/ui/components/Screen"
 import { Text } from "@/ui/components/Typography"
-import { Button } from "@/ui/components/Button"
-import { Card } from "@/ui/components/Card"
+import { Button } from "@/ui/components/kit"
+import { Card } from "@/ui/components/kit"
 import { t, setLocale } from "@/app/i18n"
 import { formatNumber } from '@/core/i18n'
 import type { MainTabParamList, RootStackParamList } from "../navigation/types"
@@ -424,7 +424,8 @@ export function SettingsScreen({ navigation }: Props) {
           <Text preset="h2">{t('settings.qaTitle')}</Text>
           <Text preset="muted">{t('settings.qaSubtitle')}</Text>
 
-          <Button text={t('dev.openComponentLab')} variant="soft" onPress={() => navigation.navigate('ComponentLab' as any)} />
+          <Button text={t('dev.openComponentLab', 'Open UI Sandbox')} variant="soft" onPress={() => (navigation as any).getParent()?.navigate('SandboxHub')} />
+          <Button text={t('dev.componentLab', 'Open Component Playground')} variant="ghost" onPress={() => (navigation as any).getParent()?.navigate('ComponentPlayground')} />
 
           <Button text={t('dev.openRepeatability')} variant="soft" onPress={() => (navigation as any).getParent()?.navigate('DevRepeatability')} />
 

@@ -1,7 +1,7 @@
 export * from './tokens'
 export * from './theme'
 export * from './primitives'
-export * from './components/kit'
+export * as kit from './components/kit'
 export * from './patterns'
 export * from './modules'
 export * from './quality/useQuality'

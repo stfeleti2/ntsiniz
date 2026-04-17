@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { pcmBase64ToFloat32 } from '../audio/pcm.js'
+import { pcmBase64ToFloat32 } from '../audio/pcm'
 
 function b64FromI16(vals: number[]) {
   const buf = Buffer.alloc(vals.length * 2)

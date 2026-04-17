@@ -1,12 +1,13 @@
-import { theme as uiTheme } from "@/ui/theme/theme"
+import { useTheme as useUiTheme } from "@/theme/provider"
 
 /**
  * Back-compat theme hook.
  *
- * The app previously used `src/theme/*` directly. The new UI system lives under `src/ui/*`.
- * This hook keeps legacy callers stable while all styling values now come from the new tokens.
+ * Legacy app surfaces still read from `src/theme/useTheme`.
+ * This adapter keeps those callers stable while canonical tokens and providers live in `src/theme/*`.
  */
 export function useTheme() {
+  const uiTheme = useUiTheme()
   const c = uiTheme.colors
 
   // Map new tokens to old keys used across legacy components/screens.
@@ -25,10 +26,10 @@ export function useTheme() {
       line: c.border,
     },
     gradients: {
-      primary: [c.primary, "#FF3DCE", c.warning],
-      hero: [c.bg, "#2A1255", c.bg],
-      surface: [c.surface, c.surface2],
-      glow: ["rgba(124, 92, 255, 0.35)", "rgba(255, 61, 206, 0.22)", "rgba(0, 229, 255, 0.16)"],
+      primary: uiTheme.gradients.primary,
+      hero: uiTheme.gradients.hero,
+      surface: uiTheme.gradients.surface,
+      glow: uiTheme.gradients.glow,
     },
     spacing: {
       xs: uiTheme.spacing.xs,

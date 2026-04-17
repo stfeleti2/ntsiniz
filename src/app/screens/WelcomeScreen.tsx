@@ -1,114 +1,209 @@
-import React, { useEffect, useMemo, useState } from "react"
-import { Pressable } from "@/ui/primitives"
-import type { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { Screen } from "@/ui/components/Screen"
-import { Text, Stack } from "@/ui/primitives"
-import { Button, Card } from "@/ui/components/kit"
-import type { RootStackParamList } from "../navigation/types"
-import { getSettings, upsertSettings } from "@/core/storage/settingsRepo"
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { View } from 'react-native'
+import { BlurView } from 'expo-blur'
+import { LinearGradient } from 'expo-linear-gradient'
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated'
+import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+
+import { Screen } from '@/ui/components/Screen'
+import { Text, Stack, Pressable } from '@/ui/primitives'
+import { Button } from '@/ui/components/kit'
+
+import type { RootStackParamList } from '../navigation/types'
+import { getSettings } from '@/core/storage/settingsRepo'
 import { t } from '@/app/i18n'
+import { useTheme } from '@/theme/provider'
 
-type Props = NativeStackScreenProps<RootStackParamList, "Welcome">
+type Props = NativeStackScreenProps<RootStackParamList, 'Welcome'>
 
-export function WelcomeScreen({ navigation }: Props) {
+type RevealContext = NonNullable<NonNullable<RootStackParamList['Welcome']>['context']>
+
+const REVEAL_COPY: Record<
+  RevealContext,
+  {
+    slogan: string
+    tip: string
+    durationMs: number
+  }
+> = {
+  firstTime: {
+    slogan: 'A fair ear for your voice.',
+    tip: 'One calm breath first. We will handle the rest.',
+    durationMs: 1850,
+  },
+  returning: {
+    slogan: 'Welcome back. Let us sharpen today.',
+    tip: 'Short consistent reps beat long random ones.',
+    durationMs: 1450,
+  },
+  nextLesson: {
+    slogan: 'Loading your next lesson.',
+    tip: 'Clear reps now make songs easier later.',
+    durationMs: 1250,
+  },
+  postSession: {
+    slogan: 'Session captured. Momentum kept.',
+    tip: 'Playback, save best, then keep moving.',
+    durationMs: 1400,
+  },
+  milestone: {
+    slogan: 'Milestone unlocked.',
+    tip: 'Progress is proof, not luck.',
+    durationMs: 1500,
+  },
+  recentProgress: {
+    slogan: 'Your progress is moving.',
+    tip: 'Keep the same calm focus into the next lesson.',
+    durationMs: 1450,
+  },
+}
+
+export function WelcomeScreen({ navigation, route }: Props) {
+  const theme = useTheme()
   const [ready, setReady] = useState(false)
-  const [hasCal, setHasCal] = useState(false)
-  const [needsOnboarding, setNeedsOnboarding] = useState(false)
+  const [firstWinComplete, setFirstWinComplete] = useState(false)
   const [devTap, setDevTap] = useState(0)
-  const showDev = __DEV__ && devTap >= 7
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const context = useMemo<RevealContext>(() => {
+    const explicit = route.params?.context
+    if (explicit) return explicit
+    return firstWinComplete ? 'returning' : 'firstTime'
+  }, [route.params?.context, firstWinComplete])
+
+  const copy = {
+    ...REVEAL_COPY[context],
+    topTag: 'Singing Studio',
+    devSkip: 'Skip intro (dev)',
+  }
 
   useEffect(() => {
     getSettings()
       .then((s) => {
-        setHasCal(!!s.hasCalibrated)
-        setNeedsOnboarding(!!s.hasCalibrated && !s.onboardingComplete)
+        setFirstWinComplete(!!s.firstWinComplete)
       })
       .catch(() => {})
       .finally(() => setReady(true))
   }, [])
 
-  // Auto-forward returning users.
   useEffect(() => {
     if (!ready) return
-    if (!hasCal) return
-    if (needsOnboarding) {
-      navigation.replace('Onboarding')
-      return
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => {
+      const explicitNext = route.params?.next
+      if (explicitNext?.name) {
+        navigation.replace(explicitNext.name as any, explicitNext.params)
+        return
+      }
+      if (firstWinComplete) navigation.replace('MainTabs')
+      else navigation.replace('Onboarding')
+    }, copy.durationMs)
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
     }
-    navigation.replace('MainTabs')
-  }, [ready, hasCal, needsOnboarding])
+  }, [copy.durationMs, firstWinComplete, navigation, ready, route.params?.next])
 
-  const primaryLabel = useMemo(() => {
-    if (!ready) return t('common.loading')
-    return hasCal ? t('welcome.enter') : t('welcome.calibrate')
-  }, [ready, hasCal])
-
-  const primaryAction = () => {
-    if (!hasCal) {
-      navigation.navigate('PermissionsPrimer', { kind: 'mic', next: { name: 'Calibration' } })
-      return
-    }
-    else if (needsOnboarding) navigation.replace('Onboarding')
-    else navigation.replace("MainTabs")
-  }
-
-  const skipCalibration = async () => {
-    const s = await getSettings()
-    await upsertSettings({
-      ...s,
-      noiseGateRms: s.noiseGateRms ?? 0.02,
-      hasCalibrated: true,
-      qaSimulatedMic: true,
-      qaMockShare: true,
-      qaBypassMicPermission: true,
-    })
-    navigation.replace("Onboarding")
-  }
+  const devUnlocked = __DEV__ && devTap >= 7
+  const topLabel = t('brand.name')
 
   return (
-    <Screen scroll background="hero">
-      <Stack gap={6}>
-        <Pressable
-          testID="tap-welcome-title"
-          accessibilityRole="button"
-          accessibilityLabel={t('brand.name')}
-          onPress={() => setDevTap((x) => x + 1)}
-        >
-          <Text size="xl" weight="bold" style={{ fontSize: 28, lineHeight: 34 }}>
-            {t('brand.name')}
-          </Text>
-        </Pressable>
-        <Text tone="muted">{t('welcome.subtitle')}</Text>
-      </Stack>
-
-      <Card>
-        <Text size="lg" weight="bold">
-          {t('welcome.weeklyFlexTitle')}
-        </Text>
-        <Text tone="muted">{t('welcome.weeklyFlexSubtitle')}</Text>
-        <Button label={primaryLabel} disabled={!ready} onPress={primaryAction} testID="btn-welcome-primary" />
-        {hasCal ? (
-          <Button label={t('welcome.recalibrate')} variant="ghost" onPress={() => navigation.navigate("Calibration")} testID="btn-welcome-recalibrate" />
-        ) : null}
-
-        {showDev ? (
-          <Button label={t('welcome.qaSkipCalibration')} variant="ghost" onPress={skipCalibration} testID="btn-qa-skip-calibration" />
-        ) : null}
-      </Card>
-
-      <Card>
-        <Text size="lg" weight="bold">
-          {t('welcome.whatYouDoTitle')}
-        </Text>
-        <Stack gap={10}>
-          <Text tone="muted">{t('welcome.bullet.listenSing')}</Text>
-          <Text tone="muted">{t('welcome.bullet.adapt')}</Text>
-          <Text tone="muted">{t('welcome.bullet.journey')}</Text>
-          <Text tone="muted">{t('welcome.bullet.shareable')}</Text>
+    <Screen background="hero">
+      <LinearGradient colors={['rgba(43,22,97,0.62)', 'rgba(7,7,18,0.38)', 'rgba(62,32,132,0.54)']} style={ABS_FILL} />
+      <Stack justify="space-between" style={{ flex: 1 }}>
+        <Stack gap={8}>
+          <Pressable
+            testID="tap-welcome-title"
+            accessibilityRole="button"
+            accessibilityLabel={topLabel}
+            onPress={() => setDevTap((x) => x + 1)}
+            style={{ alignSelf: 'flex-start', paddingVertical: 4 }}
+          >
+            <Text size="sm" tone="muted">
+              {copy.topTag}
+            </Text>
+            <Text size="2xl" weight="bold">
+              {topLabel}
+            </Text>
+          </Pressable>
         </Stack>
-      </Card>
 
-      <Text tone="muted">{t('welcome.privacy')}</Text>
+        <Stack align="center" gap={16}>
+          <AmbientRevealOrb />
+          <Text size="xl" weight="semibold" style={{ textAlign: 'center' }}>
+            {copy.slogan}
+          </Text>
+        </Stack>
+
+        <Stack gap={10}>
+          <BlurView
+            intensity={42}
+            tint="dark"
+            style={{
+              borderRadius: theme.radius[4],
+              borderWidth: 1,
+              borderColor: theme.colors.borderStrong,
+              paddingHorizontal: theme.spacing[3],
+              paddingVertical: theme.spacing[3],
+              backgroundColor: theme.colors.surfaceGlass,
+            }}
+          >
+            <Text size="sm" tone="muted" style={{ textAlign: 'center' }}>
+              {copy.tip}
+            </Text>
+          </BlurView>
+          {devUnlocked ? (
+            <Button text={copy.devSkip} variant="ghost" testID="btn-qa-skip-calibration" onPress={() => navigation.replace('MainTabs')} />
+          ) : null}
+        </Stack>
+      </Stack>
     </Screen>
   )
+}
+
+function AmbientRevealOrb() {
+  const pulse = useSharedValue(0.42)
+  useEffect(() => {
+    pulse.value = withRepeat(withTiming(1, { duration: 1800, easing: Easing.inOut(Easing.quad) }), -1, true)
+  }, [pulse])
+
+  const style = useAnimatedStyle(() => ({
+    transform: [{ scale: 0.88 + pulse.value * 0.18 }],
+    opacity: 0.45 + pulse.value * 0.42,
+  }))
+
+  return (
+    <View style={ORB_WRAP}>
+      <Animated.View style={[ORB_OUTER, style]}>
+        <LinearGradient colors={['rgba(140,101,255,0.56)', 'rgba(85,232,255,0.26)']} style={ABS_FILL} />
+      </Animated.View>
+      <BlurView intensity={28} tint="dark" style={ORB_INNER} />
+    </View>
+  )
+}
+
+const ABS_FILL = { position: 'absolute' as const, top: 0, right: 0, bottom: 0, left: 0 }
+
+const ORB_WRAP = {
+  width: 196,
+  height: 196,
+  alignItems: 'center' as const,
+  justifyContent: 'center' as const,
+}
+
+const ORB_OUTER = {
+  width: 178,
+  height: 178,
+  borderRadius: 89,
+  borderWidth: 1,
+  borderColor: 'rgba(216,208,255,0.44)',
+}
+
+const ORB_INNER = {
+  position: 'absolute' as const,
+  width: 88,
+  height: 88,
+  borderRadius: 44,
+  borderWidth: 1,
+  borderColor: 'rgba(244,240,255,0.54)',
+  backgroundColor: 'rgba(230,220,255,0.15)',
 }
