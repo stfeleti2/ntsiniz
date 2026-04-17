@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { DrillControlPanel } from '@/ui/components/DrillControlPanel'
 
 const meta: Meta<typeof DrillControlPanel> = {
-  title: 'Organisms/DrillControlPanel',
+  title: 'Patterns/Layouts/DrillControlPanel',
   component: DrillControlPanel,
   args: {
     title: 'Pitch Match Drill',

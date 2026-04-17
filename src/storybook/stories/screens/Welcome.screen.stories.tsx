@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { WelcomePreview } from '@/screens/previews'
 
 const meta: Meta<typeof WelcomePreview> = {
-  title: 'Screens/Welcome',
+  title: 'Patterns/Screens/Welcome',
   component: WelcomePreview,
 }
 

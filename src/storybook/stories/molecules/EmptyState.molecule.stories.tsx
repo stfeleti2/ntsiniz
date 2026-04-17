@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { EmptyState } from '@/ui/components/kit/EmptyState'
 
 const meta: Meta<typeof EmptyState> = {
-  title: 'Molecules/EmptyState',
+  title: 'Patterns/Layouts/EmptyState',
   component: EmptyState,
   args: {
     title: 'No sessions yet',

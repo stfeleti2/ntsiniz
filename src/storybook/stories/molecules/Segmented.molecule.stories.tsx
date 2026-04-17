@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { Segmented } from '@/ui/components/Segmented'
 
 const meta: Meta<typeof Segmented> = {
-  title: 'Molecules/Segmented',
+  title: 'Patterns/Layouts/Segmented',
   component: Segmented,
 }
 

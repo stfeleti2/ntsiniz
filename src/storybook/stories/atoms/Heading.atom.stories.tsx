@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Heading } from '@/ui/components/kit'
 
 const meta: Meta<typeof Heading> = {
-  title: 'Atoms/Heading',
+  title: 'Primitives/Heading',
   component: Heading,
   args: {
     children: 'Ntsiniz Heading',

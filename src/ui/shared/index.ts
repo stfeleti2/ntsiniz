@@ -1,5 +1,5 @@
 export * from "../primitives"
-export * from "../components/kit"
+export * as kit from "../components/kit"
 export * from "../patterns"
 export { useTheme, useThemeControls } from "../theme"
 export type { ThemeMode, MotionPreset } from "../theme"

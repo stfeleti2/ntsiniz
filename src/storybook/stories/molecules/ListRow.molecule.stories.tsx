@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { ListRow } from '@/ui/components/kit/ListRow'
 
 const meta: Meta<typeof ListRow> = {
-  title: 'Molecules/ListRow',
+  title: 'Patterns/Layouts/ListRow',
   component: ListRow,
   args: {
     title: 'Audio input',

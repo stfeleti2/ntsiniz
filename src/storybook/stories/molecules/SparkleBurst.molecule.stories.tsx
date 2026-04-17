@@ -4,7 +4,7 @@ import { Box, Text } from '@/ui/primitives'
 import { SparkleBurst } from '@/ui/components/SparkleBurst'
 
 const meta: Meta<typeof SparkleBurst> = {
-  title: 'Molecules/SparkleBurst',
+  title: 'Patterns/Layouts/SparkleBurst',
   component: SparkleBurst,
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { View, Text, Pressable, TextInput, Alert } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Alert } from 'react-native'
 import * as Sharing from 'expo-sharing'
 import * as FileSystem from 'expo-file-system/legacy'
 import { fileStore } from '@/core/io/fileStore'
@@ -11,19 +10,41 @@ import { getPublicLinks } from "@/core/config/links";
 import { follow } from '@/core/social/followsRepo'
 import { makeInviteCode, parseInviteCode } from '@/core/util/inviteCode'
 import { reportUiError } from '@/app/telemetry/report'
+import { Screen } from '@/ui/components/Screen'
+import { Button, Card, EmptyState, ErrorState, Input, Skeleton } from '@/ui/components/kit'
+import { Box } from '@/ui/primitives'
+import { Text } from '@/ui/components/Typography'
+
+type Identity = { userId: string; name: string }
 
 export default function InviteScreen({ route }: any) {
   const { t } = useI18n()
   const nav = useAppNav()
   const links = useMemo(() => getPublicLinks(), []);
-  const [me, setMe] = useState<{ userId: string; name: string } | null>(null)
+  const [me, setMe] = useState<Identity | null>(null)
   const [friendCode, setFriendCode] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [screenError, setScreenError] = useState<string | null>(null)
+  const [successNotice, setSuccessNotice] = useState<string | null>(null)
+  const [sharingBusy, setSharingBusy] = useState(false)
+  const [applyingBusy, setApplyingBusy] = useState(false)
 
-  useEffect(() => {
-    ;(async () => {
+  async function loadIdentity() {
+    setLoading(true)
+    setScreenError(null)
+    try {
       const id = await ensureAuthedIdentity()
       setMe({ userId: id.userId, name: id.displayName })
-    })()
+    } catch (e) {
+      reportUiError(e, { kind: 'invite_identity' })
+      setScreenError(t('common.error'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    void loadIdentity()
   }, [])
 
   useEffect(() => {
@@ -38,17 +59,44 @@ export default function InviteScreen({ route }: any) {
   }, [myCode, t, links.inviteUrlBase])
 
   async function shareInvite() {
+    if (!me) return
+    setSharingBusy(true)
     try {
       if (!(await Sharing.isAvailableAsync())) {
         Alert.alert(t('invite.title'), t('common.share'))
+        setSuccessNotice(t('common.share'))
         return
       }
       // expo-sharing shares a file; we write a tiny text payload.
       const uri = `${FileSystem.cacheDirectory}ntsiniz-invite.txt`
       await fileStore.writeText(uri, shareText)
       await Sharing.shareAsync(uri, { mimeType: 'text/plain', dialogTitle: 'Invite' })
+      setSuccessNotice(t('common.share'))
     } catch (e) {
       reportUiError(e, { kind: 'invite_share' })
+      setScreenError(t('common.error'))
+    } finally {
+      setSharingBusy(false)
+    }
+  }
+
+  async function copyOwnCode() {
+    if (!me) return
+    setSharingBusy(true)
+    try {
+      const uri = `${FileSystem.cacheDirectory}ntsiniz-invite-code.txt`
+      await fileStore.writeText(uri, myCode)
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(uri, { mimeType: 'text/plain' })
+      } else {
+        Alert.alert(t('invite.title'), myCode)
+      }
+      setSuccessNotice(t('common.copy'))
+    } catch (e) {
+      reportUiError(e, { kind: 'invite_copy_share' })
+      setScreenError(t('common.error'))
+    } finally {
+      setSharingBusy(false)
     }
   }
 
@@ -56,72 +104,88 @@ export default function InviteScreen({ route }: any) {
     if (!me) return
     const parsed = parseInviteCode(friendCode)
     if (!parsed) {
-      Alert.alert(t('invite.title'), t('invite.invalid'))
+      setScreenError(t('invite.invalid'))
       return
     }
+    setApplyingBusy(true)
     try {
       await follow(me.userId, parsed.userId)
-      Alert.alert(t('invite.title'), t('invite.applied'))
+      setSuccessNotice(t('invite.applied'))
+      setScreenError(null)
       setFriendCode('')
     } catch (e) {
       reportUiError(e, { kind: 'invite_apply' })
-      Alert.alert(t('invite.title'), t('common.error'))
+      setScreenError(t('common.error'))
+    } finally {
+      setApplyingBusy(false)
     }
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#0B0B10' }}>
-      <View style={{ padding: 16, gap: 12 }}>
-        <Pressable onPress={() => nav.goBack()} style={{ paddingVertical: 6 }}>
-          <Text style={{ color: '#9AA4B2' }}>{t('common.back')}</Text>
-        </Pressable>
+    <Screen
+      scroll
+      background="gradient"
+      title={t('invite.title')}
+      subtitle={t('invite.subtitle')}
+      onBack={() => nav.goBack()}
+    >
+      {loading ? (
+        <Card tone="elevated">
+          <Box style={{ gap: 10 }}>
+            <Skeleton height={16} width="40%" />
+            <Skeleton height={24} width="55%" />
+            <Skeleton height={44} width="100%" />
+          </Box>
+        </Card>
+      ) : null}
 
-        <Text style={{ color: 'white', fontSize: 22, fontWeight: '800' }}>{t('invite.title')}</Text>
-        <Text style={{ color: '#9AA4B2' }}>{t('invite.subtitle')}</Text>
+      {!loading && screenError ? (
+        <ErrorState title={t('invite.title')} message={screenError} onRetry={() => void loadIdentity()} />
+      ) : null}
 
-        <View style={{ backgroundColor: '#121826', borderRadius: 16, padding: 14 }}>
-          <Text style={{ color: '#9AA4B2', fontSize: 12 }}>{t('invite.yourCode')}</Text>
-          <Text style={{ color: 'white', fontSize: 20, fontWeight: '800', marginTop: 6 }}>{myCode}</Text>
+      {!loading && !screenError && !me ? (
+        <EmptyState title={t('invite.title')} message={t('invite.note')} />
+      ) : null}
 
-          <View style={{ flexDirection: 'row', gap: 10, marginTop: 12 }}>
-            <Pressable onPress={shareInvite} style={{ backgroundColor: '#2D6CDF', borderRadius: 12, paddingVertical: 10, paddingHorizontal: 14 }}>
-              <Text style={{ color: 'white', fontWeight: '800' }}>{t('invite.share')}</Text>
-            </Pressable>
-            <Pressable
-              onPress={async () => {
-                try {
-                  const uri = `${FileSystem.cacheDirectory}ntsiniz-invite-code.txt`
-                  await fileStore.writeText(uri, myCode)
-                  if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri, { mimeType: 'text/plain' })
-                  else Alert.alert(t('invite.title'), myCode)
-                } catch (e) {
-                  reportUiError(e, { kind: 'invite_copy_share' })
-                  Alert.alert(t('invite.title'), myCode)
-                }
-              }}
-              style={{ backgroundColor: '#1C2330', borderRadius: 12, paddingVertical: 10, paddingHorizontal: 14 }}
-            >
-              <Text style={{ color: 'white', fontWeight: '800' }}>{t('common.copy')}</Text>
-            </Pressable>
-          </View>
-        </View>
+      {!loading && !screenError && me ? (
+        <Box style={{ gap: 12 }}>
+          {successNotice ? (
+            <Card tone="glow">
+              <Text preset="body">{successNotice}</Text>
+            </Card>
+          ) : null}
 
-        <View style={{ backgroundColor: '#121826', borderRadius: 16, padding: 14 }}>
-          <Text style={{ color: '#9AA4B2', fontSize: 12 }}>{t('invite.paste')}</Text>
-          <TextInput
-            value={friendCode}
-            onChangeText={setFriendCode}
-            placeholder={t('invite.placeholder')}
-            placeholderTextColor="#4B5565"
-            autoCapitalize="characters"
-            style={{ color: 'white', marginTop: 8, borderWidth: 1, borderColor: '#1F2A3A', borderRadius: 12, padding: 10 }}
-          />
-          <Pressable onPress={applyFriendCode} style={{ marginTop: 10, backgroundColor: '#1C2330', borderRadius: 12, paddingVertical: 10, paddingHorizontal: 14 }}>
-            <Text style={{ color: 'white', fontWeight: '800' }}>{t('invite.apply')}</Text>
-          </Pressable>
-          <Text style={{ color: '#9AA4B2', fontSize: 12, marginTop: 10 }}>{t('invite.note')}</Text>
-        </View>
-      </View>
-    </SafeAreaView>
+          <Card tone="elevated">
+            <Box style={{ gap: 6 }}>
+              <Text preset="muted">{t('invite.yourCode')}</Text>
+              <Text preset="h2">{myCode}</Text>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, marginTop: 12, flexWrap: 'wrap' }}>
+              <Button text={sharingBusy ? t('common.ellipsis') : t('invite.share')} onPress={() => void shareInvite()} disabled={sharingBusy} />
+              <Button text={t('common.copy')} variant="ghost" onPress={() => void copyOwnCode()} disabled={sharingBusy} />
+            </Box>
+          </Card>
+
+          <Card>
+            <Box style={{ gap: 10 }}>
+              <Text preset="muted">{t('invite.paste')}</Text>
+              <Input
+                value={friendCode}
+                onChangeText={setFriendCode}
+                placeholder={t('invite.placeholder')}
+                autoCapitalize="characters"
+              />
+              <Button
+                text={applyingBusy ? t('common.ellipsis') : t('invite.apply')}
+                onPress={() => void applyFriendCode()}
+                disabled={!friendCode.trim() || applyingBusy}
+              />
+              <Text preset="caption">{t('invite.note')}</Text>
+            </Box>
+          </Card>
+        </Box>
+      ) : null}
+    </Screen>
   )
 }

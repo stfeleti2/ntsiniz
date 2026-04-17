@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { ErrorState } from '@/ui/components/kit/ErrorState'
 
 const meta: Meta<typeof ErrorState> = {
-  title: 'Molecules/ErrorState',
+  title: 'Patterns/Layouts/ErrorState',
   component: ErrorState,
   args: {
     title: 'Connection lost',

@@ -4,7 +4,7 @@ import { Stack, Text } from '@/ui/primitives'
 import { BottomSheetPanel } from '@/ui/components/BottomSheetPanel'
 
 const meta: Meta<typeof BottomSheetPanel> = {
-  title: 'Molecules/BottomSheetPanel',
+  title: 'Patterns/Layouts/BottomSheetPanel',
   component: BottomSheetPanel,
 }
 

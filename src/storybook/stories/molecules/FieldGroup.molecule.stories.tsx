@@ -4,7 +4,7 @@ import { FieldGroup } from '@/ui/components/FieldGroup'
 import { Input } from '@/ui/primitives'
 
 const meta: Meta<typeof FieldGroup> = {
-  title: 'Molecules/FieldGroup',
+  title: 'Patterns/Layouts/FieldGroup',
   component: FieldGroup,
 }
 

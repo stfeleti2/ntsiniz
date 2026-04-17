@@ -8,7 +8,7 @@ import { Text } from '@/ui/components/Typography'
 import { Button } from '@/ui/components/kit'
 
 const meta: Meta<typeof ModalSheet> = {
-  title: 'Molecules/Sheets',
+  title: 'Patterns/Layouts/Sheets',
   component: ModalSheet,
 }
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { Badge } from '@/ui/components/kit/Badge'
 
 const meta: Meta<typeof Badge> = {
-  title: 'Molecules/Badge',
+  title: 'Patterns/Layouts/Badge',
   component: Badge,
   args: {
     label: 'In progress',

@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Text } from '@/ui/components/Typography'
 
 const meta: Meta<typeof Text> = {
-  title: 'Atoms/BodyText',
+  title: 'Primitives/BodyText',
   component: Text,
   args: {
     children: 'Consistent body copy for onboarding and drill guidance.',

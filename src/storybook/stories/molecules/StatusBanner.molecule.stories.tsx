@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { StatusBanner } from '@/ui/components/StatusBanner'
 
 const meta: Meta<typeof StatusBanner> = {
-  title: 'Molecules/StatusBanner',
+  title: 'Patterns/Layouts/StatusBanner',
   component: StatusBanner,
   args: {
     title: 'Microphone ready',

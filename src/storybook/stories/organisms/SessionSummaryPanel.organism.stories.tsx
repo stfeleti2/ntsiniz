@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { SessionSummaryPanel } from '@/ui/components/SessionSummaryPanel'
 
 const meta: Meta<typeof SessionSummaryPanel> = {
-  title: 'Organisms/SessionSummaryPanel',
+  title: 'Patterns/Layouts/SessionSummaryPanel',
   component: SessionSummaryPanel,
   args: {
     score: 86,

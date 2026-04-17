@@ -4,7 +4,7 @@ import { Stack } from '@/ui/primitives'
 import { Skeleton } from '@/ui/components/kit/Skeleton'
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Molecules/Skeleton',
+  title: 'Patterns/Layouts/Skeleton',
   component: Skeleton,
 }
 

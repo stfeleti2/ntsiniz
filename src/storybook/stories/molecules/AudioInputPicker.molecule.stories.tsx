@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { AudioInputPicker } from '@/ui/components/AudioInputPicker'
 
 const meta: Meta<typeof AudioInputPicker> = {
-  title: 'Molecules/AudioInputPicker',
+  title: 'Patterns/Layouts/AudioInputPicker',
   component: AudioInputPicker,
 }
 

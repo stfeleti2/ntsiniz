@@ -7,6 +7,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   args: {
     label: 'Continue',
+    variant: 'primary-light-rounded',
   },
 }
 
@@ -19,14 +20,16 @@ export const Default: Story = {}
 export const Pressed: Story = {
   args: {
     label: 'Pressed',
-    variant: 'secondary',
+    variant: 'neo-depth-button',
+    state: 'active',
   },
 }
 
 export const Active: Story = {
   args: {
     label: 'Active',
-    variant: 'primary',
+    variant: 'active-led-button',
+    state: 'active',
   },
 }
 
@@ -47,6 +50,10 @@ export const Loading: Story = {
 export const Matrix: Story = {
   render: () => (
     <Stack gap={10}>
+      <Button label="Primary Light Rounded" variant="primary-light-rounded" />
+      <Button label="Icon Round Dark" variant="icon-round-dark" />
+      <Button label="Neo Depth" variant="neo-depth-button" />
+      <Button label="Active LED" variant="active-led-button" />
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />
       <Button label="Ghost" variant="ghost" />

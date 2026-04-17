@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { PlaybackPreview } from '@/screens/previews'
 
 const meta: Meta<typeof PlaybackPreview> = {
-  title: 'Screens/Playback',
+  title: 'Patterns/Screens/Playback',
   component: PlaybackPreview,
 }
 

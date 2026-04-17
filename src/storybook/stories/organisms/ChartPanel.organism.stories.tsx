@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { ChartPanel } from '@/ui/components/ChartPanel'
 
 const meta: Meta<typeof ChartPanel> = {
-  title: 'Organisms/ChartPanel',
+  title: 'Patterns/Layouts/ChartPanel',
   component: ChartPanel,
 }
 

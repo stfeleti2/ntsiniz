@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { SingingLevelSelectionPreview } from '@/screens/previews'
 
 const meta: Meta<typeof SingingLevelSelectionPreview> = {
-  title: 'Screens/SingingLevelSelection',
+  title: 'Patterns/Screens/SingingLevelSelection',
   component: SingingLevelSelectionPreview,
 }
 

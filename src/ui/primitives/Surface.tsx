@@ -3,10 +3,13 @@ import { StyleSheet, ViewStyle, StyleProp } from 'react-native'
 import { Box } from './Box'
 import { useTheme } from '../theme'
 import type { AccentRole, SurfaceDepth } from '../tokens'
+import { resolveNeoSurfaceStyle, type NeoSurfaceVariant } from '@/design-system/tokens/surfaces'
+import { textureTokens } from '@/design-system/tokens/textures'
 
 export type SurfaceProps = {
   tone?: 'default' | 'raised' | 'transparent' | 'glass'
   depth?: SurfaceDepth
+  neoVariant?: NeoSurfaceVariant
   accentRole?: AccentRole
   padding?: number
   radius?: number
@@ -18,6 +21,7 @@ export type SurfaceProps = {
 export function Surface({
   tone = 'default',
   depth,
+  neoVariant = 'solid',
   accentRole,
   padding = 0,
   radius,
@@ -25,13 +29,19 @@ export function Surface({
   children,
   testID,
 }: SurfaceProps) {
-  const { colors, elevation: elev, radius: r } = useTheme()
+  const theme = useTheme()
+  const { colors, elevation: elev, radius: r } = theme
   const corner = radius ?? r[2]
+  const mode = colors.bg.toLowerCase() === '#070911' ? 'dark' : 'light'
+  const neoSurface = resolveNeoSurfaceStyle(theme, neoVariant)
+  const texture = textureTokens[mode][neoSurface.texture]
   const resolvedDepth: SurfaceDepth =
     depth ?? (tone === 'raised' ? 'raised' : tone === 'glass' ? 'raised' : tone === 'transparent' ? 'flat' : 'flat')
 
   const accentBorder =
-    accentRole === 'primary'
+    tone === 'default' || tone === 'raised'
+      ? neoSurface.borderColor
+      : accentRole === 'primary'
       ? colors.accentLavender
       : accentRole === 'secondary'
         ? colors.accentCyan
@@ -41,7 +51,7 @@ export function Surface({
             ? colors.warning
             : colors.border
 
-  const bg =
+  const baseBg =
     tone === 'transparent'
       ? 'transparent'
       : tone === 'glass'
@@ -51,6 +61,8 @@ export function Surface({
           : resolvedDepth === 'raised'
             ? colors.surfaceRaised
             : colors.surfaceBase
+
+  const bg = tone === 'default' || tone === 'raised' ? neoSurface.backgroundColor : baseBg
 
   const shadow =
     tone === 'transparent'
@@ -77,7 +89,7 @@ export function Surface({
           borderColor: tone === 'transparent' ? 'transparent' : accentBorder,
           overflow: tone === 'transparent' ? 'visible' : 'hidden',
           shadowColor: colors.shadowDark,
-          ...(shadow as any),
+          ...((tone === 'default' || tone === 'raised' ? neoSurface.shadow : shadow) as any),
         },
         tone === 'glass'
           ? {
@@ -89,7 +101,19 @@ export function Surface({
     >
       {children}
       {tone !== 'transparent' ? (
-        <Box pointerEvents="none" style={[StyleSheet.absoluteFill, { borderRadius: corner, borderWidth: 1, borderColor: 'rgba(255,255,255,0.04)' }]} />
+        <Box
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              borderRadius: corner,
+              borderWidth: 1,
+              borderColor: texture.borderColor,
+              opacity: texture.opacity,
+              backgroundColor: texture.overlayColor,
+            },
+          ]}
+        />
       ) : null}
       {resolvedDepth === 'inset' ? (
         <Box

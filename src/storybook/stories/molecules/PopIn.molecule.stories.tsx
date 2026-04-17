@@ -4,7 +4,7 @@ import { Box, Text } from '@/ui/primitives'
 import { PopIn } from '@/ui/components/PopIn'
 
 const meta: Meta<typeof PopIn> = {
-  title: 'Molecules/PopIn',
+  title: 'Patterns/Layouts/PopIn',
   component: PopIn,
 }
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { CelebrationOverlay } from '@/ui/components/CelebrationOverlay'
 
 const meta: Meta<typeof CelebrationOverlay> = {
-  title: 'Molecules/CelebrationOverlay',
+  title: 'Patterns/Layouts/CelebrationOverlay',
   component: CelebrationOverlay,
 }
 

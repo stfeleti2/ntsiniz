@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { Box, Text } from '@/ui/primitives'
 
 const meta: Meta = {
-  title: 'Screens/Diagnostics',
+  title: 'Patterns/Screens/Diagnostics',
 }
 
 export default meta

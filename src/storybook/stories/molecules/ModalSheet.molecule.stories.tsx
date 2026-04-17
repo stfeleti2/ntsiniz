@@ -4,7 +4,7 @@ import { Stack, Text } from '@/ui/primitives'
 import { ModalSheet } from '@/ui/components/ModalSheet'
 
 const meta: Meta<typeof ModalSheet> = {
-  title: 'Molecules/ModalSheet',
+  title: 'Patterns/Layouts/ModalSheet',
   component: ModalSheet,
 }
 

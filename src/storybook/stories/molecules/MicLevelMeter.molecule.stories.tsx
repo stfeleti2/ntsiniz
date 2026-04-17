@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { MicLevelMeter } from '@/ui/components/MicLevelMeter'
 
 const meta: Meta<typeof MicLevelMeter> = {
-  title: 'Molecules/MicLevelMeter',
+  title: 'Patterns/Layouts/MicLevelMeter',
   component: MicLevelMeter,
 }
 

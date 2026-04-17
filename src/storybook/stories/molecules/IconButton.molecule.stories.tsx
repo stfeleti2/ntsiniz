@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { IconButton } from '@/ui/components/kit/IconButton'
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Molecules/IconButton',
+  title: 'Patterns/Layouts/IconButton',
   component: IconButton,
   args: {
     icon: 'mic',

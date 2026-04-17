@@ -6,7 +6,7 @@ import { Button } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
 
 const meta: Meta<typeof Screen> = {
-  title: 'Screens/ScenarioStates',
+  title: 'Patterns/Screens/ScenarioStates',
   component: Screen,
 }
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { MicPermissionPreview } from '@/screens/previews'
 
 const meta: Meta<typeof MicPermissionPreview> = {
-  title: 'Screens/MicPermission',
+  title: 'Patterns/Screens/MicPermission',
   component: MicPermissionPreview,
 }
 

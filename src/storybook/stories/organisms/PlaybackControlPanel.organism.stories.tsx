@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { PlaybackControlPanel } from '@/ui/components/PlaybackControlPanel'
 
 const meta: Meta<typeof PlaybackControlPanel> = {
-  title: 'Organisms/PlaybackControlPanel',
+  title: 'Patterns/Layouts/PlaybackControlPanel',
   component: PlaybackControlPanel,
   args: {
     elapsed: '00:14 / 00:56',

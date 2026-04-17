@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { AppHeader } from '@/ui/components/AppHeader'
 
 const meta: Meta<typeof AppHeader> = {
-  title: 'Organisms/AppHeader',
+  title: 'Patterns/Layouts/AppHeader',
   component: AppHeader,
   args: {
     title: 'Ntsiniz',

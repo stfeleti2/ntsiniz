@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 function createAnimatedComponent<T>(Component: React.ComponentType<T>) {
   return React.forwardRef<any, T>(function AnimatedComponent(props, ref) {
-    return React.createElement(Component, { ...(props as object), ref })
+    return React.createElement(Component as any, { ...(props as object), ref } as any)
   })
 }
 

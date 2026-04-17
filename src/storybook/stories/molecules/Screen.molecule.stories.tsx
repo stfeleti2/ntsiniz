@@ -4,7 +4,7 @@ import { Box, Text } from '@/ui/primitives'
 import { Screen } from '@/ui/components/Screen'
 
 const meta: Meta<typeof Screen> = {
-  title: 'Molecules/Screen',
+  title: 'Patterns/Layouts/Screen',
   component: Screen,
 }
 

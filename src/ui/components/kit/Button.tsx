@@ -2,6 +2,7 @@ import React from 'react'
 import { ActivityIndicator, ViewStyle, StyleProp } from 'react-native'
 import { SurfacePressable, Stack, Text } from '../../primitives'
 import { useTheme } from '../../theme'
+import type { ButtonVariantKey } from '@/design-system/components/Button'
 
 export type ButtonProps = {
   text?: string
@@ -11,7 +12,7 @@ export type ButtonProps = {
   onPress?: () => void
   disabled?: boolean
   loading?: boolean
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'soft'
+  variant?: ButtonVariantKey | 'soft'
   style?: StyleProp<ViewStyle>
   testID?: string
   accessibilityLabel?: string
@@ -25,7 +26,7 @@ export function Button({
   onPress,
   disabled,
   loading,
-  variant = 'primary',
+  variant = 'primary-light-rounded',
   style,
   testID,
   accessibilityLabel,
@@ -38,8 +39,12 @@ export function Button({
   const resolvedVariant = variant === 'soft' ? 'secondary' : variant
 
   const bg =
-    resolvedVariant === 'primary'
+    resolvedVariant === 'primary' || resolvedVariant === 'primary-light-rounded'
       ? colors.primary
+      : resolvedVariant === 'active-led-button'
+        ? colors.surfaceGlass
+        : resolvedVariant === 'icon-round-dark'
+          ? colors.surface2
       : resolvedVariant === 'secondary'
         ? colors.surfaceRaised
         : resolvedVariant === 'danger'
@@ -47,10 +52,12 @@ export function Button({
           : colors.surfaceGlass
 
   const textColor =
-    resolvedVariant === 'primary'
+    resolvedVariant === 'primary' || resolvedVariant === 'primary-light-rounded'
       ? colors.highContrastText
       : resolvedVariant === 'danger'
         ? colors.highContrastText
+        : resolvedVariant === 'active-led-button'
+          ? colors.primary
         : colors.text
 
   return (

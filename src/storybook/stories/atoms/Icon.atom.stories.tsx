@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Icon } from '@/ui/primitives'
 
 const meta: Meta<typeof Icon> = {
-  title: 'Atoms/Icon',
+  title: 'Primitives/Icon',
   component: Icon,
   args: {
     name: 'mic',

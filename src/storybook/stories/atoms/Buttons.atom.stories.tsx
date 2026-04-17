@@ -5,7 +5,7 @@ import { Button } from '@/ui/components/kit'
 import { IconButton } from '@/ui/components/kit'
 
 const meta: Meta<typeof Button> = {
-  title: 'Atoms/Buttons',
+  title: 'Primitives/Buttons',
   component: Button,
   args: {
     text: 'Primary',

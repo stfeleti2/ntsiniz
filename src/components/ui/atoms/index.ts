@@ -1,7 +1,0 @@
-export * from './Heading'
-export * from './BodyText'
-export * from './HelperText'
-export * from './TextBase'
-export * from './Buttons'
-export * from './Icon'
-export * from './TextInput'

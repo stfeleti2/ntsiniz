@@ -1,15 +1,18 @@
 import type { Preview } from '@storybook/react-native'
+import { withBackgrounds } from '@storybook/addon-ondevice-backgrounds'
 import { withAppProviders } from './decorators'
+import { storybookBackgroundValues } from '@/design-system/tokens/backgrounds'
+import { withAutoArgTypes } from './argTypes'
 
 const preview: Preview = {
-  decorators: [withAppProviders],
+  decorators: [withBackgrounds, withAppProviders],
   globalTypes: {
     themeMode: {
       name: 'Theme',
-      defaultValue: 'dark',
+      defaultValue: 'light',
       toolbar: {
         icon: 'paintbrush',
-        items: ['dark', 'light', 'system'],
+        items: ['dark', 'light'],
       },
     },
     motionPreset: {
@@ -47,20 +50,21 @@ const preview: Preview = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
-      values: [
-        { name: 'dark', value: '#070911' },
-        { name: 'surface', value: '#1B2340' },
-        { name: 'light', value: '#F3F6FF' },
-      ],
+      default: 'light',
+      values: [...storybookBackgroundValues],
+    },
+    actions: {
+      argTypesRegex: '^on[A-Z].*',
     },
     controls: {
+      expanded: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
   },
+  argTypesEnhancers: [withAutoArgTypes as never],
 }
 
 export default preview

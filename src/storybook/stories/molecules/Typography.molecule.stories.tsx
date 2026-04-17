@@ -4,7 +4,7 @@ import { Stack } from '@/ui/primitives'
 import { Text } from '@/ui/components/Typography'
 
 const meta: Meta<typeof Text> = {
-  title: 'Molecules/Typography',
+  title: 'Patterns/Layouts/Typography',
   component: Text,
   args: {
     children: 'Consistent voice practice compounds quickly.',

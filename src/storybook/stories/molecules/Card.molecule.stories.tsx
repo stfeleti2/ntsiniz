@@ -6,7 +6,7 @@ import { Heading } from '@/ui/components/kit'
 import { Text } from '@/ui/components/Typography'
 
 const meta: Meta<typeof Card> = {
-  title: 'Molecules/Card',
+  title: 'Patterns/Layouts/Card',
   component: Card,
 }
 

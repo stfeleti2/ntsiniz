@@ -4,7 +4,7 @@ import { Button, Stack } from '@/ui/primitives'
 import { SnackbarProvider, useSnackbar } from '@/ui/components/kit/Snackbar'
 
 const meta: Meta<typeof SnackbarProvider> = {
-  title: 'Molecules/Snackbar',
+  title: 'Patterns/Layouts/Snackbar',
   component: SnackbarProvider,
 }
 

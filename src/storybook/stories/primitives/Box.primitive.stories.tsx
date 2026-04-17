@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { Box, Stack, Text } from '@/ui/primitives'
+import { useTheme } from '@/theme/provider'
 
 const meta: Meta<typeof Box> = {
   title: 'Primitives/Box',
@@ -11,35 +12,67 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  render: () => <Box style={{ height: 48, borderRadius: 12, backgroundColor: '#27304A' }} />,
+function Swatch({ opacity = 1 }: { opacity?: number }) {
+  const { colors } = useTheme()
+  return (
+    <Box
+      style={{
+        height: 48,
+        borderRadius: 12,
+        backgroundColor: colors.surfaceRaised,
+        borderWidth: 1,
+        borderColor: colors.border,
+        opacity,
+      }}
+    />
+  )
 }
 
-export const Loading: Story = {
-  render: () => <Box style={{ height: 48, borderRadius: 12, backgroundColor: '#3A445F', opacity: 0.7 }} />,
+export const Playground: Story = {
+  render: () => <Swatch />,
 }
 
-export const Disabled: Story = {
-  render: () => <Box style={{ height: 48, borderRadius: 12, backgroundColor: '#27304A', opacity: 0.45 }} />,
+export const Variants: Story = {
+  render: () => {
+    const { colors } = useTheme()
+    return (
+      <Stack gap={10}>
+        <Box style={{ height: 48, borderRadius: 12, backgroundColor: colors.surfaceBase, borderWidth: 1, borderColor: colors.border }} />
+        <Box style={{ height: 48, borderRadius: 12, backgroundColor: colors.surfaceRaised, borderWidth: 1, borderColor: colors.borderStrong }} />
+        <Box style={{ height: 48, borderRadius: 12, backgroundColor: colors.surfaceInset, borderWidth: 1, borderColor: colors.border }} />
+      </Stack>
+    )
+  },
 }
 
-export const Error: Story = {
-  render: () => <Box style={{ height: 48, borderRadius: 12, backgroundColor: '#5A2630' }} />,
+export const States: Story = {
+  render: () => {
+    const { colors } = useTheme()
+    return (
+      <Stack gap={10}>
+        <Swatch />
+        <Swatch opacity={0.78} />
+        <Swatch opacity={0.5} />
+        <Box style={{ borderRadius: 12, borderWidth: 1, borderColor: colors.danger, padding: 12 }}>
+          <Text tone="danger">Error state container</Text>
+        </Box>
+      </Stack>
+    )
+  },
 }
 
-export const Empty: Story = {
+export const Themes: Story = {
   render: () => (
-    <Box style={{ borderRadius: 12, borderWidth: 1, borderColor: '#44506B', padding: 12 }}>
-      <Text tone="muted">No content in this container.</Text>
-    </Box>
-  ),
-}
-
-export const Success: Story = {
-  render: () => (
-    <Stack direction="horizontal" gap={8}>
-      <Box style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#2E8C68' }} />
-      <Text tone="success">Box ready</Text>
+    <Stack gap={10}>
+      <Text tone="muted">Use Storybook theme toggle for light and dark previews.</Text>
+      <Swatch />
     </Stack>
   ),
 }
+
+export const Default: Story = Playground
+export const Loading: Story = States
+export const Disabled: Story = States
+export const Error: Story = States
+export const Empty: Story = States
+export const Success: Story = Themes

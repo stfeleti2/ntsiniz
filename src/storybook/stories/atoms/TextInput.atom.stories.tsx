@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { Input } from '@/ui/primitives'
 
 const meta: Meta<typeof Input> = {
-  title: 'Atoms/TextInput',
+  title: 'Primitives/TextInput',
   component: Input,
   args: {
     label: 'Email',

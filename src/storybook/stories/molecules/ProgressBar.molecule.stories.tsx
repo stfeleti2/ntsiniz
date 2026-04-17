@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { ProgressBar } from '@/ui/components/ProgressBar'
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Molecules/ProgressBar',
+  title: 'Patterns/Layouts/ProgressBar',
   component: ProgressBar,
 }
 

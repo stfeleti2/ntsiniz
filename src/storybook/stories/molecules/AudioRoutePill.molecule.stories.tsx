@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { AudioRoutePill } from '@/ui/components/AudioRoutePill'
 
 const meta: Meta<typeof AudioRoutePill> = {
-  title: 'Molecules/AudioRoutePill',
+  title: 'Patterns/Layouts/AudioRoutePill',
   component: AudioRoutePill,
 }
 

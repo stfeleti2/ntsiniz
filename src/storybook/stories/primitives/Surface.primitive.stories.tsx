@@ -19,9 +19,31 @@ function Demo({ label, accentRole }: { label: string; accentRole?: 'primary' | '
   )
 }
 
-export const Default: Story = { render: () => <Demo label="Raised surface" /> }
-export const Loading: Story = { render: () => <Demo label="Loading surface" accentRole="secondary" /> }
-export const Disabled: Story = { render: () => <Surface tone="inset" padding={16}><Text tone="muted">Disabled surface</Text></Surface> }
-export const Error: Story = { render: () => <Demo label="Error surface" accentRole="warning" /> }
-export const Empty: Story = { render: () => <Surface tone="transparent" padding={16}><Text tone="muted">No content</Text></Surface> }
-export const Success: Story = { render: () => <Demo label="Success surface" accentRole="success" /> }
+export const Playground: Story = { render: () => <Demo label="Raised surface" /> }
+
+export const Variants: Story = {
+  render: () => (
+    <Surface tone="raised" neoVariant="layered" padding={16}>
+      <Text>Layered surface variant</Text>
+    </Surface>
+  ),
+}
+
+export const States: Story = {
+  render: () => (
+    <Surface tone="glass" padding={16}>
+      <Text tone="muted">Disabled surface</Text>
+    </Surface>
+  ),
+}
+
+export const Themes: Story = {
+  render: () => <Demo label="Theme follows toolbar" accentRole="success" />,
+}
+
+export const Default: Story = Playground
+export const Loading: Story = States
+export const Disabled: Story = States
+export const Error: Story = States
+export const Empty: Story = States
+export const Success: Story = Themes

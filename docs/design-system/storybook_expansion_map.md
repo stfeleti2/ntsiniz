@@ -1,13 +1,13 @@
 # Storybook Expansion Map
 
-Generated: 2026-04-12T13:33:26.632Z
+Generated: 2026-04-16T15:18:15.546Z
 
 ## Coverage Summary
 
 - Components: 31/31
-- Primitives: 14/14
+- Primitives: 15/15
 - Screens: 83/83
-- Story files: 136
+- Story files: 146
 
 ## Missing Component Stories
 
@@ -114,6 +114,7 @@ Generated: 2026-04-12T13:33:26.632Z
 | src/storybook/stories/screens/WeeklyReport.screen.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/screens/Welcome.screen.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/screens/WhyThisMatters.screen.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/primitives/Background.primitive.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/primitives/Box.primitive.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/primitives/Button.primitive.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/primitives/Card.primitive.stories.tsx | Y | Y | Y | Y | Y | Y | - |
@@ -156,6 +157,15 @@ Generated: 2026-04-12T13:33:26.632Z
 | src/storybook/stories/molecules/SparkleBurst.molecule.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/molecules/StatusBanner.molecule.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/molecules/Typography.molecule.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/foundations/Backgrounds.foundation.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/foundations/Colors.foundation.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/foundations/Shadows.foundation.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/foundations/Typography.foundation.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/components/Button.component.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/components/Card.component.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/components/ImagePanel.component.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/components/Radio.component.stories.tsx | Y | Y | Y | Y | Y | Y | - |
+| src/storybook/stories/components/Switch.component.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/atoms/BodyText.atom.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/atoms/Buttons.atom.stories.tsx | Y | Y | Y | Y | Y | Y | - |
 | src/storybook/stories/atoms/Heading.atom.stories.tsx | Y | Y | Y | Y | Y | Y | - |

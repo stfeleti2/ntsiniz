@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native'
 import { NextActionBar } from '@/ui/components/NextActionBar'
 
 const meta: Meta<typeof NextActionBar> = {
-  title: 'Molecules/NextActionBar',
+  title: 'Patterns/Layouts/NextActionBar',
   component: NextActionBar,
 }
 
